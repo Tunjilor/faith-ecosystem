@@ -271,6 +271,7 @@ export default function Home() {
                 </div>
 
                 
+                <a
                   href="https://faithcompanionai.com"
                   className="mt-6 block rounded-2xl bg-white px-6 py-4 text-center font-bold text-black hover:bg-slate-200"
                 >
@@ -422,6 +423,7 @@ export default function Home() {
 
               <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
                 
+                <a
                   href="https://faithcompanionai.com"
                   className="rounded-2xl bg-white px-6 py-3 font-bold text-black hover:bg-slate-200"
                 >
@@ -429,6 +431,7 @@ export default function Home() {
                 </a>
 
                 
+                <a
                   href="https://prayergeneratorai.com"
                   className="rounded-2xl border border-slate-600 px-6 py-3 font-bold text-white hover:border-emerald-400"
                 >
@@ -436,6 +439,7 @@ export default function Home() {
                 </a>
 
                 
+                <a
                   href="https://bibleversegeneratorai.com"
                   className="rounded-2xl border border-slate-600 px-6 py-3 font-bold text-white hover:border-emerald-400"
                 >
