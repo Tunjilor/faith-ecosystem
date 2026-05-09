@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -----------------------------
+   Faith Companion AI theme
+------------------------------ */
+
+:root {
+  --fc-bg: #07070a;
+  --fc-text: #f5f5f7;
+
+  /* Surfaces */
+  --fc-surface: rgba(255, 255, 255, 0.15);
+  --fc-border: rgba(255, 255, 255, 0.15);
+
+  /* Accent glows */
+  --fc-purple: 168, 85, 247;  /* purple-500-ish */
+  --fc-orange: 249, 115, 22;  /* orange-500-ish */
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--fc-bg);
+  color: var(--fc-text);
+}
+
+/* Layout helper classes used across your app */
+.bg-fc {
+  background: var(--fc-bg);
+}
+
+.text-fc {
+  color: var(--fc-text);
+}
+
+/* Background glow layer used by layout.tsx */
+.fc-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  /* subtle radial glows like before */
+  background:
+    radial-gradient(900px 500px at 20% 10%, rgba(var(--fc-purple), 0.25), transparent 55%),
+    radial-gradient(900px 500px at 80% 20%, rgba(var(--fc-orange), 0.20), transparent 60%),
+    radial-gradient(900px 700px at 50% 90%, rgba(var(--fc-purple), 0.12), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.25));
+}
+
+/* Standard card surface */
+.fc-surface {
+  border-radius: 1.25rem; /* ~rounded-2xl */
+  background: var(--fc-surface);
+  border: 1px solid var(--fc-border);
+}
+
+/* Make links/buttons look reasonable even if some pages use raw HTML */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
