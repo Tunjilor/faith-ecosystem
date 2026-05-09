@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Easter Prayer (Celebrate the Resurrection of Jesus)",
+  alternates: {
+    canonical: "/easter-prayer",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/easter-prayer",
+  },
   description:
     "A powerful Christian Easter prayer — celebrating the resurrection of Jesus Christ and the hope it brings to every believer.",
 };

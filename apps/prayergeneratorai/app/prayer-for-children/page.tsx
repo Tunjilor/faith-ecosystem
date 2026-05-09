@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Children (Cover Your Kids in Prayer)",
+  alternates: {
+    canonical: "/prayer-for-children",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-children",
+  },
   description:
     "A Christian prayer for your children — asking God to protect, guide, and grow them in faith, wisdom, and love.",
 };

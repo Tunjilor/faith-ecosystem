@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Gratitude (Thankfulness and Reflection)",
+  alternates: {
+    canonical: "/prayer-for-gratitude",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-gratitude",
+  },
   description:
     "A Christian prayer of gratitude to thank God for blessings, daily provision, strength, and grace.",
 };

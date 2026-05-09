@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Wife (Bless and Protect Her)",
+  alternates: {
+    canonical: "/prayer-for-wife",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-wife",
+  },
   description:
     "A powerful Christian prayer for your wife — covering her with God's love, peace, strength, and joy every day.",
 };

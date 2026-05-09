@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Peace (Calm Your Heart and Mind)",
+  alternates: {
+    canonical: "/prayer-for-peace",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-peace",
+  },
   description:
     "A comforting Christian prayer for peace, calm, trust, and emotional rest during difficult moments.",
 };

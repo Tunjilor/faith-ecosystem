@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Anxiety and Fear (Cast Your Worries on God)",
+  alternates: {
+    canonical: "/prayer-for-anxiety-and-fear",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-anxiety-and-fear",
+  },
   description:
     "A Christian prayer for anxiety and fear — surrendering worry to God and receiving His perfect peace that passes understanding.",
 };

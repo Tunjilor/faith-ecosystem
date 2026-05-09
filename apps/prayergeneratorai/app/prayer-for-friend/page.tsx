@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for a Friend (Lift Someone You Love to God)",
+  alternates: {
+    canonical: "/prayer-for-friend",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-friend",
+  },
   description:
     "A Christian prayer for a friend who is hurting, struggling, or in need. Intercede for the people you care about.",
 };

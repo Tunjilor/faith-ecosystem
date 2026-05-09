@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "New Year Prayer (Step Into the New Year with God)",
+  alternates: {
+    canonical: "/new-year-prayer",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/new-year-prayer",
+  },
   description:
     "A Christian prayer for the New Year — surrendering the year ahead to God, setting intentions of faith, and trusting His plans.",
 };

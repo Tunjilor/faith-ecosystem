@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer Before Sleep (Peaceful Night Prayer)",
+  alternates: {
+    canonical: "/prayer-before-sleep",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-before-sleep",
+  },
   description:
     "End your day with a peaceful Christian prayer before sleep for rest, calm, protection, and gratitude.",
 };

@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Evening Prayer (End Your Day with God)",
+  alternates: {
+    canonical: "/evening-prayer",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/evening-prayer",
+  },
   description:
     "A peaceful Christian evening prayer to close your day — giving thanks, releasing the day's burdens, and resting in God's care.",
 };

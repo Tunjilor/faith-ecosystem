@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Forgiveness (Receive God's Grace and Mercy)",
+  alternates: {
+    canonical: "/prayer-for-forgiveness",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-forgiveness",
+  },
   description:
     "A sincere Christian prayer for forgiveness — seeking God's grace, releasing guilt, and walking in freedom and restoration.",
 };

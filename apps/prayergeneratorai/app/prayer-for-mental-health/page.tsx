@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Mental Health (Peace, Clarity, and Wholeness)",
+  alternates: {
+    canonical: "/prayer-for-mental-health",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-mental-health",
+  },
   description:
     "A Christian prayer for mental health — asking God for peace, clarity, healing, and strength in times of emotional struggle.",
 };

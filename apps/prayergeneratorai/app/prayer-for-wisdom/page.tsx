@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Wisdom (Clarity, Discernment, and Guidance)",
+  alternates: {
+    canonical: "/prayer-for-wisdom",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-wisdom",
+  },
   description:
     "A Christian prayer for wisdom — asking God for clarity, discernment, and divine guidance in life's important decisions.",
 };

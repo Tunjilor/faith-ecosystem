@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Students and Exams (Focus, Peace, and Success)",
+  alternates: {
+    canonical: "/prayer-for-students-and-exams",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-students-and-exams",
+  },
   description:
     "A Christian prayer for students facing exams — asking God for focus, calm, mental clarity, and success in studies.",
 };

@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Loneliness (You Are Never Alone)",
+  alternates: {
+    canonical: "/prayer-for-loneliness",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-loneliness",
+  },
   description:
     "A Christian prayer for loneliness — finding comfort in God's presence and asking Him to bring meaningful connection into your life.",
 };

@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Healing (Comfort, Strength, and Peace)",
+  alternates: {
+    canonical: "/prayer-for-healing",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-healing",
+  },
   description:
     "Need healing? Read a comforting Christian prayer for healing, strength, peace, and God’s presence.",
 };

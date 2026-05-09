@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Grief and Loss (Comfort in Your Sorrow)",
+  alternates: {
+    canonical: "/prayer-for-grief-and-loss",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-grief-and-loss",
+  },
   description:
     "A compassionate Christian prayer for grief and loss — bringing sorrow to God and receiving His comfort, hope, and peace.",
 };

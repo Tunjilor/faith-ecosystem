@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Business (Bless My Work and Efforts)",
+  alternates: {
+    canonical: "/prayer-for-business",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-business",
+  },
   description:
     "A Christian prayer for your business — asking God for favor, growth, wisdom, and His blessing over your entrepreneurial journey.",
 };

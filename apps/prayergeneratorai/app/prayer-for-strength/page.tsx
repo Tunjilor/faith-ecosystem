@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Strength (Courage During Hard Times)",
+  alternates: {
+    canonical: "/prayer-for-strength",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-strength",
+  },
   description:
     "Need strength today? Read a Christian prayer for courage, endurance, faith, and peace.",
 };

@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for New Beginnings (Fresh Start with God)",
+  alternates: {
+    canonical: "/prayer-for-new-beginnings",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-new-beginnings",
+  },
   description:
     "A Christian prayer for new beginnings — asking God to go before you into a new chapter and fill it with His purpose and blessing.",
 };

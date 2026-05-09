@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Protection (Safety, Peace, and Guidance)",
+  alternates: {
+    canonical: "/prayer-for-protection",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-protection",
+  },
   description:
     "A Christian prayer for protection, safety, peace, and God’s guidance over your life and loved ones.",
 };

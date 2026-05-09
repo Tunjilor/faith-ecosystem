@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Faith (Strengthen Your Trust in God)",
+  alternates: {
+    canonical: "/prayer-for-faith",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-faith",
+  },
   description:
     "A Christian prayer for faith — asking God to strengthen your belief, overcome doubt, and deepen your trust in Him.",
 };

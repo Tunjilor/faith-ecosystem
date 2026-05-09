@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Parents (Honor and Bless Your Mom and Dad)",
+  alternates: {
+    canonical: "/prayer-for-parents",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-parents",
+  },
   description:
     "A heartfelt Christian prayer for your parents — asking God to bless, protect, and bring peace into their lives.",
 };

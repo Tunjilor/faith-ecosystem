@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for a New Job (Grace, Favor, and a Fresh Start)",
+  alternates: {
+    canonical: "/prayer-for-new-job",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-new-job",
+  },
   description:
     "A Christian prayer for starting a new job — asking God for confidence, favor, wisdom, and a successful new beginning.",
 };

@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for the Holy Spirit (Be Filled and Empowered)",
+  alternates: {
+    canonical: "/prayer-for-holy-spirit",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-holy-spirit",
+  },
   description:
     "A Christian prayer for the Holy Spirit — asking God to fill you afresh, lead you, and empower your daily life and witness.",
 };

@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Relationship (Restoration and Healing)",
+  alternates: {
+    canonical: "/prayer-for-relationship",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-relationship",
+  },
   description:
     "Seeking God's help in a relationship? A Christian prayer for restoration, healing, and clarity in any relationship.",
 };

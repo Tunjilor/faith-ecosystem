@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Sunday Prayer (Worship, Rest, and Renewal)",
+  alternates: {
+    canonical: "/sunday-prayer",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/sunday-prayer",
+  },
   description:
     "A Christian prayer for Sunday — entering the Lord's day with worship, gratitude, and an open heart to receive from Him.",
 };

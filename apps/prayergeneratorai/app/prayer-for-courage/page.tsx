@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Courage (Be Strong and Bold in God)",
+  alternates: {
+    canonical: "/prayer-for-courage",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-courage",
+  },
   description:
     "A Christian prayer for courage — asking God to replace fear with boldness and strengthen you to take the next step of faith.",
 };

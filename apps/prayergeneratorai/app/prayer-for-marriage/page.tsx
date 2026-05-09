@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Marriage (Strengthen Your Relationship with God)",
+  alternates: {
+    canonical: "/prayer-for-marriage",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-marriage",
+  },
   description:
     "Seek God's blessing over your marriage. A powerful Christian prayer for love, unity, and restoration in your relationship.",
 };

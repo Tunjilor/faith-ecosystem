@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Anxiety (Find Peace and Calm)",
+  alternates: {
+    canonical: "/prayer-for-anxiety",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-anxiety",
+  },
   description:
     "Struggling with anxiety? Generate a powerful personalized prayer for peace, calm, and trust in God.",
 };

@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Salvation (Come to God and Be Saved)",
+  alternates: {
+    canonical: "/prayer-for-salvation",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-salvation",
+  },
   description:
     "A sincere Christian prayer for salvation — inviting Jesus into your heart and receiving God's gift of eternal life.",
 };

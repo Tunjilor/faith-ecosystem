@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Travel and Safety (God's Protection on the Road)",
+  alternates: {
+    canonical: "/prayer-for-travel-and-safety",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-travel-and-safety",
+  },
   description:
     "A Christian prayer for travel — asking God for safety, protection, and His presence on every road, flight, and journey.",
 };

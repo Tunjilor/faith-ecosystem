@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer Before Meals (Give Thanks and Bless Your Food)",
+  alternates: {
+    canonical: "/prayer-before-meals",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-before-meals",
+  },
   description:
     "A simple and heartfelt Christian prayer before meals — giving thanks to God for His provision and blessing your food.",
 };

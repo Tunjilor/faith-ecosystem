@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Morning Prayer (Start Your Day with God)",
+  alternates: {
+    canonical: "/morning-prayer",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/morning-prayer",
+  },
   description:
     "Begin your day with a peaceful Christian morning prayer for guidance, gratitude, strength, and protection.",
 };

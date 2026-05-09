@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Monday (Start Your Week with God)",
+  alternates: {
+    canonical: "/prayer-for-monday",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-monday",
+  },
   description:
     "A Christian prayer for Monday — inviting God into your work week, setting your intentions, and beginning with faith.",
 };

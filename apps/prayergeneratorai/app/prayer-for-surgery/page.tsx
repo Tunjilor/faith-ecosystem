@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Surgery (Peace, Safety, and Healing)",
+  alternates: {
+    canonical: "/prayer-for-surgery",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-surgery",
+  },
   description:
     "A Christian prayer for before surgery — asking God for safety, calm, skilled hands, and a smooth recovery.",
 };

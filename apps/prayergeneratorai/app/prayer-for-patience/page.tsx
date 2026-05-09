@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Patience (Trust God's Timing)",
+  alternates: {
+    canonical: "/prayer-for-patience",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-patience",
+  },
   description:
     "A Christian prayer for patience — surrendering your timeline to God and finding peace in the waiting season.",
 };

@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Repentance (Turn Back to God)",
+  alternates: {
+    canonical: "/prayer-for-repentance",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-repentance",
+  },
   description:
     "A sincere Christian prayer for repentance — honestly acknowledging sin, turning back to God, and receiving His restoration.",
 };

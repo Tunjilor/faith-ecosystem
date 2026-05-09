@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Family (Love, Protection, and Unity)",
+  alternates: {
+    canonical: "/prayer-for-family",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-family",
+  },
   description:
     "Pray for your family with this Christian prayer for love, protection, unity, peace, and guidance.",
 };

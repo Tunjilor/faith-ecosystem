@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Cancer (Healing, Strength, and Hope)",
+  alternates: {
+    canonical: "/prayer-for-cancer",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-cancer",
+  },
   description:
     "A powerful Christian prayer for those battling cancer — asking God for healing, peace, strength, and hope during treatment.",
 };

@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Pregnancy (Health, Peace, and God's Blessing)",
+  alternates: {
+    canonical: "/prayer-for-pregnancy",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-pregnancy",
+  },
   description:
     "A Christian prayer during pregnancy — asking God for health, protection, peace, and His blessing over mother and baby.",
 };

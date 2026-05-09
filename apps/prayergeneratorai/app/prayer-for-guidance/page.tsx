@@ -1,6 +1,13 @@
 
 export const metadata = {
   title: "Prayer for Guidance (Wisdom and Direction)",
+  alternates: {
+    canonical: "/prayer-for-guidance",
+  },
+  openGraph: {
+    title: metadata.title as string,
+    url: "https://prayergeneratorai.com/prayer-for-guidance",
+  },
   description:
     "Need direction? Read a Christian prayer for guidance, wisdom, clarity, and trust in God.",
 };
