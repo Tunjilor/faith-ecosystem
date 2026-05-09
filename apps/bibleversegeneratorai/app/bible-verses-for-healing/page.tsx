@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Bible Verses for Healing (Physical & Emotional Restoration)",
   description:
     "10 powerful Bible verses for healing, with meaning and encouragement. Find comfort in Scripture for physical illness, emotional wounds, and grief.",
+  alternates: {
+    canonical: "/bible-verses-for-healing",
+  },
   openGraph: {
     title: "Bible Verses for Healing (Physical & Emotional Restoration)",
     description: "Scripture for healing — physical and emotional — with meaning and a free verse generator.",

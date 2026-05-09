@@ -21,10 +21,34 @@ export const metadata: Metadata = {
   description:
     "Find powerful, personalized Bible verses for anxiety, strength, healing, hope, and more. Get a meaningful scripture with reflection instantly — no login required.",
   metadataBase: new URL("https://bibleversegeneratorai.com"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     siteName: "Bible Verse Generator AI",
     type: "website",
     locale: "en_US",
+    title: "Bible Verse Generator AI — Find a Verse for Any Situation",
+    description:
+      "Find powerful, personalized Bible verses for anxiety, strength, healing, hope, and more.",
+    url: "https://bibleversegeneratorai.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bible Verse Generator AI — Find a Verse for Any Situation",
+    description:
+      "Find personalized Bible verses for anxiety, strength, healing, hope, and more. Free and instant.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   verification: {
     google: "googled139fb02f40d1ca6",
@@ -63,7 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </Link>
               ))}
             </div>
-            <a
+            
               href="https://faithcompanionai.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -80,7 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="border-t border-slate-800 mt-16">
           <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col items-center gap-4 text-center">
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-              <a
+              
                 href="https://prayergeneratorai.com"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -88,13 +112,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               >
                 PrayerGeneratorAI.com
               </a>
-              <a
+              
                 href="https://bibleversegeneratorai.com"
                 className="text-sm text-slate-400 hover:text-emerald-400 transition-colors"
               >
                 BibleVerseGeneratorAI.com
               </a>
-              <a
+              
                 href="https://faithcompanionai.com"
                 target="_blank"
                 rel="noopener noreferrer"

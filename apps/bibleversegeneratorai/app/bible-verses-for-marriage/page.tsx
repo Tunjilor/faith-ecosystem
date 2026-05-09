@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Bible Verses for Marriage (Strengthen Your Relationship with Scripture)",
   description:
     "10 powerful Bible verses for marriage, with meaning and reflection. Find wisdom for your relationship from Scripture. Free personalized verse generator.",
+  alternates: {
+    canonical: "/bible-verses-for-marriage",
+  },
   openGraph: {
     title: "Bible Verses for Marriage (Strengthen Your Relationship with Scripture)",
     description: "Scripture for marriage — love, commitment, and unity — with meaning and a free verse generator.",

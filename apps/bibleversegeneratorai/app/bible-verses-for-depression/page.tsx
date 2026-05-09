@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Bible Verses for Depression (Hope & Comfort in Scripture)",
   description:
     "10 powerful Bible verses for depression and despair, with meaning and reflection. Find God's comfort in your darkest moments. Free personalized verse generator.",
+  alternates: {
+    canonical: "/bible-verses-for-depression",
+  },
   openGraph: {
     title: "Bible Verses for Depression (Hope & Comfort in Scripture)",
     description: "Scripture for depression — God's presence in the darkest moments — with meaning and a free verse generator.",

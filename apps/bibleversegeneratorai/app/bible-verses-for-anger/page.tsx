@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Bible Verses for Anger (Peace & Self-Control from Scripture)",
   description:
     "10 powerful Bible verses for dealing with anger, with meaning and reflection. Find God's peace and self-control through Scripture. Free verse generator.",
+  alternates: {
+    canonical: "/bible-verses-for-anger",
+  },
   openGraph: {
     title: "Bible Verses for Anger (Peace & Self-Control from Scripture)",
     description: "Scripture for anger management and peace — with meaning and a free verse generator.",

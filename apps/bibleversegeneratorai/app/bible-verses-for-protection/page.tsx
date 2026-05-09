@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Bible Verses for Protection (God's Shield & Safety in Scripture)",
   description:
     "10 powerful Bible verses about God's protection, with meaning and encouragement. Find safety and confidence in God's promises. Free personalized verse generator.",
+  alternates: {
+    canonical: "/bible-verses-for-protection",
+  },
   openGraph: {
     title: "Bible Verses for Protection (God's Shield & Safety in Scripture)",
     description: "Scripture about God's protection — with meaning and a free personalized verse generator.",

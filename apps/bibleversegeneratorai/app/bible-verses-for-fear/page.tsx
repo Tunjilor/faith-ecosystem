@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Bible Verses for Fear (Courage & Comfort from Scripture)",
   description:
     "10 powerful Bible verses for fear, with meaning and encouragement. Find courage through Scripture and generate a personalized verse for your situation.",
+  alternates: {
+    canonical: "/bible-verses-for-fear",
+  },
   openGraph: {
     title: "Bible Verses for Fear (Courage & Comfort from Scripture)",
     description:

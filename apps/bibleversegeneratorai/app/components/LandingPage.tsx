@@ -26,11 +26,51 @@ interface Props {
   content: LandingPageContent;
 }
 
+function buildFaqSchema(content: LandingPageContent) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: `What does the Bible say about ${content.topicSlug}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${content.intro} Key verses include ${content.verses.slice(0, 3).map((v) => v.reference).join(", ")}.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `What is the best Bible verse for ${content.topicSlug}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `One of the most powerful verses for ${content.topicSlug} is ${content.verses[0].reference}: "${content.verses[0].text}" — ${content.verses[0].meaning}`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `How can Bible verses help with ${content.topicSlug}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${content.subtitle} Scripture provides comfort, guidance, and strength. This page includes ${content.verses.length} carefully selected verses with reflections to help you find peace and encouragement.`,
+        },
+      },
+    ],
+  };
+}
+
 export default function LandingPage({ content }: Props) {
   const { h1, subtitle, intro, versesHeading, verses, related, topicSlug } = content;
+  const faqSchema = buildFaqSchema(content);
 
   return (
     <main className="min-h-screen bg-[#020617] text-white">
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* Breadcrumb */}
       <div className="border-b border-slate-800">
         <div className="max-w-4xl mx-auto px-6 py-3 text-sm text-slate-500">
@@ -117,7 +157,7 @@ export default function LandingPage({ content }: Props) {
             FaithCompanionAI helps you grow deeper in faith with personalized prayers, devotionals,
             and saved verses — all in one place.
           </p>
-          <a
+          
             href="https://faithcompanionai.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -134,7 +174,7 @@ export default function LandingPage({ content }: Props) {
           <p className="text-gray-300 mb-3 text-sm">
             Looking for a prayer to match your verse?
           </p>
-          <a
+          
             href="https://prayergeneratorai.com"
             target="_blank"
             rel="noopener noreferrer"

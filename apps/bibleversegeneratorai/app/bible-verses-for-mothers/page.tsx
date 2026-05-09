@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Bible Verses for Mothers (Strength, Encouragement & God's Love)",
   description:
     "10 powerful Bible verses for mothers, with meaning and encouragement. Find strength, wisdom, and God's blessing for the journey of motherhood.",
+  alternates: {
+    canonical: "/bible-verses-for-mothers",
+  },
   openGraph: {
     title: "Bible Verses for Mothers (Strength, Encouragement & God's Love)",
     description: "Scripture for mothers — strength, love, and God's blessing — with meaning and a free verse generator.",

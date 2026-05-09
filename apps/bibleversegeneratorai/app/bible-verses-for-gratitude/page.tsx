@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Bible Verses for Gratitude (Thankfulness & Joy from Scripture)",
   description:
     "10 powerful Bible verses about gratitude and thankfulness, with meaning and reflection. Cultivate a heart of praise through God's Word. Free verse generator.",
+  alternates: {
+    canonical: "/bible-verses-for-gratitude",
+  },
   openGraph: {
     title: "Bible Verses for Gratitude (Thankfulness & Joy from Scripture)",
     description: "Scripture for gratitude and thankfulness — with meaning and a free verse generator.",

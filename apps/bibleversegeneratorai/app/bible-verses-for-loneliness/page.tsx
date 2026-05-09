@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Bible Verses for Loneliness (You Are Never Truly Alone)",
   description:
     "10 powerful Bible verses for loneliness and isolation, with meaning and encouragement. God's presence fills the empty spaces. Free personalized verse generator.",
+  alternates: {
+    canonical: "/bible-verses-for-loneliness",
+  },
   openGraph: {
     title: "Bible Verses for Loneliness (You Are Never Truly Alone)",
     description: "Scripture for loneliness — God's companionship and comfort — with meaning and a free verse generator.",

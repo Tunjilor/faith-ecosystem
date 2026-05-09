@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Bible Verses for Sleep (Peace & Rest from Scripture)",
   description:
     "10 calming Bible verses for sleep and rest, with meaning and reflection. Find God's peace for restless nights. Free personalized verse generator.",
+  alternates: {
+    canonical: "/bible-verses-for-sleep",
+  },
   openGraph: {
     title: "Bible Verses for Sleep (Peace & Rest from Scripture)",
     description: "Scripture for restful sleep and peace at night — with meaning and a free verse generator.",

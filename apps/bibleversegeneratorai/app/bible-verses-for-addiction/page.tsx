@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Bible Verses for Addiction (Freedom & Recovery Through Scripture)",
   description:
     "10 powerful Bible verses for overcoming addiction, with meaning and hope. Find God's strength for recovery. Free personalized verse generator.",
+  alternates: {
+    canonical: "/bible-verses-for-addiction",
+  },
   openGraph: {
     title: "Bible Verses for Addiction (Freedom & Recovery Through Scripture)",
     description: "Scripture for addiction recovery — God's freedom and strength — with meaning and a free verse generator.",
