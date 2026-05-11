@@ -1,4 +1,3 @@
-
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
@@ -6,7 +5,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: "/api/",
     },
     sitemap: "https://prayergeneratorai.com/sitemap.xml",
+    host: "https://prayergeneratorai.com",
   };
 }

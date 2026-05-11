@@ -1,15 +1,12 @@
-
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://tithecalculatorai.com'
-
   return [
     {
-      url: baseUrl,
+      url: "https://tithecalculatorai.com",
       lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1,
+      changeFrequency: "weekly",
+      priority: 1.0,
     },
-  ]
+  ];
 }
