@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "New Year Prayer (Step Into the New Year with God)",
-  alternates: {
-    canonical: "/new-year-prayer",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/new-year-prayer",
-  },
-  description:
-    "A Christian prayer for the New Year — surrendering the year ahead to God, setting intentions of faith, and trusting His plans.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "New Year Prayer (Step Into the New Year with God)",
+  "A Christian prayer for the New Year — surrendering the year ahead to God, setting intentions of faith, and trusting His plans.",
+  "/new-year-prayer"
+);
+
+
 
 import Link from "next/link";
 

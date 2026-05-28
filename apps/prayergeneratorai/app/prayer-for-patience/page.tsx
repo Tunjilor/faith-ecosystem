@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Patience (Trust God's Timing)",
-  alternates: {
-    canonical: "/prayer-for-patience",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-patience",
-  },
-  description:
-    "A Christian prayer for patience — surrendering your timeline to God and finding peace in the waiting season.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Patience (Trust God's Timing)",
+  "A Christian prayer for patience — surrendering your timeline to God and finding peace in the waiting season.",
+  "/prayer-for-patience"
+);
+
+
 
 import Link from "next/link";
 

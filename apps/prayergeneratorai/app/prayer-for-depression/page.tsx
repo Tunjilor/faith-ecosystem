@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Depression (Lift the Darkness, Find Hope)",
-  alternates: {
-    canonical: "/prayer-for-depression",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-depression",
-  },
-  description:
-    "A compassionate Christian prayer for depression — asking God to bring light, hope, and healing into the darkest seasons.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Depression (Lift the Darkness, Find Hope)",
+  "A compassionate Christian prayer for depression — asking God to bring light, hope, and healing into the darkest seasons.",
+  "/prayer-for-depression"
+);
+
+
 
 import Link from "next/link";
 

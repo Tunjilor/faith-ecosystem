@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Church (Unity, Growth, and God's Presence)",
-  alternates: {
-    canonical: "/prayer-for-church",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-church",
-  },
-  description:
-    "A Christian prayer for your church — asking God for unity among believers, spiritual growth, revival, and His glory to fill the congregation.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Church (Unity, Growth, and God's Presence)",
+  "A Christian prayer for your church — asking God for unity among believers, spiritual growth, revival, and His glory to fill the congregation.",
+  "/prayer-for-church"
+);
+
+
 
 import Link from "next/link";
 

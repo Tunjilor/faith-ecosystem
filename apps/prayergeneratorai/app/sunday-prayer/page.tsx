@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Sunday Prayer (Worship, Rest, and Renewal)",
-  alternates: {
-    canonical: "/sunday-prayer",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/sunday-prayer",
-  },
-  description:
-    "A Christian prayer for Sunday — entering the Lord's day with worship, gratitude, and an open heart to receive from Him.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Sunday Prayer (Worship, Rest, and Renewal)",
+  "A Christian prayer for Sunday — entering the Lord's day with worship, gratitude, and an open heart to receive from Him.",
+  "/sunday-prayer"
+);
+
+
 
 import Link from "next/link";
 

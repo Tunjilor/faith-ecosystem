@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Wife (Bless and Protect Her)",
-  alternates: {
-    canonical: "/prayer-for-wife",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-wife",
-  },
-  description:
-    "A powerful Christian prayer for your wife — covering her with God's love, peace, strength, and joy every day.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Wife (Bless and Protect Her)",
+  "A powerful Christian prayer for your wife — covering her with God's love, peace, strength, and joy every day.",
+  "/prayer-for-wife"
+);
+
+
 
 import Link from "next/link";
 

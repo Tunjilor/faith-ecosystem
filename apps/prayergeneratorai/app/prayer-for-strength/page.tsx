@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Strength (Courage During Hard Times)",
-  alternates: {
-    canonical: "/prayer-for-strength",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-strength",
-  },
-  description:
-    "Need strength today? Read a Christian prayer for courage, endurance, faith, and peace.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Strength (Courage During Hard Times)",
+  "Need strength today? Read a Christian prayer for courage, endurance, faith, and peace.",
+  "/prayer-for-strength"
+);
+
+
 
 import Link from "next/link";
 

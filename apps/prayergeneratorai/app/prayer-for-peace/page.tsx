@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Peace (Calm Your Heart and Mind)",
-  alternates: {
-    canonical: "/prayer-for-peace",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-peace",
-  },
-  description:
-    "A comforting Christian prayer for peace, calm, trust, and emotional rest during difficult moments.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Peace (Calm Your Heart and Mind)",
+  "A comforting Christian prayer for peace, calm, trust, and emotional rest during difficult moments.",
+  "/prayer-for-peace"
+);
+
+
 
 import Link from "next/link";
 

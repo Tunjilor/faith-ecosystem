@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Travel and Safety (God's Protection on the Road)",
-  alternates: {
-    canonical: "/prayer-for-travel-and-safety",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-travel-and-safety",
-  },
-  description:
-    "A Christian prayer for travel — asking God for safety, protection, and His presence on every road, flight, and journey.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Travel and Safety (God's Protection on the Road)",
+  "A Christian prayer for travel — asking God for safety, protection, and His presence on every road, flight, and journey.",
+  "/prayer-for-travel-and-safety"
+);
+
+
 
 import Link from "next/link";
 

@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Courage (Be Strong and Bold in God)",
-  alternates: {
-    canonical: "/prayer-for-courage",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-courage",
-  },
-  description:
-    "A Christian prayer for courage — asking God to replace fear with boldness and strengthen you to take the next step of faith.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Courage (Be Strong and Bold in God)",
+  "A Christian prayer for courage — asking God to replace fear with boldness and strengthen you to take the next step of faith.",
+  "/prayer-for-courage"
+);
+
+
 
 import Link from "next/link";
 

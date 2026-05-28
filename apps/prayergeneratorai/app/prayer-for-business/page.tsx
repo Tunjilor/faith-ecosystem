@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Business (Bless My Work and Efforts)",
-  alternates: {
-    canonical: "/prayer-for-business",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-business",
-  },
-  description:
-    "A Christian prayer for your business — asking God for favor, growth, wisdom, and His blessing over your entrepreneurial journey.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Business (Bless My Work and Efforts)",
+  "A Christian prayer for your business — asking God for favor, growth, wisdom, and His blessing over your entrepreneurial journey.",
+  "/prayer-for-business"
+);
+
+
 
 import Link from "next/link";
 

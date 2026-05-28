@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for a Friend (Lift Someone You Love to God)",
-  alternates: {
-    canonical: "/prayer-for-friend",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-friend",
-  },
-  description:
-    "A Christian prayer for a friend who is hurting, struggling, or in need. Intercede for the people you care about.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for a Friend (Lift Someone You Love to God)",
+  "A Christian prayer for a friend who is hurting, struggling, or in need. Intercede for the people you care about.",
+  "/prayer-for-friend"
+);
+
+
 
 import Link from "next/link";
 

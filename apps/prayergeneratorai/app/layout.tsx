@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
+
+const OG_IMAGE = "/api/og";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://prayergeneratorai.com"),
@@ -36,12 +39,21 @@ export const metadata: Metadata = {
     siteName: "Prayer Generator AI",
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Prayer Generator AI | Free Christian AI Prayer Generator",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Prayer Generator AI | Free Christian AI Prayer Generator",
     description:
       "Generate personalized Christian prayers for your situation in seconds.",
+    images: [OG_IMAGE],
   },
   robots: {
     index: true,
@@ -57,6 +69,41 @@ export const metadata: Metadata = {
   category: "faith",
 };
 
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://prayergeneratorai.com/#organization",
+      name: "Prayer Generator AI",
+      url: "https://prayergeneratorai.com",
+      description: "Free AI-powered Christian prayer generator",
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://prayergeneratorai.com/#website",
+      url: "https://prayergeneratorai.com",
+      name: "Prayer Generator AI",
+      publisher: { "@id": "https://prayergeneratorai.com/#organization" },
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://prayergeneratorai.com/#webapp",
+      name: "Prayer Generator AI",
+      url: "https://prayergeneratorai.com",
+      applicationCategory: "LifestyleApplication",
+      operatingSystem: "Web",
+      description:
+        "Generate personalized Christian prayers for anxiety, healing, family, strength, and more.",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -64,7 +111,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
+        />
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

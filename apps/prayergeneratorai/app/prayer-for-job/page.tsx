@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for a Job (Open Doors and Divine Opportunity)",
-  alternates: {
-    canonical: "/prayer-for-job",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-job",
-  },
-  description:
-    "A Christian prayer for finding a job — asking God to open the right doors, grant favor, and bring the right opportunity.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for a Job (Open Doors and Divine Opportunity)",
+  "A Christian prayer for finding a job — asking God to open the right doors, grant favor, and bring the right opportunity.",
+  "/prayer-for-job"
+);
+
+
 
 import Link from "next/link";
 

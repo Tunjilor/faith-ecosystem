@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Enemies (Love and Forgive Those Who Hurt You)",
-  alternates: {
-    canonical: "/prayer-for-enemies",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-enemies",
-  },
-  description:
-    "A Christian prayer for your enemies — following Jesus' command to love and pray for those who have wronged or opposed you.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Enemies (Love and Forgive Those Who Hurt You)",
+  "A Christian prayer for your enemies — following Jesus' command to love and pray for those who have wronged or opposed you.",
+  "/prayer-for-enemies"
+);
+
+
 
 import Link from "next/link";
 

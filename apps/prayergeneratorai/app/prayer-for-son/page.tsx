@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for My Son (Raise Him in God's Purpose)",
-  alternates: {
-    canonical: "/prayer-for-son",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-son",
-  },
-  description:
-    "A powerful Christian prayer for your son — covering him with God's wisdom, protection, and a life of purpose and faith.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for My Son (Raise Him in God's Purpose)",
+  "A powerful Christian prayer for your son — covering him with God's wisdom, protection, and a life of purpose and faith.",
+  "/prayer-for-son"
+);
+
+
 
 import Link from "next/link";
 

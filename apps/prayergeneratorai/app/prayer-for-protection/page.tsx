@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Protection (Safety, Peace, and Guidance)",
-  alternates: {
-    canonical: "/prayer-for-protection",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-protection",
-  },
-  description:
-    "A Christian prayer for protection, safety, peace, and God’s guidance over your life and loved ones.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Protection (Safety, Peace, and Guidance)",
+  "A Christian prayer for protection, safety, peace, and God’s guidance over your life and loved ones.",
+  "/prayer-for-protection"
+);
+
+
 
 import Link from "next/link";
 

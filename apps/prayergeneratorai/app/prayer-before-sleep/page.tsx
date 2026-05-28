@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer Before Sleep (Peaceful Night Prayer)",
-  alternates: {
-    canonical: "/prayer-before-sleep",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-before-sleep",
-  },
-  description:
-    "End your day with a peaceful Christian prayer before sleep for rest, calm, protection, and gratitude.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer Before Sleep (Peaceful Night Prayer)",
+  "End your day with a peaceful Christian prayer before sleep for rest, calm, protection, and gratitude.",
+  "/prayer-before-sleep"
+);
+
+
 
 import Link from "next/link";
 

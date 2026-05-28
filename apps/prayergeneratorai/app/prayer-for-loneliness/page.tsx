@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Loneliness (You Are Never Alone)",
-  alternates: {
-    canonical: "/prayer-for-loneliness",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-loneliness",
-  },
-  description:
-    "A Christian prayer for loneliness — finding comfort in God's presence and asking Him to bring meaningful connection into your life.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Loneliness (You Are Never Alone)",
+  "A Christian prayer for loneliness — finding comfort in God's presence and asking Him to bring meaningful connection into your life.",
+  "/prayer-for-loneliness"
+);
+
+
 
 import Link from "next/link";
 

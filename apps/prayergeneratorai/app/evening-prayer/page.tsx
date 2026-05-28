@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Evening Prayer (End Your Day with God)",
-  alternates: {
-    canonical: "/evening-prayer",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/evening-prayer",
-  },
-  description:
-    "A peaceful Christian evening prayer to close your day — giving thanks, releasing the day's burdens, and resting in God's care.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Evening Prayer (End Your Day with God)",
+  "A peaceful Christian evening prayer to close your day — giving thanks, releasing the day's burdens, and resting in God's care.",
+  "/evening-prayer"
+);
+
+
 
 import Link from "next/link";
 

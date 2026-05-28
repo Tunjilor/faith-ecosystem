@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for a New Job (Grace, Favor, and a Fresh Start)",
-  alternates: {
-    canonical: "/prayer-for-new-job",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-new-job",
-  },
-  description:
-    "A Christian prayer for starting a new job — asking God for confidence, favor, wisdom, and a successful new beginning.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for a New Job (Grace, Favor, and a Fresh Start)",
+  "A Christian prayer for starting a new job — asking God for confidence, favor, wisdom, and a successful new beginning.",
+  "/prayer-for-new-job"
+);
+
+
 
 import Link from "next/link";
 

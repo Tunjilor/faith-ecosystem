@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Christmas Prayer (Celebrate the Birth of Jesus)",
-  alternates: {
-    canonical: "/christmas-prayer",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/christmas-prayer",
-  },
-  description:
-    "A beautiful Christian prayer for Christmas — celebrating the birth of Jesus, giving thanks, and inviting His presence into the holiday.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Christmas Prayer (Celebrate the Birth of Jesus)",
+  "A beautiful Christian prayer for Christmas — celebrating the birth of Jesus, giving thanks, and inviting His presence into the holiday.",
+  "/christmas-prayer"
+);
+
+
 
 import Link from "next/link";
 

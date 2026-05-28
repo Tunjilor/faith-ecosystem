@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for a Baby (Bless This New Life)",
-  alternates: {
-    canonical: "/prayer-for-baby",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-baby",
-  },
-  description:
-    "A tender Christian prayer for a newborn baby — asking God to bless, protect, and guide this precious new life.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for a Baby (Bless This New Life)",
+  "A tender Christian prayer for a newborn baby — asking God to bless, protect, and guide this precious new life.",
+  "/prayer-for-baby"
+);
+
+
 
 import Link from "next/link";
 

@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Cancer (Healing, Strength, and Hope)",
-  alternates: {
-    canonical: "/prayer-for-cancer",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-cancer",
-  },
-  description:
-    "A powerful Christian prayer for those battling cancer — asking God for healing, peace, strength, and hope during treatment.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Cancer (Healing, Strength, and Hope)",
+  "A powerful Christian prayer for those battling cancer — asking God for healing, peace, strength, and hope during treatment.",
+  "/prayer-for-cancer"
+);
+
+
 
 import Link from "next/link";
 

@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Healing (Comfort, Strength, and Peace)",
-  alternates: {
-    canonical: "/prayer-for-healing",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-healing",
-  },
-  description:
-    "Need healing? Read a comforting Christian prayer for healing, strength, peace, and God’s presence.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Healing (Comfort, Strength, and Peace)",
+  "Need healing? Read a comforting Christian prayer for healing, strength, peace, and God’s presence.",
+  "/prayer-for-healing"
+);
+
+
 
 import Link from "next/link";
 

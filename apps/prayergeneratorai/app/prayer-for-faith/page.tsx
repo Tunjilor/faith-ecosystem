@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Faith (Strengthen Your Trust in God)",
-  alternates: {
-    canonical: "/prayer-for-faith",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-faith",
-  },
-  description:
-    "A Christian prayer for faith — asking God to strengthen your belief, overcome doubt, and deepen your trust in Him.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Faith (Strengthen Your Trust in God)",
+  "A Christian prayer for faith — asking God to strengthen your belief, overcome doubt, and deepen your trust in Him.",
+  "/prayer-for-faith"
+);
+
+
 
 import Link from "next/link";
 

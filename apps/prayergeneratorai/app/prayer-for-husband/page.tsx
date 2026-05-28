@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Husband (Cover Him with God's Grace)",
-  alternates: {
-    canonical: "/prayer-for-husband",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-husband",
-  },
-  description:
-    "A heartfelt Christian prayer for your husband — for his strength, protection, faith, and leadership in your home.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Husband (Cover Him with God's Grace)",
+  "A heartfelt Christian prayer for your husband — for his strength, protection, faith, and leadership in your home.",
+  "/prayer-for-husband"
+);
+
+
 
 import Link from "next/link";
 

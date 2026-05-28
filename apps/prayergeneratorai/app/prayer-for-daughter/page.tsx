@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for My Daughter (Raise Her in God's Love)",
-  alternates: {
-    canonical: "/prayer-for-daughter",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-daughter",
-  },
-  description:
-    "A heartfelt Christian prayer for your daughter — covering her with God's grace, identity, protection, and purpose.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for My Daughter (Raise Her in God's Love)",
+  "A heartfelt Christian prayer for your daughter — covering her with God's grace, identity, protection, and purpose.",
+  "/prayer-for-daughter"
+);
+
+
 
 import Link from "next/link";
 

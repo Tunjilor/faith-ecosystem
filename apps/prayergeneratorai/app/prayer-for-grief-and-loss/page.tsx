@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Grief and Loss (Comfort in Your Sorrow)",
-  alternates: {
-    canonical: "/prayer-for-grief-and-loss",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-grief-and-loss",
-  },
-  description:
-    "A compassionate Christian prayer for grief and loss — bringing sorrow to God and receiving His comfort, hope, and peace.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Grief and Loss (Comfort in Your Sorrow)",
+  "A compassionate Christian prayer for grief and loss — bringing sorrow to God and receiving His comfort, hope, and peace.",
+  "/prayer-for-grief-and-loss"
+);
+
+
 
 import Link from "next/link";
 

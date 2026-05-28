@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Success (God's Favor on Your Goals)",
-  alternates: {
-    canonical: "/prayer-for-success",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-success",
-  },
-  description:
-    "A Christian prayer for success — asking God to bless your efforts, align your ambitions with His will, and grant lasting results.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Success (God's Favor on Your Goals)",
+  "A Christian prayer for success — asking God to bless your efforts, align your ambitions with His will, and grant lasting results.",
+  "/prayer-for-success"
+);
+
+
 
 import Link from "next/link";
 

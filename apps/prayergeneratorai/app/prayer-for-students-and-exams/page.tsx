@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Students and Exams (Focus, Peace, and Success)",
-  alternates: {
-    canonical: "/prayer-for-students-and-exams",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-students-and-exams",
-  },
-  description:
-    "A Christian prayer for students facing exams — asking God for focus, calm, mental clarity, and success in studies.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Students and Exams (Focus, Peace, and Success)",
+  "A Christian prayer for students facing exams — asking God for focus, calm, mental clarity, and success in studies.",
+  "/prayer-for-students-and-exams"
+);
+
+
 
 import Link from "next/link";
 

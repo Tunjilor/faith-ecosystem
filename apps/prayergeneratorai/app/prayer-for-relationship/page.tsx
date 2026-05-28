@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Relationship (Restoration and Healing)",
-  alternates: {
-    canonical: "/prayer-for-relationship",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-relationship",
-  },
-  description:
-    "Seeking God's help in a relationship? A Christian prayer for restoration, healing, and clarity in any relationship.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Relationship (Restoration and Healing)",
+  "Seeking God's help in a relationship? A Christian prayer for restoration, healing, and clarity in any relationship.",
+  "/prayer-for-relationship"
+);
+
+
 
 import Link from "next/link";
 

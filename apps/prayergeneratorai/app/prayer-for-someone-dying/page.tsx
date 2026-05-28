@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Someone Dying (Comfort and Peace at the End of Life)",
-  alternates: {
-    canonical: "/prayer-for-someone-dying",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-someone-dying",
-  },
-  description:
-    "A gentle Christian prayer for someone who is dying — bringing peace, comfort, and God's presence to their final journey.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Someone Dying (Comfort and Peace at the End of Life)",
+  "A gentle Christian prayer for someone who is dying — bringing peace, comfort, and God's presence to their final journey.",
+  "/prayer-for-someone-dying"
+);
+
+
 
 import Link from "next/link";
 

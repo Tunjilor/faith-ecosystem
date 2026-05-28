@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Marriage (Strengthen Your Relationship with God)",
-  alternates: {
-    canonical: "/prayer-for-marriage",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-marriage",
-  },
-  description:
-    "Seek God's blessing over your marriage. A powerful Christian prayer for love, unity, and restoration in your relationship.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Marriage (Strengthen Your Relationship with God)",
+  "Seek God's blessing over your marriage. A powerful Christian prayer for love, unity, and restoration in your relationship.",
+  "/prayer-for-marriage"
+);
+
+
 
 import Link from "next/link";
 

@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Addiction Recovery (Freedom and Healing)",
-  alternates: {
-    canonical: "/prayer-for-addiction-recovery",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-addiction-recovery",
-  },
-  description:
-    "A Christian prayer for addiction recovery — asking God for freedom, strength, healing, and a new life beyond addiction.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Addiction Recovery (Freedom and Healing)",
+  "A Christian prayer for addiction recovery — asking God for freedom, strength, healing, and a new life beyond addiction.",
+  "/prayer-for-addiction-recovery"
+);
+
+
 
 import Link from "next/link";
 

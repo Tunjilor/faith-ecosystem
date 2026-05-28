@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Revival (Awaken the Church and Our Nation)",
-  alternates: {
-    canonical: "/prayer-for-revival",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-revival",
-  },
-  description:
-    "A powerful Christian prayer for revival — asking God to awaken hearts, restore the church, and pour out His Spirit on the land.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Revival (Awaken the Church and Our Nation)",
+  "A powerful Christian prayer for revival — asking God to awaken hearts, restore the church, and pour out His Spirit on the land.",
+  "/prayer-for-revival"
+);
+
+
 
 import Link from "next/link";
 

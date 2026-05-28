@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Anxiety and Fear (Cast Your Worries on God)",
-  alternates: {
-    canonical: "/prayer-for-anxiety-and-fear",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-anxiety-and-fear",
-  },
-  description:
-    "A Christian prayer for anxiety and fear — surrendering worry to God and receiving His perfect peace that passes understanding.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Anxiety and Fear (Cast Your Worries on God)",
+  "A Christian prayer for anxiety and fear — surrendering worry to God and receiving His perfect peace that passes understanding.",
+  "/prayer-for-anxiety-and-fear"
+);
+
+
 
 import Link from "next/link";
 

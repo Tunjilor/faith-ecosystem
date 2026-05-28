@@ -272,16 +272,7 @@ export default function Home() {
   }
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage",mainEntity:[{"@type":"Question",name:"What is Prayer Generator AI?",acceptedAnswer:{"@type":"Answer",text:"Prayer Generator AI is a free Christian tool that creates personalized prayers based on your situation. Type what you need prayer for and receive a thoughtful prayer you can read, reflect on, copy, save, and share."}},{"@type":"Question",name:"How does the AI prayer generator work?",acceptedAnswer:{"@type":"Answer",text:"Type a short description of what you need prayer for, such as anxiety, healing, family, guidance, or strength. The AI generates a simple Christian prayer you can use for personal reflection, share with others, or save to your faith journal."}},{"@type":"Question",name:"Is this prayer generator free?",acceptedAnswer:{"@type":"Answer",text:"Yes, Prayer Generator AI is 100% free to use. You can generate unlimited prayers for any topic without creating an account."}},{"@type":"Question",name:"Can I save or share my generated prayer?",acceptedAnswer:{"@type":"Answer",text:"Yes. You can copy your prayer, share it via WhatsApp or Facebook, email it to yourself, or save it on FaithCompanionAI for your personal faith journal."}}]}) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebApplication",name:"Prayer Generator AI",url:"https://prayergeneratorai.com",description:"Free Christian AI prayer generator for personalized prayers on any topic.",applicationCategory:"LifestyleApplication",operatingSystem:"Any",offers:{"@type":"Offer",price:"0",priceCurrency:"USD"}}) }}
-      />
-      <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white">
+    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white">
       <section className="mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center px-6 py-16 text-center">
         <p className="mb-4 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300">
           Free Christian AI Prayer Generator
@@ -603,6 +594,5 @@ export default function Home() {
         <span className="text-[10px] font-medium leading-none">Top</span>
       </button>
     </main>
-    </>
   );
 }

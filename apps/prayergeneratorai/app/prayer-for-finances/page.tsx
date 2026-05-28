@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Finances (Provision, Freedom, and Wisdom)",
-  alternates: {
-    canonical: "/prayer-for-finances",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-finances",
-  },
-  description:
-    "A Christian prayer for financial breakthrough — asking God for provision, wisdom, debt freedom, and financial peace.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Finances (Provision, Freedom, and Wisdom)",
+  "A Christian prayer for financial breakthrough — asking God for provision, wisdom, debt freedom, and financial peace.",
+  "/prayer-for-finances"
+);
+
+
 
 import Link from "next/link";
 

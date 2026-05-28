@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Moving On (Healing and Letting Go)",
-  alternates: {
-    canonical: "/prayer-for-moving-on",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-moving-on",
-  },
-  description:
-    "A Christian prayer for moving on — asking God for the strength to let go of the past and step into a healed, hopeful future.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Moving On (Healing and Letting Go)",
+  "A Christian prayer for moving on — asking God for the strength to let go of the past and step into a healed, hopeful future.",
+  "/prayer-for-moving-on"
+);
+
+
 
 import Link from "next/link";
 

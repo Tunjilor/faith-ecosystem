@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Chronic Illness (Endurance, Peace, and Healing)",
-  alternates: {
-    canonical: "/prayer-for-chronic-illness",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-chronic-illness",
-  },
-  description:
-    "A Christian prayer for chronic illness — seeking God's strength, peace, and healing through long-term health struggles.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Chronic Illness (Endurance, Peace, and Healing)",
+  "A Christian prayer for chronic illness — seeking God's strength, peace, and healing through long-term health struggles.",
+  "/prayer-for-chronic-illness"
+);
+
+
 
 import Link from "next/link";
 

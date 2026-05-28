@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer Before Meals (Give Thanks and Bless Your Food)",
-  alternates: {
-    canonical: "/prayer-before-meals",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-before-meals",
-  },
-  description:
-    "A simple and heartfelt Christian prayer before meals — giving thanks to God for His provision and blessing your food.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer Before Meals (Give Thanks and Bless Your Food)",
+  "A simple and heartfelt Christian prayer before meals — giving thanks to God for His provision and blessing your food.",
+  "/prayer-before-meals"
+);
+
+
 
 import Link from "next/link";
 

@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Gratitude (Thankfulness and Reflection)",
-  alternates: {
-    canonical: "/prayer-for-gratitude",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-gratitude",
-  },
-  description:
-    "A Christian prayer of gratitude to thank God for blessings, daily provision, strength, and grace.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Gratitude (Thankfulness and Reflection)",
+  "A Christian prayer of gratitude to thank God for blessings, daily provision, strength, and grace.",
+  "/prayer-for-gratitude"
+);
+
+
 
 import Link from "next/link";
 

@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Hope (Renew Your Hope in God)",
-  alternates: {
-    canonical: "/prayer-for-hope",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-hope",
-  },
-  description:
-    "A Christian prayer for hope — asking God to restore what has been lost and fill your heart with expectation and trust in His promises.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Hope (Renew Your Hope in God)",
+  "A Christian prayer for hope — asking God to restore what has been lost and fill your heart with expectation and trust in His promises.",
+  "/prayer-for-hope"
+);
+
+
 
 import Link from "next/link";
 

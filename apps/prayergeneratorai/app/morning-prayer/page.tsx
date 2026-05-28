@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Morning Prayer (Start Your Day with God)",
-  alternates: {
-    canonical: "/morning-prayer",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/morning-prayer",
-  },
-  description:
-    "Begin your day with a peaceful Christian morning prayer for guidance, gratitude, strength, and protection.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Morning Prayer (Start Your Day with God)",
+  "Begin your day with a peaceful Christian morning prayer for guidance, gratitude, strength, and protection.",
+  "/morning-prayer"
+);
+
+
 
 import Link from "next/link";
 

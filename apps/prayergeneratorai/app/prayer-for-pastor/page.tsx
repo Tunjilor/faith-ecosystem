@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Pastor (Strength, Wisdom, and Protection)",
-  alternates: {
-    canonical: "/prayer-for-pastor",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-pastor",
-  },
-  description:
-    "A powerful Christian prayer for your pastor — covering them with God's strength, wisdom, protection, and renewal.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Pastor (Strength, Wisdom, and Protection)",
+  "A powerful Christian prayer for your pastor — covering them with God's strength, wisdom, protection, and renewal.",
+  "/prayer-for-pastor"
+);
+
+
 
 import Link from "next/link";
 

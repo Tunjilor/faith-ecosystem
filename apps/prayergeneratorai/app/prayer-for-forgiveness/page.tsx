@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Forgiveness (Receive God's Grace and Mercy)",
-  alternates: {
-    canonical: "/prayer-for-forgiveness",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-forgiveness",
-  },
-  description:
-    "A sincere Christian prayer for forgiveness — seeking God's grace, releasing guilt, and walking in freedom and restoration.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Forgiveness (Receive God's Grace and Mercy)",
+  "A sincere Christian prayer for forgiveness — seeking God's grace, releasing guilt, and walking in freedom and restoration.",
+  "/prayer-for-forgiveness"
+);
+
+
 
 import Link from "next/link";
 

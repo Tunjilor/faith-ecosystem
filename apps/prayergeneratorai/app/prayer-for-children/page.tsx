@@ -1,16 +1,13 @@
+import type { Metadata } from "next";
+import { createPrayerMetadata } from "@/lib/prayer-page-metadata";
 
-export const metadata = {
-  title: "Prayer for Children (Cover Your Kids in Prayer)",
-  alternates: {
-    canonical: "/prayer-for-children",
-  },
-  openGraph: {
-    title: metadata.title as string,
-    url: "https://prayergeneratorai.com/prayer-for-children",
-  },
-  description:
-    "A Christian prayer for your children — asking God to protect, guide, and grow them in faith, wisdom, and love.",
-};
+export const metadata: Metadata = createPrayerMetadata(
+  "Prayer for Children (Cover Your Kids in Prayer)",
+  "A Christian prayer for your children — asking God to protect, guide, and grow them in faith, wisdom, and love.",
+  "/prayer-for-children"
+);
+
+
 
 import Link from "next/link";
 
