@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Forgiveness (Healing & Freedom in Scripture)",
-  description:
-    "10 powerful Bible verses about forgiveness — forgiving others and receiving God's forgiveness. With meaning, reflection, and a personalized verse generator.",
-  openGraph: {
-    title: "Bible Verses for Forgiveness (Healing & Freedom in Scripture)",
-    description: "Scripture on forgiveness with meaning, reflection, and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-forgiveness",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Forgiveness (Healing & Freedom in Scripture)",
+  "10 powerful Bible verses about forgiveness — forgiving others and receiving God's forgiveness. With meaning, reflection, and a personalized verse generator.",
+  "/bible-verses-for-forgiveness"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Forgiveness",

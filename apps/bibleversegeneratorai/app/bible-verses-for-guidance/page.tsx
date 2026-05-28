@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Guidance (Direction & Wisdom from Scripture)",
-  description:
-    "10 Bible verses for guidance and direction, with meaning and reflection. Find God's wisdom for major decisions and life crossroads. Free personalized verse generator.",
-  openGraph: {
-    title: "Bible Verses for Guidance (Direction & Wisdom from Scripture)",
-    description: "Scripture for guidance and decisions — with meaning, reflection, and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-guidance",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Guidance (Direction & Wisdom from Scripture)",
+  "10 Bible verses for guidance and direction, with meaning and reflection. Find God's wisdom for major decisions and life crossroads. Free personalized verse generator.",
+  "/bible-verses-for-guidance"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Guidance",

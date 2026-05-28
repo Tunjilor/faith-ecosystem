@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Anger (Peace & Self-Control from Scripture)",
-  description:
-    "10 powerful Bible verses for dealing with anger, with meaning and reflection. Find God's peace and self-control through Scripture. Free verse generator.",
-  openGraph: {
-    title: "Bible Verses for Anger (Peace & Self-Control from Scripture)",
-    description: "Scripture for anger management and peace — with meaning and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-anger",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Anger (Peace & Self-Control from Scripture)",
+  "10 powerful Bible verses for dealing with anger, with meaning and reflection. Find God's peace and self-control through Scripture. Free verse generator.",
+  "/bible-verses-for-anger"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Anger",

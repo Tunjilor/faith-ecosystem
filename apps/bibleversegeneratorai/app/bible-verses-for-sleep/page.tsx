@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Sleep (Peace & Rest from Scripture)",
-  description:
-    "10 calming Bible verses for sleep and rest, with meaning and reflection. Find God's peace for restless nights. Free personalized verse generator.",
-  openGraph: {
-    title: "Bible Verses for Sleep (Peace & Rest from Scripture)",
-    description: "Scripture for restful sleep and peace at night — with meaning and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-sleep",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Sleep (Peace & Rest from Scripture)",
+  "10 calming Bible verses for sleep and rest, with meaning and reflection. Find God's peace for restless nights. Free personalized verse generator.",
+  "/bible-verses-for-sleep"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Sleep",

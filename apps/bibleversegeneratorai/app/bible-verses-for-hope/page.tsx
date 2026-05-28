@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Hope (Encouragement When Life Is Hard)",
-  description:
-    "10 powerful Bible verses for hope, with meaning and encouragement. Find light in the darkness through Scripture and a free personalized verse generator.",
-  openGraph: {
-    title: "Bible Verses for Hope (Encouragement When Life Is Hard)",
-    description: "Scripture to renew hope — with meaning, reflection, and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-hope",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Hope (Encouragement When Life Is Hard)",
+  "10 powerful Bible verses for hope, with meaning and encouragement. Find light in the darkness through Scripture and a free personalized verse generator.",
+  "/bible-verses-for-hope"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Hope",

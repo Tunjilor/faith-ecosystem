@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Protection (God's Shield & Safety in Scripture)",
-  description:
-    "10 powerful Bible verses about God's protection, with meaning and encouragement. Find safety and confidence in God's promises. Free personalized verse generator.",
-  openGraph: {
-    title: "Bible Verses for Protection (God's Shield & Safety in Scripture)",
-    description: "Scripture about God's protection — with meaning and a free personalized verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-protection",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Protection (God's Shield & Safety in Scripture)",
+  "10 powerful Bible verses about God's protection, with meaning and encouragement. Find safety and confidence in God's promises. Free personalized verse generator.",
+  "/bible-verses-for-protection"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Protection",

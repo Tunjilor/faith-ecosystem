@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Anxiety (With Meaning & Comfort)",
-  description:
-    "Find the most powerful Bible verses for anxiety and worry. 10 scriptures with explanations to calm your heart, plus a free personalized verse generator.",
-  openGraph: {
-    title: "Bible Verses for Anxiety (With Meaning & Comfort)",
-    description:
-      "Scripture to calm anxiety and worry — with reflections, a free verse generator, and links to prayer.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-anxiety",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Anxiety (With Meaning & Comfort)",
+  "Find the most powerful Bible verses for anxiety and worry. 10 scriptures with explanations to calm your heart, plus a free personalized verse generator.",
+  "/bible-verses-for-anxiety"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Anxiety",

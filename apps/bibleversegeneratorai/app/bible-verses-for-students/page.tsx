@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Students (Wisdom & Strength for School & College)",
-  description:
-    "10 powerful Bible verses for students, with meaning and reflection. Find God's wisdom and strength for exams, stress, and academic life. Free verse generator.",
-  openGraph: {
-    title: "Bible Verses for Students (Wisdom & Strength for School & College)",
-    description: "Scripture for students — wisdom, strength, and focus — with meaning and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-students",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Students (Wisdom & Strength for School & College)",
+  "10 powerful Bible verses for students, with meaning and reflection. Find God's wisdom and strength for exams, stress, and academic life. Free verse generator.",
+  "/bible-verses-for-students"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Students",

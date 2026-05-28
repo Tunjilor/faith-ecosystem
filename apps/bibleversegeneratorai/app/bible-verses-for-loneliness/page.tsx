@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Loneliness (You Are Never Truly Alone)",
-  description:
-    "10 powerful Bible verses for loneliness and isolation, with meaning and encouragement. God's presence fills the empty spaces. Free personalized verse generator.",
-  openGraph: {
-    title: "Bible Verses for Loneliness (You Are Never Truly Alone)",
-    description: "Scripture for loneliness — God's companionship and comfort — with meaning and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-loneliness",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Loneliness (You Are Never Truly Alone)",
+  "10 powerful Bible verses for loneliness and isolation, with meaning and encouragement. God's presence fills the empty spaces. Free personalized verse generator.",
+  "/bible-verses-for-loneliness"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Loneliness",

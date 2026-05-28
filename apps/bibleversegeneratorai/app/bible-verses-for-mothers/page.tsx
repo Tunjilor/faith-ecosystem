@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Mothers (Strength, Encouragement & God's Love)",
-  description:
-    "10 powerful Bible verses for mothers, with meaning and encouragement. Find strength, wisdom, and God's blessing for the journey of motherhood.",
-  openGraph: {
-    title: "Bible Verses for Mothers (Strength, Encouragement & God's Love)",
-    description: "Scripture for mothers — strength, love, and God's blessing — with meaning and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-mothers",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Mothers (Strength, Encouragement & God's Love)",
+  "10 powerful Bible verses for mothers, with meaning and encouragement. Find strength, wisdom, and God's blessing for the journey of motherhood.",
+  "/bible-verses-for-mothers"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Mothers",

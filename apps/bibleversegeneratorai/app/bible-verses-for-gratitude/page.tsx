@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Gratitude (Thankfulness & Joy from Scripture)",
-  description:
-    "10 powerful Bible verses about gratitude and thankfulness, with meaning and reflection. Cultivate a heart of praise through God's Word. Free verse generator.",
-  openGraph: {
-    title: "Bible Verses for Gratitude (Thankfulness & Joy from Scripture)",
-    description: "Scripture for gratitude and thankfulness — with meaning and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-gratitude",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Gratitude (Thankfulness & Joy from Scripture)",
+  "10 powerful Bible verses about gratitude and thankfulness, with meaning and reflection. Cultivate a heart of praise through God's Word. Free verse generator.",
+  "/bible-verses-for-gratitude"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Gratitude",

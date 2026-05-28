@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Addiction (Freedom & Recovery Through Scripture)",
-  description:
-    "10 powerful Bible verses for overcoming addiction, with meaning and hope. Find God's strength for recovery. Free personalized verse generator.",
-  openGraph: {
-    title: "Bible Verses for Addiction (Freedom & Recovery Through Scripture)",
-    description: "Scripture for addiction recovery — God's freedom and strength — with meaning and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-addiction",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Addiction (Freedom & Recovery Through Scripture)",
+  "10 powerful Bible verses for overcoming addiction, with meaning and hope. Find God's strength for recovery. Free personalized verse generator.",
+  "/bible-verses-for-addiction"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Addiction",

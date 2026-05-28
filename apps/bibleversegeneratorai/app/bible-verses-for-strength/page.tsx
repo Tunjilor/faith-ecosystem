@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Strength (Courage & Endurance from Scripture)",
-  description:
-    "10 powerful Bible verses for strength and endurance, with meaning and reflection. Find the courage to keep going through God's Word.",
-  openGraph: {
-    title: "Bible Verses for Strength (Courage & Endurance from Scripture)",
-    description: "Scripture for strength in hard times — with meaning and a free personalized verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-strength",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Strength (Courage & Endurance from Scripture)",
+  "10 powerful Bible verses for strength and endurance, with meaning and reflection. Find the courage to keep going through God's Word.",
+  "/bible-verses-for-strength"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Strength",

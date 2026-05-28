@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Finances (God's Provision & Financial Wisdom)",
-  description:
-    "10 powerful Bible verses for financial worry, provision, and wisdom. Find God's peace about money through Scripture. Free personalized verse generator.",
-  openGraph: {
-    title: "Bible Verses for Finances (God's Provision & Financial Wisdom)",
-    description: "Scripture for financial stress and wisdom — with meaning and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-finances",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Finances (God's Provision & Financial Wisdom)",
+  "10 powerful Bible verses for financial worry, provision, and wisdom. Find God's peace about money through Scripture. Free personalized verse generator.",
+  "/bible-verses-for-finances"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Finances",

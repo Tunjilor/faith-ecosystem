@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Grief (Comfort & Hope After Loss)",
-  description:
-    "10 comforting Bible verses for grief and loss, with meaning and encouragement. Find God's comfort when you are mourning. Free personalized verse generator.",
-  openGraph: {
-    title: "Bible Verses for Grief (Comfort & Hope After Loss)",
-    description: "Scripture for grief and loss — God's comfort in mourning — with meaning and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-grief",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Grief (Comfort & Hope After Loss)",
+  "10 comforting Bible verses for grief and loss, with meaning and encouragement. Find God's comfort when you are mourning. Free personalized verse generator.",
+  "/bible-verses-for-grief"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Grief",

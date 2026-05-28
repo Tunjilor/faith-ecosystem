@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Healing (Physical & Emotional Restoration)",
-  description:
-    "10 powerful Bible verses for healing, with meaning and encouragement. Find comfort in Scripture for physical illness, emotional wounds, and grief.",
-  openGraph: {
-    title: "Bible Verses for Healing (Physical & Emotional Restoration)",
-    description: "Scripture for healing — physical and emotional — with meaning and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-healing",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Healing (Physical & Emotional Restoration)",
+  "10 powerful Bible verses for healing, with meaning and encouragement. Find comfort in Scripture for physical illness, emotional wounds, and grief.",
+  "/bible-verses-for-healing"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Healing",

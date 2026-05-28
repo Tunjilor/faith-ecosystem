@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Depression (Hope & Comfort in Scripture)",
-  description:
-    "10 powerful Bible verses for depression and despair, with meaning and reflection. Find God's comfort in your darkest moments. Free personalized verse generator.",
-  openGraph: {
-    title: "Bible Verses for Depression (Hope & Comfort in Scripture)",
-    description: "Scripture for depression — God's presence in the darkest moments — with meaning and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-depression",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Depression (Hope & Comfort in Scripture)",
+  "10 powerful Bible verses for depression and despair, with meaning and reflection. Find God's comfort in your darkest moments. Free personalized verse generator.",
+  "/bible-verses-for-depression"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Depression",

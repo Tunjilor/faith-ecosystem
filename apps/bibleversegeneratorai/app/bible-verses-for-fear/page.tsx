@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Fear (Courage & Comfort from Scripture)",
-  description:
-    "10 powerful Bible verses for fear, with meaning and encouragement. Find courage through Scripture and generate a personalized verse for your situation.",
-  openGraph: {
-    title: "Bible Verses for Fear (Courage & Comfort from Scripture)",
-    description:
-      "Scripture to overcome fear — with reflections and a free personalized verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-fear",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Fear (Courage & Comfort from Scripture)",
+  "10 powerful Bible verses for fear, with meaning and encouragement. Find courage through Scripture and generate a personalized verse for your situation.",
+  "/bible-verses-for-fear"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Fear",

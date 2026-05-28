@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Marriage (Strengthen Your Relationship with Scripture)",
-  description:
-    "10 powerful Bible verses for marriage, with meaning and reflection. Find wisdom for your relationship from Scripture. Free personalized verse generator.",
-  openGraph: {
-    title: "Bible Verses for Marriage (Strengthen Your Relationship with Scripture)",
-    description: "Scripture for marriage — love, commitment, and unity — with meaning and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-marriage",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Marriage (Strengthen Your Relationship with Scripture)",
+  "10 powerful Bible verses for marriage, with meaning and reflection. Find wisdom for your relationship from Scripture. Free personalized verse generator.",
+  "/bible-verses-for-marriage"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Marriage",

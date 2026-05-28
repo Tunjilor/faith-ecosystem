@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,22 +14,107 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const OG_IMAGE = "/api/og";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bibleversegeneratorai.com"),
   title: {
     default: "Bible Verse Generator AI — Find a Verse for Any Situation",
     template: "%s | Bible Verse Generator AI",
   },
   description:
     "Find powerful, personalized Bible verses for anxiety, strength, healing, hope, and more. Get a meaningful scripture with reflection instantly — no login required.",
-  metadataBase: new URL("https://bibleversegeneratorai.com"),
+  keywords: [
+    "Bible verse generator",
+    "Christian Bible verses",
+    "free Bible verse finder",
+    "Bible verses for anxiety",
+    "Bible verses for strength",
+    "Bible verses for healing",
+    "Bible verses for hope",
+    "scripture generator",
+    "daily Bible verse",
+    "Bible verse by topic",
+    "FaithCompanionAI",
+  ],
+  authors: [{ name: "Bible Verse Generator AI" }],
+  creator: "Bible Verse Generator AI",
+  publisher: "Bible Verse Generator AI",
+  alternates: { canonical: "/" },
   openGraph: {
+    title: "Bible Verse Generator AI — Find a Verse for Any Situation",
+    description:
+      "Find powerful Bible verses for anxiety, strength, healing, hope, and more. Get scripture with reflection instantly — no login required.",
+    url: "https://bibleversegeneratorai.com",
     siteName: "Bible Verse Generator AI",
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Bible Verse Generator AI — Find a Verse for Any Situation",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bible Verse Generator AI — Find a Verse for Any Situation",
+    description:
+      "Find Bible verses for any situation instantly. Free, no login required.",
+    images: [OG_IMAGE],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   verification: {
     google: "googled139fb02f40d1ca6",
   },
+  category: "faith",
+};
+
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://bibleversegeneratorai.com/#organization",
+      name: "Bible Verse Generator AI",
+      url: "https://bibleversegeneratorai.com",
+      description: "Free AI-powered Bible verse finder by topic",
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://bibleversegeneratorai.com/#website",
+      url: "https://bibleversegeneratorai.com",
+      name: "Bible Verse Generator AI",
+      publisher: { "@id": "https://bibleversegeneratorai.com/#organization" },
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://bibleversegeneratorai.com/#webapp",
+      name: "Bible Verse Generator AI",
+      url: "https://bibleversegeneratorai.com",
+      applicationCategory: "LifestyleApplication",
+      operatingSystem: "Web",
+      description:
+        "Find personalized Bible verses for anxiety, strength, healing, hope, and more.",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+    },
+  ],
 };
 
 const navTopics = [
@@ -74,7 +160,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </nav>
         </header>
 
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
+        />
         {children}
+        <Analytics />
 
         {/* Footer */}
         <footer className="border-t border-slate-800 mt-16">

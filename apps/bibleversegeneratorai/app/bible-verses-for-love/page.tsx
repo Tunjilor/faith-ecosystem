@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import LandingPage from "@/app/components/LandingPage";
+import { createVersePageMetadata } from "@/lib/bible-page-metadata";
 
-export const metadata: Metadata = {
-  title: "Bible Verses for Love (God's Love & Loving Others)",
-  description:
-    "10 powerful Bible verses about love — God's love for us and loving others. With meaning, reflection, and a free personalized verse generator.",
-  openGraph: {
-    title: "Bible Verses for Love (God's Love & Loving Others)",
-    description: "Scripture on love — God's love and loving others — with meaning and a free verse generator.",
-    url: "https://bibleversegeneratorai.com/bible-verses-for-love",
-  },
-};
+export const metadata: Metadata = createVersePageMetadata(
+  "Bible Verses for Love (God's Love & Loving Others)",
+  "10 powerful Bible verses about love — God's love for us and loving others. With meaning, reflection, and a free personalized verse generator.",
+  "/bible-verses-for-love"
+);
+
+
+import LandingPage from "@/app/components/LandingPage";
+
 
 const content = {
   h1: "Bible Verses for Love",
