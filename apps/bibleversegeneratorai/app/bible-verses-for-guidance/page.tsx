@@ -5,9 +5,6 @@ export const metadata: Metadata = {
   title: "Bible Verses for Guidance (Direction & Wisdom from Scripture)",
   description:
     "10 Bible verses for guidance and direction, with meaning and reflection. Find God's wisdom for major decisions and life crossroads. Free personalized verse generator.",
-  alternates: {
-    canonical: "/bible-verses-for-guidance",
-  },
   openGraph: {
     title: "Bible Verses for Guidance (Direction & Wisdom from Scripture)",
     description: "Scripture for guidance and decisions — with meaning, reflection, and a free verse generator.",

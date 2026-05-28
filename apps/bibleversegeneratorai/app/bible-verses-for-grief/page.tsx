@@ -5,9 +5,6 @@ export const metadata: Metadata = {
   title: "Bible Verses for Grief (Comfort & Hope After Loss)",
   description:
     "10 comforting Bible verses for grief and loss, with meaning and encouragement. Find God's comfort when you are mourning. Free personalized verse generator.",
-  alternates: {
-    canonical: "/bible-verses-for-grief",
-  },
   openGraph: {
     title: "Bible Verses for Grief (Comfort & Hope After Loss)",
     description: "Scripture for grief and loss — God's comfort in mourning — with meaning and a free verse generator.",

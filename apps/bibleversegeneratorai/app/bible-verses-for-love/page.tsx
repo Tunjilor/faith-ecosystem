@@ -5,9 +5,6 @@ export const metadata: Metadata = {
   title: "Bible Verses for Love (God's Love & Loving Others)",
   description:
     "10 powerful Bible verses about love — God's love for us and loving others. With meaning, reflection, and a free personalized verse generator.",
-  alternates: {
-    canonical: "/bible-verses-for-love",
-  },
   openGraph: {
     title: "Bible Verses for Love (God's Love & Loving Others)",
     description: "Scripture on love — God's love and loving others — with meaning and a free verse generator.",

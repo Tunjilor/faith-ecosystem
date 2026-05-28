@@ -5,9 +5,6 @@ export const metadata: Metadata = {
   title: "Bible Verses for Finances (God's Provision & Financial Wisdom)",
   description:
     "10 powerful Bible verses for financial worry, provision, and wisdom. Find God's peace about money through Scripture. Free personalized verse generator.",
-  alternates: {
-    canonical: "/bible-verses-for-finances",
-  },
   openGraph: {
     title: "Bible Verses for Finances (God's Provision & Financial Wisdom)",
     description: "Scripture for financial stress and wisdom — with meaning and a free verse generator.",

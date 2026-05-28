@@ -5,9 +5,6 @@ export const metadata: Metadata = {
   title: "Bible Verses for Strength (Courage & Endurance from Scripture)",
   description:
     "10 powerful Bible verses for strength and endurance, with meaning and reflection. Find the courage to keep going through God's Word.",
-  alternates: {
-    canonical: "/bible-verses-for-strength",
-  },
   openGraph: {
     title: "Bible Verses for Strength (Courage & Endurance from Scripture)",
     description: "Scripture for strength in hard times — with meaning and a free personalized verse generator.",

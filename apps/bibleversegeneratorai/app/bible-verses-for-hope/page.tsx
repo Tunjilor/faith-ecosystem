@@ -5,9 +5,6 @@ export const metadata: Metadata = {
   title: "Bible Verses for Hope (Encouragement When Life Is Hard)",
   description:
     "10 powerful Bible verses for hope, with meaning and encouragement. Find light in the darkness through Scripture and a free personalized verse generator.",
-  alternates: {
-    canonical: "/bible-verses-for-hope",
-  },
   openGraph: {
     title: "Bible Verses for Hope (Encouragement When Life Is Hard)",
     description: "Scripture to renew hope — with meaning, reflection, and a free verse generator.",

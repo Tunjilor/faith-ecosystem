@@ -5,9 +5,6 @@ export const metadata: Metadata = {
   title: "Bible Verses for Forgiveness (Healing & Freedom in Scripture)",
   description:
     "10 powerful Bible verses about forgiveness — forgiving others and receiving God's forgiveness. With meaning, reflection, and a personalized verse generator.",
-  alternates: {
-    canonical: "/bible-verses-for-forgiveness",
-  },
   openGraph: {
     title: "Bible Verses for Forgiveness (Healing & Freedom in Scripture)",
     description: "Scripture on forgiveness with meaning, reflection, and a free verse generator.",

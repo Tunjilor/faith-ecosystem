@@ -5,9 +5,6 @@ export const metadata: Metadata = {
   title: "Bible Verses for Anxiety (With Meaning & Comfort)",
   description:
     "Find the most powerful Bible verses for anxiety and worry. 10 scriptures with explanations to calm your heart, plus a free personalized verse generator.",
-  alternates: {
-    canonical: "/bible-verses-for-anxiety",
-  },
   openGraph: {
     title: "Bible Verses for Anxiety (With Meaning & Comfort)",
     description:
