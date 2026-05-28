@@ -11,8 +11,41 @@ import Script from "next/script";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import AddToHomeScreen from "@/components/AddToHomeScreen";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { Analytics } from "@vercel/analytics/react";
 
 const GA_ID = "G-5WYYE098DH";
+
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://faithcompanionai.com/#organization",
+      name: "Faith Companion AI",
+      url: "https://faithcompanionai.com",
+      description:
+        "Scripture-based verses, prayers, devotionals, and Bible quizzes for daily faith growth.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://faithcompanionai.com/#website",
+      url: "https://faithcompanionai.com",
+      name: "Faith Companion AI",
+      publisher: { "@id": "https://faithcompanionai.com/#organization" },
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://faithcompanionai.com/#webapp",
+      name: "Faith Companion AI",
+      url: "https://faithcompanionai.com",
+      applicationCategory: "LifestyleApplication",
+      operatingSystem: "Web",
+      description:
+        "Daily Bible verses, personalized prayers, devotionals, and faith quizzes — grounded in Scripture.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://faithcompanionai.com"),
@@ -76,6 +109,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         `}</Script>
       </head>
       <body className="min-h-screen bg-fc text-fc">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
+        />
         <div className="fc-bg" />
         <UserProvider>
           <div className="fixed right-4 top-3 z-50">
@@ -92,6 +129,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <AddToHomeScreen />
           <ServiceWorkerRegistration />
         </UserProvider>
+        <Analytics />
       </body>
     </html>
   );
