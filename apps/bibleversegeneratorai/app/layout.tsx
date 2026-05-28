@@ -76,9 +76,6 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  verification: {
-    google: "googled139fb02f40d1ca6",
-  },
   category: "faith",
 };
 
