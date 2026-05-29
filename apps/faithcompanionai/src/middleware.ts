@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-
 const LOCALES = ["en", "es"] as const;
 const DEFAULT_LOCALE = "en";
 const COOKIE = "NEXT_LOCALE";
-
-// Exact-match legacy redirects that must fire before locale logic
 const LEGACY_REDIRECTS: Record<string, string> = {
   "/Verse": "/verse",
   "/Refund": "/refund",
@@ -18,35 +15,21 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   "/sign-in": "/login",
   "/premium": "/pricing",
 };
-
 function hasLocalePrefix(pathname: string) {
   return LOCALES.some((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`));
 }
-
-function detectLocale(request: NextRequest): string {
-  const cookie = request.cookies.get(COOKIE)?.value;
-  if (cookie && (LOCALES as readonly string[]).includes(cookie)) return cookie;
-  return DEFAULT_LOCALE;
-}
-
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  // Legacy URL redirects — checked before locale logic
   if (pathname in LEGACY_REDIRECTS) {
     const url = request.nextUrl.clone();
     url.pathname = LEGACY_REDIRECTS[pathname];
     return NextResponse.redirect(url, 301);
   }
-
-  // /Blog/* wildcard redirect
   if (pathname.startsWith("/Blog/")) {
     const url = request.nextUrl.clone();
     url.pathname = "/blog/" + pathname.slice("/Blog/".length);
     return NextResponse.redirect(url, 301);
   }
-
-  // Pass through static assets and service worker
   if (
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/api/") ||
@@ -54,21 +37,16 @@ export function middleware(request: NextRequest) {
   ) {
     return NextResponse.next();
   }
-
   if (hasLocalePrefix(pathname)) {
     const locale = LOCALES.find(
       (l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`)
     ) ?? DEFAULT_LOCALE;
     const stripped = pathname.replace(`/${locale}`, "") || "/";
-
-    // If someone visits /en/... redirect to /... (canonical is without /en)
     if (locale === DEFAULT_LOCALE) {
       const url = request.nextUrl.clone();
       url.pathname = stripped;
       return NextResponse.redirect(url, 301);
     }
-
-    // Non-default locale (e.g. /es) — rewrite to the page and set locale header
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set("x-locale", locale);
     const response = NextResponse.rewrite(new URL(stripped, request.url), {
@@ -77,16 +55,6 @@ export function middleware(request: NextRequest) {
     response.cookies.set(COOKIE, locale, { path: "/", maxAge: 60 * 60 * 24 * 365, sameSite: "lax" });
     return response;
   }
-
-  // No locale prefix — only redirect if non-default locale
-  const locale = detectLocale(request);
-  if (locale !== DEFAULT_LOCALE) {
-    const url = request.nextUrl.clone();
-    url.pathname = `/${locale}${pathname}`;
-    return NextResponse.redirect(url);
-  }
-
-  // Default locale (en) — serve directly without redirect, set header
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-locale", DEFAULT_LOCALE);
   const response = NextResponse.next({
@@ -95,7 +63,6 @@ export function middleware(request: NextRequest) {
   response.cookies.set(COOKIE, DEFAULT_LOCALE, { path: "/", maxAge: 60 * 60 * 24 * 365, sameSite: "lax" });
   return response;
 }
-
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico|brand|manifest.json|sw.js|offline.html).*)"],
 };
