@@ -2,9 +2,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "AI Prayer Generator — Write a Personal Prayer in Seconds | Faith Companion AI",
+  title: "AI Prayer Generator – Personal Prayers | Faith Companion",
   description:
-    "Generate a personal, Scripture-grounded prayer for any situation in seconds. Free AI prayer generator for peace, healing, strength, family, and daily faith — any tone, any need.",
+    "Generate a personal, Scripture-grounded prayer for any situation in seconds. Free AI prayer generator for peace, healing, strength, family, and daily faith – any tone, any need.",
   keywords: [
     "AI prayer generator",
     "Christian prayer app",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/tools/prayer" },
   openGraph: {
-    title: "AI Prayer Generator — Faith Companion AI",
+    title: "AI Prayer Generator – Faith Companion",
     description:
       "Generate a personal, Scripture-grounded prayer in seconds. Free AI prayer tool for any situation.",
     url: "https://faithcompanionai.com/tools/prayer",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Prayer Generator — Faith Companion AI",
+    title: "AI Prayer Generator – Faith Companion",
     description: "Personal, Scripture-grounded prayers for any need.",
     images: ["/brand/og-quiz.png"],
   },

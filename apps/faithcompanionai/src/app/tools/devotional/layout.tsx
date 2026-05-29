@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Daily Devotional Generator — Faith Companion AI",
+  title: "Daily Devotional Generator – Faith Companion",
   description:
     "Generate a personalized Christian devotional with Scripture, reflection, prayer, and action steps. Free AI devotional app for daily spiritual growth.",
   keywords: [
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/tools/devotional" },
   openGraph: {
-    title: "Daily Devotional Generator — Faith Companion AI",
+    title: "Daily Devotional Generator – Faith Companion",
     description:
       "AI-generated devotionals with Scripture, reflection, prayer, and action steps. Free for daily spiritual growth.",
     url: "https://faithcompanionai.com/tools/devotional",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Daily Devotional Generator — Faith Companion AI",
+    title: "Daily Devotional Generator – Faith Companion",
     description: "AI devotionals with Scripture, reflection, prayer, and action steps.",
     images: ["/brand/og-quiz.png"],
   },

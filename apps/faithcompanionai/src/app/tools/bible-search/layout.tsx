@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Bible Search — Find Verses by Reference or Keyword | Faith Companion AI",
+  title: "Bible Search – Find Verses by Keyword | Faith Companion",
   description:
     "Search Scripture by reference (e.g. John 3:16) or keyword (e.g. peace, faith, love). Free Bible verse search with KJV, WEB, and ASV translations.",
   keywords: [
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/tools/bible-search" },
   openGraph: {
-    title: "Bible Search — Faith Companion AI",
+    title: "Bible Search – Faith Companion",
     description: "Search Scripture by reference or keyword. Free Bible verse lookup tool.",
     url: "https://faithcompanionai.com/tools/bible-search",
     siteName: "Faith Companion AI",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bible Search — Faith Companion AI",
+    title: "Bible Search – Faith Companion",
     description: "Search Scripture by reference or keyword.",
     images: ["/brand/og-quiz.png"],
   },
