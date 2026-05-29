@@ -4,6 +4,21 @@ const LOCALES = ["en", "es"] as const;
 const DEFAULT_LOCALE = "en";
 const COOKIE = "NEXT_LOCALE";
 
+// Exact-match legacy redirects that must fire before locale logic
+const LEGACY_REDIRECTS: Record<string, string> = {
+  "/Verse": "/verse",
+  "/Refund": "/refund",
+  "/Blog": "/blog",
+  "/Home": "/",
+  "/home": "/",
+  "/Courses": "/",
+  "/WeeklyDevotional": "/daily-devotional",
+  "/Search": "/tools/bible-search",
+  "/bible-quiz": "/biblequiz",
+  "/sign-in": "/login",
+  "/premium": "/pricing",
+};
+
 function hasLocalePrefix(pathname: string) {
   return LOCALES.some((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`));
 }
@@ -16,6 +31,20 @@ function detectLocale(request: NextRequest): string {
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Legacy URL redirects — checked before locale logic
+  if (pathname in LEGACY_REDIRECTS) {
+    const url = request.nextUrl.clone();
+    url.pathname = LEGACY_REDIRECTS[pathname];
+    return NextResponse.redirect(url, 301);
+  }
+
+  // /Blog/* wildcard redirect
+  if (pathname.startsWith("/Blog/")) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/blog/" + pathname.slice("/Blog/".length);
+    return NextResponse.redirect(url, 301);
+  }
 
   // Pass through static assets and service worker
   if (
