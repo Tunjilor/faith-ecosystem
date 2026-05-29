@@ -2,9 +2,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "AI Bible Verse Generator — Find Scripture for Any Topic | Faith Companion AI",
+  title: "Bible Verse Generator – Scripture for Any Topic | Faith Companion",
   description:
-    "Find the perfect Bible verse for any topic — peace, anxiety, hope, healing, strength, grief, or guidance. Free AI-powered Scripture generator with references and daily encouragement.",
+    "Find the perfect Bible verse for any topic – peace, anxiety, hope, healing, strength, grief, or guidance. Free AI-powered Scripture generator with references and daily encouragement.",
   keywords: [
     "Bible verse generator",
     "AI Bible verse",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/tools/verse" },
   openGraph: {
-    title: "Bible Verse Generator — Faith Companion AI",
+    title: "Bible Verse Generator – Faith Companion",
     description:
       "Get a Scripture-based verse for any topic in seconds. Free AI Bible verse generator for daily encouragement.",
     url: "https://faithcompanionai.com/tools/verse",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bible Verse Generator — Faith Companion AI",
+    title: "Bible Verse Generator – Faith Companion",
     description: "AI-powered Scripture for peace, hope, healing, and more.",
     images: ["/brand/og-quiz.png"],
   },
