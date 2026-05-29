@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "How to Pray — A Simple Guide for Christians",
+  title: "How to Pray – A Simple Guide for Christians",
   description:
     "A practical, Scripture-based guide to prayer for beginners and believers who want to go deeper. Learn how to start, what to say, and how to make prayer a daily habit.",
   alternates: { canonical: "/how-to-pray" },
   openGraph: {
     title: "How to Pray | Faith Companion AI",
     description:
-      "A simple, honest guide to prayer. What to say, how to start, and how to build a habit that sticks — grounded in Scripture.",
+      "A simple, honest guide to prayer. What to say, how to start, and how to build a habit that sticks – grounded in Scripture.",
     url: "https://faithcompanionai.com/how-to-pray",
   },
 };

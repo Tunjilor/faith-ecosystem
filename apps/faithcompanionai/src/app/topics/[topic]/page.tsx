@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!data) return { title: "Topic not found" };
 
   return {
-    title: `${data.title} — Verses, Prayers & Devotionals | Faith Companion AI`,
+    title: `${data.title} – Verses & Prayers | Faith Companion`,
     description: data.description,
     alternates: { canonical: `/topics/${data.topic}` },
     openGraph: {

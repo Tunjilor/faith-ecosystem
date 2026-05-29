@@ -5,9 +5,9 @@ import QuizClient from "./quiz-client";
 import AdSenseSlot from "@/components/AdSenseSlot";
 
 export const metadata: Metadata = {
-  title: "Free Bible Quiz Online — Test Your Scripture Knowledge | Faith Companion AI",
+  title: "Free Bible Quiz – Test Your Knowledge | Faith Companion",
   description:
-    "Take a free Bible quiz online and test your Scripture knowledge across 6 categories: General Bible, Women of the Bible, Parables, Theology, Church History, and AI questions. Share your score and challenge friends.",
+    "Take a free Bible quiz and test your Scripture knowledge across 6 categories: General Bible, Parables, Theology, and more. Share your score with friends.",
   keywords: [
     "Bible quiz online",
     "free Bible quiz",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/biblequiz" },
   openGraph: {
-    title: "Bible Quiz Online — Faith Companion AI",
+    title: "Bible Quiz Online – Faith Companion",
     description:
       "Free Bible quiz with multiple categories. Test your Scripture knowledge and challenge friends.",
     url: "https://faithcompanionai.com/biblequiz",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bible Quiz Online — Faith Companion AI",
+    title: "Bible Quiz Online – Faith Companion",
     description: "Free Bible trivia with shareable results. Test your Scripture knowledge.",
     images: ["/brand/og-quiz.png"],
   },

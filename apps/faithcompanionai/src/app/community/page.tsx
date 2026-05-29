@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Community — Faith Companion AI",
+  title: "Community – Faith Companion AI",
   description: "Connect with other believers, share prayer requests, and grow together in faith.",
   alternates: { canonical: "/community" },
 };

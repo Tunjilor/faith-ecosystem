@@ -8,12 +8,12 @@ import AdSenseSlot from "@/components/AdSenseSlot";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Blog — Bible Study Tips, Prayer Guides & Faith Resources | Faith Companion AI",
+  title: "Blog – Bible Study Tips & Prayer Guides | Faith Companion",
   description:
     "Practical guides on prayer, Bible study, devotionals, and Scripture memory. Written to help you grow in faith with Scripture-grounded, actionable content.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Faith Companion AI Blog — Bible Study Tips & Prayer Guides",
+    title: "Faith Companion AI Blog – Bible Study Tips & Prayer Guides",
     description: "Practical guides on prayer, Bible study, devotionals, and Scripture memory.",
     url: "https://faithcompanionai.com/blog",
     type: "website",

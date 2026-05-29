@@ -4,7 +4,7 @@ import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Christian Resources — Bible Study, Prayer & Devotional Tools | Faith Companion AI",
+  title: "Christian Resources – Bible & Prayer Tools | Faith Companion",
   description:
     "Free Christian resources for daily Bible study, AI-powered prayer, devotionals, and Scripture memory. Explore Bible quiz, verse finder, and faith tools designed for daily spiritual growth.",
   keywords: [
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/resources" },
   openGraph: {
-    title: "Christian Resources — Faith Companion AI",
+    title: "Christian Resources – Faith Companion",
     description:
       "Free tools for daily Bible study, prayer, devotionals, and spiritual growth. AI-powered and Scripture-grounded.",
     url: "https://faithcompanionai.com/resources",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Christian Resources — Faith Companion AI",
+    title: "Christian Resources – Faith Companion",
     description: "Free tools for daily Bible study, prayer, devotionals, and spiritual growth.",
     images: ["/brand/og-quiz.png"],
   },

@@ -3,12 +3,12 @@ import Link from "next/link";
 
 
 export const metadata: Metadata = {
-  title: "What Is Tithing? Bible Meaning, Verses, and How to Calculate It",
+  title: "What Is Tithing? Bible Meaning, Verses & Calculator",
   description:
     "Learn what tithing means in the Bible, the difference between tithe and offering, and how to calculate your giving.",
   alternates: { canonical: "/tithing" },
   openGraph: {
-    title: "What Is Tithing? Bible Meaning, Verses, and How to Calculate It",
+    title: "What Is Tithing? Bible Meaning, Verses & Calculator",
     description:
       "Learn what tithing means in the Bible, the difference between tithe and offering, and how to calculate your giving.",
     url: "https://faithcompanionai.com/tithing",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "What Is Tithing? Bible Meaning, Verses, and How to Calculate It",
+    title: "What Is Tithing? Bible Meaning, Verses & Calculator",
     description:
       "Learn what tithing means in the Bible, the difference between tithe and offering, and how to calculate your giving.",
   },
