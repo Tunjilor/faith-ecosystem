@@ -19,32 +19,57 @@ const OG_IMAGE = "/api/og";
 export const metadata: Metadata = {
   metadataBase: new URL("https://bibleversegeneratorai.com"),
   title: {
-    default: "Bible Verse Generator AI — Find a Verse for Any Situation",
+    default: "Bible Verse Generator AI — Random Scripture by Topic, Mood & Translation",
     template: "%s | Bible Verse Generator AI",
   },
   description:
-    "Find powerful, personalized Bible verses for anxiety, strength, healing, hope, and more. Get a meaningful scripture with reflection instantly — no login required.",
+    "Generate Bible verses instantly by topic, mood, or keyword using AI. Get daily scripture for encouragement, healing, strength, anxiety, and more — KJV, NIV, ESV and all major translations.",
   keywords: [
     "Bible verse generator",
-    "Christian Bible verses",
-    "free Bible verse finder",
-    "Bible verses for anxiety",
-    "Bible verses for strength",
-    "Bible verses for healing",
-    "Bible verses for hope",
-    "scripture generator",
-    "daily Bible verse",
+    "random Bible verse generator",
+    "AI Bible verse generator",
+    "daily Bible verse generator",
     "Bible verse by topic",
-    "FaithCompanionAI",
+    "Bible scripture generator",
+    "Bible quote generator",
+    "Bible verse finder",
+    "random Bible verse for encouragement",
+    "Bible verse generator by mood",
+    "Bible verse for anxiety",
+    "Bible verse for strength",
+    "Bible verse for healing",
+    "Bible verse for grief",
+    "Bible verse for love",
+    "Bible verse for new beginnings",
+    "Bible verse generator KJV",
+    "Bible verse generator NIV",
+    "Bible verse of the day",
+    "random scripture generator",
+    "Bible verse for depression",
+    "Bible verse for fear",
+    "Bible verse for forgiveness",
+    "Bible verse for gratitude",
+    "Bible verse for marriage",
+    "Bible verse for children",
+    "Bible verse for sleep",
+    "Bible verse for hope",
+    "scripture of the day",
+    "daily scripture verse",
+    "Bible verse lookup",
+    "find Bible verses by topic",
+    "Bible verse search by keyword",
+    "inspirational Bible verses",
+    "encouraging Bible scriptures",
+    "Bible verses about faith",
   ],
   authors: [{ name: "Bible Verse Generator AI" }],
   creator: "Bible Verse Generator AI",
   publisher: "Bible Verse Generator AI",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Bible Verse Generator AI — Find a Verse for Any Situation",
+    title: "Bible Verse Generator AI — Random Scripture by Topic, Mood & Translation",
     description:
-      "Find powerful Bible verses for anxiety, strength, healing, hope, and more. Get scripture with reflection instantly — no login required.",
+      "Generate Bible verses instantly by topic, mood, or keyword using AI. Get daily scripture for encouragement, healing, strength, anxiety, and more — KJV, NIV, ESV and all major translations.",
     url: "https://bibleversegeneratorai.com",
     siteName: "Bible Verse Generator AI",
     type: "website",
@@ -54,13 +79,13 @@ export const metadata: Metadata = {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Bible Verse Generator AI — Find a Verse for Any Situation",
+        alt: "Bible Verse Generator AI — Random Scripture by Topic, Mood & Translation",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bible Verse Generator AI — Find a Verse for Any Situation",
+    title: "Bible Verse Generator AI — Random Scripture by Topic, Mood & Translation",
     description:
       "Find Bible verses for any situation instantly. Free, no login required.",
     images: [OG_IMAGE],
@@ -100,6 +125,12 @@ const siteJsonLd = {
       "@type": "WebApplication",
       "@id": "https://bibleversegeneratorai.com/#webapp",
       name: "Bible Verse Generator AI",
+      alternateName: [
+        "Random Scripture Generator",
+        "Daily Bible Verse Tool",
+        "AI Scripture Finder",
+        "Bible Quote Generator",
+      ],
       url: "https://bibleversegeneratorai.com",
       applicationCategory: "LifestyleApplication",
       operatingSystem: "Web",
@@ -110,6 +141,51 @@ const siteJsonLd = {
         price: "0",
         priceCurrency: "USD",
       },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "How does the AI Bible verse generator work?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Our AI analyzes your topic, mood, or keyword and matches it against thousands of scriptures across the entire Bible. It returns the most relevant verses with context and reflection prompts.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can I get Bible verses by topic?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. You can search by topics like hope, love, anxiety, healing, strength, forgiveness, gratitude, marriage, fear, and hundreds more. Each topic returns curated scriptures with explanations.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Which Bible translations are supported?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Our generator supports KJV, NIV, ESV, NLT, NKJV, CSB, and more. You can compare translations side by side to find the wording that speaks most powerfully to you.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can I get a random Bible verse?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. Our random Bible verse generator delivers a fresh scripture every time, drawn from a curated library spanning both Old and New Testaments, tagged by theme and mood.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is the Bible verse of the day?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Each day our AI selects a featured verse chosen for its encouragement and relevance. You can also subscribe to receive a daily scripture in your preferred translation.",
+          },
+        },
+      ],
     },
   ],
 };
@@ -169,18 +245,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col items-center gap-4 text-center">
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
               <a
-                href="https://prayergeneratorai.com"
+                href="https://www.prayergeneratorai.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-slate-400 hover:text-emerald-400 transition-colors"
               >
-                PrayerGeneratorAI.com
+                AI Prayer Generator
               </a>
               <a
-                href="https://bibleversegeneratorai.com"
+                href="https://www.tithecalculatorai.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-sm text-slate-400 hover:text-emerald-400 transition-colors"
               >
-                BibleVerseGeneratorAI.com
+                AI Tithe Calculator
               </a>
               <a
                 href="https://faithcompanionai.com"
@@ -188,10 +266,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 rel="noopener noreferrer"
                 className="text-sm text-slate-400 hover:text-emerald-400 transition-colors"
               >
-                FaithCompanionAI.com
+                Faith Companion AI
               </a>
             </div>
-            <p className="text-xs text-slate-600">Part of the Faith Companion ecosystem</p>
+            <p className="text-xs text-slate-600">
+              Part of the Faith Companion AI ecosystem — explore all free Christian AI tools at faithcompanionai.com
+            </p>
           </div>
         </footer>
       </body>
