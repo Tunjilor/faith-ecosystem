@@ -302,7 +302,7 @@ export default function VersePage() {
               className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-500 transition hover:bg-slate-50"
               title="Upgrade to Premium to save verses"
             >
-              ðŸ”’ Save
+              🔖 Save
             </Link>
           )}
 

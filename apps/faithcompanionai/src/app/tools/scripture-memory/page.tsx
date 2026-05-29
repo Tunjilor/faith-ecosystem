@@ -224,7 +224,7 @@ export default function ScriptureMemoryPage() {
 
   // â”€â”€ Results screen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   if (mode === "results" && activeVerse) {
-    const emoji = score === 100 ? "ðŸŽ‰" : score >= 80 ? "✅" : score >= 50 ? "ðŸ“–" : "ðŸ“";
+    const emoji = score === 100 ? "🎉" : score >= 80 ? "✅" : score >= 50 ? "📖" : "📝";
 
     return (
       <div className="mx-auto max-w-3xl px-4 py-6 md:px-6">

@@ -540,7 +540,7 @@ export default function DashboardPage() {
                 </div>
               </div>
               <Link href="/pricing" className="ml-auto shrink-0 rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-4 py-2 text-xs font-bold text-white hover:opacity-95">
-                ðŸ”’ Premium
+                🔖 Premium
               </Link>
             </div>
           </div>
@@ -621,7 +621,7 @@ export default function DashboardPage() {
               </p>
               {typeof me.referralCount === "number" && (
                 <div className="mt-2 text-sm font-semibold text-orange-300">
-                  ðŸ™Œ You've invited {me.referralCount} friend{me.referralCount !== 1 ? "s" : ""}
+                  🙌 You've invited {me.referralCount} friend{me.referralCount !== 1 ? "s" : ""}
                 </div>
               )}
             </div>
@@ -763,7 +763,7 @@ export default function DashboardPage() {
         ) : !premiumActive ? (
           <div className="rounded-[24px] border border-white/10 bg-white/5 p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-              <div className="text-3xl">ðŸ™</div>
+              <div className="text-3xl">🙏</div>
               <div className="flex-1">
                 <div className="font-semibold text-white">Prayer Journal is a Premium feature</div>
                 <p className="mt-2 text-sm leading-6 text-white/65">
