@@ -56,7 +56,7 @@ const siteJsonLd = {
           name: "What is Faith Companion AI?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Faith Companion AI is a free ecosystem of Christian AI tools including an AI prayer generator, Bible verse generator, and tithe calculator — all designed to support your spiritual growth.",
+            text: "Faith Companion AI is a free ecosystem of Christian AI tools including an AI prayer generator, Bible verse generator, and tithe calculator – all designed to support your spiritual growth.",
           },
         },
         {
@@ -64,7 +64,7 @@ const siteJsonLd = {
           name: "What is the best AI app for Christians?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Faith Companion AI offers a suite of free tools built specifically for Christians — AI prayer writing, Bible verse discovery by topic and mood, and a biblical tithe calculator. All free, no subscription required.",
+            text: "Faith Companion AI offers a suite of free tools built specifically for Christians – AI prayer writing, Bible verse discovery by topic and mood, and a biblical tithe calculator. All free, no subscription required.",
           },
         },
         {
@@ -80,7 +80,7 @@ const siteJsonLd = {
           name: "Is there a free Christian AI tool?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes. All Faith Companion AI tools are completely free — including the AI prayer generator, random Bible verse generator, and tithe calculator. No account required to get started.",
+            text: "Yes. All Faith Companion AI tools are completely free – including the AI prayer generator, random Bible verse generator, and tithe calculator. No account required to get started.",
           },
         },
         {
@@ -88,7 +88,7 @@ const siteJsonLd = {
           name: "How can AI improve my prayer life?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "AI can help when you struggle to find the right words. Our prayer generator creates personalized, scripture-inspired prayers for any situation — helping you pray with more depth, consistency, and confidence.",
+            text: "AI can help when you struggle to find the right words. Our prayer generator creates personalized, scripture-inspired prayers for any situation – helping you pray with more depth, consistency, and confidence.",
           },
         },
       ],
