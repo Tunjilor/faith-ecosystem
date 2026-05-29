@@ -45,7 +45,7 @@ const siteJsonLd = {
       applicationCategory: "LifestyleApplication",
       operatingSystem: "Web",
       description:
-        "Daily Bible verses, personalized prayers, devotionals, and faith quizzes — grounded in Scripture.",
+        "Daily Bible verses, personalized prayers, devotionals, and faith quizzes – grounded in Scripture.",
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     },
     {
@@ -99,7 +99,7 @@ const siteJsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://faithcompanionai.com"),
   title: {
-    default: "Faith Companion AI — Free Christian AI Tools for Prayer, Bible & Tithing",
+    default: "Faith Companion AI – Free AI Tools for Prayer & Bible",
     template: "%s | Faith Companion AI",
   },
   description:
@@ -158,14 +158,14 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://faithcompanionai.com",
     siteName: "Faith Companion AI",
-    title: "Faith Companion AI — Free Christian AI Tools for Prayer, Bible & Tithing",
+    title: "Faith Companion AI – Free AI Tools for Prayer & Bible",
     description:
       "Your complete faith ecosystem powered by AI. Free tools for prayer generation, Bible verse discovery, tithe calculation, and daily devotion.",
     images: [{ url: "/brand/og-quiz.png", width: 1200, height: 630, alt: "Faith Companion AI" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Faith Companion AI — Free Christian AI Tools for Prayer, Bible & Tithing",
+    title: "Faith Companion AI – Free AI Tools for Prayer & Bible",
     description:
       "Your complete faith ecosystem powered by AI. Free tools for prayer, Bible verses, and tithing.",
     images: ["/brand/og-quiz.png"],
