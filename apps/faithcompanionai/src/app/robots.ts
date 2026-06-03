@@ -7,15 +7,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: [
-          "/api/",
-          "/dashboard",
-          "/saved",
-          "/login",
-        ],
+        disallow: ["/api/", "/admin/"],
       },
     ],
     sitemap: "https://faithcompanionai.com/sitemap.xml",
-    host: "https://faithcompanionai.com",
   };
 }
