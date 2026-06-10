@@ -82,7 +82,30 @@ export default function TopicPage({ params }: Props) {
         <p className="mt-4 max-w-2xl text-sm leading-7 text-white/65 md:text-base">{data.intro}</p>
       </header>
 
-      {/* ── Bible Verses ── */}
+      {/* ── Full passage quote (optional — scripture passage pages) ── */}
+      {data.passage && (
+        <section className="mb-10">
+          <div className="rounded-[22px] border border-white/10 bg-white/5 p-6 md:p-8">
+            <div className="text-sm font-bold text-orange-300">{data.passage.ref}</div>
+            <blockquote className="mt-4 whitespace-pre-line text-base leading-8 text-white/90 italic">
+              {data.passage.text}
+            </blockquote>
+          </div>
+        </section>
+      )}
+
+      {/* ── What this passage means (optional — passage pages) ── */}
+      {data.meaning && (
+        <section className="mb-10">
+          <h2 className="text-2xl font-bold text-white md:text-3xl">What this passage means</h2>
+          <div className="mt-6 rounded-[22px] border border-white/10 bg-white/5 p-6 md:p-8">
+            <p className="whitespace-pre-line text-sm leading-7 text-white/75">{data.meaning}</p>
+          </div>
+        </section>
+      )}
+
+      {/* ── Bible Verses (topical pages only) ── */}
+      {data.verses.length > 0 && (
       <section>
         <h2 className="text-2xl font-bold text-white md:text-3xl">
           Key Bible Verses for {label}
@@ -112,6 +135,7 @@ export default function TopicPage({ params }: Props) {
           </div>
         )}
       </section>
+      )}
 
       {/* ── Reflection (optional) ── */}
       {data.reflection && (

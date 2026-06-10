@@ -9,6 +9,10 @@ export type TopicData = {
    *  Defaults to a capitalized topic slug, so single-word topics need not set it. */
   label?: string;
   verses: Array<{ ref: string; text: string; context: string }>;
+  /** Optional full passage quote (scripture passage pages). Rendered after the hero, in place of the verses list. */
+  passage?: { ref: string; text: string };
+  /** Optional plain-language "what this passage means" / context section (passage pages). */
+  meaning?: string;
   /** Optional short devotional reflection (1–2 paragraphs), rendered between the verses and the prayer. */
   reflection?: string;
   prayer: string;
@@ -798,6 +802,102 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "prayer-for-a-struggling-marriage", label: "A Prayer for a Struggling Marriage" },
       { slug: "forgiveness", label: "What the Bible Says About Forgiveness" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
+    ],
+  },
+
+  "psalm-91": {
+    topic: "psalm-91",
+    label: "Protection",
+    title: "Psalm 91: God's Promise of Protection",
+    description:
+      "Read Psalm 91 in full (KJV), with a plain explanation of what it means and a written prayer for protection. God's promise of refuge for when you're afraid.",
+    intro:
+      "When fear is loud — a frightening diagnosis, a dangerous situation, a night you can't stop bracing for the worst — Psalm 91 is the chapter believers have reached for across the centuries. It doesn't pretend danger isn't real; it anchors you to a God who is bigger than it. Here is the full psalm, what it actually promises, and a prayer for when you need to feel safe.",
+    verses: [],
+    passage: {
+      ref: "Psalm 91 (KJV)",
+      text: "1 He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty.\n2 I will say of the LORD, He is my refuge and my fortress: my God; in him will I trust.\n3 Surely he shall deliver thee from the snare of the fowler, and from the noisome pestilence.\n4 He shall cover thee with his feathers, and under his wings shalt thou trust: his truth shall be thy shield and buckler.\n5 Thou shalt not be afraid for the terror by night; nor for the arrow that flieth by day;\n6 Nor for the pestilence that walketh in darkness; nor for the destruction that wasteth at noonday.\n7 A thousand shall fall at thy side, and ten thousand at thy right hand; but it shall not come nigh thee.\n8 Only with thine eyes shalt thou behold and see the reward of the wicked.\n9 Because thou hast made the LORD, which is my refuge, even the most High, thy habitation;\n10 There shall no evil befall thee, neither shall any plague come nigh thy dwelling.\n11 For he shall give his angels charge over thee, to keep thee in all thy ways.\n12 They shall bear thee up in their hands, lest thou dash thy foot against a stone.\n13 Thou shalt tread upon the lion and adder: the young lion and the dragon shalt thou trample under feet.\n14 Because he hath set his love upon me, therefore will I deliver him: I will set him on high, because he hath known my name.\n15 He shall call upon me, and I will answer him: I will be with him in trouble; I will deliver him, and honour him.\n16 With long life will I satisfy him, and shew him my salvation.",
+    },
+    meaning:
+      "Psalm 91 is a song about taking shelter in God. Its central image is a small, hunted creature hiding under the wings of something far stronger — \"he shall cover thee with his feathers, and under his wings shalt thou trust.\" The psalmist piles up the dangers of the ancient world — the hunter's trap (the snare of the fowler), plague, war (the arrow that flieth by day), wild animals — and answers each one with God's nearness.\n\nIt matters to read these promises the way Scripture means them, not as a magic charm. Psalm 91 is not a guarantee that nothing bad will ever touch you — faithful people in the Bible still suffered and died. Satan even misused this very psalm to tempt Jesus (Matthew 4:6), and Jesus refused to treat God's protection as something to test. What the psalm promises is deeper than a trouble-free life: that the God of the universe has set his love on you (v. 14), that he is with you in trouble (v. 15), and that nothing can finally separate you from him — not even death, which for the believer opens into \"my salvation\" (v. 16).",
+    reflection:
+      "You may not be dodging arrows, but you know what your \"terror by night\" is — the worry that wakes you at 3 a.m., the situation you cannot control. Psalm 91 invites you to do one thing with it: dwell. Not to visit God in a panic and leave, but to make him your habitation (v. 9), the place you actually live. Protection here is less a force field around your circumstances and more a Person you can run into again and again. The safest place in the universe is not a place at all — it is God himself.",
+    prayer:
+      "Father, you are my refuge and my fortress, and today I need to feel it. You know exactly what I am afraid of — the thing I cannot fix or escape on my own. Cover me and the people I love under your wings, and quiet the fear that keeps circling back. Help me to actually live in you, not just run to you when I am scared. And whatever comes, hold me in the truth that nothing can reach me that has not first passed through your hands, and that I am yours in life and in death. In Jesus' name, Amen.",
+    actionStep:
+      "Tonight, before the fears get loud, read Psalm 91 slowly out loud — your own voice, your own room — and stop at verse 4 to pray it back: \"Cover me with your feathers; let your truth be my shield.\" Leave the chapter open where you'll see it in the morning.",
+    prayerCta: {
+      text: "Facing a specific fear or danger right now? Tell Faith Companion what you're up against and get a personal prayer for protection written for your situation.",
+      buttonLabel: "Write a prayer for protection",
+    },
+    related: [
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "bible-verses-for-when-you-cant-sleep", label: "Verses for When You Can't Sleep" },
+      { slug: "strength", label: "Bible Verses About Strength" },
+    ],
+  },
+
+  "psalm-23": {
+    topic: "psalm-23",
+    label: "Comfort",
+    title: "Psalm 23: Comfort in the Valley",
+    description:
+      "Read Psalm 23 in full (KJV), with a plain explanation of what it means and a written prayer for comfort. The shepherd's psalm for grief, fear, and hard valleys.",
+    intro:
+      "Psalm 23 is the passage people reach for at hospital bedsides, at funerals, and in the quiet middle-of-the-night hours when the future feels dark. There is a reason it has comforted the grieving and the frightened for three thousand years: it doesn't promise an easy road, it promises a Shepherd who walks every step of it with you. Here is the full psalm, what it means, and a prayer for the valley you may be in.",
+    verses: [],
+    passage: {
+      ref: "Psalm 23 (KJV)",
+      text: "1 The LORD is my shepherd; I shall not want.\n2 He maketh me to lie down in green pastures: he leadeth me beside the still waters.\n3 He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake.\n4 Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.\n5 Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over.\n6 Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever.",
+    },
+    meaning:
+      "David — who had been a shepherd himself before he was a king — describes God as the shepherd and us as the sheep. Sheep are not self-sufficient; they have to be led to food (\"green pastures\"), water (\"still waters\"), and safety. The psalm's quiet claim is that under God's care, \"I shall not want\" — not that you will have everything you desire, but that you will lack nothing you truly need.\n\nThe heart of the psalm is verse 4: \"though I walk through the valley of the shadow of death.\" Notice the word \"through\" — the valley is not the destination, it is a passage, and you do not stay in it. And notice what changes there: the psalm shifts from talking about God (\"he leadeth me\") to talking to God (\"thou art with me\"). In the darkest stretch, God moves from a fact to a presence. The rod and staff were a shepherd's tools — one to fight off predators, one to guide and rescue — so even the valley is not unguarded. And the psalm ends not in the dark but at a table and in a home: \"I will dwell in the house of the LORD for ever.\"",
+    reflection:
+      "Whatever valley you are walking — grief, fear, a season that feels like a long shadow — Psalm 23 does not ask you to pretend it isn't dark. It simply insists you are not walking it alone. You don't have to feel brave; you only have to keep walking, because the Shepherd sets the pace and knows the way out. Today, let the psalm reframe one thing: the goodness and mercy you are desperate for are not only ahead of you to chase — they are behind you, following you all the days of your life.",
+    prayer:
+      "Lord, you are my shepherd, and right now I am walking through a valley I did not choose. You know the loss, the fear, the shadow that follows me into each morning. Thank you that you have not sent me through it alone — that you are with me, your presence closer than my own breath. Lead me beside still waters when my mind will not rest, and restore my soul one ordinary day at a time. Help me to trust that this valley is a passage and not my home, and that goodness and mercy are still following me even here. Amen.",
+    actionStep:
+      "Read Psalm 23 slowly and underline the single word \"through\" in verse 4. When the valley feels permanent today, say it out loud: \"I am walking through this — I am not staying here.\" Then let the Shepherd set the pace.",
+    prayerCta: {
+      text: "Walking through a specific loss or hard valley? Tell Faith Companion what you're facing and get a gentle, personal prayer written for it.",
+      buttonLabel: "Write a prayer for comfort",
+    },
+    related: [
+      { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+      { slug: "peace", label: "A Prayer for Peace" },
+      { slug: "prayer-for-a-sick-parent", label: "A Prayer for a Sick Parent" },
+    ],
+  },
+
+  "jeremiah-29-11": {
+    topic: "jeremiah-29-11",
+    label: "Hope",
+    title: "Jeremiah 29:11: God's Plans and Hope",
+    description:
+      "What Jeremiah 29:11 really means in context (WEB), with a plain explanation and a written prayer for hope. God's thoughts of peace, hope, and a future.",
+    intro:
+      "Jeremiah 29:11 shows up on coffee mugs and graduation cards, but people usually search for it in a harder moment — when the future feels uncertain and they need to believe God is still writing a good story. The verse is even better than the poster version once you see who God first said it to. Here is the verse, the context that makes it land, and a prayer for hope.",
+    verses: [],
+    passage: {
+      ref: "Jeremiah 29:11 (WEB)",
+      text: "\"For I know the thoughts that I think toward you,\" says Yahweh, \"thoughts of peace, and not of evil, to give you hope and a future.\"",
+    },
+    meaning:
+      "Here is the part the coffee mugs leave out: God spoke these words to people whose lives had just fallen apart. Jeremiah was writing to Israelites dragged into exile in Babylon — far from home, defeated, grieving. And in the verse just before this, God tells them the exile will last seventy years (Jeremiah 29:10). So the promise of \"hope and a future\" was not a promise that the hardship would end quickly; many who first heard it would die in exile before the restoration came.\n\nThat makes the verse stronger, not weaker. God's plans run on a longer timeline than ours, and his idea of our welfare includes things we cannot see yet. The very next verses tell them what to do while they wait: \"You shall call on me... You shall seek me, and find me, when you search for me with all your heart\" (Jeremiah 29:12–13). Jeremiah 29:11 is not a guarantee that this year will go the way you want. It is a guarantee about God's heart toward you — thoughts of peace, not evil — even in a season that feels like exile.",
+    reflection:
+      "If you are in a waiting season — a long one, maybe — Jeremiah 29:11 meets you exactly there. It does not promise the wait is almost over; it promises that the One who holds your future is good and is thinking thoughts of peace toward you right now. Hope, in the Bible, is not wishful thinking that things will improve. It is confident trust in the character of the God who is already standing on the other side of your seventy years. Today, you do not have to see the plan to trust the Planner.",
+    prayer:
+      "Father, you say your thoughts toward me are thoughts of peace and not of evil, and today I need to believe it. You know the part of my future that feels uncertain, the waiting that has worn me down. Thank you that your plans are good even when I cannot trace them, and that your timeline is longer and kinder than mine. Help me to seek you with my whole heart in this in-between season, and to trust that you have not forgotten me. Anchor my hope not in a change of circumstances but in your unchanging character. Amen.",
+    actionStep:
+      "Write down the one outcome you are anxiously waiting on, then underneath it write Jeremiah 29:12: \"You shall call on me, and I will listen to you.\" Spend two minutes today honestly seeking God about it, instead of only worrying about it.",
+    prayerCta: {
+      text: "Waiting on God for something specific? Tell Faith Companion what feels uncertain and get a personal, hope-filled prayer written for your situation.",
+      buttonLabel: "Write a prayer for hope",
+    },
+    related: [
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "faith", label: "Bible Verses About Faith" },
     ],
   },
 };
