@@ -5,9 +5,21 @@ export type TopicData = {
   title: string;
   description: string;
   intro: string;
+  /** Human-readable subject used in templated section headings (e.g. "a Sick Parent").
+   *  Defaults to a capitalized topic slug, so single-word topics need not set it. */
+  label?: string;
   verses: Array<{ ref: string; text: string; context: string }>;
+  /** Optional short devotional reflection (1–2 paragraphs), rendered between the verses and the prayer. */
+  reflection?: string;
   prayer: string;
-  devotional: { title: string; reflection: string; actionSteps: string[] };
+  /** Optional full devotional block (title + reflection + action steps). */
+  devotional?: { title: string; reflection: string; actionSteps: string[] };
+  /** Optional single "small step" rendered as its own card (used by prayer-focused topics). */
+  actionStep?: string;
+  /** Optional dedicated call-to-action linking to the live prayer tool (/tools/prayer → /api/ask). */
+  prayerCta?: { text: string; buttonLabel: string };
+  /** Optional explicit "Related" links. When set, replaces the auto "Explore other topics" list. */
+  related?: Array<{ slug: string; label: string }>;
 };
 
 export const TOPICS: Record<string, TopicData> = {
@@ -45,17 +57,21 @@ export const TOPICS: Record<string, TopicData> = {
         context: "A psalm that names anxiety directly — you are not alone in feeling it, and God's comfort is the answer.",
       },
     ],
+    reflection:
+      "Anxiety tells you that you are alone with your problem — that it is all on you to figure out, prevent, or fix. Scripture tells a different story. From Genesis to Revelation, God's repeated message is 'I am with you.' Not 'figure it out,' but 'I am here.'\n\nPhilippians 4:6–7 does not say anxiety will never come. It says when anxiety comes, bring it to God. The result is not always an immediate change in circumstances — it is peace that transcends understanding. A peace that doesn't make logical sense given the situation.\n\nThis is the Christian life: not a life free from trouble, but a life accompanied through it.",
     prayer:
       "Heavenly Father, I am carrying anxiety that I cannot seem to put down. You know the exact situation — the uncertainty, the fear, the what-ifs that keep cycling through my mind.\n\nYour Word says to bring everything to you in prayer and thanksgiving. So I am doing that now. Thank you for this day, even with its difficulties. Thank you that you are not surprised by anything I face.\n\nI confess that I have been trying to control what I cannot control. Forgive me for doubting your care.\n\nLord, give me the peace that passes understanding — the kind that guards my heart and mind even when nothing around me has changed. Help me to take the next step in front of me, and to leave the rest in your hands.\n\nNot my will, but yours be done. Amen.",
-    devotional: {
-      title: "You Are Not Carrying This Alone",
-      reflection:
-        "Anxiety tells you that you are alone with your problem — that it is all on you to figure out, prevent, or fix. Scripture tells a different story. From Genesis to Revelation, God's repeated message is 'I am with you.' Not 'figure it out,' but 'I am here.'\n\nPhilippians 4:6–7 does not say anxiety will never come. It says when anxiety comes, bring it to God. The result is not always an immediate change in circumstances — it is peace that transcends understanding. A peace that doesn't make logical sense given the situation.\n\nThis is the Christian life: not a life free from trouble, but a life accompanied through it.",
-      actionSteps: [
-        "Write down the specific thing making you anxious, then write: 'God knows this and is with me in it.'",
-        "Set a 5-minute timer and pray Philippians 4:6–7 out loud over your situation, naming each worry specifically.",
-      ],
+    actionStep:
+      "Write down the one specific thing making you anxious right now, and underneath it write: \"God knows this, and he is with me in it.\" Then set a five-minute timer and pray Philippians 4:6–7 out loud over that exact worry — naming it to God instead of rehearsing it to yourself.",
+    prayerCta: {
+      text: "Anxious about something specific right now? Tell Faith Companion what's weighing on you and get a calming, Scripture-based prayer written for your exact situation.",
+      buttonLabel: "Write a prayer for my anxiety",
     },
+    related: [
+      { slug: "prayer-for-a-sick-parent", label: "A Prayer for a Sick Parent" },
+      { slug: "prayer-before-surgery", label: "A Prayer Before Surgery" },
+      { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+    ],
   },
 
   hope: {
@@ -385,6 +401,153 @@ export const TOPICS: Record<string, TopicData> = {
         "Read Hebrews 11 in one sitting — the 'faith hall of fame.' Notice that every person listed also had moments of profound uncertainty.",
       ],
     },
+  },
+
+  "prayer-for-a-sick-parent": {
+    topic: "prayer-for-a-sick-parent",
+    label: "a Sick Parent",
+    title: "A Prayer for a Sick Parent",
+    description:
+      "Bible verses, a heartfelt written prayer, and one small next step for when your mother or father is sick. Scripture-grounded comfort for worried adult children.",
+    intro:
+      "When a parent is sick, the person who once cared for you suddenly needs your care — and that reversal can leave you frightened, exhausted, and unsure how to pray. You don't need the perfect words tonight. Below are a few verses to steady you, a prayer you can pray at the bedside or from far away, and one small step you can take today.",
+    verses: [
+      {
+        ref: "Psalm 41:3 (KJV)",
+        text: "The LORD will strengthen him upon the bed of languishing: thou wilt make all his bed in his sickness.",
+        context:
+          "Picture God himself tending your parent's sickbed — this verse promises his nearness in the very place that frightens you most.",
+      },
+      {
+        ref: "Isaiah 41:10 (WEB)",
+        text: "Don't be afraid, for I am with you. Don't be dismayed, for I am your God. I will strengthen you. Yes, I will help you. Yes, I will uphold you with the right hand of my righteousness.",
+        context:
+          "Spoken to you, the worried child: God's promise to be with you is meant to steady your hands when you feel powerless to fix anything.",
+      },
+      {
+        ref: "2 Corinthians 1:3–4 (WEB)",
+        text: "Blessed be the God and Father of our Lord Jesus Christ, the Father of mercies and God of all comfort, who comforts us in all our affliction, that we may be able to comfort those who are in any affliction, through the comfort with which we ourselves are comforted by God.",
+        context:
+          "The comfort you receive from God is not only for you — it becomes the comfort you carry back into your parent's room.",
+      },
+      {
+        ref: "Matthew 11:28 (WEB)",
+        text: "Come to me, all you who labor and are heavily burdened, and I will give you rest.",
+        context:
+          "Caregiving is heavy work; Jesus invites the weary child, not only the sick parent, to come to him and find rest.",
+      },
+    ],
+    prayer:
+      "Father, my mom (or dad) is sick, and I feel so small in front of it. You know every detail of this illness that I cannot control — the test results, the long nights, the fear I carry into their room. Thank you that you are already at the bedside, strengthening and sustaining them when I can't. Steady my own heart with your peace, and let me be a calm, loving presence instead of an anxious one. Whether you bring healing in this life or carry them gently home to you, help us both to trust that they are held in hands kinder and stronger than mine. Give me strength for today, and the grace to love them well in the time we have. Amen.",
+    actionStep:
+      "Before today gets away from you, do one small thing: sit with your parent for ten unhurried minutes — no phone, no agenda — and read Psalm 41:3 aloud over them. If you live far away, send a short voice note telling them you love them and that you prayed for them today.",
+    prayerCta: {
+      text: "Need a prayer for your exact situation? Tell Faith Companion what you're going through — their diagnosis, your fears, the words you can't find — and get a personal prayer written for this moment.",
+      buttonLabel: "Write a prayer for my situation",
+    },
+    related: [
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "prayer-before-surgery", label: "A Prayer Before Surgery" },
+      { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+    ],
+  },
+
+  "prayer-before-surgery": {
+    topic: "prayer-before-surgery",
+    label: "Surgery",
+    title: "A Prayer Before Surgery",
+    description:
+      "Bible verses, a written prayer, and a calming next step to pray before surgery — for yourself or someone you love. Scripture-grounded peace before an operation.",
+    intro:
+      "The night before surgery is often the hardest part — the waiting, the what-ifs, the loss of control. Whether you're the one going under or you're pacing a waiting room for someone you love, God is not absent from the operating room. Here are a few verses to steady you, a prayer for before the procedure, and one small thing you can do tonight.",
+    verses: [
+      {
+        ref: "Psalm 56:3 (WEB)",
+        text: "When I am afraid, I will put my trust in you.",
+        context:
+          "A short, honest sentence you can pray on the gurney itself, the moment fear spikes.",
+      },
+      {
+        ref: "Psalm 23:4 (WEB)",
+        text: "Even though I walk through the valley of the shadow of death, I will fear no evil, for you are with me. Your rod and your staff, they comfort me.",
+        context:
+          "The promise is not that you skip the valley, but that you are never alone in it.",
+      },
+      {
+        ref: "Proverbs 3:5–6 (KJV)",
+        text: "Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.",
+        context:
+          "You don't have to understand the medicine or control the outcome — only entrust both to God.",
+      },
+      {
+        ref: "Psalm 91:1–2 (KJV)",
+        text: "He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty. I will say of the LORD, He is my refuge and my fortress: my God; in him will I trust.",
+        context:
+          "A shelter to return to again and again through the long hours of waiting.",
+      },
+    ],
+    prayer:
+      "Father, surgery is coming, and I feel the weight of everything I cannot control. You know the fear sitting in my chest tonight — the unknowns, the waiting, the what-ifs I keep turning over. Thank you that you will be in that operating room when I cannot be, steadying the hands of every doctor and nurse and watching over every moment. Quiet my racing thoughts and give me the kind of peace that does not depend on knowing the outcome. Whatever the result, help me to trust that I am held by a God who is good and who never leaves. Into your hands I place this body, this day, and the people I love. Amen.",
+    actionStep:
+      "Tonight, before you try to sleep, write the one thing you're most afraid of on a slip of paper, pray Psalm 56:3 over it — \"When I am afraid, I will put my trust in you\" — and leave the paper where you'll see it in the morning. If you're waiting on a loved one's surgery, send them one short message tonight telling them you're praying.",
+    prayerCta: {
+      text: "Facing a specific procedure or waiting on someone in surgery? Tell Faith Companion the details and get a personal prayer written for this exact moment.",
+      buttonLabel: "Write a prayer for surgery",
+    },
+    related: [
+      { slug: "prayer-for-a-sick-parent", label: "A Prayer for a Sick Parent" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+    ],
+  },
+
+  "bible-verses-for-grief": {
+    topic: "bible-verses-for-grief",
+    label: "Grief",
+    title: "Bible Verses for Grief",
+    description:
+      "Comforting Bible verses, a written prayer, and a gentle next step for grief and loss. Scripture-grounded comfort for the brokenhearted when you're mourning someone you love.",
+    intro:
+      "Grief doesn't move in a straight line, and there's no timeline you're failing to keep. Whether the loss is fresh or you've been carrying it quietly for months, Scripture doesn't rush you or tidy your sorrow — it sits with you in it. Here are verses for the brokenhearted, a prayer for when words run out, and one small thing for today.",
+    verses: [
+      {
+        ref: "Psalm 34:18 (KJV)",
+        text: "The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.",
+        context:
+          "God draws nearest, not farthest, in the moments your heart is most broken.",
+      },
+      {
+        ref: "Matthew 5:4 (WEB)",
+        text: "Blessed are those who mourn, for they shall be comforted.",
+        context:
+          "Jesus calls mourning blessed — your tears are not a failure of faith but a doorway to comfort.",
+      },
+      {
+        ref: "Revelation 21:4 (WEB)",
+        text: "He will wipe away every tear from their eyes. Death will be no more; neither will there be mourning, nor crying, nor pain any more, for the first things have passed away.",
+        context:
+          "A promise that grief is real now but not forever — God himself will one day undo it.",
+      },
+      {
+        ref: "Psalm 147:3 (WEB)",
+        text: "He heals the broken in heart, and binds up their wounds.",
+        context:
+          "Healing from loss is slow, tender work, and God does it like a physician binding a wound.",
+      },
+    ],
+    prayer:
+      "Father, I am grieving, and some days the weight of it is almost more than I can carry. You know who I've lost and the exact shape of this empty space — the conversations that won't happen, the ordinary moments I keep reaching for out of habit. Thank you that you are near to the brokenhearted and that you keep track of every one of my tears. Comfort me in the places no one else can reach, and don't let me feel ashamed of how long this is taking. Hold the hope in front of me that death does not get the final word, and that what is hidden in you is never truly lost. Until that day, be my comfort and my strength, one ordinary morning at a time. Amen.",
+    actionStep:
+      "Don't carry it silently today — say the name of the person you lost out loud to God, and tell him honestly how you're doing, even if all you can manage is \"this hurts.\" Then read Psalm 34:18 slowly, and let yourself believe he is near.",
+    prayerCta: {
+      text: "Grieving a specific loss? Tell Faith Companion who you're missing and get a gentle, personal prayer written for exactly where you are today.",
+      buttonLabel: "Write a prayer for my grief",
+    },
+    related: [
+      { slug: "prayer-for-a-sick-parent", label: "A Prayer for a Sick Parent" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "prayer-before-surgery", label: "A Prayer Before Surgery" },
+    ],
   },
 };
 

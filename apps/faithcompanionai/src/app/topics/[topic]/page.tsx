@@ -17,7 +17,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!data) return { title: "Topic not found" };
 
   return {
-    title: `${data.title} – Verses & Prayers | Faith Companion`,
+    // Absolute title bypasses the root layout's "%s | Faith Companion AI" template,
+    // avoiding double-branding. Keep `${data.title}` short so the total stays < 60 chars.
+    title: { absolute: `${data.title} | Faith Companion AI` },
     description: data.description,
     alternates: { canonical: `/topics/${data.topic}` },
     openGraph: {
@@ -53,6 +55,7 @@ export default function TopicPage({ params }: Props) {
   };
 
   const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+  const label = data.label ?? capitalize(data.topic);
 
   return (
     <>
@@ -73,7 +76,7 @@ export default function TopicPage({ params }: Props) {
       {/* Hero */}
       <header className="mb-8">
         <div className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/60">
-          Scripture for {capitalize(data.topic)}
+          Scripture for {label}
         </div>
         <h1 className="mt-4 text-4xl font-extrabold text-white md:text-5xl">{data.title}</h1>
         <p className="mt-4 max-w-2xl text-sm leading-7 text-white/65 md:text-base">{data.intro}</p>
@@ -82,7 +85,7 @@ export default function TopicPage({ params }: Props) {
       {/* ── Bible Verses ── */}
       <section>
         <h2 className="text-2xl font-bold text-white md:text-3xl">
-          Key Bible Verses for {capitalize(data.topic)}
+          Key Bible Verses for {label}
         </h2>
 
         <div className="mt-6 space-y-4">
@@ -100,18 +103,32 @@ export default function TopicPage({ params }: Props) {
           ))}
         </div>
 
-        <div className="mt-6 rounded-[20px] border border-white/10 bg-black/20 p-4 text-center text-sm text-white/55">
-          Want a verse tailored to your specific situation?{" "}
-          <Link href="/tools/verse" className="font-semibold text-orange-300 hover:text-orange-200">
-            Generate a personalized verse →
-          </Link>
-        </div>
+        {!data.prayerCta && (
+          <div className="mt-6 rounded-[20px] border border-white/10 bg-black/20 p-4 text-center text-sm text-white/55">
+            Want a verse tailored to your specific situation?{" "}
+            <Link href="/tools/verse" className="font-semibold text-orange-300 hover:text-orange-200">
+              Generate a personalized verse →
+            </Link>
+          </div>
+        )}
       </section>
+
+      {/* ── Reflection (optional) ── */}
+      {data.reflection && (
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-white md:text-3xl">Reflection</h2>
+          <div className="mt-6 rounded-[22px] border border-white/10 bg-white/5 p-6 md:p-8">
+            <p className="whitespace-pre-line text-sm leading-7 text-white/75">
+              {data.reflection}
+            </p>
+          </div>
+        </section>
+      )}
 
       {/* ── Prayer ── */}
       <section className="mt-12">
         <h2 className="text-2xl font-bold text-white md:text-3xl">
-          A Prayer for {capitalize(data.topic)}
+          A Prayer for {label}
         </h2>
         <p className="mt-2 text-sm text-white/55">
           Use this prayer as-is, or let it guide your own words. There is no perfect formula — God
@@ -124,86 +141,140 @@ export default function TopicPage({ params }: Props) {
           </p>
         </div>
 
-        <div className="mt-4 text-center text-sm text-white/55">
-          <Link href="/tools/prayer" className="font-semibold text-orange-300 hover:text-orange-200">
-            Generate a personal prayer for your exact situation →
-          </Link>
-        </div>
-      </section>
-
-      {/* ── Devotional ── */}
-      <section className="mt-12">
-        <h2 className="text-2xl font-bold text-white md:text-3xl">Devotional Reflection</h2>
-
-        <div className="mt-6 rounded-[22px] border border-white/10 bg-white/5 p-6 md:p-8">
-          <h3 className="text-xl font-bold text-white">{data.devotional.title}</h3>
-          <p className="mt-4 whitespace-pre-line text-sm leading-7 text-white/75">
-            {data.devotional.reflection}
-          </p>
-
-          <div className="mt-6 border-t border-white/10 pt-5">
-            <div className="text-xs font-semibold uppercase tracking-widest text-white/40">Action Steps</div>
-            <ol className="mt-3 space-y-3 pl-4 list-decimal marker:text-orange-400">
-              {data.devotional.actionSteps.map((step, i) => (
-                <li key={i} className="text-sm leading-6 text-white/70">{step}</li>
-              ))}
-            </ol>
-          </div>
-        </div>
-
-        <div className="mt-4 text-center text-sm text-white/55">
-          <Link href="/tools/devotional" className="font-semibold text-orange-300 hover:text-orange-200">
-            Get a full devotional with Scripture, reflection, prayer & action steps →
-          </Link>
-        </div>
-      </section>
-
-      {/* ── Explore other topics ── */}
-      <section className="mt-12">
-        <h2 className="text-xl font-bold text-white">Explore other topics</h2>
-        <div className="mt-4 flex flex-wrap gap-3">
-          {otherTopics.map((t) => (
-            <Link
-              key={t}
-              href={`/topics/${t}`}
-              className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white/70 capitalize hover:bg-white/10 hover:text-white transition"
-            >
-              {t}
+        {!data.prayerCta && (
+          <div className="mt-4 text-center text-sm text-white/55">
+            <Link href="/tools/prayer" className="font-semibold text-orange-300 hover:text-orange-200">
+              Generate a personal prayer for your exact situation →
             </Link>
-          ))}
-        </div>
+          </div>
+        )}
       </section>
 
-      {/* ── CTA ── */}
-      <section className="mt-12 rounded-[28px] border border-white/10 bg-white/5 p-8 text-center">
-        <h2 className="text-xl font-bold text-white">
-          Personalize these resources for your situation
-        </h2>
-        <p className="mt-2 text-sm text-white/60 max-w-xl mx-auto">
-          Faith Companion AI generates verses, prayers, and devotionals tailored to your exact situation —
-          any topic, any tone. Free to try, no account required.
-        </p>
-        <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-          <Link
-            href="/tools/verse"
-            className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-black hover:opacity-90 transition"
-          >
-            Get a Verse
-          </Link>
-          <Link
-            href="/tools/prayer"
-            className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition"
-          >
-            Write a Prayer
-          </Link>
-          <Link
-            href="/tools/devotional"
-            className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition"
-          >
-            Get a Devotional
-          </Link>
-        </div>
-      </section>
+      {/* ── Devotional (optional) ── */}
+      {data.devotional && (
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-white md:text-3xl">Devotional Reflection</h2>
+
+          <div className="mt-6 rounded-[22px] border border-white/10 bg-white/5 p-6 md:p-8">
+            <h3 className="text-xl font-bold text-white">{data.devotional.title}</h3>
+            <p className="mt-4 whitespace-pre-line text-sm leading-7 text-white/75">
+              {data.devotional.reflection}
+            </p>
+
+            <div className="mt-6 border-t border-white/10 pt-5">
+              <div className="text-xs font-semibold uppercase tracking-widest text-white/40">Action Steps</div>
+              <ol className="mt-3 space-y-3 pl-4 list-decimal marker:text-orange-400">
+                {data.devotional.actionSteps.map((step, i) => (
+                  <li key={i} className="text-sm leading-6 text-white/70">{step}</li>
+                ))}
+              </ol>
+            </div>
+          </div>
+
+          <div className="mt-4 text-center text-sm text-white/55">
+            <Link href="/tools/devotional" className="font-semibold text-orange-300 hover:text-orange-200">
+              Get a full devotional with Scripture, reflection, prayer & action steps →
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* ── One small step (optional) ── */}
+      {data.actionStep && (
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-white md:text-3xl">One Small Step</h2>
+          <div className="mt-6 rounded-[22px] border border-white/10 bg-white/5 p-6 md:p-8">
+            <div className="flex gap-4">
+              <div className="mt-0.5 flex h-8 w-8 flex-none items-center justify-center rounded-full bg-orange-500/20 text-sm font-bold text-orange-300">
+                ✓
+              </div>
+              <p className="text-sm leading-7 text-white/80">{data.actionStep}</p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── Prayer-tool CTA (optional) ── */}
+      {data.prayerCta && (
+        <section className="mt-12 rounded-[28px] border border-white/10 bg-white/5 p-8 text-center">
+          <p className="mx-auto max-w-xl text-sm leading-7 text-white/70">{data.prayerCta.text}</p>
+          <div className="mt-6">
+            <Link
+              href="/tools/prayer"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:opacity-95"
+            >
+              {data.prayerCta.buttonLabel}
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* ── Related (explicit) or Explore other topics (auto) ── */}
+      {data.related && data.related.length > 0 ? (
+        <section className="mt-12">
+          <h2 className="text-xl font-bold text-white">Related</h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-3">
+            {data.related.map((r) => (
+              <Link
+                key={r.slug}
+                href={`/topics/${r.slug}`}
+                className="rounded-[18px] border border-white/10 bg-white/5 px-5 py-4 text-sm font-semibold text-white/75 transition hover:bg-white/10 hover:text-white"
+              >
+                {r.label}
+                <span className="ml-1 text-orange-300">→</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <section className="mt-12">
+          <h2 className="text-xl font-bold text-white">Explore other topics</h2>
+          <div className="mt-4 flex flex-wrap gap-3">
+            {otherTopics.map((t) => (
+              <Link
+                key={t}
+                href={`/topics/${t}`}
+                className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white/70 capitalize hover:bg-white/10 hover:text-white transition"
+              >
+                {getTopic(t)?.label ?? t}
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ── Generic CTA (hidden when a focused prayer CTA is present) ── */}
+      {!data.prayerCta && (
+        <section className="mt-12 rounded-[28px] border border-white/10 bg-white/5 p-8 text-center">
+          <h2 className="text-xl font-bold text-white">
+            Personalize these resources for your situation
+          </h2>
+          <p className="mt-2 text-sm text-white/60 max-w-xl mx-auto">
+            Faith Companion AI generates verses, prayers, and devotionals tailored to your exact situation —
+            any topic, any tone. Free to try, no account required.
+          </p>
+          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Link
+              href="/tools/verse"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-black hover:opacity-90 transition"
+            >
+              Get a Verse
+            </Link>
+            <Link
+              href="/tools/prayer"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition"
+            >
+              Write a Prayer
+            </Link>
+            <Link
+              href="/tools/devotional"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition"
+            >
+              Get a Devotional
+            </Link>
+          </div>
+        </section>
+      )}
     </>
   );
 }
