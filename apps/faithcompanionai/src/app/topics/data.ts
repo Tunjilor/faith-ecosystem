@@ -70,11 +70,11 @@ export const TOPICS: Record<string, TopicData> = {
       buttonLabel: "Write a prayer for my anxiety",
     },
     related: [
+      { slug: "isaiah-41-10", label: "Isaiah 41:10: Fear Not" },
       { slug: "psalm-91", label: "Psalm 91: God's Protection" },
+      { slug: "romans-8-28", label: "Romans 8:28: All Things for Good" },
       { slug: "jeremiah-29-11", label: "Jeremiah 29:11: Plans & Hope" },
-      { slug: "prayer-for-a-sick-parent", label: "A Prayer for a Sick Parent" },
-      { slug: "prayer-before-surgery", label: "A Prayer Before Surgery" },
-      { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+      { slug: "joshua-1-9", label: "Joshua 1:9: Be Strong & Courageous" },
     ],
   },
 
@@ -124,6 +124,7 @@ export const TOPICS: Record<string, TopicData> = {
     },
     related: [
       { slug: "jeremiah-29-11", label: "Jeremiah 29:11: Plans & Hope" },
+      { slug: "romans-8-28", label: "Romans 8:28: All Things for Good" },
       { slug: "faith", label: "Bible Verses About Faith" },
       { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
       { slug: "strength", label: "Bible Verses About Strength" },
@@ -175,10 +176,11 @@ export const TOPICS: Record<string, TopicData> = {
       buttonLabel: "Write a prayer for strength",
     },
     related: [
+      { slug: "joshua-1-9", label: "Joshua 1:9: Be Strong & Courageous" },
       { slug: "psalm-91", label: "Psalm 91: God's Protection" },
+      { slug: "isaiah-41-10", label: "Isaiah 41:10: Fear Not" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "peace", label: "A Prayer for Peace" },
-      { slug: "healing", label: "Prayer for Healing" },
     ],
   },
 
@@ -532,6 +534,7 @@ export const TOPICS: Record<string, TopicData> = {
       buttonLabel: "Write a prayer for surgery",
     },
     related: [
+      { slug: "joshua-1-9", label: "Joshua 1:9: Be Strong & Courageous" },
       { slug: "prayer-for-a-sick-parent", label: "A Prayer for a Sick Parent" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
@@ -582,6 +585,7 @@ export const TOPICS: Record<string, TopicData> = {
     },
     related: [
       { slug: "psalm-23", label: "Psalm 23: Comfort in the Valley" },
+      { slug: "romans-8-28", label: "Romans 8:28: All Things for Good" },
       { slug: "prayer-for-a-sick-parent", label: "A Prayer for a Sick Parent" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "prayer-before-surgery", label: "A Prayer Before Surgery" },
@@ -843,6 +847,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "bible-verses-for-when-you-cant-sleep", label: "Verses for When You Can't Sleep" },
       { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "isaiah-41-10", label: "Isaiah 41:10: Fear Not" },
     ],
   },
 
@@ -907,6 +912,102 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "hope", label: "Bible Verses for Hope" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "faith", label: "Bible Verses About Faith" },
+    ],
+  },
+
+  "isaiah-41-10": {
+    topic: "isaiah-41-10",
+    label: "Fear and Anxiety",
+    title: "Isaiah 41:10: Fear Not, I Am With You",
+    description:
+      "Isaiah 41:10 (WEB) in full, with a plain explanation of what it means and a written prayer for fear and anxiety. God's promise to be with you and hold you up.",
+    intro:
+      "When fear has its hand around your throat — a frightening unknown, a situation spinning out of your control — Isaiah 41:10 is one of the most repeated reassurances in all of Scripture. God doesn't just tell you to stop being afraid; he tells you why you can. Here is the verse, what it meant to the people who first heard it, and a prayer for when fear won't let go.",
+    verses: [],
+    passage: {
+      ref: "Isaiah 41:10 (WEB)",
+      text: "Don't be afraid, for I am with you. Don't be dismayed, for I am your God. I will strengthen you. Yes, I will help you. Yes, I will uphold you with the right hand of my righteousness.",
+    },
+    meaning:
+      "God spoke these words through the prophet Isaiah to Israel facing exile and enemies far stronger than themselves — people with every earthly reason to be afraid. Notice that God's answer to fear is not a pep talk about their own strength. It is four promises about himself: I am with you, I am your God, I will strengthen you, I will uphold you. Fear shrinks when the focus shifts from the size of the threat to the size of the One who is present.\n\nThe phrase \"the right hand of my righteousness\" is a picture of God's own strong, just hand reaching down to steady someone who would otherwise fall. In the ancient world the right hand was the hand of power and rescue. God is not promising the frightening thing will vanish — he is promising he will personally hold you up inside it. That is why this verse has steadied believers in sickrooms, in war, and in crisis for over 2,700 years: it doesn't deny the danger, it out-weighs it with God's nearness.",
+    reflection:
+      "Fear tells you that you are alone and that everything depends on you. Isaiah 41:10 answers both lies at once: you are not alone (\"I am with you\"), and it does not all depend on you (\"I will uphold you\"). You don't have to manufacture courage out of nothing — you borrow steadiness from the God who is holding your hand. Today, when the fear rises, you don't have to argue yourself out of it. You only have to remember whose hand is under you.",
+    prayer:
+      "Father, fear has a grip on me today, and I am tired of fighting it on my own. You see exactly what I am afraid of — the unknown I keep bracing for. Thank you that you have not told me to be brave by myself, but promised to be with me, to strengthen me, and to hold me up with your own hand. Quiet the part of me that believes it all depends on me. Steady my heart with your nearness, and help me to take the next small step trusting that you are already holding the rest. Amen.",
+    actionStep:
+      "Write Isaiah 41:10 on a card — or set it as your phone's lock screen — and when fear spikes today, read just the four promises slowly: \"I am with you. I am your God. I will strengthen you. I will uphold you.\" Let each one answer the fear before you move on.",
+    prayerCta: {
+      text: "Gripped by a specific fear right now? Tell Faith Companion what you're afraid of and get a calming, personal prayer written for it.",
+      buttonLabel: "Write a prayer for fear",
+    },
+    related: [
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "psalm-91", label: "Psalm 91: God's Protection" },
+    ],
+  },
+
+  "romans-8-28": {
+    topic: "romans-8-28",
+    label: "Hard Seasons",
+    title: "Romans 8:28: All Things Work for Good",
+    description:
+      "Romans 8:28 (WEB) in full, with a plain explanation of what it really means and a written prayer for hard seasons. God working all things together for good.",
+    intro:
+      "Romans 8:28 is one of the most quoted — and most misquoted — verses in the Bible, often handed to hurting people as a quick fix. Read carefully and in context, it is far more honest and far more comforting than the bumper-sticker version. Here is the verse, what it actually promises (and what it doesn't), and a prayer for a hard season.",
+    verses: [],
+    passage: {
+      ref: "Romans 8:28 (WEB)",
+      text: "We know that all things work together for good for those who love God, to those who are called according to his purpose.",
+    },
+    meaning:
+      "Notice first what this verse does not say. It does not say all things ARE good — Paul, who wrote it, was beaten, imprisoned, and shipwrecked, and his letters are full of grief. It does not say you will see the good, or see it soon. What it says is that God WORKS all things together for good — even the painful, senseless things — for those who love him.\n\nThe picture is not that every bad thing is secretly good, but that God is a master weaver who takes every thread, including the dark ones, and works them into something good that none of them could have produced alone. And Paul defines that \"good\" in the verses right after: being shaped into the likeness of Christ (Romans 8:29), and held by a love that nothing — \"neither death, nor life... nor things present, nor things to come\" (Romans 8:38–39) — can separate us from. Romans 8:28 is not a promise that your hard season will make sense on your timeline. It is a promise that it is not wasted, and not outside God's hands.",
+    reflection:
+      "When you are in the middle of something painful, Romans 8:28 is not meant to be said quickly or used to skip past the grief. It is an anchor to hold once you have been honest about how much it hurts. You may never see, this side of heaven, how God works a particular loss for good — but you can trust the Weaver even when you cannot see the pattern. Today, you don't have to call the hard thing good. You only have to believe God is good, and that he is still working.",
+    prayer:
+      "Father, I am in a season I cannot make sense of, and I am tired of pretending it doesn't hurt. You know what I have lost and what I am afraid this will cost me. I don't understand how any good can come from this, but your Word says you are working all things together for good for those who love you — so I bring you the tangled threads of it and ask you to weave them. Help me to trust the Weaver when I cannot see the pattern, and to rest in a love that nothing can separate me from. Until I can see it, hold me. Amen.",
+    actionStep:
+      "Name the one hard thing you cannot make sense of, and instead of forcing it to feel good, pray one honest sentence: \"God, I don't see the good in this — help me trust that you are still working.\" Then leave it in his hands for today.",
+    prayerCta: {
+      text: "Walking through a hard season that doesn't make sense? Tell Faith Companion what you're carrying and get a personal prayer written for it.",
+      buttonLabel: "Write a prayer for a hard season",
+    },
+    related: [
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+      { slug: "hope", label: "Bible Verses for Hope" },
+    ],
+  },
+
+  "joshua-1-9": {
+    topic: "joshua-1-9",
+    label: "Courage",
+    title: "Joshua 1:9: Be Strong and Courageous",
+    description:
+      "Joshua 1:9 (KJV) in full, with a plain explanation of what it means and a written prayer for courage. God's command to be strong because he goes with you.",
+    intro:
+      "Some seasons ask more of you than you feel you have — a daunting new responsibility, a hard conversation, a step into the unknown. Joshua 1:9 is God's charge to a man standing exactly there, and it has steadied the fearful ever since. Here is the verse, the moment God spoke it, and a prayer for when you need courage you don't feel.",
+    verses: [],
+    passage: {
+      ref: "Joshua 1:9 (KJV)",
+      text: "Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.",
+    },
+    meaning:
+      "God spoke these words to Joshua at one of the most intimidating moments imaginable. Moses — the leader who had carried Israel for forty years — had just died, and Joshua was handed the impossible task of leading a whole nation into a land of fortified cities and giants. Three times in this short passage God tells him to be strong and courageous, precisely because Joshua had every reason to be terrified.\n\nNotice that the command to be courageous is not \"believe in yourself.\" It is grounded entirely in a promise: \"for the LORD thy God is with thee whithersoever thou goest.\" Biblical courage is not the absence of fear or confidence in your own ability — it is moving forward because of who goes with you. God doesn't tell Joshua the road will be easy or the enemies small. He tells him the one thing that changes everything: you will not go alone. The courage God commands is always courage he supplies by his presence.",
+    reflection:
+      "You may be standing at your own Jordan today — a threshold you feel unqualified to cross. Joshua 1:9 does not ask you to feel brave; it commands you to act on a fact: God goes with you \"whithersoever thou goest.\" Courage, then, is not waiting until the fear is gone. It is taking the next step while the fear is still there, trusting the presence that goes ahead of you and behind you. Today, you don't need more confidence in yourself — you need a firmer grip on the God who promised to come along.",
+    prayer:
+      "Lord, you know the thing in front of me that I feel too small for, and the fear that is telling me to stay where it's safe. You commanded Joshua to be strong and courageous not because he was enough, but because you were with him — and you have promised the same to me. Give me courage that does not depend on my own confidence but on your presence. Help me take the next step even while I am afraid, trusting that you go before me and behind me. Wherever you send me today, go with me, and that will be enough. Amen.",
+    actionStep:
+      "Name the one step you have been avoiding because it scares you, and take the smallest possible version of it today — one email, one conversation, one decision — praying Joshua 1:9 as you do: \"You are with me wherever I go.\"",
+    prayerCta: {
+      text: "Facing something that takes more courage than you feel you have? Tell Faith Companion what you're up against and get a personal prayer for courage written for it.",
+      buttonLabel: "Write a prayer for courage",
+    },
+    related: [
+      { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "prayer-before-surgery", label: "A Prayer Before Surgery" },
     ],
   },
 };
