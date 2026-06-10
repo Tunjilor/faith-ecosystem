@@ -80,7 +80,7 @@ export const TOPICS: Record<string, TopicData> = {
     description:
       "Scripture-based verses, a personal prayer, and a devotional reflection for hope. Rediscover God's promises when the future feels uncertain.",
     intro:
-      "Biblical hope is not wishful thinking — it is confident expectation rooted in the character of God. When circumstances are bleak and the future feels unclear, Scripture gives hope something solid to stand on. Here are key Bible verses about hope, a prayer for renewed hope, and a short devotional.",
+      "Biblical hope is not wishful thinking — it is confident expectation rooted in the character of God. When circumstances are bleak and the future feels unclear, Scripture gives hope something solid to stand on. Here are key Bible verses about hope, a short reflection, a prayer for renewed hope, and one small step.",
     verses: [
       {
         ref: "Jeremiah 29:11 (KJV)",
@@ -110,15 +110,19 @@ export const TOPICS: Record<string, TopicData> = {
     ],
     prayer:
       "Father God, I come to you when hope feels thin. Circumstances have worn me down, and it is hard to see a future that looks different from today.\n\nYour Word says you are the God of hope — that you fill your people with joy and peace as they trust you. I want to trust you. Help me where my trust falls short.\n\nThank you that your mercies are new every morning. Even when I cannot see the path forward, your faithfulness has not changed.\n\nFill me with hope that doesn't depend on circumstances. Let the Holy Spirit renew my expectation that you are at work, even now, even here. Amen.",
-    devotional: {
-      title: "Hope That Holds in the Dark",
-      reflection:
-        "Real hope is tested in difficulty, not confirmed by it. The hope Paul writes about in Romans 8 is not the hope of good circumstances — it is the hope of resurrection, of a God who reverses death itself.\n\nThis kind of hope changes how you live while you wait. You can act with courage, extend grace to others, and face hard days without being destroyed — because you know how the story ends.\n\nIf your hope feels thin today, it may simply need feeding. Hope grows through Scripture, through prayer, and through remembering what God has already done.",
-      actionSteps: [
-        "Write down three things God has done in your life or the lives of people you know that required hope beforehand.",
-        "Read Romans 8:18–25 slowly and sit with the phrase 'we wait for it patiently.' What are you currently waiting for?",
-      ],
+    reflection:
+      "Real hope is tested in difficulty, not confirmed by it. The hope Paul writes about in Romans 8 is not the hope of good circumstances — it is the hope of resurrection, of a God who reverses death itself.\n\nThis kind of hope changes how you live while you wait. You can act with courage, extend grace to others, and face hard days without being destroyed — because you know how the story ends.\n\nIf your hope feels thin today, it may simply need feeding. Hope grows through Scripture, through prayer, and through remembering what God has already done.",
+    actionStep:
+      "Write down three things God has already done in your life that once required hope — then, when this season feels hopeless, read the list back as evidence. Sit with Romans 8 and the phrase \"with patience wait for it,\" naming what you are waiting for now.",
+    prayerCta: {
+      text: "Holding onto hope in a specific situation? Tell Faith Companion what feels hopeless right now and get a hope-filled, Scripture-based prayer written for it.",
+      buttonLabel: "Write a prayer for hope",
     },
+    related: [
+      { slug: "faith", label: "Bible Verses for Faith" },
+      { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+      { slug: "strength", label: "Bible Verses About Strength" },
+    ],
   },
 
   strength: {
@@ -382,7 +386,7 @@ export const TOPICS: Record<string, TopicData> = {
     description:
       "Scripture-based verses, a personal prayer, and a devotional for faith. Strengthen your trust in God through His Word when doubt or uncertainty arise.",
     intro:
-      "Faith is not the absence of doubt — it is choosing to trust God in spite of it. Scripture defines faith, models it through extraordinary examples, and calls every believer into it as a daily practice. Here are key Bible verses on faith, a prayer for strengthened faith, and a devotional.",
+      "Faith is not the absence of doubt — it is choosing to trust God in spite of it. Scripture defines faith, models it through extraordinary examples, and calls every believer into it as a daily practice. Here are key Bible verses on faith, a short reflection, a prayer for strengthened faith, and one small step.",
     verses: [
       {
         ref: "Hebrews 11:1 (KJV)",
@@ -412,15 +416,19 @@ export const TOPICS: Record<string, TopicData> = {
     ],
     prayer:
       "Lord, I believe. Help my unbelief.\n\nThere are areas of my life where my faith feels thin — where the gap between what I confess and what I truly trust is wide. You know exactly what those areas are.\n\nThank you that faith is a gift, not a performance. Thank you that even faith the size of a mustard seed moves mountains in your hands.\n\nGrow my faith through your Word. Through answered prayer I can look back on. Through community with people who trust you deeply. Help me to act on what I believe, not just hold it as a belief.\n\nI trust you — and where I struggle to trust, I ask you to hold me. Amen.",
-    devotional: {
-      title: "Faith Is Not the Absence of Doubt",
-      reflection:
-        "Mark 9:24 contains one of the most remarkable exchanges in the Gospels. A desperate father says to Jesus: 'I believe; help me in my unbelief.' And Jesus heals his son anyway.\n\nFaith in Scripture is not certainty. It is directional trust — choosing to orient your life toward God even when questions remain. The father in Mark 9 was half-certain at best. Jesus responded to his reaching, not his theological confidence.\n\nIf your faith feels weak today, you are in good company. Elijah, Gideon, Thomas, and Peter all had moments of genuine doubt. What marked them was not perfect faith — it was returning to God in the doubt.",
-      actionSteps: [
-        "Write down one thing you are struggling to trust God with. Pray Mark 9:24 over it: 'I believe; help my unbelief.'",
-        "Read Hebrews 11 in one sitting — the 'faith hall of fame.' Notice that every person listed also had moments of profound uncertainty.",
-      ],
+    reflection:
+      "Mark 9:24 contains one of the most remarkable exchanges in the Gospels. A desperate father says to Jesus: 'Lord, I believe; help thou mine unbelief.' And Jesus heals his son anyway.\n\nFaith in Scripture is not certainty. It is directional trust — choosing to orient your life toward God even when questions remain. The father in Mark 9 was half-certain at best. Jesus responded to his reaching, not his theological confidence.\n\nIf your faith feels weak today, you are in good company. Elijah, Gideon, Thomas, and Peter all had moments of genuine doubt. What marked them was not perfect faith — it was returning to God in the doubt.",
+    actionStep:
+      "Write down one thing you're struggling to trust God with, and pray Mark 9:24 over it — \"Lord, I believe; help thou mine unbelief.\" Then read Hebrews 11 in one sitting and notice that every person in faith's \"hall of fame\" also had seasons of real uncertainty.",
+    prayerCta: {
+      text: "Wrestling with doubt about something specific? Tell Faith Companion where your faith feels thin and get a personal, Scripture-based prayer written for it.",
+      buttonLabel: "Write a prayer for faith",
     },
+    related: [
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+    ],
   },
 
   "prayer-for-a-sick-parent": {
