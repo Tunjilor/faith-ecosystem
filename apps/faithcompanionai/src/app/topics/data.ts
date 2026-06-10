@@ -78,7 +78,7 @@ export const TOPICS: Record<string, TopicData> = {
     topic: "hope",
     title: "Bible Verses for Hope",
     description:
-      "Scripture-based verses, a personal prayer, and a devotional reflection for hope. Rediscover God's promises when the future feels uncertain.",
+      "Bible verses for hope, a written prayer, and one small step for when hope feels thin. Scripture-grounded encouragement to rebuild confident hope in God.",
     intro:
       "Biblical hope is not wishful thinking — it is confident expectation rooted in the character of God. When circumstances are bleak and the future feels unclear, Scripture gives hope something solid to stand on. Here are key Bible verses about hope, a short reflection, a prayer for renewed hope, and one small step.",
     verses: [
@@ -119,7 +119,7 @@ export const TOPICS: Record<string, TopicData> = {
       buttonLabel: "Write a prayer for hope",
     },
     related: [
-      { slug: "faith", label: "Bible Verses for Faith" },
+      { slug: "faith", label: "Bible Verses About Faith" },
       { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
       { slug: "strength", label: "Bible Verses About Strength" },
     ],
@@ -382,9 +382,9 @@ export const TOPICS: Record<string, TopicData> = {
 
   faith: {
     topic: "faith",
-    title: "Bible Verses for Faith",
+    title: "Bible Verses About Faith",
     description:
-      "Scripture-based verses, a personal prayer, and a devotional for faith. Strengthen your trust in God through His Word when doubt or uncertainty arise.",
+      "Bible verses about faith, a written prayer, and one small step for trusting God when your faith feels weak. Scripture-grounded encouragement for honest doubt.",
     intro:
       "Faith is not the absence of doubt — it is choosing to trust God in spite of it. Scripture defines faith, models it through extraordinary examples, and calls every believer into it as a daily practice. Here are key Bible verses on faith, a short reflection, a prayer for strengthened faith, and one small step.",
     verses: [
