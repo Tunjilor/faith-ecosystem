@@ -150,35 +150,6 @@ export default function TopicPage({ params }: Props) {
         )}
       </section>
 
-      {/* ── Devotional (optional) ── */}
-      {data.devotional && (
-        <section className="mt-12">
-          <h2 className="text-2xl font-bold text-white md:text-3xl">Devotional Reflection</h2>
-
-          <div className="mt-6 rounded-[22px] border border-white/10 bg-white/5 p-6 md:p-8">
-            <h3 className="text-xl font-bold text-white">{data.devotional.title}</h3>
-            <p className="mt-4 whitespace-pre-line text-sm leading-7 text-white/75">
-              {data.devotional.reflection}
-            </p>
-
-            <div className="mt-6 border-t border-white/10 pt-5">
-              <div className="text-xs font-semibold uppercase tracking-widest text-white/40">Action Steps</div>
-              <ol className="mt-3 space-y-3 pl-4 list-decimal marker:text-orange-400">
-                {data.devotional.actionSteps.map((step, i) => (
-                  <li key={i} className="text-sm leading-6 text-white/70">{step}</li>
-                ))}
-              </ol>
-            </div>
-          </div>
-
-          <div className="mt-4 text-center text-sm text-white/55">
-            <Link href="/tools/devotional" className="font-semibold text-orange-300 hover:text-orange-200">
-              Get a full devotional with Scripture, reflection, prayer & action steps →
-            </Link>
-          </div>
-        </section>
-      )}
-
       {/* ── One small step (optional) ── */}
       {data.actionStep && (
         <section className="mt-12">

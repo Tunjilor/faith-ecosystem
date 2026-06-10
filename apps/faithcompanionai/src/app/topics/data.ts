@@ -12,8 +12,6 @@ export type TopicData = {
   /** Optional short devotional reflection (1–2 paragraphs), rendered between the verses and the prayer. */
   reflection?: string;
   prayer: string;
-  /** Optional full devotional block (title + reflection + action steps). */
-  devotional?: { title: string; reflection: string; actionSteps: string[] };
   /** Optional single "small step" rendered as its own card (used by prayer-focused topics). */
   actionStep?: string;
   /** Optional dedicated call-to-action linking to the live prayer tool (/tools/prayer → /api/ask). */
