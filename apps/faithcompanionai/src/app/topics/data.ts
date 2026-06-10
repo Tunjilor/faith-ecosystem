@@ -955,6 +955,8 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "strength", label: "Bible Verses About Strength" },
       { slug: "psalm-91", label: "Psalm 91: God's Protection" },
+      { slug: "philippians-4-6", label: "Philippians 4:6: Do Not Be Anxious" },
+      { slug: "psalm-27", label: "Psalm 27: The Lord Is My Light" },
     ],
   },
 
@@ -1405,6 +1407,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "hope", label: "Bible Verses for Hope" },
       { slug: "bible-verses-for-depression", label: "Bible Verses for Depression" },
+      { slug: "psalm-139", label: "Psalm 139: You Have Searched Me" },
     ],
   },
 
@@ -1452,6 +1455,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "psalm-91", label: "Psalm 91: God's Protection" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "faith", label: "Bible Verses About Faith" },
+      { slug: "psalm-121", label: "Psalm 121: God Watches Over You" },
     ],
   },
 
@@ -1598,6 +1602,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "faith", label: "Bible Verses About Faith" },
       { slug: "hope", label: "Bible Verses for Hope" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "psalm-139", label: "Psalm 139: You Have Searched Me" },
     ],
   },
 
@@ -1691,6 +1696,134 @@ export const TOPICS: Record<string, TopicData> = {
     related: [
       { slug: "prayer-for-a-struggling-marriage", label: "A Prayer for a Struggling Marriage" },
       { slug: "faith", label: "Bible Verses About Faith" },
+      { slug: "hope", label: "Bible Verses for Hope" },
+    ],
+  },
+
+  "philippians-4-6": {
+    topic: "philippians-4-6",
+    label: "Peace",
+    title: "Philippians 4:6: Do Not Be Anxious",
+    description:
+      "Philippians 4:6-7 (WEB) in full, with a plain explanation of what it means and a written prayer for peace. Trade anxiety for the peace that guards your heart.",
+    intro:
+      "When worry has a grip on you — the racing thoughts, the what-ifs, the knot in your chest — Philippians 4:6-7 is the passage believers return to again and again. It doesn't just tell you to stop worrying; it tells you what to do instead, and what God promises in return. Here is the passage, what it actually means, and a prayer for trading anxiety for peace.",
+    verses: [],
+    passage: {
+      ref: "Philippians 4:6–7 (WEB)",
+      text: "In nothing be anxious, but in everything, by prayer and petition with thanksgiving, let your requests be made known to God. And the peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus.",
+    },
+    meaning:
+      "The first thing to notice is that this is a command with a method attached. \"In nothing be anxious\" could feel like an impossible order — you can't simply switch off worry — but Paul immediately tells you what to do with the anxiety: turn it into prayer. Every worry becomes a specific request, brought to God \"with thanksgiving,\" which keeps you mindful of what he's already done even while you ask for more.\n\nAnd notice what is promised — and what isn't. Paul doesn't promise that the thing you're anxious about will resolve the way you want. He promises something better and stranger: \"the peace of God, which surpasses all understanding.\" This is peace that doesn't make sense given your circumstances, a peace that \"guards\" your heart and mind like a soldier at a gate. Remember, too, that Paul wrote this from a prison cell — he wasn't theorizing about peace from a comfortable life, but practicing it in chains.",
+    reflection:
+      "The hard, hopeful truth of this passage is that the antidote to anxiety isn't getting your circumstances under control — it's handing them, one by one, to God. Anxiety keeps the problem circling in your own head; prayer moves it into God's hands. You may not feel the peace the instant you pray, and that's okay; the promise is that as you keep bringing each worry to God, his peace stands guard over you, holding the line your worry keeps trying to cross. Today, the invitation is simple: don't carry it — name it, and hand it over.",
+    prayer:
+      "Father, I'm carrying anxiety I can't seem to put down, and my mind keeps circling the same worries. Your Word tells me not to be anxious, but to bring everything to you — so here I am, handing you the exact thing weighing on me. Thank you that you already know it, and that you invite me to come with thanksgiving instead of only fear. Guard my heart and my mind with the peace that doesn't depend on my circumstances changing. Help me to leave this with you, and to keep coming back every time the worry returns. Amen.",
+    actionStep:
+      "Take the one worry that's loudest right now and turn it into a specific prayer — out loud or written down — beginning with one thing you're thankful for. Each time it comes circling back today, hand it to God again instead of rehearsing it.",
+    prayerCta: {
+      text: "Anxious about something specific right now? Tell Faith Companion what's weighing on you and get a calming, personal prayer written for it.",
+      buttonLabel: "Write a prayer for peace",
+    },
+    related: [
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "peace", label: "A Prayer for Peace" },
+      { slug: "isaiah-41-10", label: "Isaiah 41:10: Fear Not" },
+    ],
+  },
+
+  "psalm-121": {
+    topic: "psalm-121",
+    label: "God's Help",
+    title: "Psalm 121: God Watches Over You",
+    description:
+      "Psalm 121 (KJV) in full, with a plain explanation of what it means and a written prayer for protection and help. God your keeper, who never slumbers or sleeps.",
+    intro:
+      "Psalm 121 is a traveler's psalm — words pilgrims sang as they climbed toward Jerusalem, eyes on the unknown road ahead. It's the chapter to reach for when you feel small against what's in front of you, and you need to remember who is watching over you. Here is the full psalm, what it means, and a prayer for God's protection and help.",
+    verses: [],
+    passage: {
+      ref: "Psalm 121 (KJV)",
+      text: "1 I will lift up mine eyes unto the hills, from whence cometh my help.\n2 My help cometh from the LORD, which made heaven and earth.\n3 He will not suffer thy foot to be moved: he that keepeth thee will not slumber.\n4 Behold, he that keepeth Israel shall neither slumber nor sleep.\n5 The LORD is thy keeper: the LORD is thy shade upon thy right hand.\n6 The sun shall not smite thee by day, nor the moon by night.\n7 The LORD shall preserve thee from all evil: he shall preserve thy soul.\n8 The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+    },
+    meaning:
+      "The psalm opens with a question: the traveler lifts his eyes \"unto the hills\" — which in the ancient world were both where help might come from and where danger (bandits, pagan shrines) lurked. He answers his own uncertainty in verse 2: \"My help cometh from the LORD, which made heaven and earth.\" Not from the hills, not from himself — from the God who made it all.\n\nFrom there the psalm repeats one word again and again: keep. God is the one who \"keepeth\" you, and he \"shall neither slumber nor sleep\" — unlike the pagan gods who were thought to doze, the God of Israel never takes his eyes off you. The promises pile up: he keeps your foot from slipping, shades you from the sun, preserves you from evil, watches your \"going out and coming in.\" This isn't a promise that you'll never face hardship — it's a promise that through all of it, you are never unwatched and never alone. The God who keeps the whole universe is personally keeping you.",
+    reflection:
+      "There's deep comfort in that small, repeated word: kept. So much of life is outside your control — the road ahead, the people you love, the things you can't see coming. Psalm 121 doesn't tell you to control them; it tells you that the One watching over you never sleeps, never looks away, never clocks out. You can lie down tonight and actually rest, because the One keeping watch doesn't need to. Whatever your going out and coming in holds tomorrow, you go into it kept.",
+    prayer:
+      "LORD, you are my keeper, and today I need to remember it. You made heaven and earth, and yet you don't lose sight of me for a single moment. Watch over my going out and my coming in, and over the people I love when I can't be with them. Keep my foot from slipping when the road is uncertain, and guard my heart from the fears that creep in at night. Help me to lift my eyes from my worries to you, the One who never slumbers nor sleeps. I rest in your keeping. Amen.",
+    actionStep:
+      "Tonight, as you lie down, pray verse 4 over yourself and your family — \"he that keepeth me will neither slumber nor sleep\" — and consciously hand him the things you can't control while you sleep. Let him keep watch so you don't have to.",
+    prayerCta: {
+      text: "Facing an uncertain road or worried about someone you love? Tell Faith Companion what you're facing and get a personal prayer for protection and help written for it.",
+      buttonLabel: "Write a prayer for protection",
+    },
+    related: [
+      { slug: "prayer-for-protection-over-my-family", label: "A Prayer for Family Protection" },
+      { slug: "psalm-91", label: "Psalm 91: God's Protection" },
+      { slug: "faith", label: "Bible Verses About Faith" },
+    ],
+  },
+
+  "psalm-27": {
+    topic: "psalm-27",
+    label: "When You're Afraid",
+    title: "Psalm 27: The Lord Is My Light",
+    description:
+      "Psalm 27 (KJV) in full, with a plain explanation of what it means and a written prayer for confidence when afraid. The Lord is my light — whom shall I fear?",
+    intro:
+      "Psalm 27 is a defiant, hopeful song for frightening times — written by David when enemies pressed in and the outcome was anything but certain. It moves honestly between bold confidence and raw pleading, which is exactly why it rings true when you're afraid. Here is the full psalm, what it means, and a prayer for confidence when fear closes in.",
+    verses: [],
+    passage: {
+      ref: "Psalm 27 (KJV)",
+      text: "1 The LORD is my light and my salvation; whom shall I fear? the LORD is the strength of my life; of whom shall I be afraid?\n2 When the wicked, even mine enemies and my foes, came upon me to eat up my flesh, they stumbled and fell.\n3 Though an host should encamp against me, my heart shall not fear: though war should rise against me, in this will I be confident.\n4 One thing have I desired of the LORD, that will I seek after; that I may dwell in the house of the LORD all the days of my life, to behold the beauty of the LORD, and to enquire in his temple.\n5 For in the time of trouble he shall hide me in his pavilion: in the secret of his tabernacle shall he hide me; he shall set me up upon a rock.\n6 And now shall mine head be lifted up above mine enemies round about me: therefore will I offer in his tabernacle sacrifices of joy; I will sing, yea, I will sing praises unto the LORD.\n7 Hear, O LORD, when I cry with my voice: have mercy also upon me, and answer me.\n8 When thou saidst, Seek ye my face; my heart said unto thee, Thy face, LORD, will I seek.\n9 Hide not thy face far from me; put not thy servant away in anger: thou hast been my help; leave me not, neither forsake me, O God of my salvation.\n10 When my father and my mother forsake me, then the LORD will take me up.\n11 Teach me thy way, O LORD, and lead me in a plain path, because of mine enemies.\n12 Deliver me not over unto the will of mine enemies: for false witnesses are risen up against me, and such as breathe out cruelty.\n13 I had fainted, unless I had believed to see the goodness of the LORD in the land of the living.\n14 Wait on the LORD: be of good courage, and he shall strengthen thine heart: wait, I say, on the LORD.",
+    },
+    meaning:
+      "The psalm begins with a question that answers itself: \"The LORD is my light and my salvation; whom shall I fear?\" Fear shrinks when you measure the threat against the size of the One on your side. David isn't pretending there's no danger — he names whole armies encamped against him — but his confidence isn't in his circumstances; it's in God's presence.\n\nWhat's striking is how the psalm refuses to stay on the mountaintop. By the middle it turns to pleading: \"Hide not thy face from me... leave me not.\" This is honest faith — confidence and desperation in the same breath. And it ends not with the problem solved, but with a resolve: \"Wait on the LORD: be of good courage, and he shall strengthen thine heart.\" The courage Psalm 27 offers isn't the absence of fear; it's the decision to keep your eyes on God and wait, trusting that you will yet \"see the goodness of the LORD in the land of the living\" (v. 13).",
+    reflection:
+      "Psalm 27 gives you permission to be both brave and afraid at once. You don't have to manufacture fearlessness; you only have to keep turning your eyes back to your light and your salvation. Notice David's one deep desire (v. 4) — not the removal of his enemies, but nearness to God. Often the thing that steadies us in fear isn't getting answers, but getting close to the One who holds them. When fear says wait in dread, this psalm says wait in courage: he will strengthen your heart.",
+    prayer:
+      "LORD, you are my light and my salvation — when fear closes in, help me to remember that and to ask the only honest question left: whom shall I fear? You see exactly what I'm afraid of, the thing that feels too big for me. Be my stronghold; hide me in your shelter when I feel exposed, and do not hide your face from me. Strengthen my heart while I wait, and help me to believe that I will yet see your goodness in the land of the living. I will wait on you, and take courage. Amen.",
+    actionStep:
+      "When the fear spikes today, pray Psalm 27:1 back to God as a question — \"You are my light and my salvation; whom shall I fear?\" — and then sit for two minutes with verse 14: \"Wait on the LORD... he shall strengthen thine heart.\"",
+    prayerCta: {
+      text: "Facing something that frightens you right now? Tell Faith Companion what you're up against and get a personal prayer for courage written for it.",
+      buttonLabel: "Write a prayer for courage",
+    },
+    related: [
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "isaiah-41-10", label: "Isaiah 41:10: Fear Not" },
+      { slug: "strength", label: "Bible Verses About Strength" },
+    ],
+  },
+
+  "psalm-139": {
+    topic: "psalm-139",
+    label: "When You Feel Unseen",
+    title: "Psalm 139: You Have Searched Me",
+    description:
+      "Psalm 139 (KJV) in full, with a plain explanation of what it means and a written prayer for when you feel unseen or unknown. Fully known, and fully loved by God.",
+    intro:
+      "Psalm 139 is for the moments you feel invisible — overlooked, misunderstood, unknown even to the people closest to you. It answers that ache with one of the most staggering claims in all of Scripture: that the God of the universe knows you completely, down to the words on your tongue before you speak them. Here is the passage, what it means, and a prayer for when you feel unseen.",
+    verses: [],
+    passage: {
+      ref: "Psalm 139:1–18, 23–24 (KJV)",
+      text: "1 O LORD, thou hast searched me, and known me.\n2 Thou knowest my downsitting and mine uprising, thou understandest my thought afar off.\n3 Thou compassest my path and my lying down, and art acquainted with all my ways.\n4 For there is not a word in my tongue, but, lo, O LORD, thou knowest it altogether.\n5 Thou hast beset me behind and before, and laid thine hand upon me.\n6 Such knowledge is too wonderful for me; it is high, I cannot attain unto it.\n7 Whither shall I go from thy spirit? or whither shall I flee from thy presence?\n8 If I ascend up into heaven, thou art there: if I make my bed in hell, behold, thou art there.\n9 If I take the wings of the morning, and dwell in the uttermost parts of the sea;\n10 Even there shall thy hand lead me, and thy right hand shall hold me.\n11 If I say, Surely the darkness shall cover me; even the night shall be light about me.\n12 Yea, the darkness hideth not from thee; but the night shineth as the day: the darkness and the light are both alike to thee.\n13 For thou hast possessed my reins: thou hast covered me in my mother's womb.\n14 I will praise thee; for I am fearfully and wonderfully made: marvellous are thy works; and that my soul knoweth right well.\n15 My substance was not hid from thee, when I was made in secret, and curiously wrought in the lowest parts of the earth.\n16 Thine eyes did see my substance, yet being unperfect; and in thy book all my members were written, which in continuance were fashioned, when as yet there was none of them.\n17 How precious also are thy thoughts unto me, O God! how great is the sum of them!\n18 If I should count them, they are more in number than the sand: when I awake, I am still with thee.\n23 Search me, O God, and know my heart: try me, and know my thoughts:\n24 And see if there be any wicked way in me, and lead me in the way everlasting.",
+    },
+    meaning:
+      "David explores three overwhelming truths about God, and lets each one land. First, God knows him completely (vv. 1-6): every thought, every word, every movement — \"such knowledge is too wonderful for me.\" Second, God is everywhere (vv. 7-12): there is no place — not the heights, not the depths, not the darkness — where God's presence and hand don't reach him. Third, God made him on purpose (vv. 13-16): \"I am fearfully and wonderfully made,\" formed deliberately, with all his days written in God's book before one of them came to be.\n\nPut together, these aren't abstract doctrines — they are the cure for feeling unseen. To be fully known and still held, fully visible and still loved, is what every lonely heart longs for. (The psalm also has a raw middle section, not quoted here, where David pours out his anger at evil — proof that being fully known by God includes being honest with him about everything.) It closes where real intimacy always leads: \"Search me, O God, and know my heart\" — an invitation, from someone who has realized that being completely known by God is the safest thing in the world.",
+    reflection:
+      "There is a particular loneliness in feeling unknown — as if you could disappear and no one would really notice the real you. Psalm 139 speaks directly into it: before you were born, God knew you; right now, wherever you are, he sees you; and his thoughts toward you are \"more in number than the sand.\" You are not overlooked. You are not a stranger to the One who matters most. Today, let that reframe the ache — you are fully known, and at the very same time, fully wanted.",
+    prayer:
+      "Father, I feel unseen today, as if the real me goes unnoticed. And yet your Word says you have searched me and known me — every thought, every word, every hidden place. Thank you that there is nowhere I can go from your presence, and that even in the dark you are there, holding me with your right hand. Thank you that I am fearfully and wonderfully made — no accident, fully known and still fully loved. Quiet the lie that I am forgotten, and let me rest in being seen by you. Search me, know me, and lead me in the way everlasting. Amen.",
+    actionStep:
+      "Read Psalm 139:1-6 slowly and make it personal — \"You know my sitting down and my rising up; you understand my thoughts.\" Then name one part of you that feels unseen, and tell God that he already sees it and loves you still.",
+    prayerCta: {
+      text: "Feeling unseen or unknown in a specific season? Tell Faith Companion what's on your heart and get a gentle, personal prayer written for it.",
+      buttonLabel: "Write a prayer for me",
+    },
+    related: [
+      { slug: "bible-verses-for-loneliness", label: "Bible Verses for Loneliness" },
+      { slug: "prayer-for-when-you-feel-far-from-god", label: "A Prayer When You Feel Far from God" },
       { slug: "hope", label: "Bible Verses for Hope" },
     ],
   },
