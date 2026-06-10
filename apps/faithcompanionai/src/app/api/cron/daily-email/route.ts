@@ -1,24 +1,31 @@
 // src/app/api/cron/daily-email/route.ts
 //
-// Runs hourly via Vercel Cron (see vercel.json or crons config).
-// For each opted-in user whose local emailTime hour matches the current UTC
-// hour translated to their timezone, generates and sends a devotional email.
+// Runs hourly via Vercel Cron (vercel.json: "0 * * * *").
 //
-// Content rotation:
-//   Mon / Wed  → verse
-//   Tue / Thu  → devotional
-//   Fri / Sat / Sun → prayer
+// Each daily run sends ONE general devotional (verse + short reflection +
+// closing encouragement), generated once per day via the shared devotional
+// generator (the same openai-ts path as /tools/devotional) using public-domain
+// WEB/KJV scripture. The same body is mailed to every recipient that day —
+// opted-in users (at their chosen local hour) and email-only leads (once/day at
+// LEAD_EMAIL_HOUR_UTC). Only the per-recipient unsubscribe link differs.
+//
+// Generation is cached per day (one model call/day, reused on same-day re-runs);
+// sends are guarded per (day, hour) so a re-run never double-mails. If
+// generation fails or is empty, the run skips sending and logs it.
+//
+// Safety valve: set TEST_EMAIL_OVERRIDE to divert ALL daily devotional mail to
+// that single address (one review email/day at LEAD_EMAIL_HOUR_UTC, or any time
+// with ?force=1) so output can be reviewed before real subscribers receive it.
 
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { getOpenAI, getModel, extractOutputText } from "@/lib/openai-ts";
 import { sendDevotionalEmail } from "@/lib/email";
+import { generateDailyDevotional } from "@/lib/devotional";
 import {
   makeUnsubscribeToken,
   makeLeadUnsubscribeToken,
   hourInTimezone,
   parseEmailHour,
-  contentTypeForDate,
 } from "@/lib/email-prefs";
 
 export const runtime = "nodejs";
@@ -31,55 +38,11 @@ type DailyEmailUser = {
   emailTimezone: string;
 };
 
-// ── AI content generation ────────────────────────────────────────────────────
-
-const PROMPTS = {
-  verse: {
-    system:
-      "You are a Christian faith assistant. Write a short daily devotional email (150-200 words) built around one encouraging Bible verse. Format: start with the verse reference in bold, then the verse text in quotes, then a 2-3 sentence reflection. End with one short action step. No markdown headings.",
-    user: "Give me an encouraging Bible verse and reflection for today.",
-  },
-  devotional: {
-    system:
-      "You are a Christian devotional writer. Write a daily devotional (200-250 words) with a title, a Bible reference, a reflection paragraph, and a closing prayer (2-3 sentences). No markdown headings. Plain text only.",
-    user: "Write a daily devotional for today focused on faith and trust in God.",
-  },
-  prayer: {
-    system:
-      "You are a Christian prayer writer. Write a morning prayer (150-200 words) suitable for starting the day. Include 1-2 Bible references inline. Warm, personal tone. No markdown headings.",
-    user: "Write a morning prayer for strength, guidance, and gratitude.",
-  },
-} as const;
-
-async function generateContent(
-  type: "verse" | "devotional" | "prayer"
-): Promise<string> {
-  const client = getOpenAI();
-  const model = getModel();
-  const { system, user } = PROMPTS[type];
-
-  const resp = await client.responses.create({
-    model,
-    input: [
-      { role: "system", content: system },
-      { role: "user", content: user },
-    ],
-    temperature: 0.7,
-  });
-
-  return extractOutputText(resp);
-}
-
-// ── Subject lines ─────────────────────────────────────────────────────────────
-
-function subjectFor(type: "verse" | "devotional" | "prayer"): string {
-  const day = new Date().toLocaleDateString("en-US", { weekday: "long" });
-  if (type === "verse") return `Your ${day} verse — Faith Companion AI`;
-  if (type === "devotional") return `${day} devotional — Faith Companion AI`;
-  return `A prayer for your ${day}`;
-}
-
-// ── Cron handler ─────────────────────────────────────────────────────────────
+type Recipient = {
+  email: string;
+  unsubscribeUrl: string;
+  kind: "user" | "lead" | "test";
+};
 
 export async function GET(req: Request) {
   try {
@@ -107,137 +70,206 @@ export async function GET(req: Request) {
 
     const now = new Date();
     const currentUtcHour = now.getUTCHours();
+    const dayKey = now.toISOString().slice(0, 10); // "2025-04-20"
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://faithcompanionai.com";
 
-    // Email-only leads (no account, e.g. the quiz-3day-limit capture) have no
-    // per-user send time, so they get one daily send at a fixed UTC hour.
+    // Leads (no account) have no per-user send time → one daily send at a fixed UTC hour.
     const leadHour = Number.parseInt(process.env.LEAD_EMAIL_HOUR_UTC ?? "13", 10);
     const isLeadHour = currentUtcHour === leadHour;
 
-    // Opted-in users whose chosen local hour matches now.
-    const users = await db.user.findMany({
-      where: { emailOptIn: true },
-      select: { id: true, email: true, emailTime: true, emailTimezone: true },
-    });
+    // ── Safety valve ────────────────────────────────────────────────────────
+    const overrideTo = process.env.TEST_EMAIL_OVERRIDE?.trim();
+    const testMode = !!overrideTo;
+    const force = url.searchParams.get("force") === "1";
 
-    const due = (users as DailyEmailUser[]).filter((u) => {
-      const localHour = hourInTimezone(now, u.emailTimezone);
-      const wantedHour = parseEmailHour(u.emailTime);
-      return localHour === wantedHour;
-    });
+    // ── Build the recipient list + the per-run double-send guard key ─────────
+    let recipients: Recipient[] = [];
+    let sentGuardKey: string | null = null;
 
-    // Leads, deduped against any opted-in user email so no address is mailed twice.
-    let dueLeads: Array<{ email: string }> = [];
-    if (isLeadHour) {
-      const optedInEmails = new Set(
-        (users as DailyEmailUser[]).map((u) => u.email.toLowerCase())
-      );
-      const leads = (await db.lead.findMany({
-        select: { email: true },
-      })) as Array<{ email: string }>;
-      dueLeads = leads.filter((l) => !optedInEmails.has(l.email.toLowerCase()));
-    }
-
-    if (due.length === 0 && dueLeads.length === 0) {
-      return NextResponse.json({
-        ok: true,
-        sent: 0,
-        leadSent: 0,
-        skipped: users.length,
-        utcHour: currentUtcHour,
-        reason: "nothing due this hour",
+    if (testMode) {
+      // Only ever mail the override address. Once/day at leadHour, or any time with ?force=1.
+      if (!force && !isLeadHour) {
+        return NextResponse.json({
+          ok: true,
+          sent: 0,
+          testMode: true,
+          reason: `test mode: review email sends at LEAD_EMAIL_HOUR_UTC (${leadHour}:00 UTC), or add ?force=1`,
+          utcHour: currentUtcHour,
+        });
+      }
+      const token = makeLeadUnsubscribeToken(overrideTo!, sessionSecret);
+      recipients = [
+        {
+          email: overrideTo!,
+          kind: "test",
+          unsubscribeUrl: `${baseUrl}/api/email/unsubscribe?lead=${encodeURIComponent(
+            overrideTo!
+          )}&token=${token}`,
+        },
+      ];
+      // ?force bypasses the guard so reviews can be re-triggered on demand.
+      sentGuardKey = force ? null : `daily-devotional-sent:${dayKey}:test`;
+    } else {
+      // Opted-in users whose chosen local hour matches now.
+      const users = await db.user.findMany({
+        where: { emailOptIn: true },
+        select: { id: true, email: true, emailTime: true, emailTimezone: true },
       });
+
+      const due = (users as DailyEmailUser[]).filter((u) => {
+        return hourInTimezone(now, u.emailTimezone) === parseEmailHour(u.emailTime);
+      });
+
+      for (const u of due) {
+        const token = makeUnsubscribeToken(u.id, sessionSecret);
+        recipients.push({
+          email: u.email,
+          kind: "user",
+          unsubscribeUrl: `${baseUrl}/api/email/unsubscribe?uid=${u.id}&token=${token}`,
+        });
+      }
+
+      // Leads, once/day at leadHour, deduped against opted-in user emails.
+      if (isLeadHour) {
+        const optedInEmails = new Set(
+          (users as DailyEmailUser[]).map((u) => u.email.toLowerCase())
+        );
+        const leads = (await db.lead.findMany({
+          select: { email: true },
+        })) as Array<{ email: string }>;
+        for (const l of leads) {
+          if (optedInEmails.has(l.email.toLowerCase())) continue;
+          const token = makeLeadUnsubscribeToken(l.email, sessionSecret);
+          recipients.push({
+            email: l.email,
+            kind: "lead",
+            unsubscribeUrl: `${baseUrl}/api/email/unsubscribe?lead=${encodeURIComponent(
+              l.email
+            )}&token=${token}`,
+          });
+        }
+      }
+
+      if (recipients.length === 0) {
+        return NextResponse.json({
+          ok: true,
+          sent: 0,
+          reason: "nothing due this hour",
+          utcHour: currentUtcHour,
+        });
+      }
+
+      sentGuardKey = `daily-devotional-sent:${dayKey}:${currentUtcHour}`;
     }
 
-    // Determine content type from server's UTC day (representative — most users
-    // will be within ±12h so this is close enough for a daily rotation)
-    const contentType = contentTypeForDate(now, "UTC");
+    // ── Idempotency: skip if this (day, hour) cohort was already sent ─────────
+    if (sentGuardKey) {
+      const alreadySent = await db.aiCache.findUnique({
+        where: { cacheKey: sentGuardKey },
+        select: { id: true },
+      });
+      if (alreadySent) {
+        return NextResponse.json({
+          ok: true,
+          sent: 0,
+          reason: "already sent this run",
+          utcHour: currentUtcHour,
+        });
+      }
+    }
 
-    // Check for cached content for today
-    const dayKey = now.toISOString().slice(0, 10); // "2025-04-20"
-    const cacheKey = `daily-email:${contentType}:${dayKey}`;
-
-    let contentText: string;
+    // ── Generate (or reuse) today's ONE general devotional ───────────────────
+    const genKey = `daily-devotional:${dayKey}`;
+    let body: string;
 
     const cached = await db.aiCache.findUnique({
-      where: { cacheKey },
+      where: { cacheKey: genKey },
       select: { outputText: true },
     });
 
     if (cached) {
-      contentText = cached.outputText;
+      body = cached.outputText;
     } else {
-      contentText = await generateContent(contentType);
+      try {
+        body = await generateDailyDevotional();
+      } catch (err) {
+        console.error(`[daily-email] devotional generation failed for ${dayKey} — skipping send:`, err);
+        return NextResponse.json(
+          { ok: false, error: "generation_failed", sent: 0, dayKey },
+          { status: 200 }
+        );
+      }
+
+      if (!body) {
+        console.error(`[daily-email] devotional generation returned empty for ${dayKey} — skipping send.`);
+        return NextResponse.json(
+          { ok: false, error: "generation_empty", sent: 0, dayKey },
+          { status: 200 }
+        );
+      }
+
+      // Store the day's devotional so it's visible and reused (no regeneration).
       await db.aiCache.create({
         data: {
-          cacheKey,
-          kind: "daily-email",
+          cacheKey: genKey,
+          kind: "daily-devotional",
           translation: "",
-          inputJson: JSON.stringify({ contentType, dayKey }),
-          outputText: contentText,
+          inputJson: JSON.stringify({ dayKey }),
+          outputText: body,
         },
       });
     }
 
-    const subject = subjectFor(contentType);
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://faithcompanionai.com";
+    // ── Send the shared body; per-recipient unsubscribe link ─────────────────
+    const weekday = now.toLocaleDateString("en-US", { weekday: "long", timeZone: "UTC" });
+    const subject = `${weekday} devotional — Faith Companion AI`;
 
     let sent = 0;
     let failed = 0;
 
-    for (const user of due) {
+    for (const r of recipients) {
       try {
-        const token = makeUnsubscribeToken(user.id, sessionSecret);
-        const unsubscribeUrl = `${baseUrl}/api/email/unsubscribe?uid=${user.id}&token=${token}`;
-
         await sendDevotionalEmail({
-          to: user.email,
+          to: r.email,
           subject,
-          contentType,
-          contentText,
-          unsubscribeUrl,
+          contentType: "devotional",
+          contentText: body,
+          unsubscribeUrl: r.unsubscribeUrl,
         });
-
         sent++;
       } catch (err) {
-        console.error(`[daily-email] Failed for ${user.email}:`, err);
+        console.error(`[daily-email] send failed for ${r.email}:`, err);
         failed++;
       }
     }
 
-    let leadSent = 0;
-    let leadFailed = 0;
-
-    for (const lead of dueLeads) {
-      try {
-        const token = makeLeadUnsubscribeToken(lead.email, sessionSecret);
-        const unsubscribeUrl = `${baseUrl}/api/email/unsubscribe?lead=${encodeURIComponent(
-          lead.email
-        )}&token=${token}`;
-
-        await sendDevotionalEmail({
-          to: lead.email,
-          subject,
-          contentType,
-          contentText,
-          unsubscribeUrl,
-        });
-
-        leadSent++;
-      } catch (err) {
-        console.error(`[daily-email] Lead send failed for ${lead.email}:`, err);
-        leadFailed++;
-      }
+    // Mark this cohort sent (only when something succeeded, so a total failure can retry).
+    if (sentGuardKey && sent > 0) {
+      await db.aiCache
+        .create({
+          data: {
+            cacheKey: sentGuardKey,
+            kind: "daily-devotional-sent",
+            translation: "",
+            inputJson: JSON.stringify({
+              dayKey,
+              hour: currentUtcHour,
+              testMode,
+              recipients: recipients.length,
+            }),
+            outputText: `sent=${sent} failed=${failed}`,
+          },
+        })
+        .catch(() => {});
     }
 
     return NextResponse.json({
       ok: true,
       sent,
       failed,
-      leadSent,
-      leadFailed,
-      leadsConsidered: dueLeads.length,
-      skipped: users.length - due.length,
-      contentType,
+      testMode,
+      forced: force && testMode,
+      recipientCount: recipients.length,
       dayKey,
       utcHour: currentUtcHour,
     });
