@@ -70,6 +70,8 @@ export const TOPICS: Record<string, TopicData> = {
       buttonLabel: "Write a prayer for my anxiety",
     },
     related: [
+      { slug: "psalm-91", label: "Psalm 91: God's Protection" },
+      { slug: "jeremiah-29-11", label: "Jeremiah 29:11: Plans & Hope" },
       { slug: "prayer-for-a-sick-parent", label: "A Prayer for a Sick Parent" },
       { slug: "prayer-before-surgery", label: "A Prayer Before Surgery" },
       { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
@@ -121,6 +123,7 @@ export const TOPICS: Record<string, TopicData> = {
       buttonLabel: "Write a prayer for hope",
     },
     related: [
+      { slug: "jeremiah-29-11", label: "Jeremiah 29:11: Plans & Hope" },
       { slug: "faith", label: "Bible Verses About Faith" },
       { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
       { slug: "strength", label: "Bible Verses About Strength" },
@@ -172,6 +175,7 @@ export const TOPICS: Record<string, TopicData> = {
       buttonLabel: "Write a prayer for strength",
     },
     related: [
+      { slug: "psalm-91", label: "Psalm 91: God's Protection" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "peace", label: "A Prayer for Peace" },
       { slug: "healing", label: "Prayer for Healing" },
@@ -325,6 +329,7 @@ export const TOPICS: Record<string, TopicData> = {
       buttonLabel: "Write a prayer for peace",
     },
     related: [
+      { slug: "psalm-23", label: "Psalm 23: Comfort in the Valley" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "bible-verses-for-when-you-cant-sleep", label: "Verses for When You Can't Sleep" },
       { slug: "strength", label: "Bible Verses About Strength" },
@@ -427,6 +432,7 @@ export const TOPICS: Record<string, TopicData> = {
       buttonLabel: "Write a prayer for faith",
     },
     related: [
+      { slug: "jeremiah-29-11", label: "Jeremiah 29:11: Plans & Hope" },
       { slug: "hope", label: "Bible Verses for Hope" },
       { slug: "strength", label: "Bible Verses About Strength" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
@@ -476,6 +482,7 @@ export const TOPICS: Record<string, TopicData> = {
       buttonLabel: "Write a prayer for my situation",
     },
     related: [
+      { slug: "psalm-23", label: "Psalm 23: Comfort in the Valley" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "prayer-before-surgery", label: "A Prayer Before Surgery" },
       { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
@@ -574,6 +581,7 @@ export const TOPICS: Record<string, TopicData> = {
       buttonLabel: "Write a prayer for my grief",
     },
     related: [
+      { slug: "psalm-23", label: "Psalm 23: Comfort in the Valley" },
       { slug: "prayer-for-a-sick-parent", label: "A Prayer for a Sick Parent" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "prayer-before-surgery", label: "A Prayer Before Surgery" },
@@ -709,6 +717,7 @@ export const TOPICS: Record<string, TopicData> = {
       buttonLabel: "Write a prayer for rest",
     },
     related: [
+      { slug: "psalm-91", label: "Psalm 91: God's Protection" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "peace", label: "A Prayer for Peace" },
       { slug: "prayer-for-financial-provision", label: "A Prayer for Financial Provision" },
