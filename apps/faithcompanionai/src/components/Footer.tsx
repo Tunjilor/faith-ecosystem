@@ -5,6 +5,7 @@ const sitemapLinks = [
   { label: "Home", href: "/" },
   { label: "Dashboard", href: "/dashboard" },
   { label: "Tools", href: "/tools/verse" },
+  { label: "Prayer Library", href: "/topics" },
   { label: "Resources", href: "/resources" },
   { label: "Quiz", href: "/biblequiz" },
   { label: "Pricing", href: "/pricing" },

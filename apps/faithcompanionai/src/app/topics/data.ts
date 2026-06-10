@@ -1834,3 +1834,64 @@ export const TOPIC_SLUGS = Object.keys(TOPICS);
 export function getTopic(slug: string): TopicData | undefined {
   return TOPICS[slug];
 }
+
+/**
+ * Thematic grouping for the /topics hub page. Lists the non-passage topic pages
+ * by theme. Scripture passage pages (those with a `passage` field) are grouped
+ * automatically by the hub, and any topic NOT listed here still appears on the
+ * hub under a "More Topics" fallback — so a new page can never be orphaned, it
+ * just needs adding to the right group below.
+ */
+export const TOPIC_GROUPS: Array<{ title: string; slugs: string[] }> = [
+  {
+    title: "Anxiety, Fear & Peace",
+    slugs: ["anxiety", "peace", "bible-verses-for-when-you-cant-sleep"],
+  },
+  {
+    title: "Grief, Depression & Loneliness",
+    slugs: ["bible-verses-for-grief", "bible-verses-for-depression", "bible-verses-for-loneliness"],
+  },
+  {
+    title: "Health, Sickness & Hard Seasons",
+    slugs: [
+      "healing",
+      "prayer-for-a-sick-parent",
+      "prayer-before-surgery",
+      "prayer-for-a-friend-who-is-hurting",
+      "prayer-for-a-pregnant-friend-safe-delivery",
+    ],
+  },
+  {
+    title: "Marriage & Family",
+    slugs: [
+      "prayer-for-a-struggling-marriage",
+      "prayer-to-save-my-marriage",
+      "prayer-for-a-prodigal-child",
+      "prayer-for-a-loved-one-struggling-with-addiction",
+      "prayer-for-protection-over-my-family",
+      "prayer-for-the-first-day-of-school",
+    ],
+  },
+  {
+    title: "Work, Money & Decisions",
+    slugs: [
+      "prayer-for-a-job-interview",
+      "prayer-for-starting-a-new-job",
+      "prayer-for-financial-provision",
+      "what-does-the-bible-say-about-worry-and-money",
+      "prayer-for-guidance-when-facing-a-big-decision",
+    ],
+  },
+  {
+    title: "Forgiveness, Patience & Anger",
+    slugs: [
+      "forgiveness",
+      "prayer-for-patience-with-a-difficult-person",
+      "bible-verses-for-anger-and-self-control",
+    ],
+  },
+  {
+    title: "Faith, Hope & Strength",
+    slugs: ["faith", "hope", "strength", "gratitude", "prayer-for-when-you-feel-far-from-god"],
+  },
+];

@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: "/tools/bible-search",       priority: 0.9, freq: "weekly" },
     { route: "/tools/share-card",         priority: 0.9, freq: "weekly" },
     { route: "/biblequiz",                priority: 0.9, freq: "weekly" },
+    { route: "/topics",                   priority: 0.9, freq: "weekly" },
     { route: "/pricing",                  priority: 0.9, freq: "monthly" },
     { route: "/blog",                     priority: 0.85, freq: "weekly" },
     { route: "/resources",                priority: 0.85, freq: "weekly" },
