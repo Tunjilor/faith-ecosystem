@@ -4,7 +4,6 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SpiritualAssistant } from "@/components/SpiritualAssistant";
-import { ExitIntentModal } from "@/components/ExitIntentModal";
 import { ReferralTracker } from "@/components/ReferralTracker";
 import { UserProvider } from "@/context/UserContext";
 import Script from "next/script";
@@ -227,7 +226,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </main>
           <Footer />
           <SpiritualAssistant />
-          <ExitIntentModal />
           <ReferralTracker />
           <AddToHomeScreen />
           <ServiceWorkerRegistration />

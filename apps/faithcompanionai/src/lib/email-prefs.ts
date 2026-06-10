@@ -24,6 +24,33 @@ export function verifyUnsubscribeToken(
   }
 }
 
+/**
+ * Unsubscribe token for email-only leads (no user account). Keyed on the
+ * lowercased email so the link in their marketing email is stable.
+ */
+export function makeLeadUnsubscribeToken(email: string, secret: string): string {
+  return crypto
+    .createHmac("sha256", secret)
+    .update(`unsub-lead:${email.trim().toLowerCase()}`)
+    .digest("hex");
+}
+
+export function verifyLeadUnsubscribeToken(
+  email: string,
+  token: string,
+  secret: string
+): boolean {
+  try {
+    const expected = makeLeadUnsubscribeToken(email, secret);
+    const a = Buffer.from(token, "hex");
+    const b = Buffer.from(expected, "hex");
+    if (a.length !== b.length) return false;
+    return crypto.timingSafeEqual(a, b);
+  } catch {
+    return false;
+  }
+}
+
 /** Returns the hour (0-23) in a given IANA timezone for a given Date. */
 export function hourInTimezone(date: Date, tz: string): number {
   try {

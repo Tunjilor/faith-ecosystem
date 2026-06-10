@@ -5,6 +5,7 @@ import { useUser } from "@/context/UserContext";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import DenominationSelect, { readDenomination } from "@/components/DenominationSelect";
+import QuizLimitPrompt from "@/components/QuizLimitPrompt";
 
 type Choice = "A" | "B" | "C" | "D";
 type CategoryId = "general" | "women" | "parables" | "ai" | "theology" | "history";
@@ -221,7 +222,8 @@ export default function QuizClient() {
   // Completion state (replaces immediate redirect after submit)
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [completionScore, setCompletionScore] = useState<CompletionScore | null>(null);
-  const [softLimitReached, setSoftLimitReached] = useState(false);
+  // Single calm prompt shown once the 3 free quiz days are used up.
+  const [showLimitPrompt, setShowLimitPrompt] = useState(false);
 
   const [displayName, setDisplayName] = useState("");
   const [savingName, setSavingName] = useState(false);
@@ -355,7 +357,7 @@ export default function QuizClient() {
     setCurrentIndex(0);
     setQuizCompleted(false);
     setCompletionScore(null);
-    setSoftLimitReached(false);
+    setShowLimitPrompt(false);
     setShowAnswerGate(false);
     setReviewItems([]);
     setShowInlineReview(false);
@@ -398,7 +400,12 @@ export default function QuizClient() {
     setQuestions(dedupedQuestions);
     setCurrentIndex(0);
     if (attempt.usage) setUsage(attempt.usage);
-    if (attempt.softLimit) setSoftLimitReached(true);
+    // Single calm prompt: only once the 3 free quiz days (3 x 10 questions) are used up
+    // and the user is starting/returning for another quiz. Not a wall — quiz still loads.
+    const u = attempt.usage;
+    const usedAllFreeDays =
+      !!u && (u.totalUsedQuestions > u.totalLimitQuestions || u.daysUsed > u.daysLimit);
+    if (!premium && usedAllFreeDays) setShowLimitPrompt(true);
     setBusy(false);
     setTimeout(() => quizAreaRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
   }
@@ -412,7 +419,7 @@ export default function QuizClient() {
     setCurrentIndex(0);
     setQuizCompleted(false);
     setCompletionScore(null);
-    setSoftLimitReached(false);
+    setShowLimitPrompt(false);
     setShowAnswerGate(false);
 
     const reset = await postJSON("/api/quiz/reset", { attemptId: prevAttemptId });
@@ -474,6 +481,11 @@ export default function QuizClient() {
           usage={usage}
           onClose={() => setHardStop(false)}
         />
+      )}
+
+      {/* Single calm prompt — fires only after the 3 free quiz days are used up */}
+      {showLimitPrompt && !premium && (
+        <QuizLimitPrompt signedIn={signedIn} onClose={() => setShowLimitPrompt(false)} />
       )}
 
       <div className="mx-auto w-full max-w-5xl px-4 py-10">
@@ -579,19 +591,20 @@ export default function QuizClient() {
             )}
           </div>
 
-          {/* Usage tracker — only for free/guest users when we have usage data */}
+          {/* Usage tracker — free/guest users; reflects the real 3 quiz days × 10 questions model */}
           {usageDisplay && (
             <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-white/10 pt-3 text-xs text-white/50">
               <span>
-                Free trial:{" "}
-                <span className={classNames("font-semibold", usageDisplay.quizzesLeft <= 1 ? "text-orange-400" : "text-white/70")}>
-                  {usageDisplay.quizzesLeft} quiz{usageDisplay.quizzesLeft !== 1 ? "zes" : ""} remaining
-                </span>
+                Free plan:{" "}
+                <span className={classNames("font-semibold", usageDisplay.daysLeft <= 1 ? "text-orange-400" : "text-white/70")}>
+                  {Math.max(0, usageDisplay.daysLeft)} of {usage!.daysLimit} quiz {usageDisplay.daysLeft === 1 ? "day" : "days"} left
+                </span>{" "}
+                <span className="text-white/40">· 10 questions each</span>
               </span>
               <span>
-                Days:{" "}
-                <span className={classNames("font-semibold", usageDisplay.daysLeft <= 1 ? "text-orange-400" : "text-white/70")}>
-                  {usageDisplay.daysLeft} of {usage!.daysLimit} left
+                Today:{" "}
+                <span className="font-semibold text-white/70">
+                  {usage!.todayUsedQuestions}/{usage!.todayLimitQuestions} questions
                 </span>
               </span>
               <Link href="/pricing" className="ml-auto text-orange-400 underline underline-offset-2 hover:text-orange-300">
@@ -697,22 +710,6 @@ export default function QuizClient() {
                       Continue as Guest
                     </button>
                   </div>
-                </div>
-              )}
-
-              {/* Soft limit message for registered free users */}
-              {signedIn && !premium && softLimitReached && (
-                <div className="rounded-2xl border border-orange-500/20 bg-orange-500/10 p-5">
-                  <div className="font-semibold text-orange-100">You&apos;ve completed your free questions!</div>
-                  <p className="mt-1 text-sm text-orange-200/80">
-                    Go Premium for unlimited questions, all categories, and your personal faith journal.
-                  </p>
-                  <Link
-                    href="/pricing"
-                    className="mt-3 inline-block rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-5 py-2.5 text-sm font-semibold text-white hover:opacity-95"
-                  >
-                    Upgrade to Premium
-                  </Link>
                 </div>
               )}
 
@@ -839,20 +836,13 @@ export default function QuizClient() {
             </div>
           ) : (
             <div className="space-y-5">
-              {/* Soft upgrade prompt — shown at question 8 and 9 (2 or 1 left) */}
+              {/* Gentle progress note near the end of a quiz (no upgrade push — the single
+                  upgrade/devotional prompt lives in QuizLimitPrompt, shown only after 3 quiz days) */}
               {showSoftPrompt && (
-                <div className="rounded-2xl border border-orange-500/20 bg-orange-500/10 px-4 py-3 text-sm text-orange-100">
-                  <div className="font-semibold">
-                    {questionsLeftInQuiz === 1
-                      ? "Last question — this is your daily free quiz"
-                      : `${questionsLeftInQuiz} questions left in today's free quiz`}
-                  </div>
-                  <div className="mt-1 text-orange-200/80">
-                    Upgrade to Premium for unlimited daily quizzes across all categories.{" "}
-                    <Link href="/pricing" className="font-semibold underline underline-offset-2 hover:text-white">
-                      Upgrade now →
-                    </Link>
-                  </div>
+                <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/70">
+                  {questionsLeftInQuiz === 1
+                    ? "Last question of this quiz."
+                    : `${questionsLeftInQuiz} questions left in this quiz.`}
                 </div>
               )}
 

@@ -15,6 +15,7 @@ import { getOpenAI, getModel, extractOutputText } from "@/lib/openai-ts";
 import { sendDevotionalEmail } from "@/lib/email";
 import {
   makeUnsubscribeToken,
+  makeLeadUnsubscribeToken,
   hourInTimezone,
   parseEmailHour,
   contentTypeForDate,
@@ -22,6 +23,13 @@ import {
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+type DailyEmailUser = {
+  id: string;
+  email: string;
+  emailTime: string;
+  emailTimezone: string;
+};
 
 // ── AI content generation ────────────────────────────────────────────────────
 
@@ -100,30 +108,43 @@ export async function GET(req: Request) {
     const now = new Date();
     const currentUtcHour = now.getUTCHours();
 
-    // Find all opted-in users
+    // Email-only leads (no account, e.g. the quiz-3day-limit capture) have no
+    // per-user send time, so they get one daily send at a fixed UTC hour.
+    const leadHour = Number.parseInt(process.env.LEAD_EMAIL_HOUR_UTC ?? "13", 10);
+    const isLeadHour = currentUtcHour === leadHour;
+
+    // Opted-in users whose chosen local hour matches now.
     const users = await db.user.findMany({
       where: { emailOptIn: true },
       select: { id: true, email: true, emailTime: true, emailTimezone: true },
     });
 
-    if (users.length === 0) {
-      return NextResponse.json({ ok: true, sent: 0, skipped: 0, reason: "no opted-in users" });
-    }
-
-    // Filter to users whose local hour matches their chosen emailTime hour
-    const due = users.filter((u) => {
+    const due = (users as DailyEmailUser[]).filter((u) => {
       const localHour = hourInTimezone(now, u.emailTimezone);
       const wantedHour = parseEmailHour(u.emailTime);
       return localHour === wantedHour;
     });
 
-    if (due.length === 0) {
+    // Leads, deduped against any opted-in user email so no address is mailed twice.
+    let dueLeads: Array<{ email: string }> = [];
+    if (isLeadHour) {
+      const optedInEmails = new Set(
+        (users as DailyEmailUser[]).map((u) => u.email.toLowerCase())
+      );
+      const leads = (await db.lead.findMany({
+        select: { email: true },
+      })) as Array<{ email: string }>;
+      dueLeads = leads.filter((l) => !optedInEmails.has(l.email.toLowerCase()));
+    }
+
+    if (due.length === 0 && dueLeads.length === 0) {
       return NextResponse.json({
         ok: true,
         sent: 0,
+        leadSent: 0,
         skipped: users.length,
         utcHour: currentUtcHour,
-        reason: "no users due this hour",
+        reason: "nothing due this hour",
       });
     }
 
@@ -183,10 +204,38 @@ export async function GET(req: Request) {
       }
     }
 
+    let leadSent = 0;
+    let leadFailed = 0;
+
+    for (const lead of dueLeads) {
+      try {
+        const token = makeLeadUnsubscribeToken(lead.email, sessionSecret);
+        const unsubscribeUrl = `${baseUrl}/api/email/unsubscribe?lead=${encodeURIComponent(
+          lead.email
+        )}&token=${token}`;
+
+        await sendDevotionalEmail({
+          to: lead.email,
+          subject,
+          contentType,
+          contentText,
+          unsubscribeUrl,
+        });
+
+        leadSent++;
+      } catch (err) {
+        console.error(`[daily-email] Lead send failed for ${lead.email}:`, err);
+        leadFailed++;
+      }
+    }
+
     return NextResponse.json({
       ok: true,
       sent,
       failed,
+      leadSent,
+      leadFailed,
+      leadsConsidered: dueLeads.length,
       skipped: users.length - due.length,
       contentType,
       dayKey,

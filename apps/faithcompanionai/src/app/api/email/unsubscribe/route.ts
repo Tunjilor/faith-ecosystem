@@ -1,7 +1,7 @@
 // src/app/api/email/unsubscribe/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { verifyUnsubscribeToken } from "@/lib/email-prefs";
+import { verifyUnsubscribeToken, verifyLeadUnsubscribeToken } from "@/lib/email-prefs";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -9,13 +9,24 @@ export const dynamic = "force-dynamic";
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const uid = searchParams.get("uid") ?? "";
+  const leadEmail = searchParams.get("lead") ?? "";
   const token = searchParams.get("token") ?? "";
 
   const secret = process.env.SESSION_SECRET;
-  if (!secret || !uid || !token) {
+  if (!secret || !token || (!uid && !leadEmail)) {
     return htmlResponse("Invalid unsubscribe link.", false);
   }
 
+  // Email-only lead (no account): verify token, then remove from the send list.
+  if (leadEmail) {
+    if (!verifyLeadUnsubscribeToken(leadEmail, token, secret)) {
+      return htmlResponse("This unsubscribe link is invalid or has expired.", false);
+    }
+    await db.lead.deleteMany({ where: { email: leadEmail.trim().toLowerCase() } });
+    return htmlResponse("You have been unsubscribed from the daily devotional email.", true);
+  }
+
+  // Registered user.
   if (!verifyUnsubscribeToken(uid, token, secret)) {
     return htmlResponse("This unsubscribe link is invalid or has expired.", false);
   }
