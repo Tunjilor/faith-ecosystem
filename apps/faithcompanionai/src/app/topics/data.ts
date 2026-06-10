@@ -71,10 +71,10 @@ export const TOPICS: Record<string, TopicData> = {
     },
     related: [
       { slug: "isaiah-41-10", label: "Isaiah 41:10: Fear Not" },
+      { slug: "bible-verses-for-depression", label: "Bible Verses for Depression" },
       { slug: "psalm-91", label: "Psalm 91: God's Protection" },
       { slug: "romans-8-28", label: "Romans 8:28: All Things for Good" },
       { slug: "jeremiah-29-11", label: "Jeremiah 29:11: Plans & Hope" },
-      { slug: "joshua-1-9", label: "Joshua 1:9: Be Strong & Courageous" },
     ],
   },
 
@@ -283,6 +283,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "prayer-for-a-struggling-marriage", label: "A Prayer for a Struggling Marriage" },
       { slug: "peace", label: "A Prayer for Peace" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "prayer-for-patience-with-a-difficult-person", label: "A Prayer for Patience" },
     ],
   },
 
@@ -335,6 +336,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "bible-verses-for-when-you-cant-sleep", label: "Verses for When You Can't Sleep" },
       { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "prayer-for-patience-with-a-difficult-person", label: "A Prayer for Patience" },
     ],
   },
 
@@ -438,6 +440,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "hope", label: "Bible Verses for Hope" },
       { slug: "strength", label: "Bible Verses About Strength" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "prayer-for-guidance-when-facing-a-big-decision", label: "A Prayer for Guidance" },
     ],
   },
 
@@ -488,6 +491,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "prayer-before-surgery", label: "A Prayer Before Surgery" },
       { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+      { slug: "prayer-for-a-friend-who-is-hurting", label: "A Prayer for a Hurting Friend" },
     ],
   },
 
@@ -634,6 +638,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "prayer-for-financial-provision", label: "A Prayer for Financial Provision" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "prayer-for-starting-a-new-job", label: "A Prayer for Starting a New Job" },
     ],
   },
 
@@ -679,6 +684,8 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "prayer-for-a-job-interview", label: "A Prayer for a Job Interview" },
       { slug: "gratitude", label: "A Prayer for Gratitude" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "prayer-for-guidance-when-facing-a-big-decision", label: "A Prayer for Guidance" },
+      { slug: "what-does-the-bible-say-about-worry-and-money", label: "What the Bible Says on Worry & Money" },
     ],
   },
 
@@ -976,6 +983,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
       { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "bible-verses-for-depression", label: "Bible Verses for Depression" },
     ],
   },
 
@@ -1008,6 +1016,293 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "strength", label: "Bible Verses About Strength" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "prayer-before-surgery", label: "A Prayer Before Surgery" },
+    ],
+  },
+
+  "prayer-for-a-friend-who-is-hurting": {
+    topic: "prayer-for-a-friend-who-is-hurting",
+    label: "a Hurting Friend",
+    title: "A Prayer for a Friend Who Is Hurting",
+    description:
+      "A prayer for a friend who is hurting, with Bible verses on comfort and one small step. When someone you love is in pain and you don't know what to say.",
+    intro:
+      "When someone you love is hurting — grieving, frightened, falling apart — it's easy to feel helpless, afraid you'll say the wrong thing or do too little. You don't have to fix their pain to love them well; sometimes the most faithful thing is simply to show up and to pray. Here are a few verses to steady you, a prayer for your hurting friend, and one small thing you can do today.",
+    verses: [
+      {
+        ref: "Galatians 6:2 (WEB)",
+        text: "Bear one another's burdens, and so fulfill the law of Christ.",
+        context: "Praying for a hurting friend is one of the most concrete ways to help carry a weight they can't carry alone.",
+      },
+      {
+        ref: "Romans 12:15 (WEB)",
+        text: "Rejoice with those who rejoice. Weep with those who weep.",
+        context: "Sometimes love isn't fixing the pain — it's being willing to sit down and grieve alongside it.",
+      },
+      {
+        ref: "2 Corinthians 1:3–4 (WEB)",
+        text: "Blessed be the God and Father of our Lord Jesus Christ, the Father of mercies and God of all comfort, who comforts us in all our affliction, that we may be able to comfort those who are in any affliction, through the comfort with which we ourselves are comforted by God.",
+        context: "The comfort God has given you in your own hard seasons becomes the comfort you can carry to your friend.",
+      },
+      {
+        ref: "Proverbs 17:17 (KJV)",
+        text: "A friend loveth at all times, and a brother is born for adversity.",
+        context: "Real friendship proves itself most in the hard seasons, not the easy ones — showing up is the point.",
+      },
+    ],
+    reflection:
+      "When you love someone who is hurting, the pressure to say something profound can actually get in the way. Most people in pain don't need answers; they need presence — someone who keeps showing up, listens without rushing to fix, and quietly keeps praying when they can't pray for themselves.\n\nYou cannot carry your friend's pain for them, but you can carry it to God on their behalf, and you can make sure they don't walk through it alone. That is not a small thing. It may be the most Christlike thing you do this week.",
+    prayer:
+      "Father, my friend is hurting, and I feel so powerless to help. You know exactly what they're carrying — the pain I can see and the parts they can't even put into words. Draw near to them in a way I never could, and let them feel, even faintly, that they are not alone. Give me wisdom to know when to speak and when to simply sit beside them, and the courage to keep showing up even when it's uncomfortable. Comfort them with the comfort that only you can give, and use me however you can to carry a little of the weight. Amen.",
+    actionStep:
+      "Don't wait until you have the perfect words — send your friend one short, honest message today: \"I'm thinking of you and praying for you, and I'm not going anywhere.\" Then follow it with something concrete: a meal, a visit, or a quiet hour just being there.",
+    prayerCta: {
+      text: "Walking with a specific friend through something hard? Tell Faith Companion what they're facing and get a personal prayer written for them.",
+      buttonLabel: "Write a prayer for my friend",
+    },
+    related: [
+      { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+      { slug: "prayer-for-a-sick-parent", label: "A Prayer for a Sick Parent" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+    ],
+  },
+
+  "bible-verses-for-depression": {
+    topic: "bible-verses-for-depression",
+    label: "Depression",
+    title: "Bible Verses for Depression",
+    description:
+      "Compassionate Bible verses for depression and feeling hopeless, a gentle written prayer, and one small step. God is near to the brokenhearted — you are not alone.",
+    intro:
+      "If you're reading this while everything feels heavy and gray, please know two things: you are not alone, and you are not failing at faith because you feel this way. Depression can make God feel distant and hope feel impossible — yet Scripture is full of honest, hurting people God never once let go of. Here are a few verses to sit with, a prayer for when you can't find words, and a gentle next step.",
+    verses: [
+      {
+        ref: "Psalm 34:18 (KJV)",
+        text: "The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.",
+        context: "When you feel farthest from everything, Scripture says God is in fact nearest — drawn to the broken, not repelled by them.",
+      },
+      {
+        ref: "Psalm 42:11 (WEB)",
+        text: "Why are you in despair, my soul? Why are you disturbed within me? Hope in God! For I shall still praise him, the saving help of my countenance, and my God.",
+        context: "The psalmist talks honestly to his own downcast soul — proof that faith and depression can occupy the same heart.",
+      },
+      {
+        ref: "Isaiah 43:2 (WEB)",
+        text: "When you pass through the waters, I will be with you, and through the rivers, they will not overflow you.",
+        context: "God doesn't promise you'll skip the deep water — only that you will not go under it alone.",
+      },
+      {
+        ref: "Matthew 11:28 (WEB)",
+        text: "Come to me, all you who labor and are heavily burdened, and I will give you rest.",
+        context: "The invitation stands even when you have nothing to bring to it but exhaustion.",
+      },
+    ],
+    reflection:
+      "Depression is not a sign of weak faith or a sin to repent of. Some of the most faithful people in the Bible — Elijah under the broom tree, David in the Psalms — prayed their way through seasons of real darkness. These verses are not meant to rush you out of how you feel or tie a bow on genuine pain. They're here to remind you, gently, that God is near to the brokenhearted even when he feels absent, and that this heaviness is not the end of your story.\n\nAnd please hear this clearly: reaching out for help is not a lack of faith — it is a brave and faithful step. If the darkness is deep, tell a trusted friend, a pastor, or a counselor, and if you ever feel unsafe or in crisis, please reach out to a crisis line or someone who can be with you today. God so often sends his help through other people; letting them in is part of how he carries you.",
+    prayer:
+      "God, I don't have many words today, and even praying feels like effort. You see the heaviness I'm carrying — the hope that feels out of reach, the days that all blur together. Thank you that you are near to the brokenhearted, that you have not turned away from me even though I feel far from you. Hold me through this, and give me just enough light for the next small step. Send people to help carry what I cannot carry alone, and remind me, gently, that your mercies are still new every morning. Amen.",
+    actionStep:
+      "Do one small, kind thing for yourself today — a glass of water, a short walk, opening a window — and tell one person you trust how you're really doing. You don't need the right words; \"I'm struggling\" is enough to start.",
+    prayerCta: {
+      text: "Carrying something heavy you can't put into words? Tell Faith Companion as much or as little as you want, and get a gentle, personal prayer written for right where you are.",
+      buttonLabel: "Write a prayer for me",
+    },
+    related: [
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "romans-8-28", label: "Romans 8:28: All Things for Good" },
+    ],
+  },
+
+  "prayer-for-guidance-when-facing-a-big-decision": {
+    topic: "prayer-for-guidance-when-facing-a-big-decision",
+    label: "Guidance",
+    title: "A Prayer for Guidance in Big Decisions",
+    description:
+      "A prayer for guidance when facing a big decision, with Bible verses on God's wisdom and one small step. Seek God's direction when the path forward isn't clear.",
+    intro:
+      "A big decision has a way of stealing your sleep — the weighing of options, the fear of getting it wrong, the wish that God would just write the answer in the sky. He rarely does that, but he does promise to guide those who ask. Here are a few verses on God's direction, a prayer for wisdom, and one small step for when the path isn't clear.",
+    verses: [
+      {
+        ref: "Proverbs 3:5–6 (KJV)",
+        text: "Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.",
+        context: "Guidance begins not with more analysis but with trusting God more than your own ability to figure it out.",
+      },
+      {
+        ref: "James 1:5 (WEB)",
+        text: "But if any of you lacks wisdom, let him ask of God, who gives to all liberally and without reproach, and it will be given to him.",
+        context: "God is not stingy with wisdom, and he doesn't shame you for not having it — he simply invites you to ask.",
+      },
+      {
+        ref: "Psalm 32:8 (WEB)",
+        text: "I will instruct you and teach you in the way which you shall go. I will counsel you with my eye on you.",
+        context: "God promises personal, attentive guidance — not a vague hope that things work out.",
+      },
+      {
+        ref: "Proverbs 16:9 (WEB)",
+        text: "A man's heart plans his course, but Yahweh directs his steps.",
+        context: "You can plan wisely and still hold the outcome loosely, trusting God to direct the steps you can't see.",
+      },
+    ],
+    reflection:
+      "We often want guidance to arrive as certainty — the whole map before we'll take a step. But Scripture describes guidance more like a lamp for the feet than a floodlight on the horizon: enough light for the next step, given as you walk. That means seeking God in a decision is less about extracting a secret answer and more about surrendering the outcome to a God you trust.\n\nDo the honest work — pray, seek counsel, weigh it wisely — and then move forward in faith, trusting that a God who promised to direct your steps will not let a surrendered heart wander too far. You don't have to see the whole path to take the next faithful step on it.",
+    prayer:
+      "Father, I have a decision in front of me that feels too big to get wrong, and I keep turning it over without peace. You have promised wisdom to anyone who asks, so I'm asking — give me clarity where I'm confused and calm where I'm anxious. Help me to trust you more than my own understanding, and to want your will more than I want a particular outcome. Direct my steps even when I can't see the whole path, and guard me from deciding out of fear. I place this choice, and its results, in your hands. Amen.",
+    actionStep:
+      "Write the decision at the top of a page, list what you genuinely know and what you don't, and pray James 1:5 over it: \"God, I lack wisdom — please give it.\" Then ask one wise, trusted person for their honest input this week before you decide.",
+    prayerCta: {
+      text: "Facing a specific decision right now? Tell Faith Companion what you're weighing and get a personal prayer for guidance written for your situation.",
+      buttonLabel: "Write a prayer for guidance",
+    },
+    related: [
+      { slug: "faith", label: "Bible Verses About Faith" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "prayer-for-financial-provision", label: "A Prayer for Financial Provision" },
+    ],
+  },
+
+  "prayer-for-patience-with-a-difficult-person": {
+    topic: "prayer-for-patience-with-a-difficult-person",
+    label: "Patience",
+    title: "A Prayer for Patience with Hard People",
+    description:
+      "A prayer for patience with a difficult person, with Bible verses on patience and one small step. Find grace for the relationship that keeps testing yours.",
+    intro:
+      "Some people seem placed in our lives to wear down our patience — a coworker, a relative, a neighbor who pushes every button you have. You can't always change them, and you may not be able to avoid them, but you can ask God to change how you respond. Here are a few verses on patience, a prayer for the relationship that keeps testing yours, and one small step.",
+    verses: [
+      {
+        ref: "Ephesians 4:2 (WEB)",
+        text: "with all lowliness and humility, with patience, bearing with one another in love;",
+        context: "\"Bearing with\" is honest language — some people we love by enduring them patiently, not by enjoying them.",
+      },
+      {
+        ref: "Proverbs 15:1 (KJV)",
+        text: "A soft answer turneth away wrath: but grievous words stir up anger.",
+        context: "Your response, not their behavior, is the part you actually control — and the part God can use.",
+      },
+      {
+        ref: "1 Corinthians 13:4 (KJV)",
+        text: "Charity suffereth long, and is kind; charity envieth not; charity vaunteth not itself, is not puffed up.",
+        context: "Love is literally defined as long-suffering — patience isn't extra credit, it's the heart of love.",
+      },
+      {
+        ref: "James 1:19 (WEB)",
+        text: "let every man be swift to hear, slow to speak, and slow to anger;",
+        context: "A simple, hard discipline to carry into the next tense conversation.",
+      },
+    ],
+    reflection:
+      "Patience with a difficult person rarely arrives as a warm feeling. More often it's a decision, made in the moment, to respond with grace instead of reacting with frustration — and it usually has to be made again the next day. The good news is that this is exactly the kind of growth God specializes in.\n\nIt helps to remember how patiently God bears with you. The person testing your patience is also someone he loves, someone he is patient with. Praying for them — genuinely, not through gritted teeth — slowly changes your own heart, even when it doesn't change theirs. You may not get an easier person; you can get a steadier you.",
+    prayer:
+      "Lord, you know exactly who I'm thinking of, and how quickly my patience runs out with them. I confess the irritation and the unkind thoughts I've been carrying. Thank you for how patiently you bear with me, every day, without keeping score. Give me that same patience — a soft answer when I want a sharp one, and the grace to be slow to anger. Where I cannot change this person, change me, and help me to see them the way you do. Amen.",
+    actionStep:
+      "Before your next interaction with them, pray one sentence: \"God, give me patience and a soft answer here.\" Then this week, ask God to bless that person by name — not because they've earned it, but because praying for someone slowly softens how you see them.",
+    prayerCta: {
+      text: "Struggling with a specific difficult relationship? Tell Faith Companion what's going on and get a personal prayer for patience written for it.",
+      buttonLabel: "Write a prayer for patience",
+    },
+    related: [
+      { slug: "forgiveness", label: "What the Bible Says About Forgiveness" },
+      { slug: "peace", label: "A Prayer for Peace" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+    ],
+  },
+
+  "prayer-for-starting-a-new-job": {
+    topic: "prayer-for-starting-a-new-job",
+    label: "a New Job",
+    title: "A Prayer for Starting a New Job",
+    description:
+      "A prayer for starting a new job and the nervous first day, with Bible verses and one small step. Walk into the new role trusting God goes in with you.",
+    intro:
+      "The first day at a new job carries its own particular nerves — new faces and systems, the quiet fear of not measuring up, the pressure to prove you belong. Whether you're excited, terrified, or both, you don't walk in alone. Here are a few verses for the new chapter, a prayer for your first days, and one small step to settle your heart.",
+    verses: [
+      {
+        ref: "Colossians 3:23 (KJV)",
+        text: "And whatsoever ye do, do it heartily, as to the Lord, and not unto men.",
+        context: "On day one, your truest boss is God — which quietly frees you from performing for everyone watching.",
+      },
+      {
+        ref: "Joshua 1:9 (KJV)",
+        text: "Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.",
+        context: "A new building, new people, new expectations — and God walks through the door with you.",
+      },
+      {
+        ref: "Philippians 1:6 (KJV)",
+        text: "Being confident of this very thing, that he which hath begun a good work in you will perform it until the day of Jesus Christ.",
+        context: "God is committed to finishing what he starts in you — and that includes this new chapter.",
+      },
+      {
+        ref: "Ecclesiastes 9:10 (WEB)",
+        text: "Whatever your hand finds to do, do it with your might.",
+        context: "Show up fully to the small, unglamorous tasks of the first weeks — faithfulness in little builds real trust.",
+      },
+    ],
+    reflection:
+      "The impostor feeling that shadows a new job — \"they'll figure out I don't belong here\" — loses much of its power when you remember who you're actually working for. You don't have to earn your worth from a new manager or a new team; your worth is already settled in God, which frees you to learn slowly, ask questions, and make the inevitable first-week mistakes without spiraling.\n\nDo your work heartily, as to the Lord. Be quick to listen and slow to assume. And trust that the same God who opened this door is committed to finishing the good work he's begun in you — one ordinary day at a time.",
+    prayer:
+      "Father, thank you for this new job — for the open door and the provision it represents. You know the nerves I'm carrying into the first day: the fear of falling short, of not fitting in, of being found out. Steady my heart with the truth that my worth is secure in you, not in my performance. Help me to work heartily as for you, to be humble and teachable, and to treat the people around me with kindness. Go with me through that door, and let me be a quiet light in this new place. Amen.",
+    actionStep:
+      "The night before — or the morning of — your first day, pray Joshua 1:9 over yourself: \"You are with me wherever I go.\" Then choose one simple goal for day one, like learning three coworkers' names, instead of trying to prove yourself all at once.",
+    prayerCta: {
+      text: "Starting a specific new role? Tell Faith Companion about it and get a personal prayer for your first day written for you.",
+      buttonLabel: "Write a prayer for my new job",
+    },
+    related: [
+      { slug: "prayer-for-a-job-interview", label: "A Prayer for a Job Interview" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "strength", label: "Bible Verses About Strength" },
+    ],
+  },
+
+  "what-does-the-bible-say-about-worry-and-money": {
+    topic: "what-does-the-bible-say-about-worry-and-money",
+    label: "Money Worries",
+    title: "What the Bible Says on Worry & Money",
+    description:
+      "What does the Bible say about worry and money? Key WEB/KJV verses, a plain reflection, and a written prayer for financial worry — trusting God over fear.",
+    intro:
+      "Few things stir up worry like money — the bills, the shortfall, the comparison, the sense that it's never quite enough. The Bible has a great deal to say about both, and it's surprisingly freeing: it doesn't shame you for needing money, but it does invite you out from under its weight. Here is what Scripture teaches about worry and money, plus a prayer for when the numbers won't stop circling in your head.",
+    verses: [
+      {
+        ref: "Matthew 6:24 (WEB)",
+        text: "No one can serve two masters, for either he will hate the one and love the other, or else he will be devoted to one and despise the other. You can't serve both God and Mammon.",
+        context: "Jesus frames money as a rival master — much of our worry comes from quietly serving it instead of trusting God.",
+      },
+      {
+        ref: "Matthew 6:33 (KJV)",
+        text: "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.",
+        context: "Jesus' answer to money worry isn't a budgeting tip — it's a reordering of what you seek first.",
+      },
+      {
+        ref: "1 Timothy 6:6–7 (KJV)",
+        text: "But godliness with contentment is great gain. For we brought nothing into this world, and it is certain we can carry nothing out.",
+        context: "Scripture's wealth strategy starts with contentment, not accumulation — gain measured in peace, not totals.",
+      },
+      {
+        ref: "Hebrews 13:5 (WEB)",
+        text: "Be free from the love of money, content with such things as you have, for he has said, \"I will in no way leave you, nor forsake you.\"",
+        context: "The cure for money fear is tied not to a bigger balance but to God's promise of his unfailing presence.",
+      },
+      {
+        ref: "Proverbs 30:8 (KJV)",
+        text: "Remove far from me vanity and lies: give me neither poverty nor riches; feed me with food convenient for me.",
+        context: "A rare, honest prayer for enough — neither crushing poverty nor distracting wealth.",
+      },
+    ],
+    reflection:
+      "Put together, the Bible's teaching on worry and money is strikingly consistent. It never treats money as evil, but it repeatedly warns that the love of it, and the worry that travels with it, can quietly take God's place as the thing we trust to keep us safe. Jesus' counsel isn't to care less about provision — it's to seek God first and trust the Father who feeds the birds to know what you need.\n\nThe antidote Scripture offers is not a windfall but contentment, anchored in a promise: \"I will never leave you nor forsake you.\" Money can vanish; God's presence won't. Faith with money doesn't mean you stop being responsible — you still budget, work, and plan wisely. It means you do all of that with open hands, refusing to let a number become the master only God should be.",
+    prayer:
+      "Father, you know the exact figures that keep me up at night, and how easily money becomes the thing I trust to keep me safe. Forgive me for serving it with my worry instead of trusting you with my needs. Thank you that you have promised never to leave me or forsake me, and that my security was never meant to rest on a balance. Teach me contentment with what I have, give me wisdom with what I steward, and help me to seek your kingdom first. Provide what we truly need, and quiet the fear that says it's all on me. Amen.",
+    actionStep:
+      "Name the one money fear that circles most, and write Matthew 6:33 beside it. Then take one concrete, faithful step this week — an honest look at the budget, one conversation, one small payment — and consciously hand the rest to God instead of carrying it alone.",
+    prayerCta: {
+      text: "Worried about a specific financial situation? Tell Faith Companion what you're facing and get a personal, Scripture-based prayer written for it.",
+      buttonLabel: "Write a prayer for my finances",
+    },
+    related: [
+      { slug: "prayer-for-financial-provision", label: "A Prayer for Financial Provision" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "faith", label: "Bible Verses About Faith" },
     ],
   },
 };
