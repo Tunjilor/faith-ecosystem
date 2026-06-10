@@ -284,6 +284,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "peace", label: "A Prayer for Peace" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "prayer-for-patience-with-a-difficult-person", label: "A Prayer for Patience" },
+      { slug: "bible-verses-for-anger-and-self-control", label: "Bible Verses for Anger & Self-Control" },
     ],
   },
 
@@ -438,7 +439,7 @@ export const TOPICS: Record<string, TopicData> = {
     related: [
       { slug: "jeremiah-29-11", label: "Jeremiah 29:11: Plans & Hope" },
       { slug: "hope", label: "Bible Verses for Hope" },
-      { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "prayer-for-when-you-feel-far-from-god", label: "A Prayer When You Feel Far from God" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "prayer-for-guidance-when-facing-a-big-decision", label: "A Prayer for Guidance" },
     ],
@@ -777,6 +778,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "forgiveness", label: "What the Bible Says About Forgiveness" },
       { slug: "prayer-for-a-prodigal-child", label: "A Prayer for a Prodigal Child" },
       { slug: "peace", label: "A Prayer for Peace" },
+      { slug: "prayer-to-save-my-marriage", label: "A Prayer to Save My Marriage" },
     ],
   },
 
@@ -822,6 +824,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "prayer-for-a-struggling-marriage", label: "A Prayer for a Struggling Marriage" },
       { slug: "forgiveness", label: "What the Bible Says About Forgiveness" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "prayer-for-a-loved-one-struggling-with-addiction", label: "A Prayer for a Loved One's Addiction" },
     ],
   },
 
@@ -855,6 +858,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "bible-verses-for-when-you-cant-sleep", label: "Verses for When You Can't Sleep" },
       { slug: "strength", label: "Bible Verses About Strength" },
       { slug: "isaiah-41-10", label: "Isaiah 41:10: Fear Not" },
+      { slug: "prayer-for-protection-over-my-family", label: "A Prayer for Family Protection" },
     ],
   },
 
@@ -1063,6 +1067,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
       { slug: "prayer-for-a-sick-parent", label: "A Prayer for a Sick Parent" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "prayer-for-a-pregnant-friend-safe-delivery", label: "A Prayer for a Pregnant Friend" },
     ],
   },
 
@@ -1110,6 +1115,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "hope", label: "Bible Verses for Hope" },
       { slug: "romans-8-28", label: "Romans 8:28: All Things for Good" },
+      { slug: "bible-verses-for-loneliness", label: "Bible Verses for Loneliness" },
     ],
   },
 
@@ -1204,6 +1210,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "forgiveness", label: "What the Bible Says About Forgiveness" },
       { slug: "peace", label: "A Prayer for Peace" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "bible-verses-for-anger-and-self-control", label: "Bible Verses for Anger & Self-Control" },
     ],
   },
 
@@ -1251,6 +1258,7 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "prayer-for-a-job-interview", label: "A Prayer for a Job Interview" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "prayer-for-the-first-day-of-school", label: "A Prayer for the First Day of School" },
     ],
   },
 
@@ -1303,6 +1311,387 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "prayer-for-financial-provision", label: "A Prayer for Financial Provision" },
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
       { slug: "faith", label: "Bible Verses About Faith" },
+    ],
+  },
+
+  "prayer-for-a-loved-one-struggling-with-addiction": {
+    topic: "prayer-for-a-loved-one-struggling-with-addiction",
+    label: "a Loved One's Addiction",
+    title: "A Prayer for a Loved One in Addiction",
+    description:
+      "A prayer for a loved one struggling with addiction, with Bible verses on freedom and one small step. Hope and intercession when someone you love is bound.",
+    intro:
+      "Loving someone caught in addiction is its own kind of heartbreak — the broken promises, the helplessness, the fear of the phone ringing at 3 a.m. You can't control or cure them, but you can pray, and the God you're praying to is in the business of setting captives free. Here are a few verses to hold onto, a prayer for the one you love, and one small step for today.",
+    verses: [
+      {
+        ref: "2 Corinthians 10:4 (KJV)",
+        text: "For the weapons of our warfare are not carnal, but mighty through God to the pulling down of strong holds.",
+        context: "Addiction is a stronghold, and your prayers are not wishful thinking — they are a real weapon against it.",
+      },
+      {
+        ref: "Psalm 107:13–14 (KJV)",
+        text: "Then they cried unto the LORD in their trouble, and he saved them out of their distresses. He brought them out of darkness and the shadow of death, and brake their bands in sunder.",
+        context: "A picture of God literally breaking the chains of those who cry out to him from the dark.",
+      },
+      {
+        ref: "John 8:36 (WEB)",
+        text: "If therefore the Son makes you free, you will be free indeed.",
+        context: "The freedom Jesus gives reaches the deep places that willpower and rehab alone cannot.",
+      },
+      {
+        ref: "Jeremiah 32:27 (KJV)",
+        text: "Behold, I am the LORD, the God of all flesh: is there any thing too hard for me?",
+        context: "Addiction can feel unbreakable — but nothing is too hard for the God you are bringing it to.",
+      },
+    ],
+    reflection:
+      "When you love an addict, one of the hardest lessons is that you cannot do their recovery for them. You can love them, set healthy boundaries, and refuse to give up — but the change has to happen in them, and ultimately only God can reach a will that's bound. That can feel powerless. It isn't.\n\nPrayer puts the battle where it belongs: in the hands of the One who breaks chains. Keep praying, keep loving wisely, and don't carry this alone — God often works through counselors, support groups, and other people who understand. Loving someone in addiction is a long obedience; let God carry what you were never meant to carry by yourself.",
+    prayer:
+      "Father, you know the person I'm aching over, and the grip this addiction has on them. I cannot reach their heart, but you can — pursue them, even into the places I can't follow. Break the chains that bind them, and put people and moments in their path that lead them toward freedom and toward you. Give me wisdom to love them well without enabling the addiction, and the strength to keep hoping when I'm exhausted. Guard their life, soften their heart, and remind me that nothing is too hard for you. I place them in your hands. Amen.",
+    actionStep:
+      "Write your loved one's name on a card and pray Psalm 107 over them each day this week — \"break their bands in sunder.\" Then take one step to care for yourself too: tell a trusted friend, a pastor, or a support group what you're carrying, so you're not walking it alone.",
+    prayerCta: {
+      text: "Carrying a specific loved one through addiction? Tell Faith Companion their story and get a personal prayer written for them and for you.",
+      buttonLabel: "Write a prayer for my loved one",
+    },
+    related: [
+      { slug: "prayer-for-a-prodigal-child", label: "A Prayer for a Prodigal Child" },
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+    ],
+  },
+
+  "bible-verses-for-loneliness": {
+    topic: "bible-verses-for-loneliness",
+    label: "Loneliness",
+    title: "Bible Verses for Loneliness",
+    description:
+      "Bible verses for loneliness, a written prayer, and one small step for when you feel unseen and alone. God's promise of his nearness and belonging.",
+    intro:
+      "Loneliness can ache whether you're physically by yourself or surrounded by people who don't really know you. It whispers that you're forgotten, unseen, on your own. Scripture answers with a steady promise that runs from Genesis to Revelation: you are not alone, and you never were. Here are a few verses for the lonely heart, a prayer, and one small step toward connection.",
+    verses: [
+      {
+        ref: "Deuteronomy 31:6 (KJV)",
+        text: "Be strong and of a good courage, fear not, nor be afraid of them: for the LORD thy God, he it is that doth go with thee; he will not fail thee, nor forsake thee.",
+        context: "God's promise isn't that you'll always have company — it's that he himself will never leave your side.",
+      },
+      {
+        ref: "Psalm 68:6 (KJV)",
+        text: "God setteth the solitary in families.",
+        context: "God's heart is to move the isolated into belonging — he notices the lonely and acts on their behalf.",
+      },
+      {
+        ref: "Matthew 28:20 (WEB)",
+        text: "Behold, I am with you always, even to the end of the age.",
+        context: "Jesus' final promise before leaving earth was his presence — every single day, to the very end.",
+      },
+      {
+        ref: "Psalm 25:16 (KJV)",
+        text: "Turn thee unto me, and have mercy upon me; for I am desolate and afflicted.",
+        context: "Scripture gives words to loneliness — you can pray your isolation honestly, exactly as it feels.",
+      },
+    ],
+    reflection:
+      "There's a difference between solitude and loneliness. Solitude can be filled with God's presence; loneliness feels like an absence. The good news is that the God who promises to never leave you is just as present in the empty apartment as in the crowded room — and learning to sense his nearness is part of how the ache eases.\n\nBut God also made us for each other, and he often answers loneliness through people. So the call is twofold: lean into the One who is always there, and take the risk of reaching toward others, even when it's hard. You are more known, and more wanted, than loneliness will ever let you believe.",
+    prayer:
+      "Father, I feel alone, and the ache of it is heavy today. You see the isolation I carry, the longing to be known and wanted. Thank you that you have promised never to leave me or forsake me — that even now, in this quiet, you are here. Help me to feel your nearness, and to believe I am not forgotten. Set me, in your kindness, into real belonging, and give me the courage to reach toward others instead of hiding. Be my company until then, and let me know I am yours. Amen.",
+    actionStep:
+      "Take one small step toward connection today — text someone you've lost touch with, say yes to an invitation, or simply sit somewhere people gather. Then spend two minutes telling God honestly how the loneliness feels; he is nearer than it seems.",
+    prayerCta: {
+      text: "Feeling alone in a specific season right now? Tell Faith Companion what's on your heart and get a gentle, personal prayer written for it.",
+      buttonLabel: "Write a prayer for loneliness",
+    },
+    related: [
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "bible-verses-for-depression", label: "Bible Verses for Depression" },
+    ],
+  },
+
+  "prayer-for-protection-over-my-family": {
+    topic: "prayer-for-protection-over-my-family",
+    label: "Family Protection",
+    title: "A Prayer for Protection Over My Family",
+    description:
+      "A prayer for protection over my family, with Bible verses on God's shelter and one small step. Cover your spouse, children, and home with prayer.",
+    intro:
+      "When you love a family, the instinct to protect them runs deep — and so does the worry, because so much of their safety is outside your control. You can't guard every road they travel or every choice they make, but you can entrust them, daily, to the God who never sleeps. Here are a few verses on his protection, a prayer over your household, and one small step.",
+    verses: [
+      {
+        ref: "Psalm 91:1–2 (KJV)",
+        text: "He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty. I will say of the LORD, He is my refuge and my fortress: my God; in him will I trust.",
+        context: "The same refuge you run to is the shelter you can ask God to spread over your whole household.",
+      },
+      {
+        ref: "Proverbs 18:10 (KJV)",
+        text: "The name of the LORD is a strong tower: the righteous runneth into it, and is safe.",
+        context: "God's own name is a fortress your family can run into — safety found in him, not in your own vigilance.",
+      },
+      {
+        ref: "Psalm 121:7–8 (KJV)",
+        text: "The LORD shall preserve thee from all evil: he shall preserve thy soul. The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+        context: "God watches over the daily comings and goings of the people you love, awake when you can't be.",
+      },
+      {
+        ref: "Isaiah 54:13 (KJV)",
+        text: "And all thy children shall be taught of the LORD; and great shall be the peace of thy children.",
+        context: "God's protection covers their hearts and their peace, not only their physical safety.",
+      },
+    ],
+    reflection:
+      "Praying for your family's protection is not a magic shield against all trouble — faithful families still face hard things, and God's care is bigger than mere safety. What this prayer really does is move your family from your white-knuckled grip into the hands of the One who loves them even more than you do.\n\nThat shift matters, because the fear of all that could happen can quietly rule a home. Cover your family in prayer, do the wise and practical things, and then release them, again and again, to God. His protection reaches places you can't follow — into their hearts, their friendships, their futures.",
+    prayer:
+      "Father, I bring my family before you and ask you to be their refuge and strong tower. You know each of them by name — guard their going out and their coming in, their bodies and their hearts. Protect them from harm I can see and harm I can't, and where I cannot be, be there. Quiet the fear in me that wants to control what only you can hold, and help me to trust them to your care. Draw each of them close to you, and let your peace rest over our home. Amen.",
+    actionStep:
+      "Tonight, pray over your family by name — out loud if you can — asking God's protection over each person specifically. Make it a habit: a one-minute blessing at the door, the dinner table, or bedtime.",
+    prayerCta: {
+      text: "Worried about a specific situation with your family? Tell Faith Companion what's going on and get a personal prayer for protection written for it.",
+      buttonLabel: "Write a prayer for my family",
+    },
+    related: [
+      { slug: "psalm-91", label: "Psalm 91: God's Protection" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "faith", label: "Bible Verses About Faith" },
+    ],
+  },
+
+  "bible-verses-for-anger-and-self-control": {
+    topic: "bible-verses-for-anger-and-self-control",
+    label: "Anger & Self-Control",
+    title: "Bible Verses for Anger & Self-Control",
+    description:
+      "Bible verses for anger and self-control, a written prayer, and one small step. What Scripture says about a hot temper and the Spirit-grown fruit of self-control.",
+    intro:
+      "Anger has a way of arriving faster than wisdom — the sharp word you regret, the slow burn you can't shake, the reaction that doesn't match the person you want to be. Scripture doesn't shame you for feeling anger; it teaches you what to do with it. Here are a few verses on anger and self-control, a prayer for a steadier heart, and one small step.",
+    verses: [
+      {
+        ref: "James 1:19–20 (KJV)",
+        text: "let every man be swift to hear, slow to speak, slow to wrath: for the wrath of man worketh not the righteousness of God.",
+        context: "Anger feels righteous in the moment, but it rarely produces the good it promises.",
+      },
+      {
+        ref: "Proverbs 16:32 (KJV)",
+        text: "He that is slow to anger is better than the mighty; and he that ruleth his spirit than he that taketh a city.",
+        context: "Mastering your own temper is counted a greater strength than conquering a city.",
+      },
+      {
+        ref: "Ephesians 4:26–27 (WEB)",
+        text: "Be angry, and don't sin. Don't let the sun go down on your wrath, and don't give place to the devil.",
+        context: "Anger itself isn't the sin — what you do with it, and how long you nurse it, is.",
+      },
+      {
+        ref: "Galatians 5:22–23 (WEB)",
+        text: "But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faith, gentleness, and self-control.",
+        context: "Self-control isn't willpower you manufacture — it's fruit the Spirit grows in you over time.",
+      },
+      {
+        ref: "Proverbs 29:11 (KJV)",
+        text: "A fool uttereth all his mind: but a wise man keepeth it in till afterwards.",
+        context: "Wisdom often lives in the pause — holding the reaction until the heat has passed.",
+      },
+    ],
+    reflection:
+      "Anger usually isn't the real problem; it's a messenger. It points to something underneath — a hurt, a fear, a boundary crossed, a sense of injustice. The goal isn't to never feel it, but to stop letting it drive. Scripture's wisdom is mostly about the gap between feeling and reacting: be slow, keep it in till afterward, don't let it fester overnight.\n\nAnd here's the freeing part: self-control is listed as fruit of the Spirit, not a personality trait you either have or don't. That means it grows. Every time you pause instead of erupt, you're cooperating with something God is doing in you. You won't get there by trying harder alone — you get there by inviting the Spirit into the moment the heat rises.",
+    prayer:
+      "Father, you know how quickly my anger flares, and the words and reactions I later regret. Forgive me for the times my temper has hurt the people around me. Thank you that self-control is fruit your Spirit grows — I can't manufacture it on my own, so I'm asking you for it. Give me the grace to be slow to anger, to pause before I speak, and to hand you what's underneath the heat. Where my anger has done damage, help me make it right, and grow in me a steadier, gentler heart. Amen.",
+    actionStep:
+      "Notice your most common anger trigger, and decide in advance on your pause — step away, breathe, count to ten, pray one sentence: \"Spirit, give me self-control here.\" Practicing the pause before you need it makes it possible when you do.",
+    prayerCta: {
+      text: "Wrestling with anger in a specific relationship or situation? Tell Faith Companion what's going on and get a personal, Scripture-based prayer written for it.",
+      buttonLabel: "Write a prayer for self-control",
+    },
+    related: [
+      { slug: "forgiveness", label: "What the Bible Says About Forgiveness" },
+      { slug: "prayer-for-patience-with-a-difficult-person", label: "A Prayer for Patience" },
+      { slug: "peace", label: "A Prayer for Peace" },
+    ],
+  },
+
+  "prayer-for-a-pregnant-friend-safe-delivery": {
+    topic: "prayer-for-a-pregnant-friend-safe-delivery",
+    label: "a Safe Delivery",
+    title: "A Prayer for a Pregnant Friend",
+    description:
+      "A prayer for a pregnant friend and a safe delivery, with Bible verses and one small step. Lift up both mother and baby to the God who knits life together.",
+    intro:
+      "When a friend is expecting, the joy often comes braided with worry — for her health, for the baby, for the delivery still ahead. One of the best gifts you can give her is to carry those hopes and fears to God on her behalf. Here are a few verses for mother and baby, a prayer for a safe delivery, and one small way to support her.",
+    verses: [
+      {
+        ref: "Psalm 139:13–14 (WEB)",
+        text: "For you formed my inmost being. You knit me together in my mother's womb. I will give thanks to you, for I am fearfully and wonderfully made.",
+        context: "The God knitting this baby together already loves them — more than even their parents can.",
+      },
+      {
+        ref: "Jeremiah 1:5 (KJV)",
+        text: "Before I formed thee in the belly I knew thee; and before thou camest forth out of the womb I sanctified thee.",
+        context: "This child is already known by name to God, long before their first breath.",
+      },
+      {
+        ref: "Isaiah 40:11 (WEB)",
+        text: "He will gather the lambs in his arm, and carry them in his bosom. He will gently lead those who have their young.",
+        context: "God has a particular tenderness for mothers and the very young — he leads them gently.",
+      },
+      {
+        ref: "Philippians 4:6 (KJV)",
+        text: "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+        context: "A verse to pray over your friend's anxiety as the delivery draws near — every worry, handed to God.",
+      },
+    ],
+    reflection:
+      "Pregnancy holds joy and vulnerability in the same hands. For all that modern medicine can do, so much of it is still outside anyone's control — which is exactly why it's such fertile ground for prayer. To intercede for a pregnant friend is to stand in the gap for two people at once: a mother carrying hope and fear, and a baby being formed by God's own hands.\n\nYou don't have to have the perfect words or fix her worries. You simply keep lifting them up — her health, the baby's, the delivery, the days after — and keep showing up in practical love. The same God who is knitting this child together is well able to carry them both safely through.",
+    prayer:
+      "Father, thank you for the new life you are forming, and for my friend who carries it. You knew this baby before the world did, and you love them already. Watch over them both through these months — guard her health, strengthen her body, and bring this child safely into her arms. Quiet her fears as the delivery approaches, and surround her with peace that passes understanding. Be the gentle Shepherd who carries the lambs, and let her feel your nearness in every step of this. Amen.",
+    actionStep:
+      "Tell your friend, in a text or a note, that you're praying specifically for her and the baby's safe arrival — then ask one concrete way you can help, whether it's a meal, a ride, or simply checking in. Praying with her, not just for her, is a gift she'll remember.",
+    prayerCta: {
+      text: "Walking with a specific friend through her pregnancy? Tell Faith Companion about her and get a personal prayer for her and the baby written for you to pray.",
+      buttonLabel: "Write a prayer for my friend",
+    },
+    related: [
+      { slug: "prayer-for-a-friend-who-is-hurting", label: "A Prayer for a Hurting Friend" },
+      { slug: "faith", label: "Bible Verses About Faith" },
+      { slug: "hope", label: "Bible Verses for Hope" },
+    ],
+  },
+
+  "prayer-for-when-you-feel-far-from-god": {
+    topic: "prayer-for-when-you-feel-far-from-god",
+    label: "When God Feels Distant",
+    title: "A Prayer When You Feel Far from God",
+    description:
+      "A prayer for when you feel far from God, with Bible verses on his nearness and one small step. Find your way back when prayer feels empty and God feels distant.",
+    intro:
+      "Almost every honest believer hits seasons where God feels distant — when prayer feels like talking to the ceiling and the faith that once felt alive feels flat. If that's you, take heart: feeling far from God is not the same as being far from God, and you are not the first to walk this stretch. Here are a few verses on his nearness, a prayer for the dry season, and one small step back.",
+    verses: [
+      {
+        ref: "James 4:8 (KJV)",
+        text: "Draw nigh to God, and he will draw nigh to you.",
+        context: "The distance you feel isn't God backing away — and one honest step toward him is always met.",
+      },
+      {
+        ref: "Deuteronomy 4:29 (KJV)",
+        text: "But if from thence thou shalt seek the LORD thy God, thou shalt find him, if thou seek him with all thy heart and with all thy soul.",
+        context: "God is findable — never hidden from a heart that genuinely seeks him, even from a far country.",
+      },
+      {
+        ref: "Psalm 139:7–8 (WEB)",
+        text: "Where could I go from your Spirit? Or where could I flee from your presence? If I ascend up into heaven, you are there. If I make my bed in Sheol, behold, you are there!",
+        context: "Even when God feels absent, there is nowhere his presence actually isn't.",
+      },
+      {
+        ref: "Psalm 73:26 (WEB)",
+        text: "My flesh and my heart fails, but God is the strength of my heart and my portion forever.",
+        context: "Feelings rise and fall, but God's nearness doesn't depend on whether you can feel it today.",
+      },
+    ],
+    reflection:
+      "Feeling far from God is one of the most common — and least talked about — parts of a real faith. The great believers wrote whole psalms from this place. It can come from grief, exhaustion, sin, depression, or no clear reason at all. The danger isn't the distance; it's concluding that the distance is the truth about you and God.\n\nFaith in the dry seasons looks less like feeling and more like showing up — opening the Bible when it feels dull, praying honest, half-empty prayers, staying near God's people. Feelings are real, but they aren't the measure of God's presence. Keep walking toward him; he has not moved, and the One you're looking for is the One drawing you to look.",
+    prayer:
+      "Father, you feel far away right now, and I miss the nearness I once knew. I don't fully understand this distance — whether it's something in me, this hard season, or just the silence — but I'm turning toward you anyway. Your Word says if I draw near, you'll draw near to me, so here I am, with as much heart as I can find. Meet me in the dryness. Remind me that you have not moved, even when I can't feel you, and that you are still my portion when my heart fails. Lead me back to you. Amen.",
+    actionStep:
+      "Don't wait to feel close before you come — do one small, ordinary thing of faith today: read one psalm slowly, or pray one honest sentence even if it feels empty. Showing up is the step; God meets you in it.",
+    prayerCta: {
+      text: "Going through a dry or distant season with God? Tell Faith Companion where you are and get a gentle, personal prayer written to help you find your way back.",
+      buttonLabel: "Write a prayer for me",
+    },
+    related: [
+      { slug: "faith", label: "Bible Verses About Faith" },
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+    ],
+  },
+
+  "prayer-for-the-first-day-of-school": {
+    topic: "prayer-for-the-first-day-of-school",
+    label: "My Child's First Day",
+    title: "A Prayer for the First Day of School",
+    description:
+      "A prayer for the first day of school, with Bible verses for parents and one small step. Entrust your child to God as they head into a new year.",
+    intro:
+      "The first day of school stirs up more than your child's nerves — as a parent, you feel it too: the pride, the worry, the strange ache of watching them walk away from you toward a world you can't fully see into. You can't go with them into every classroom, but the God who loves them already is going ahead of them. Here are a few verses for the morning of drop-off, a prayer over your child, and one small step.",
+    verses: [
+      {
+        ref: "Deuteronomy 31:8 (KJV)",
+        text: "And the LORD, he it is that doth go before thee; he will be with thee, he will not fail thee, neither forsake thee: fear not, neither be dismayed.",
+        context: "God goes ahead of your child into the unknown of a new year — they don't walk in alone.",
+      },
+      {
+        ref: "Psalm 127:3 (KJV)",
+        text: "Lo, children are an heritage of the LORD: and the fruit of the womb is his reward.",
+        context: "Your child is a gift entrusted to you — and today you can entrust them back to the Giver.",
+      },
+      {
+        ref: "Proverbs 22:6 (KJV)",
+        text: "Train up a child in the way he should go: and when he is old, he will not depart from it.",
+        context: "The foundation you've been laying at home walks through the school doors with them.",
+      },
+      {
+        ref: "Philippians 1:6 (KJV)",
+        text: "Being confident of this very thing, that he which hath begun a good work in you will perform it until the day of Jesus Christ.",
+        context: "God is committed to finishing the good work he's begun in your child — this year included.",
+      },
+    ],
+    reflection:
+      "Every first day of school is a small letting go. From the moment they were born, the whole arc of parenting has been about preparing them to walk into rooms you're not in — and that's exactly how it's supposed to be, even when it tugs at your heart. The fear you feel is just love with nowhere to put itself yet.\n\nSo put it in prayer. You can't control the friendships they'll make, the teacher they'll get, or the hard days they'll have — but you can entrust all of it to a God who goes before them and never leaves. Send them off covered in prayer, and then trust the One who loves them even more than you do.",
+    prayer:
+      "Father, today my child steps into something new, and my heart is full of both pride and worry. Go before them into that classroom and every place I can't follow. Give them kind friends, patient teachers, and confidence that comes from knowing they are loved by you and by us. Guard their heart, help them be a light to others, and bring them home to me at the end of the day. Where I have to let go, help me to trust you with the child you've entrusted to me. Amen.",
+    actionStep:
+      "Before drop-off, place your hand on your child (or text them, if they're older) and pray a short blessing out loud: \"God goes with you today, and so does our love.\" Then release the worry to him as you walk away.",
+    prayerCta: {
+      text: "Sending a specific child into a new school or grade? Tell Faith Companion about them and get a personal prayer written for their first day.",
+      buttonLabel: "Write a prayer for my child",
+    },
+    related: [
+      { slug: "prayer-for-starting-a-new-job", label: "A Prayer for Starting a New Job" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "faith", label: "Bible Verses About Faith" },
+    ],
+  },
+
+  "prayer-to-save-my-marriage": {
+    topic: "prayer-to-save-my-marriage",
+    label: "a Marriage in Crisis",
+    title: "A Prayer to Save My Marriage",
+    description:
+      "A prayer to save my marriage when it's falling apart or divorce is on the table, with Bible verses on restoration and one small step. Hope when it feels too late.",
+    intro:
+      "If your marriage feels like it's slipping through your fingers — the word \"divorce\" spoken out loud, the distance grown into a canyon, the fear that it may be too late — this is a desperate and holy place to pray from. God is not finished where you think you are, and reconciliation is the kind of impossible he specializes in. Here are a few verses to hold onto, a prayer for a marriage in crisis, and one small step.",
+    verses: [
+      {
+        ref: "Mark 10:9 (KJV)",
+        text: "What therefore God hath joined together, let not man put asunder.",
+        context: "God's heart is for restoration, not separation — your marriage matters deeply to him.",
+      },
+      {
+        ref: "Joel 2:25 (KJV)",
+        text: "And I will restore to you the years that the locust hath eaten.",
+        context: "God specializes in restoring what's been devoured — even years of damage are not beyond him.",
+      },
+      {
+        ref: "Ezekiel 36:26 (KJV)",
+        text: "A new heart also will I give you, and a new spirit will I put within you: and I will take away the stony heart out of your flesh, and I will give you an heart of flesh.",
+        context: "Only God can soften a hardened heart — yours, or your spouse's — and softened hearts are where hope begins.",
+      },
+      {
+        ref: "Matthew 19:26 (KJV)",
+        text: "With men this is impossible; but with God all things are possible.",
+        context: "When reconciliation looks impossible from where you stand, that is precisely God's specialty.",
+      },
+    ],
+    reflection:
+      "A marriage in crisis is one of the most painful places to stand, and prayer is not a way to bypass the hard work it will take — it's where the strength for that work comes from. God can do what no counseling or effort alone can: change a heart. But he usually works through people, too, so if you haven't yet, reaching out to a wise pastor or a marriage counselor is a faithful and brave step, not a failure.\n\nYou cannot control your spouse or guarantee the outcome. What you can do is bring your own heart honestly before God — your part in the breakdown, your hurt, your hope — and let him begin his work there. Sometimes the first marriage God saves is the one happening inside the person who finally kneels down to pray.",
+    prayer:
+      "Father, my marriage is breaking, and I am afraid we've gone too far to come back. You see every wound, every hard word, and the distance between us that I don't know how to cross. I'm asking for the impossible: soften both our hearts, where they've turned to stone, and restore what the years have eaten away. Where I have been wrong, show me and change me first. Give us both the humility to seek help and the courage to try again, and let your love do what ours alone cannot. Nothing is impossible for you — so I bring you my marriage. Amen.",
+    actionStep:
+      "Before you make any irreversible decision, pray Ezekiel 36:26 over both of you — \"give us hearts of flesh\" — and take one step toward help, not away: book a session with a pastor or marriage counselor, or send one honest, non-accusing message to your spouse.",
+    prayerCta: {
+      text: "Fighting for a specific marriage on the brink? Tell Faith Companion what's happening and get a personal prayer written for your situation.",
+      buttonLabel: "Write a prayer for my marriage",
+    },
+    related: [
+      { slug: "prayer-for-a-struggling-marriage", label: "A Prayer for a Struggling Marriage" },
+      { slug: "faith", label: "Bible Verses About Faith" },
+      { slug: "hope", label: "Bible Verses for Hope" },
     ],
   },
 };
