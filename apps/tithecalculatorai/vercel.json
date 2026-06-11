@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/what-is-a-tithe", "destination": "https://faithcompanionai.com/tithing", "permanent": true },
+    { "source": "/how-to-tithe", "destination": "https://faithcompanionai.com/tithing", "permanent": true },
+    { "source": "/tithe-vs-offering", "destination": "https://faithcompanionai.com/tithing", "permanent": true },
+    { "source": "/", "destination": "https://faithcompanionai.com/tools/tithe", "permanent": true },
+    { "source": "/:path*", "destination": "https://faithcompanionai.com/topics", "permanent": true }
+  ]
+}
