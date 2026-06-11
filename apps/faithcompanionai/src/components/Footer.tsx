@@ -27,9 +27,9 @@ const legalLinks = [
 ];
 
 const ecosystemLinks = [
-  { label: "AI Tithe Calculator", href: "https://www.tithecalculatorai.com" },
-  { label: "AI Prayer Generator", href: "https://www.prayergeneratorai.com" },
-  { label: "Bible Verse Generator AI", href: "https://www.bibleversegeneratorai.com" },
+  { label: "AI Tithe Calculator", href: "/tools/tithe" },
+  { label: "AI Prayer Generator", href: "/tools/prayer" },
+  { label: "Bible Verse Generator AI", href: "/tools/verse" },
 ];
 
 export default function Footer() {
@@ -145,15 +145,13 @@ export default function Footer() {
               </h3>
               <div className="mt-4 space-y-3">
                 {ecosystemLinks.map((item) => (
-                  <a
+                  <Link
                     key={item.href}
                     href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="block text-sm text-white/75 transition hover:text-white"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
               <p className="mt-5 text-xs leading-5 text-white/45">

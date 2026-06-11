@@ -59,7 +59,7 @@ const faithTools = [
     name: "Tithe Calculator AI",
     description:
       "Calculate exactly what 10% of your income looks like — gross, net, weekly, monthly, or annual. Fast and free.",
-    href: "https://tithecalculatorai.com",
+    href: "/tools/tithe",
     tag: "Calculate your tithe",
     accent: "text-orange-300",
   },
@@ -67,7 +67,7 @@ const faithTools = [
     name: "Prayer Generator AI",
     description:
       "Generate a personal prayer for your giving journey — whether you are just starting to tithe or deepening your generosity practice.",
-    href: "https://prayergeneratorai.com",
+    href: "/tools/prayer",
     tag: "Personalized prayer",
     accent: "text-purple-300",
   },
@@ -75,7 +75,7 @@ const faithTools = [
     name: "Bible Verse Generator AI",
     description:
       "Get scripture tailored to your specific faith question — including verses on generosity, stewardship, and financial trust.",
-    href: "https://bibleversegeneratorai.com",
+    href: "/tools/verse",
     tag: "Scripture on demand",
     accent: "text-orange-300",
   },
@@ -116,14 +116,12 @@ export default function TithingPage() {
           </p>
 
           <div className="mt-8">
-            <a
-              href="https://tithecalculatorai.com"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/tools/tithe"
               className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-8 py-3 text-sm font-semibold text-white transition hover:opacity-95"
             >
               Calculate Your Tithe Now →
-            </a>
+            </Link>
           </div>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs text-white/50 sm:text-sm">
@@ -372,14 +370,12 @@ export default function TithingPage() {
             Not sure what 10% of your income looks like? The Tithe Calculator AI handles
             both gross and net — weekly, bi-weekly, monthly, or annual.
           </p>
-          <a
-            href="https://tithecalculatorai.com"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/tools/tithe"
             className="inline-flex shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-95"
           >
             Try the Calculator →
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -544,11 +540,9 @@ export default function TithingPage() {
 
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {faithTools.map((tool) => (
-            <a
+            <Link
               key={tool.name}
               href={tool.href}
-              target="_blank"
-              rel="noopener noreferrer"
               className="group flex flex-col rounded-[26px] p-6 transition hover:scale-[1.01]"
               style={{
                 background: "rgba(0,0,0,0.2)",
@@ -565,7 +559,7 @@ export default function TithingPage() {
               <div className={`mt-5 text-sm font-semibold ${tool.accent}`}>
                 Open tool →
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </section>
@@ -605,23 +599,19 @@ export default function TithingPage() {
               Open Faith Dashboard
             </Link>
 
-            <a
-              href="https://prayergeneratorai.com"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/tools/prayer"
               className="inline-flex min-h-[48px] w-full items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10 sm:w-auto"
             >
               Generate a Prayer
-            </a>
+            </Link>
 
-            <a
-              href="https://bibleversegeneratorai.com"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/tools/verse"
               className="inline-flex min-h-[48px] w-full items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10 sm:w-auto"
             >
               Find a Verse
-            </a>
+            </Link>
           </div>
         </div>
       </section>
