@@ -27,9 +27,9 @@ const legalLinks = [
 ];
 
 const ecosystemLinks = [
-  { label: "AI Tithe Calculator", href: "/tools/tithe" },
-  { label: "AI Prayer Generator", href: "/tools/prayer" },
-  { label: "Bible Verse Generator AI", href: "/tools/verse" },
+  { label: "Tithe Calculator", href: "/tools/tithe" },
+  { label: "Prayer Generator", href: "/tools/prayer" },
+  { label: "Bible Verse Generator", href: "/tools/verse" },
 ];
 
 export default function Footer() {

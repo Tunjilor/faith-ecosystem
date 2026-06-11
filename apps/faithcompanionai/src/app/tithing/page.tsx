@@ -56,7 +56,7 @@ const bibleVerses = [
 
 const faithTools = [
   {
-    name: "Tithe Calculator AI",
+    name: "Tithe Calculator",
     description:
       "Calculate exactly what 10% of your income looks like — gross, net, weekly, monthly, or annual. Fast and free.",
     href: "/tools/tithe",
@@ -64,7 +64,7 @@ const faithTools = [
     accent: "text-orange-300",
   },
   {
-    name: "Prayer Generator AI",
+    name: "Prayer Generator",
     description:
       "Generate a personal prayer for your giving journey — whether you are just starting to tithe or deepening your generosity practice.",
     href: "/tools/prayer",
@@ -72,7 +72,7 @@ const faithTools = [
     accent: "text-purple-300",
   },
   {
-    name: "Bible Verse Generator AI",
+    name: "Bible Verse Generator",
     description:
       "Get scripture tailored to your specific faith question — including verses on generosity, stewardship, and financial trust.",
     href: "/tools/verse",
@@ -367,7 +367,7 @@ export default function TithingPage() {
           }}
         >
           <p className="text-sm leading-7 text-white/80">
-            Not sure what 10% of your income looks like? The Tithe Calculator AI handles
+            Not sure what 10% of your income looks like? Our built-in tithe calculator handles
             both gross and net — weekly, bi-weekly, monthly, or annual.
           </p>
           <Link
