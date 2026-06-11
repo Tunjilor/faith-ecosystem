@@ -1,0 +1,30 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/bible-verses-for-anger", "destination": "https://faithcompanionai.com/topics/bible-verses-for-anger-and-self-control", "permanent": true },
+    { "source": "/bible-verses-for-anxiety", "destination": "https://faithcompanionai.com/topics/anxiety", "permanent": true },
+    { "source": "/bible-verses-for-depression", "destination": "https://faithcompanionai.com/topics/bible-verses-for-depression", "permanent": true },
+    { "source": "/bible-verses-for-forgiveness", "destination": "https://faithcompanionai.com/topics/forgiveness", "permanent": true },
+    { "source": "/bible-verses-for-gratitude", "destination": "https://faithcompanionai.com/topics/gratitude", "permanent": true },
+    { "source": "/bible-verses-for-grief", "destination": "https://faithcompanionai.com/topics/bible-verses-for-grief", "permanent": true },
+    { "source": "/bible-verses-for-healing", "destination": "https://faithcompanionai.com/topics/healing", "permanent": true },
+    { "source": "/bible-verses-for-hope", "destination": "https://faithcompanionai.com/topics/hope", "permanent": true },
+    { "source": "/bible-verses-for-loneliness", "destination": "https://faithcompanionai.com/topics/bible-verses-for-loneliness", "permanent": true },
+    { "source": "/bible-verses-for-sleep", "destination": "https://faithcompanionai.com/topics/bible-verses-for-when-you-cant-sleep", "permanent": true },
+    { "source": "/bible-verses-for-strength", "destination": "https://faithcompanionai.com/topics/strength", "permanent": true },
+
+    { "source": "/bible-verses-for-love", "destination": "https://faithcompanionai.com/topics/bible-verses-for-love", "permanent": true },
+    { "source": "/bible-verses-for-mothers", "destination": "https://faithcompanionai.com/topics/bible-verses-for-mothers", "permanent": true },
+
+    { "source": "/bible-verses-for-addiction", "destination": "https://faithcompanionai.com/topics/prayer-for-a-loved-one-struggling-with-addiction", "permanent": true },
+    { "source": "/bible-verses-for-fear", "destination": "https://faithcompanionai.com/topics/isaiah-41-10", "permanent": true },
+    { "source": "/bible-verses-for-finances", "destination": "https://faithcompanionai.com/topics/prayer-for-financial-provision", "permanent": true },
+    { "source": "/bible-verses-for-guidance", "destination": "https://faithcompanionai.com/topics/prayer-for-guidance-when-facing-a-big-decision", "permanent": true },
+    { "source": "/bible-verses-for-marriage", "destination": "https://faithcompanionai.com/topics/prayer-for-a-struggling-marriage", "permanent": true },
+    { "source": "/bible-verses-for-protection", "destination": "https://faithcompanionai.com/topics/psalm-91", "permanent": true },
+    { "source": "/bible-verses-for-students", "destination": "https://faithcompanionai.com/topics/prayer-for-the-first-day-of-school", "permanent": true },
+
+    { "source": "/", "destination": "https://faithcompanionai.com/tools/verse", "permanent": true },
+    { "source": "/:path*", "destination": "https://faithcompanionai.com/topics", "permanent": true }
+  ]
+}
