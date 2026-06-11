@@ -1827,6 +1827,122 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "hope", label: "Bible Verses for Hope" },
     ],
   },
+
+  "bible-verses-for-love": {
+    topic: "bible-verses-for-love",
+    label: "Love",
+    title: "Bible Verses for Love",
+    description:
+      "Scripture on God's love for you and how to love others — key Bible verses about love, a reflection, and a prayer. Discover the love that defines the Christian faith.",
+    intro:
+      "The Bible says more about love than almost any other subject. Whether you are trying to grasp how deeply God loves you, learning to love others well, or seeking encouragement in a relationship, these passages anchor you in the love that runs from Genesis to Revelation. Below are key Bible verses about love, a short reflection, and a prayer you can pray right now.",
+    verses: [
+      {
+        ref: "1 Corinthians 13:4–7 (WEB)",
+        text: "Love is patient and is kind. Love doesn't envy. Love doesn't brag, is not proud, doesn't behave itself inappropriately, doesn't seek its own way, is not provoked, takes no account of evil; doesn't rejoice in unrighteousness, but rejoices with the truth; bears all things, believes all things, hopes all things, endures all things.",
+        context: "The Bible's fullest definition of love — not a feeling but a steady, self-giving choice. Read it slowly; each line is a description of how God Himself loves you.",
+      },
+      {
+        ref: "John 3:16 (KJV)",
+        text: "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.",
+        context: "Love defined by sacrifice. God's love for you was never theoretical — it cost Him everything.",
+      },
+      {
+        ref: "Romans 8:38–39 (KJV)",
+        text: "For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord.",
+        context: "Paul names every imaginable threat to God's love and declares them all powerless. Nothing can separate you from it.",
+      },
+      {
+        ref: "1 John 4:7–8 (KJV)",
+        text: "Beloved, let us love one another: for love is of God; and every one that loveth is born of God, and knoweth God. He that loveth not knoweth not God; for God is love.",
+        context: "God does not merely show love — He is love. Our capacity to love others is itself a reflection of His nature in us.",
+      },
+      {
+        ref: "Romans 5:8 (KJV)",
+        text: "But God commendeth his love toward us, in that, while we were yet sinners, Christ died for us.",
+        context: "God's love was never conditional on us getting our act together first. He loved us at our worst — which means His love can be trusted completely.",
+      },
+      {
+        ref: "Zephaniah 3:17 (KJV)",
+        text: "The LORD thy God in the midst of thee is mighty; he will save, he will rejoice over thee with joy; he will rest in his love, he will joy over thee with singing.",
+        context: "One of the tenderest pictures of God's love in all of Scripture — He does not merely tolerate you, He delights in you and sings over you.",
+      },
+    ],
+    reflection:
+      "We tend to treat love as something we feel and then act on. The Bible reverses the order. \"We love because he first loved us\" (1 John 4:19) — love begins with God, flows to us, and then through us to others. You are not the source; you are a channel.\n\nThat changes how you love the difficult people in your life. You don't have to manufacture warm feelings before you act. You love out of the overflow of being loved — patiently, kindly, without keeping a record of wrongs — because that is exactly how you have been treated by God. The most freeing truth in Scripture is that His love for you does not rise and fall with your performance. It held while you were still a sinner; it holds now.",
+    prayer:
+      "Father, thank You that You loved me first — before I ever turned toward You, while I was still far off. Thank You that nothing in all creation can separate me from Your love in Christ.\n\nWhere I have tried to earn love, or feared losing it, settle my heart in the truth that I am already fully and finally loved by You.\n\nAnd make me a person who loves the way You love — patient, kind, slow to anger, keeping no record of wrongs. Give me grace for the people who are hardest to love, because that is the love You have shown me. Let Your love flow through me today. In Jesus' name, Amen.",
+    actionStep:
+      "Think of one person who is hard for you to love right now. Read 1 Corinthians 13:4–7 slowly, replacing the word \"love\" with your own name — \"[Name] is patient, [Name] is kind…\" Notice where it convicts you, and ask God for the grace to love that person one concrete way today.",
+    prayerCta: {
+      text: "Need words for a specific relationship — gratitude, reconciliation, or simply asking God to help you love someone well? Tell Faith Companion what's on your heart and get a personal, Scripture-based prayer.",
+      buttonLabel: "Write a prayer about love",
+    },
+    related: [
+      { slug: "bible-verses-for-mothers", label: "Bible Verses for Mothers" },
+      { slug: "forgiveness", label: "What the Bible Says About Forgiveness" },
+      { slug: "gratitude", label: "A Prayer of Gratitude" },
+      { slug: "hope", label: "Bible Verses for Hope" },
+    ],
+  },
+
+  "bible-verses-for-mothers": {
+    topic: "bible-verses-for-mothers",
+    label: "Mothers",
+    title: "Bible Verses for Mothers",
+    description:
+      "Encouraging Bible verses for mothers — strength, wisdom, and God's blessing for the journey of motherhood. With a reflection and a prayer for every season of being a mom.",
+    intro:
+      "Motherhood is one of the most profound callings there is, and Scripture honors it deeply. Whether you are a new mother finding your footing, a tired mom in the thick of it, a mother still carrying grown children in prayer, or someone honoring a mother who has passed, these Bible verses speak to the beauty, the weight, and the significance of a mother's love. Below are encouraging passages, a reflection, and a prayer.",
+    verses: [
+      {
+        ref: "Proverbs 31:25–26 (KJV)",
+        text: "Strength and honour are her clothing; and she shall rejoice in time to come. She openeth her mouth with wisdom; and in her tongue is the law of kindness.",
+        context: "The Proverbs 31 mother is not defined by perfection but by character — strength, dignity, wisdom, and kindness. That is the goal, and none of it requires having it all together.",
+      },
+      {
+        ref: "Isaiah 66:13 (KJV)",
+        text: "As one whom his mother comforteth, so will I comfort you; and ye shall be comforted in Jerusalem.",
+        context: "God reaches for the image of a mother's comfort to describe His own. A mother's tenderness reflects something true about the heart of God.",
+      },
+      {
+        ref: "Psalm 127:3 (KJV)",
+        text: "Lo, children are an heritage of the LORD: and the fruit of the womb is his reward.",
+        context: "Children are not burdens but blessings — entrusted to mothers as gifts. Motherhood is a sacred stewardship, even on the exhausting days.",
+      },
+      {
+        ref: "Philippians 4:13 (KJV)",
+        text: "I can do all things through Christ which strengtheneth me.",
+        context: "For the overwhelmed mother: strength is available. The impossible-feeling demands of motherhood are met with divine strength for those who lean on Christ.",
+      },
+      {
+        ref: "Proverbs 22:6 (KJV)",
+        text: "Train up a child in the way he should go: and when he is old, he will not depart from it.",
+        context: "The investment of faithful mothering lasts a lifetime. The values and faith you plant in the early years carry further than you may ever see.",
+      },
+      {
+        ref: "Lamentations 3:22–23 (KJV)",
+        text: "It is of the LORD's mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness.",
+        context: "For the mother who feels she failed today — His mercies are new tomorrow. Every morning is a fresh start with a God whose compassion never runs out.",
+      },
+    ],
+    reflection:
+      "No one tells you how much of motherhood happens unseen — the prayers whispered over a crib, the worry carried quietly, the thousand small acts of love no one applauds. It can feel invisible. Scripture says it is not.\n\nGod sees the faithful mother. He compares His own comfort to hers (Isaiah 66:13), calls her children a reward (Psalm 127:3), and promises that the faith passed down through a mother shapes generations — as it did through Timothy's mother Eunice and grandmother Lois (2 Timothy 1:5). On the days you feel you are failing, Lamentations 3 is for you: His mercies are new every morning. You do not have to be a perfect mother. You have to be a present one, leaning on the God who gives strength for all things.",
+    prayer:
+      "Father, thank You for the gift and the calling of being a mother. You know how much of this I carry quietly — the love, the worry, the tiredness, the prayers no one else hears.\n\nWhen I feel I am not enough, remind me that Your mercies are new every morning and Your strength is made perfect in my weakness. Clothe me with strength and dignity. Give me wisdom for the decisions, patience for the hard moments, and kindness on my tongue.\n\nWatch over my children wherever they are today. Plant a faith in them that will not depart when they are old. And on the days I feel invisible, remind me that You see me, You delight in me, and You are with me. In Jesus' name, Amen.",
+    actionStep:
+      "Pick the verse above that meets you where you are today, and write it somewhere you'll see it — a phone lock screen, the bathroom mirror, the fridge. The next time motherhood feels overwhelming or unseen, read it out loud and let it reframe the moment.",
+    prayerCta: {
+      text: "Carrying something specific as a mom — a worried season, a prodigal child, sheer exhaustion? Tell Faith Companion what's on your heart and get a gentle, personal prayer written for it.",
+      buttonLabel: "Write a prayer for me",
+    },
+    related: [
+      { slug: "bible-verses-for-love", label: "Bible Verses for Love" },
+      { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "prayer-for-protection-over-my-family", label: "A Prayer for Family Protection" },
+      { slug: "prayer-for-a-prodigal-child", label: "A Prayer for a Prodigal Child" },
+    ],
+  },
 };
 
 export const TOPIC_SLUGS = Object.keys(TOPICS);
@@ -1870,6 +1986,8 @@ export const TOPIC_GROUPS: Array<{ title: string; slugs: string[] }> = [
       "prayer-for-a-loved-one-struggling-with-addiction",
       "prayer-for-protection-over-my-family",
       "prayer-for-the-first-day-of-school",
+      "bible-verses-for-mothers",
+      "bible-verses-for-love",
     ],
   },
   {

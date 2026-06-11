@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const static_pages: Array<{ route: string; priority: number; freq: Freq }> = [
     { route: "",                          priority: 1.0, freq: "weekly" },
     { route: "/tools/verse",              priority: 0.9, freq: "weekly" },
+    { route: "/tools/tithe",              priority: 0.9, freq: "weekly" },
     { route: "/tools/prayer",             priority: 0.9, freq: "weekly" },
     { route: "/tools/devotional",         priority: 0.9, freq: "weekly" },
     { route: "/tools/bible-search",       priority: 0.9, freq: "weekly" },
