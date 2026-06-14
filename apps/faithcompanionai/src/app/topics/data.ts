@@ -826,12 +826,42 @@ export const TOPICS: Record<string, TopicData> = {
       },
     ],
     prayer:
-      "Father, it's late and I'm still awake, and the harder I try to sleep the louder my mind gets. You see the worries I keep turning over and the tomorrow I can't control tonight. Thank you that you never slumber, that you are keeping watch over everything I love even now. Quiet my racing thoughts, loosen the grip of every fear, and remind me that rest is a gift you give your beloved, not something I have to earn. Help me to hand you the day that's ending and the one that's coming, and to lie down without fear. Give me, even now, the sweet sleep you promise. Amen.",
+      "Father, it is late, and I am still awake. The house is quiet, but my mind is not — it keeps replaying today and rehearsing tomorrow, turning over worries I cannot solve at this hour. You see every thought I cannot switch off.\n\nThank you that you never sleep, and that nothing I am afraid of has slipped past you. While I lie here, you are already watching over the people I love and the things I cannot control. I do not have to keep watch tonight, because you never stop watching.\n\nQuiet my racing thoughts and loosen the grip of every fear. Help me to hand you the day that is ending and the one that is coming, and to leave them both in your hands until morning. Remind me that rest is your gift, not something I have to earn.\n\nSteady my breathing, soften my body, and let your peace settle over this room. Even now, give me the sweet sleep you promise to those you love.\n\nAmen.",
     actionStep:
       "Instead of reaching for your phone, breathe slowly and pray Psalm 121 back to God — \"He that keepeth me will not slumber\" — naming each worry as you exhale it. If your mind keeps racing, keep a notepad by the bed and write tomorrow's worries down to hand to God until morning.",
+    devotional: {
+      heading: "A 5-Minute Devotional for a Sleepless Night",
+      passage: {
+        ref: "Psalm 4:8 (WEB)",
+        text: "In peace I will both lie down and sleep, for you, LORD, alone make me live in safety.",
+      },
+      reflection:
+        "There is a particular loneliness to being awake when the rest of the world is asleep — the dark feels bigger, worries feel louder, and morning feels impossibly far away. Notice what the psalmist does here. He does not say he will lie down once every problem is solved and every fear is settled. He lies down and sleeps because of who is keeping watch: \"you, LORD, alone make me live in safety.\" Sleep is an act of trust. To close your eyes is to admit that you are not the one holding the world together tonight — and to let the God who never sleeps take the night shift. You do not have to resolve tomorrow before you rest. You only have to hand it, and yourself, to the One who is already awake and already watching over everyone you love.",
+      question:
+        "What are you still trying to keep watch over tonight that you could hand to the God who never sleeps?",
+    },
+    reflectionQuestions: {
+      heading: "Reflect or Discuss",
+      questions: [
+        "What worry is keeping you awake that you haven't yet handed to God tonight?",
+        "What would it feel like to trust that God is awake and watching over everything you love, so that you don't have to?",
+        "Is there one thing within your control you could write down to deal with tomorrow — and one thing outside your control you could release to God right now?",
+      ],
+    },
+    discussionGuide: {
+      heading: "For Small Groups & Families",
+      text: "Families can make these verses part of a bedtime rhythm — read one aloud together, then let each person name one worry to hand to God before the lights go out. For a child afraid of the dark, or a whole household going through a restless, stressful season, a simple repeated prayer like Psalm 4:8 can become a familiar anchor that turns the end of the day into an act of trust rather than a nightly battle with fear.",
+    },
     prayerCta: {
-      text: "Lying awake with something specific on your mind? Tell Faith Companion what's keeping you up and get a calming prayer written for tonight.",
+      text: "These verses speak to sleeplessness in general. For a verse or prayer written around what is keeping you awake tonight — the specific worry, the exact thing your mind keeps circling — tell Faith Companion what is on your mind and receive something written for this moment.",
       buttonLabel: "Write a prayer for rest",
+    },
+    shareBlock: {
+      text: "Know someone who can't sleep? Share these verses with them tonight.",
+    },
+    pdfDownload: {
+      href: "/downloads/prayer-for-sleep.pdf",
+      label: "Download Printable Prayer Card",
     },
     related: [
       { slug: "psalm-91", label: "Psalm 91: God's Protection" },
