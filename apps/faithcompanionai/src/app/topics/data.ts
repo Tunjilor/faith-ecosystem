@@ -495,12 +495,42 @@ export const TOPICS: Record<string, TopicData> = {
       },
     ],
     prayer:
-      "Father, my mom (or dad) is sick, and I feel so small in front of it. You know every detail of this illness that I cannot control — the test results, the long nights, the fear I carry into their room. Thank you that you are already at the bedside, strengthening and sustaining them when I can't. Steady my own heart with your peace, and let me be a calm, loving presence instead of an anxious one. Whether you bring healing in this life or carry them gently home to you, help us both to trust that they are held in hands kinder and stronger than mine. Give me strength for today, and the grace to love them well in the time we have. Amen.",
+      "Father, my mom or dad is sick, and I feel small in the face of it. You know every part of this illness — the test results, the long nights, the uncertainty, and the fear I carry with me. Thank you for being near to them, even when I cannot fix what is happening. Thank you for being at their bedside, strengthening and sustaining them in ways I may never see.\n\nPlease steady my heart with your peace. Help me not to be ruled by anxiety, but to be a calm, loving presence for them. Give the doctors wisdom, give my parent comfort, and give our family strength for each day.\n\nLord, I ask for healing. But whatever comes, help us trust that my parent is held in hands kinder and stronger than mine. Give me grace to love them well, courage to face today, and peace in the time we have together.\n\nAmen.",
     actionStep:
       "Before today gets away from you, do one small thing: sit with your parent for ten unhurried minutes — no phone, no agenda — and read Psalm 41:3 aloud over them. If you live far away, send a short voice note telling them you love them and that you prayed for them today.",
+    devotional: {
+      heading: "A 5-Minute Devotional for the Hospital Waiting Room",
+      passage: {
+        ref: "Psalm 46:1 (WEB)",
+        text: "God is our refuge and strength, a very present help in trouble.",
+      },
+      reflection:
+        "Few things feel as helpless as loving someone you cannot heal. You can sit by the bed, ask the right questions, advocate with the doctors — and still the one thing you most want, their wholeness, is not yours to give. This verse does not pretend the trouble away. It calls it what it is — trouble — and then says God is a \"very present help\" inside of it, not a distant rescuer who shows up only when the crisis is over. Notice that he is named your strength, not just your parent's. The God tending the sickbed is the same God steadying the exhausted child in the waiting-room chair. You were never meant to be your parent's savior. You are allowed to be their son or daughter, and to let the One who is strong enough carry what you cannot.",
+      question:
+        "What does it mean to trust God with someone you love but cannot fix?",
+    },
+    reflectionQuestions: {
+      heading: "Reflect or Discuss",
+      questions: [
+        "What would it look like to release your parent into God's care — not giving up, but trusting?",
+        "Where are you running on empty right now, and what would it mean to bring that exhaustion to God instead of pushing through it alone?",
+        "What is one honest thing — fear, anger, grief, or guilt — you've been afraid to say to God about this illness?",
+      ],
+    },
+    discussionGuide: {
+      heading: "For Small Groups & Families",
+      text: "If you're praying through this as siblings or as a small group walking with a caregiver, read the verses and the prayer aloud, then let each person name one specific way to help carry the load — a meal, a hospital shift, a phone call, a prayer kept up through the week. Caregiving is rarely meant to fall on one person; part of how God provides his \"very present help\" is through the people he places around the family.",
+    },
     prayerCta: {
-      text: "Need a prayer for your exact situation? Tell Faith Companion what you're going through — their diagnosis, your fears, the words you can't find — and get a personal prayer written for this moment.",
+      text: "This prayer speaks to a sick parent in general. For a prayer written around your parent's specific illness, what the doctors have said, and what you're carrying today, tell Faith Companion what's happening — the diagnosis, your fears, the words you can't find — and receive words shaped for this exact moment.",
       buttonLabel: "Write a prayer for my situation",
+    },
+    shareBlock: {
+      text: "Caring for a sick parent? Share this prayer with someone in the waiting room.",
+    },
+    pdfDownload: {
+      href: "/downloads/prayer-for-a-sick-parent.pdf",
+      label: "Download Printable Prayer Card",
     },
     related: [
       { slug: "psalm-23", label: "Psalm 23: Comfort in the Valley" },
