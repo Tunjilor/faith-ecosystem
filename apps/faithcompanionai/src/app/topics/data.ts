@@ -1211,12 +1211,42 @@ export const TOPICS: Record<string, TopicData> = {
     reflection:
       "Depression is not a sign of weak faith or a sin to repent of. Some of the most faithful people in the Bible — Elijah under the broom tree, David in the Psalms — prayed their way through seasons of real darkness. These verses are not meant to rush you out of how you feel or tie a bow on genuine pain. They're here to remind you, gently, that God is near to the brokenhearted even when he feels absent, and that this heaviness is not the end of your story.\n\nAnd please hear this clearly: reaching out for help is not a lack of faith — it is a brave and faithful step. If the darkness is deep, tell a trusted friend, a pastor, or a counselor, and if you ever feel unsafe or in crisis, please reach out to a crisis line or someone who can be with you today. God so often sends his help through other people; letting them in is part of how he carries you.",
     prayer:
-      "God, I don't have many words today, and even praying feels like effort. You see the heaviness I'm carrying — the hope that feels out of reach, the days that all blur together. Thank you that you are near to the brokenhearted, that you have not turned away from me even though I feel far from you. Hold me through this, and give me just enough light for the next small step. Send people to help carry what I cannot carry alone, and remind me, gently, that your mercies are still new every morning. Amen.",
+      "Father, I feel tired in a way I cannot fully explain. Some days even simple things feel heavy, and I do not always have the words to describe what is happening inside me. You see the sadness I try to hide, the thoughts that wear me down, and the quiet battles no one else notices.\n\nPlease meet me here with your mercy. Remind me that I am not a burden to you, and that my life still matters even when I cannot feel it. Speak peace into the places that feel dark, and help me take the next small step without shame.\n\nGive me strength for today, not for every day ahead. Surround me with people who are patient, kind, and safe. Help me receive support, rest, and healing without feeling weak for needing them.\n\nLord, when hope feels far away, hold it for me. When I cannot see the light, stay close in the darkness. Let your love steady me, carry me, and gently remind me that this is not the end of my story.\n\nAmen.",
     actionStep:
       "Do one small, kind thing for yourself today — a glass of water, a short walk, opening a window — and tell one person you trust how you're really doing. You don't need the right words; \"I'm struggling\" is enough to start.",
+    devotional: {
+      heading: "A 5-Minute Devotional for a Heavy Day",
+      passage: {
+        ref: "Psalm 34:18 (KJV)",
+        text: "The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.",
+      },
+      reflection:
+        "Read that verse again, slowly: the LORD is near to the brokenhearted. Not near once you cheer up. Not near after you have pulled yourself together or prayed with enough faith. Near now — drawn toward the very heaviness you are most tempted to hide. Depression tells you that you are too much, too far gone, or too far away for God to bother with. This verse says the opposite: your broken heart is not what pushes him away, it is what draws him close. He does not promise here to fix everything today or to lift the weight by morning. He promises something quieter and more durable — that you are not alone in it. And you do not have to feel his nearness for it to be true. On a heavy day, that may be the one solid thing you can hold onto: he is near, and he is not leaving.",
+      question:
+        "Where do you most need to know that God is near to you today — not to fix you, but simply to be with you in it?",
+    },
+    reflectionQuestions: {
+      heading: "Reflect or Discuss",
+      questions: [
+        "What would it mean to believe, even slightly, that God is not disappointed in you today?",
+        "What is one small kindness you could let someone show you this week, instead of carrying everything alone?",
+        "If you could tell God one honest thing about how you really feel — with no need to fix it or dress it up — what would it be?",
+      ],
+    },
+    discussionGuide: {
+      heading: "For Small Groups & Families",
+      text: "If you are walking alongside someone in a heavy season, resist the urge to fix, correct, or rush them toward feeling better — your steady, unhurried presence will mean more than any answer. Read a verse together only if they want to, let them be honest without judgment, and ask simply, \"How can I support you this week?\" And if you ever sense someone is in danger or talking about not wanting to be here, take it seriously and help them reach a counselor, pastor, or crisis line today — loving someone well sometimes means helping them get more help than you alone can give.",
+    },
     prayerCta: {
-      text: "Carrying something heavy you can't put into words? Tell Faith Companion as much or as little as you want, and get a gentle, personal prayer written for right where you are.",
+      text: "This prayer speaks to depression in general. For a prayer written around what you are carrying today — your specific situation, your exact struggle — tell Faith Companion what is on your heart, in as many or as few words as you have, and receive something gentle and personal.",
       buttonLabel: "Write a prayer for me",
+    },
+    shareBlock: {
+      text: "Know someone carrying a heaviness they can't explain? Share this with them.",
+    },
+    pdfDownload: {
+      href: "/downloads/prayer-for-depression.pdf",
+      label: "Download Printable Prayer Card",
     },
     related: [
       { slug: "anxiety", label: "Bible Verses for Anxiety" },
