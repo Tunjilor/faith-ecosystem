@@ -546,12 +546,42 @@ export const TOPICS: Record<string, TopicData> = {
       },
     ],
     prayer:
-      "Father, surgery is coming, and I feel the weight of everything I cannot control. You know the fear sitting in my chest tonight — the unknowns, the waiting, the what-ifs I keep turning over. Thank you that you will be in that operating room when I cannot be, steadying the hands of every doctor and nurse and watching over every moment. Quiet my racing thoughts and give me the kind of peace that does not depend on knowing the outcome. Whatever the result, help me to trust that I am held by a God who is good and who never leaves. Into your hands I place this body, this day, and the people I love. Amen.",
+      "Father, surgery is coming, and I feel the weight of everything I cannot control. You know the fear sitting in my heart tonight — the unknowns, the waiting, the what-ifs I keep turning over. Thank you that you will be in that operating room when I cannot be, steadying the hands of every doctor and nurse and watching over every moment. Quiet my racing thoughts and give me the kind of peace that does not depend on knowing the outcome. Whatever the result, help me to trust that I am held by a God who is good and who never leaves. Into your hands I place this body, this day, and the people I love. Amen.",
     actionStep:
       "Tonight, before you try to sleep, write the one thing you're most afraid of on a slip of paper, pray Psalm 56:3 over it — \"When I am afraid, I will put my trust in you\" — and leave the paper where you'll see it in the morning. If you're waiting on a loved one's surgery, send them one short message tonight telling them you're praying.",
+    devotional: {
+      heading: "A 5-Minute Devotional for the Day Before Surgery",
+      passage: {
+        ref: "Isaiah 41:10 (WEB)",
+        text: "Don't be afraid, for I am with you. Don't be dismayed, for I am your God. I will strengthen you. Yes, I will help you. Yes, I will uphold you with the right hand of my righteousness.",
+      },
+      reflection:
+        "Notice what God does not say here. He does not promise an easy procedure, a short recovery, or a result you'll be happy with. He promises something better and more certain than any of that: \"I am with you.\" Tomorrow there will be a great deal you cannot control — the skill of the surgeon, the response of your body, the hours you'll spend unconscious in someone else's hands. Fear fixates on exactly those things, the ones you were never meant to carry. This verse gently moves your grip off the outcome and onto the One who holds it. You can walk into that hospital tomorrow afraid and still trusting, because the strength being offered is not your own — it's the right hand of a God who has promised, four times in a single sentence, that he will not let go of you.",
+      question:
+        "What is the one fear about tomorrow you most need to hand to God tonight — and can you say it to him plainly, in your own words, right now?",
+    },
+    reflectionQuestions: {
+      heading: "Reflect or Discuss",
+      questions: [
+        "What would it mean to hand this surgery — and its outcome — completely to God today?",
+        "Where in your body or your thoughts are you carrying the fear right now, and what would it feel like to set it down?",
+        "Who has God placed around you — family, friends, medical staff — that you can let care for you instead of facing this alone?",
+      ],
+    },
+    discussionGuide: {
+      heading: "For Small Groups & Families",
+      text: "If you're gathered around someone before their surgery — at a bedside, in a living room, or on a call — read the verses and the prayer aloud together, then lay hands on them or simply hold a hand as you pray. Let each person name one specific thing they're entrusting to God: the procedure, the surgeon's hands, the recovery, the fear. The goal is not to promise a particular outcome, but to surround the person with the truth that they are not walking into tomorrow alone.",
+    },
     prayerCta: {
-      text: "Facing a specific procedure or waiting on someone in surgery? Tell Faith Companion the details and get a personal prayer written for this exact moment.",
+      text: "This prayer covers surgery in general. For a prayer written around your specific procedure, your fears, and what you need today, tell Faith Companion what you're facing — the operation, the worries, the people you're carrying — and receive words shaped for this exact moment.",
       buttonLabel: "Write a prayer for surgery",
+    },
+    shareBlock: {
+      text: "Praying for someone facing surgery? Share this prayer with them.",
+    },
+    pdfDownload: {
+      href: "/downloads/prayer-before-surgery.pdf",
+      label: "Download Printable Prayer Card",
     },
     related: [
       { slug: "joshua-1-9", label: "Joshua 1:9: Be Strong & Courageous" },
