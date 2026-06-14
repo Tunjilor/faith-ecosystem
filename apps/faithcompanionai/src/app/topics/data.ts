@@ -826,7 +826,7 @@ export const TOPICS: Record<string, TopicData> = {
       },
     ],
     prayer:
-      "Father, it is late, and I am still awake. The house is quiet, but my mind is not — it keeps replaying today and rehearsing tomorrow, turning over worries I cannot solve at this hour. You see every thought I cannot switch off.\n\nThank you that you never sleep, and that nothing I am afraid of has slipped past you. While I lie here, you are already watching over the people I love and the things I cannot control. I do not have to keep watch tonight, because you never stop watching.\n\nQuiet my racing thoughts and loosen the grip of every fear. Help me to hand you the day that is ending and the one that is coming, and to leave them both in your hands until morning. Remind me that rest is your gift, not something I have to earn.\n\nSteady my breathing, soften my body, and let your peace settle over this room. Even now, give me the sweet sleep you promise to those you love.\n\nAmen.",
+      "Father, it is late, and I am still awake.\n\nThe house is quiet, but my mind is not. I keep replaying what happened today and worrying about what may happen tomorrow. I am tired, but I cannot seem to rest.\n\nYou see every thought I cannot turn off. You know the fears I keep carrying, the questions I cannot answer, and the things I cannot fix at this hour.\n\nThank you that you are awake with me. Thank you that while I am lying here, you are still watching over the people I love and the things I cannot control. I do not have to hold everything together tonight.\n\nQuiet my mind, Lord. Loosen the grip of fear. Help me place this day in your hands, and leave tomorrow there too.\n\nSlow my breathing. Soften my body. Let your peace settle over this room.\n\nAnd when sleep comes, let me receive it as a gift from you.\n\nAmen.",
     actionStep:
       "Instead of reaching for your phone, breathe slowly and pray Psalm 121 back to God — \"He that keepeth me will not slumber\" — naming each worry as you exhale it. If your mind keeps racing, keep a notepad by the bed and write tomorrow's worries down to hand to God until morning.",
     devotional: {
@@ -1247,13 +1247,13 @@ export const TOPICS: Record<string, TopicData> = {
     devotional: {
       heading: "A 5-Minute Devotional for a Heavy Day",
       passage: {
-        ref: "Psalm 34:18 (KJV)",
-        text: "The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.",
+        ref: "Lamentations 3:22–23 (WEB)",
+        text: "It is because of Yahweh's loving kindnesses that we are not consumed, because his compassion doesn't fail. They are new every morning.",
       },
       reflection:
-        "Read that verse again, slowly: the LORD is near to the brokenhearted. Not near once you cheer up. Not near after you have pulled yourself together or prayed with enough faith. Near now — drawn toward the very heaviness you are most tempted to hide. Depression tells you that you are too much, too far gone, or too far away for God to bother with. This verse says the opposite: your broken heart is not what pushes him away, it is what draws him close. He does not promise here to fix everything today or to lift the weight by morning. He promises something quieter and more durable — that you are not alone in it. And you do not have to feel his nearness for it to be true. On a heavy day, that may be the one solid thing you can hold onto: he is near, and he is not leaving.",
+        "These words were written by someone in genuine anguish — the book is literally called Lamentations, a long, honest cry of grief. And right in the middle of that darkness, the writer says something almost defiant: we are not consumed. The heaviness is real, but it has not swallowed you whole, and it will not, because God's compassion does not run out. Notice the promise is not that the weight lifts all at once, but that his mercies are \"new every morning\" — enough for one day, renewed again when the next one comes. Depression makes tomorrow feel unbearable because you are trying to carry every future morning at once. You do not have to. You only need today's mercy today, and there will be fresh mercy waiting when morning comes. On a heavy day, that may be the one solid thing you can hold onto: you have not been consumed, and you will not be.",
       question:
-        "Where do you most need to know that God is near to you today — not to fix you, but simply to be with you in it?",
+        "What would it mean to ask God for just enough mercy to get through today — and to trust that more will be waiting tomorrow?",
     },
     reflectionQuestions: {
       heading: "Reflect or Discuss",

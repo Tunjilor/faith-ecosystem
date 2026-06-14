@@ -39,10 +39,13 @@ const VERSES: Array<{ ref: string; text: string }> = [
 
 // Paragraphs are drawn with a small gap between them so the PDF matches the page layout.
 const PRAYER_PARAGRAPHS = [
-  "Father, it is late, and I am still awake. The house is quiet, but my mind is not — it keeps replaying today and rehearsing tomorrow, turning over worries I cannot solve at this hour. You see every thought I cannot switch off.",
-  "Thank you that you never sleep, and that nothing I am afraid of has slipped past you. While I lie here, you are already watching over the people I love and the things I cannot control. I do not have to keep watch tonight, because you never stop watching.",
-  "Quiet my racing thoughts and loosen the grip of every fear. Help me to hand you the day that is ending and the one that is coming, and to leave them both in your hands until morning. Remind me that rest is your gift, not something I have to earn.",
-  "Steady my breathing, soften my body, and let your peace settle over this room. Even now, give me the sweet sleep you promise to those you love.",
+  "Father, it is late, and I am still awake.",
+  "The house is quiet, but my mind is not. I keep replaying what happened today and worrying about what may happen tomorrow. I am tired, but I cannot seem to rest.",
+  "You see every thought I cannot turn off. You know the fears I keep carrying, the questions I cannot answer, and the things I cannot fix at this hour.",
+  "Thank you that you are awake with me. Thank you that while I am lying here, you are still watching over the people I love and the things I cannot control. I do not have to hold everything together tonight.",
+  "Quiet my mind, Lord. Loosen the grip of fear. Help me place this day in your hands, and leave tomorrow there too.",
+  "Slow my breathing. Soften my body. Let your peace settle over this room.",
+  "And when sleep comes, let me receive it as a gift from you.",
   "Amen.",
 ];
 
