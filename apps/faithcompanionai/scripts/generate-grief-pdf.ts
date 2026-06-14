@@ -35,8 +35,14 @@ const VERSES: Array<{ ref: string; text: string }> = [
   },
 ];
 
-const PRAYER =
-  "Father, I am grieving, and some days the weight of it is almost more than I can carry. You know who I've lost and the exact shape of this empty space — the conversations that won't happen, the ordinary moments I keep reaching for out of habit. Thank you that you are near to the brokenhearted and that you keep track of every one of my tears. Comfort me in the places no one else can reach, and don't let me feel ashamed of how long this is taking. Hold the hope in front of me that death does not get the final word, and that what is hidden in you is never truly lost. Until that day, be my comfort and my strength, one ordinary morning at a time. Amen.";
+// Paragraphs are drawn with a small gap between them so the PDF matches the page layout.
+const PRAYER_PARAGRAPHS = [
+  "Father, I am grieving, and some days the weight of it feels like more than I can carry. You know who I have lost, and you understand the emptiness they have left behind — the conversations that will not happen, the familiar moments I still reach for out of habit, and the ache that rises when I least expect it.",
+  "Thank you that you are near to the brokenhearted, and that not one of my tears is hidden from you. Comfort me in the places no one else can reach. Help me not to feel ashamed of how deeply I hurt or how long healing takes.",
+  "Hold hope before me when I cannot hold it for myself. Remind me that death does not have the final word, and that what is kept in your love is never truly lost.",
+  "Until the day when sorrow is no more, be my comfort, my strength, and my steady peace — one ordinary morning at a time.",
+  "Amen.",
+];
 
 const FOOTER = "faithcompanionai.com";
 
@@ -155,8 +161,11 @@ async function main() {
   page.drawText("A Prayer", { x: MARGIN, y, size: 15, font: bold, color: INK });
   y -= 24;
 
-  // Prayer body
-  drawWrapped(PRAYER, body, 12, 18);
+  // Prayer body — one wrapped block per paragraph, with a small gap between them.
+  PRAYER_PARAGRAPHS.forEach((para, i) => {
+    drawWrapped(para, body, 12, 18);
+    if (i < PRAYER_PARAGRAPHS.length - 1) y -= 8;
+  });
 
   // Footer sits just below the prayer (a small, intentional gap), not at the page bottom.
   drawFooter(y - 6);

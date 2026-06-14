@@ -37,8 +37,13 @@ const VERSES: Array<{ ref: string; text: string }> = [
   },
 ];
 
-const PRAYER =
-  "Father, surgery is coming, and I feel the weight of everything I cannot control. You know the fear sitting in my heart tonight — the unknowns, the waiting, the what-ifs I keep turning over. Thank you that you will be in that operating room when I cannot be, steadying the hands of every doctor and nurse and watching over every moment. Quiet my racing thoughts and give me the kind of peace that does not depend on knowing the outcome. Whatever the result, help me to trust that I am held by a God who is good and who never leaves. Into your hands I place this body, this day, and the people I love. Amen.";
+// Paragraphs are drawn with a small gap between them so the PDF matches the page layout.
+const PRAYER_PARAGRAPHS = [
+  "Father, surgery is coming, and I feel the weight of everything I cannot control. You know the fear sitting in my chest tonight — the unknowns, the waiting, and the what-ifs I keep turning over.",
+  "Thank you that you will be in that operating room when I cannot be, steadying the hands of every doctor and nurse and watching over every moment. Quiet my racing thoughts, calm my body, and give me the kind of peace that does not depend on knowing the outcome.",
+  "Whatever the result, help me trust that I am held by a God who is good and who never leaves. Into your hands I place this body, this day, and the people I love.",
+  "Amen.",
+];
 
 const FOOTER = "faithcompanionai.com";
 
@@ -157,8 +162,11 @@ async function main() {
   page.drawText("A Prayer", { x: MARGIN, y, size: 15, font: bold, color: INK });
   y -= 24;
 
-  // Prayer body
-  drawWrapped(PRAYER, body, 12, 18);
+  // Prayer body — one wrapped block per paragraph, with a small gap between them.
+  PRAYER_PARAGRAPHS.forEach((para, i) => {
+    drawWrapped(para, body, 12, 18);
+    if (i < PRAYER_PARAGRAPHS.length - 1) y -= 8;
+  });
 
   // Footer sits just below the prayer (a small, intentional gap), not at the page bottom.
   drawFooter(y - 6);
