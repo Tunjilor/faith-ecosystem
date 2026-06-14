@@ -20,6 +20,21 @@ export type TopicData = {
   actionStep?: string;
   /** Optional dedicated call-to-action linking to the live prayer tool (/tools/prayer → /api/ask). */
   prayerCta?: { text: string; buttonLabel: string };
+  /** Optional short "5-minute devotional" rendered after the prayer: one passage, one paragraph, one question. */
+  devotional?: {
+    heading: string;
+    passage: { ref: string; text: string };
+    reflection: string;
+    question: string;
+  };
+  /** Optional reflection / discussion questions, rendered after the devotional. */
+  reflectionQuestions?: { heading: string; questions: string[] };
+  /** Optional small-group / family framing, rendered after the reflection questions. */
+  discussionGuide?: { heading: string; text: string };
+  /** Optional "share this page" block (warm prompt + copy-link button), rendered above Related. */
+  shareBlock?: { text: string };
+  /** Optional printable-PDF download link (static file in /public/downloads). */
+  pdfDownload?: { href: string; label: string };
   /** Optional explicit "Related" links. When set, replaces the auto "Explore other topics" list. */
   related?: Array<{ slug: string; label: string }>;
 };
@@ -584,9 +599,39 @@ export const TOPICS: Record<string, TopicData> = {
       "Father, I am grieving, and some days the weight of it is almost more than I can carry. You know who I've lost and the exact shape of this empty space — the conversations that won't happen, the ordinary moments I keep reaching for out of habit. Thank you that you are near to the brokenhearted and that you keep track of every one of my tears. Comfort me in the places no one else can reach, and don't let me feel ashamed of how long this is taking. Hold the hope in front of me that death does not get the final word, and that what is hidden in you is never truly lost. Until that day, be my comfort and my strength, one ordinary morning at a time. Amen.",
     actionStep:
       "Don't carry it silently today — say the name of the person you lost out loud to God, and tell him honestly how you're doing, even if all you can manage is \"this hurts.\" Then read Psalm 34:18 slowly, and let yourself believe he is near.",
+    devotional: {
+      heading: "A 5-Minute Devotional for the Grieving Heart",
+      passage: {
+        ref: "John 11:33–35 (WEB)",
+        text: "When Jesus therefore saw her weeping, and the Jews weeping who came with her, he groaned in the spirit, and was troubled, and said, \"Where have you laid him?\" They told him, \"Lord, come and see.\" Jesus wept.",
+      },
+      reflection:
+        "Jesus was standing minutes away from raising Lazarus from the dead. He knew the grave would be empty before the day was over — and still, he wept. He did not scold the sisters for crying, did not rush them toward the happy ending he was about to bring. He stood in the sorrow with them first. That is what God does with your grief. He does not stand at a distance asking you to hurry up and feel better, and he is not embarrassed by your tears. The God who will one day wipe away every tear is, right now, near enough to share them. Your weeping is not a lack of faith — it is something Jesus himself did, and it is holy ground he is willing to stand on with you.",
+      question:
+        "Where do you most need to know that God is sitting with you in your grief, rather than rushing you past it?",
+    },
+    reflectionQuestions: {
+      heading: "Reflect or Discuss",
+      questions: [
+        "What memory of your loved one brings you the most comfort today?",
+        "Where have you sensed God's nearness — or felt his absence — in this season of loss?",
+        "What is one thing you wish the people around you understood about what you're carrying right now?",
+      ],
+    },
+    discussionGuide: {
+      heading: "For Small Groups & Families",
+      text: "If you're walking through loss together as a family or a small group, read the verses and the prayer aloud, then give each person room to answer just one of the reflection questions — without being fixed, corrected, or rushed. Grief shared in safe company is lighter than grief carried alone. Your job here is not to solve someone's sorrow but to sit in it with them, the way Christ sat with Mary and Martha at the tomb.",
+    },
     prayerCta: {
-      text: "Grieving a specific loss? Tell Faith Companion who you're missing and get a gentle, personal prayer written for exactly where you are today.",
+      text: "This prayer speaks to grief in general. For a prayer written around your specific loss and what you're carrying today, tell Faith Companion what you're going through — who you're missing, what the hardest moments are — and receive words shaped for exactly where you are.",
       buttonLabel: "Write a prayer for my grief",
+    },
+    shareBlock: {
+      text: "Know someone who is grieving? Share these verses and this prayer with them.",
+    },
+    pdfDownload: {
+      href: "/downloads/prayer-for-grief.pdf",
+      label: "Download Printable Prayer Card",
     },
     related: [
       { slug: "psalm-23", label: "Psalm 23: Comfort in the Valley" },

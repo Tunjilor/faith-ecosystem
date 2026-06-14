@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { TOPICS, TOPIC_SLUGS, getTopic } from "../data";
+import ShareBlock from "./ShareBlock";
 
 export const dynamic = "force-static";
 
@@ -165,6 +166,18 @@ export default function TopicPage({ params }: Props) {
           </p>
         </div>
 
+        {data.pdfDownload && (
+          <div className="mt-4 text-center text-sm">
+            <a
+              href={data.pdfDownload.href}
+              download
+              className="inline-flex items-center gap-2 font-semibold text-orange-300 hover:text-orange-200"
+            >
+              ⬇ {data.pdfDownload.label}
+            </a>
+          </div>
+        )}
+
         {!data.prayerCta && (
           <div className="mt-4 text-center text-sm text-white/55">
             <Link href="/tools/prayer" className="font-semibold text-orange-300 hover:text-orange-200">
@@ -173,6 +186,57 @@ export default function TopicPage({ params }: Props) {
           </div>
         )}
       </section>
+
+      {/* ── 5-minute devotional (optional) ── */}
+      {data.devotional && (
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-white md:text-3xl">{data.devotional.heading}</h2>
+          <div className="mt-6 rounded-[22px] border border-white/10 bg-white/5 p-6 md:p-8">
+            <div className="text-sm font-bold text-orange-300">{data.devotional.passage.ref}</div>
+            <blockquote className="mt-3 text-base leading-7 text-white italic">
+              "{data.devotional.passage.text}"
+            </blockquote>
+            <p className="mt-5 whitespace-pre-line text-sm leading-7 text-white/75">
+              {data.devotional.reflection}
+            </p>
+            <div className="mt-6 rounded-[18px] border border-orange-400/20 bg-orange-500/5 p-5">
+              <div className="text-xs font-semibold uppercase tracking-wide text-orange-300/80">
+                Sit with this
+              </div>
+              <p className="mt-2 text-sm leading-7 text-white/85">{data.devotional.question}</p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── Reflection / discussion questions (optional) ── */}
+      {data.reflectionQuestions && (
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-white md:text-3xl">{data.reflectionQuestions.heading}</h2>
+          <div className="mt-6 rounded-[22px] border border-white/10 bg-white/5 p-6 md:p-8">
+            <ol className="space-y-4">
+              {data.reflectionQuestions.questions.map((q, i) => (
+                <li key={i} className="flex gap-4">
+                  <div className="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-purple-500/20 text-sm font-bold text-purple-200">
+                    {i + 1}
+                  </div>
+                  <p className="text-sm leading-7 text-white/80">{q}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      )}
+
+      {/* ── Small-group / family discussion guide (optional) ── */}
+      {data.discussionGuide && (
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-white md:text-3xl">{data.discussionGuide.heading}</h2>
+          <div className="mt-6 rounded-[22px] border border-white/10 bg-white/5 p-6 md:p-8">
+            <p className="whitespace-pre-line text-sm leading-7 text-white/75">{data.discussionGuide.text}</p>
+          </div>
+        </section>
+      )}
 
       {/* ── One small step (optional) ── */}
       {data.actionStep && (
@@ -202,6 +266,11 @@ export default function TopicPage({ params }: Props) {
             </Link>
           </div>
         </section>
+      )}
+
+      {/* ── Share block (optional — copy page URL to clipboard) ── */}
+      {data.shareBlock && (
+        <ShareBlock text={data.shareBlock.text} url={`https://faithcompanionai.com/topics/${data.topic}`} />
       )}
 
       {/* ── Related (explicit) or Explore other topics (auto) ── */}
