@@ -40,6 +40,12 @@ const CATEGORY_LABELS: Record<CategoryId, string> = {
 
 const PREMIUM_CATEGORIES = new Set<CategoryId>(["ai", "theology", "history"]);
 
+// Seasonal categories are FREE FOREVER and UNLIMITED. They bypass every free-tier gate
+// (per-day cap, 3-day/30-question trial, no-repeat seen tracking) and never count toward
+// — nor are blocked by — the general-pool limits. Keyed off this flag set, not scattered
+// slug checks. General/AI categories are unaffected.
+const FREE_FOREVER_CATEGORIES = new Set<CategoryId>(["christmas", "thanksgiving", "new-year"]);
+
 function getUtcDayRange(d = new Date()) {
   const start = new Date(
     Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 0, 0, 0)
@@ -218,6 +224,7 @@ export async function POST(req: Request) {
 
     // Narrowed to CategoryId after the set check above
     const category = rawCategory as CategoryId;
+    const isFreeForever = FREE_FOREVER_CATEGORIES.has(category);
 
     const ident = await getActorAndPremium();
     if (!ident.ok) {
@@ -256,15 +263,21 @@ export async function POST(req: Request) {
       })
     );
 
-    const todayAttempts = allAttempts.filter(
+    // Free-forever (seasonal) attempts are invisible to the limit math: they neither
+    // count toward the cap nor block other categories. Only "limited" attempts gate.
+    const limitedAttempts = allAttempts.filter(
+      (a) => !FREE_FOREVER_CATEGORIES.has(a.category as CategoryId)
+    );
+
+    const todayAttempts = limitedAttempts.filter(
       (a) => a.createdAt >= start && a.createdAt < end
     );
 
     const distinctDaysUsed = new Set(
-      allAttempts.map((a) => utcDayKey(a.createdAt))
+      limitedAttempts.map((a) => utcDayKey(a.createdAt))
     ).size;
 
-    const totalQuestionsUsed = allAttempts.length * QUESTIONS_PER_QUIZ;
+    const totalQuestionsUsed = limitedAttempts.length * QUESTIONS_PER_QUIZ;
     const todayQuestionsUsed = todayAttempts.length * QUESTIONS_PER_QUIZ;
 
     const usage = {
@@ -278,7 +291,8 @@ export async function POST(req: Request) {
 
     let softLimit = false;
 
-    if (!ident.isPremium) {
+    // Seasonal categories skip the entire free-tier gate (no daily cap, no trial cap).
+    if (!ident.isPremium && !isFreeForever) {
       const todayAttempt = todayAttempts[0] ?? null;
 
       if (todayAttempt) {
@@ -343,22 +357,28 @@ export async function POST(req: Request) {
       }
     }
 
-    const seenRows = await withDbRetry(() =>
-      db.quizSeenQuestion.findMany({
-        where: {
-          actorKey: ident.actorKey,
-          category,
-        },
-        select: {
-          questionId: true,
-        },
-      })
-    );
+    // Seasonal (free-forever) categories have no no-repeat tracking: skip the seen read
+    // entirely and allow repeats from the full pool.
+    const seenRows = isFreeForever
+      ? []
+      : await withDbRetry(() =>
+          db.quizSeenQuestion.findMany({
+            where: {
+              actorKey: ident.actorKey,
+              category,
+            },
+            select: {
+              questionId: true,
+            },
+          })
+        );
 
-    // Merge server-tracked seen IDs with any client-side localStorage IDs (guests)
-    const clientSeenIds = Array.isArray(body.clientSeenIds)
-      ? (body.clientSeenIds as unknown[]).filter((s): s is string => typeof s === "string").slice(0, 500)
-      : [];
+    // Merge server-tracked seen IDs with any client-side localStorage IDs (guests).
+    // Skipped for seasonal categories so they never de-duplicate.
+    const clientSeenIds =
+      !isFreeForever && Array.isArray(body.clientSeenIds)
+        ? (body.clientSeenIds as unknown[]).filter((s): s is string => typeof s === "string").slice(0, 500)
+        : [];
     const seenIds = [...new Set([...seenRows.map((row) => row.questionId), ...clientSeenIds])];
 
     let candidateRows = await withDbRetry(() =>
@@ -492,16 +512,19 @@ export async function POST(req: Request) {
       })
     );
 
-    await withDbRetry(() =>
-      db.quizSeenQuestion.createMany({
-        data: rows.map((q) => ({
-          actorKey: ident.actorKey,
-          category,
-          questionId: q.id,
-        })),
-        skipDuplicates: true,
-      })
-    );
+    // Seasonal categories are not tracked for no-repeat, so don't record seen questions.
+    if (!isFreeForever) {
+      await withDbRetry(() =>
+        db.quizSeenQuestion.createMany({
+          data: rows.map((q) => ({
+            actorKey: ident.actorKey,
+            category,
+            questionId: q.id,
+          })),
+          skipDuplicates: true,
+        })
+      );
+    }
 
     const questions = rows.map((q) => ({
       id: q.id,
@@ -516,7 +539,7 @@ export async function POST(req: Request) {
       chosen: null as Choice | null,
     }));
 
-    const nextUsage = ident.isPremium
+    const nextUsage = ident.isPremium || isFreeForever
       ? null
       : {
           todayUsedQuestions: todayQuestionsUsed + QUESTIONS_PER_QUIZ,
