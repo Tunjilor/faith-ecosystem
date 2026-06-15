@@ -8,7 +8,16 @@ import DenominationSelect, { readDenomination } from "@/components/DenominationS
 import QuizLimitPrompt from "@/components/QuizLimitPrompt";
 
 type Choice = "A" | "B" | "C" | "D";
-type CategoryId = "general" | "women" | "parables" | "ai" | "theology" | "history";
+type CategoryId =
+  | "general"
+  | "women"
+  | "parables"
+  | "ai"
+  | "theology"
+  | "history"
+  | "christmas"
+  | "thanksgiving"
+  | "new-year";
 
 type Category = {
   id: CategoryId;
@@ -82,6 +91,9 @@ const categories: Category[] = [
   { id: "general", name: "General Bible Knowledge", premium: false },
   { id: "women", name: "Women of the Bible", premium: false },
   { id: "parables", name: "Jesus' Parables", premium: false },
+  { id: "christmas", name: "Christmas & the Nativity", premium: false, hover: "Seasonal: the Christmas story" },
+  { id: "thanksgiving", name: "Thanksgiving & Gratitude", premium: false, hover: "Seasonal: gratitude in Scripture" },
+  { id: "new-year", name: "New Year & New Beginnings", premium: false, hover: "Seasonal: fresh starts in Scripture" },
   { id: "ai", name: "AI Bible Questions", premium: true, hover: "Premium: unlimited AI-generated questions" },
   { id: "theology", name: "Theology", premium: true, hover: "Premium: unlimited AI-generated questions" },
   { id: "history", name: "Church History", premium: true, hover: "Premium: unlimited AI-generated questions" },
@@ -254,6 +266,21 @@ export default function QuizClient() {
     const t = window.setTimeout(() => setToast(null), 2400);
     return () => window.clearTimeout(t);
   }, [toast]);
+
+  // Deep-link support: /biblequiz?category=christmas (etc.) preselects a category and
+  // auto-starts that quiz. Used by the seasonal topic pages' "take the Bible Quiz" buttons.
+  const autoStartedRef = useRef(false);
+  useEffect(() => {
+    if (autoStartedRef.current || typeof window === "undefined") return;
+    const requested = new URLSearchParams(window.location.search).get("category");
+    if (!requested) return;
+    const match = categories.find((c) => c.id === requested && !c.premium);
+    if (!match) return;
+    autoStartedRef.current = true;
+    setCategory(match.id);
+    void startQuiz(match.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const statusLabel = useMemo(() => {
     if (!premiumLoaded) return "Checking…";

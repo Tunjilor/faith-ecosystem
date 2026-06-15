@@ -12,7 +12,10 @@ type CategoryId =
   | "parables"
   | "ai"
   | "theology"
-  | "history";
+  | "history"
+  | "christmas"
+  | "thanksgiving"
+  | "new-year";
 
 type QuizQuestion = {
   id: string;
@@ -114,6 +117,24 @@ const CATEGORIES: Array<{
     title: "Jesus’ Parables",
     premium: false,
     description: "Teachings and meaning behind the parables.",
+  },
+  {
+    id: "christmas",
+    title: "Christmas & the Nativity",
+    premium: false,
+    description: "The Christmas story, from the angel’s announcement to the manger.",
+  },
+  {
+    id: "thanksgiving",
+    title: "Thanksgiving & Gratitude",
+    premium: false,
+    description: "What Scripture says about thankfulness and giving thanks.",
+  },
+  {
+    id: "new-year",
+    title: "New Year & New Beginnings",
+    premium: false,
+    description: "Fresh starts, new beginnings, and trusting God for the year ahead.",
   },
   {
     id: "ai",
