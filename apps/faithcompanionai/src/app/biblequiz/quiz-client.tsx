@@ -700,9 +700,6 @@ export default function QuizClient() {
             <div className="text-white/80">
               Category: <span className="font-semibold text-white">{activeCategoryName}</span>
             </div>
-            <div className="text-sm text-white/50">
-              Attempt: {attemptId ? <span className="text-white/70">{attemptId.slice(0, 8)}…</span> : "—"}
-            </div>
           </div>
 
           {busy ? (
