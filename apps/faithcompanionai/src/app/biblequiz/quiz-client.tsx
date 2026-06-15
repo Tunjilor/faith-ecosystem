@@ -362,7 +362,11 @@ export default function QuizClient() {
     }
 
     if (data.error === "premium_required") {
-      setInlineError(data.message || "That category is available on Premium.");
+      // Replace the easily-missed inline banner with the upgrade modal (Go Premium → /pricing).
+      triggerHardStop(
+        "Premium category",
+        data.message || "This category is part of Premium. Go Premium to unlock every category."
+      );
       return;
     }
 
@@ -651,6 +655,15 @@ export default function QuizClient() {
                 title={c.hover || c.name}
                 disabled={busy}
                 onClick={async () => {
+                  // Premium category + known non-premium user → show the upgrade modal
+                  // (clear "Go Premium" CTA to /pricing) instead of a silent/failed start.
+                  if (c.premium && premiumLoaded && !premium) {
+                    triggerHardStop(
+                      "Premium category",
+                      "This category is part of Premium — unlimited quizzes and every category. Go Premium to unlock it."
+                    );
+                    return;
+                  }
                   setCategory(c.id);
                   await startQuiz(c.id);
                 }}
