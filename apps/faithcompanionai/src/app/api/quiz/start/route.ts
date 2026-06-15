@@ -20,7 +20,10 @@ type CategoryId =
   | "parables"
   | "ai"
   | "theology"
-  | "history";
+  | "history"
+  | "christmas"
+  | "thanksgiving"
+  | "new-year";
 type Choice = "A" | "B" | "C" | "D";
 
 const CATEGORY_LABELS: Record<CategoryId, string> = {
@@ -30,6 +33,9 @@ const CATEGORY_LABELS: Record<CategoryId, string> = {
   ai: "AI Bible Questions",
   theology: "Theology",
   history: "Church History",
+  christmas: "Christmas & the Nativity",
+  thanksgiving: "Thanksgiving & Gratitude",
+  "new-year": "New Year & New Beginnings",
 };
 
 const PREMIUM_CATEGORIES = new Set<CategoryId>(["ai", "theology", "history"]);

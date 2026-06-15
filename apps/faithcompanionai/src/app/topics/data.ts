@@ -37,6 +37,39 @@ export type TopicData = {
   pdfDownload?: { href: string; label: string };
   /** Optional explicit "Related" links. When set, replaces the auto "Explore other topics" list. */
   related?: Array<{ slug: string; label: string }>;
+
+  /** Optional ISO date (YYYY-MM-DD) for Article structured data — datePublished / dateModified. */
+  datePublished?: string;
+  dateModified?: string;
+  /** Optional prominent interactive-tool CTA buttons (seasonal/landing pages). Rendered as buttons, not links. */
+  toolCtas?: {
+    heading: string;
+    intro?: string;
+    buttons: Array<{ href: string; label: string }>;
+  };
+  /** Optional link to a matching Bible quiz, rendered as a prominent banner. */
+  quizLink?: { href: string; label: string };
+  /** Optional gentle "when the season is hard" block with internal support links. */
+  hardSeason?: {
+    heading: string;
+    text: string;
+    links: Array<{ slug: string; label: string }>;
+  };
+  /** Optional FAQ rendered near the bottom and emitted as FAQPage JSON-LD (Google "People Also Ask"). */
+  faqs?: Array<{ question: string; answer: string }>;
+  /** Optional rich seasonal content blocks rendered after the verses (subheadings, verse-a-day lists, etc.). */
+  contentSections?: Array<
+    | { kind: "prose"; heading: string; body: string; callout?: string }
+    | { kind: "verseList"; heading: string; intro?: string; items: Array<{ ref: string; note?: string }> }
+    | { kind: "moodVerses"; heading: string; intro?: string; groups: Array<{ mood: string; ref: string; note: string }> }
+    | {
+        kind: "wordOfYear";
+        heading: string;
+        intro?: string;
+        shareHref: string;
+        words: Array<{ word: string; ref: string }>;
+      }
+  >;
 };
 
 export const TOPICS: Record<string, TopicData> = {
@@ -2108,6 +2141,584 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "prayer-for-a-prodigal-child", label: "A Prayer for a Prodigal Child" },
     ],
   },
+
+  thanksgiving: {
+    topic: "thanksgiving",
+    label: "Thanksgiving",
+    title: "Thanksgiving Bible Verses & Prayer",
+    description:
+      "Bible verses about gratitude and thankfulness, a Thanksgiving dinner prayer and table blessing, a 30-day gratitude reading plan, and a free printable prayer card. Scripture-grounded gratitude for the whole family.",
+    intro:
+      "Thanksgiving is more than a holiday — it's the posture Scripture returns to again and again. Below you'll find the best Thanksgiving Bible verses for gratitude, a dinner prayer and table blessing you can read aloud over the family, encouragement for being thankful in hard times, a 30-day gratitude reading plan for November, and a free printable card to keep the season grounded in thanks.",
+    verses: [
+      {
+        ref: "Psalm 100:4 (KJV)",
+        text: "Enter into his gates with thanksgiving, and into his courts with praise: be thankful unto him, and bless his name.",
+        context: "The classic Thanksgiving psalm — gratitude is the doorway into God's presence.",
+      },
+      {
+        ref: "1 Thessalonians 5:18 (KJV)",
+        text: "In every thing give thanks: for this is the will of God in Christ Jesus concerning you.",
+        context: "Notice it says give thanks 'in' every thing, not 'for' every thing — there is something to thank God for in every season.",
+      },
+      {
+        ref: "Philippians 4:6–7 (KJV)",
+        text: "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+        context: "Thanksgiving and anxiety can't easily share the same breath — gratitude is the doorway to peace.",
+      },
+      {
+        ref: "Psalm 107:1 (KJV)",
+        text: "O give thanks unto the LORD, for he is good: for his mercy endureth for ever.",
+        context: "A one-line summary of why we give thanks: God is good, and his mercy never runs out.",
+      },
+      {
+        ref: "Colossians 3:17 (KJV)",
+        text: "And whatsoever ye do in word or deed, do all in the name of the Lord Jesus, giving thanks to God and the Father by him.",
+        context: "Gratitude isn't just for the table — it's meant to season everything we say and do.",
+      },
+      {
+        ref: "James 1:17 (KJV)",
+        text: "Every good gift and every perfect gift is from above, and cometh down from the Father of lights, with whom is no variableness, neither shadow of turning.",
+        context: "Every good thing on the table, and every face around it, is a gift from a generous Father.",
+      },
+      {
+        ref: "Psalm 118:1 (KJV)",
+        text: "O give thanks unto the LORD; for he is good: because his mercy endureth for ever.",
+        context: "The refrain Israel sang together — thanksgiving is meant to be spoken out loud, in community.",
+      },
+      {
+        ref: "Psalm 95:1–2 (KJV)",
+        text: "O come, let us sing unto the LORD: let us make a joyful noise to the rock of our salvation. Let us come before his presence with thanksgiving, and make a joyful noise unto him with psalms.",
+        context: "Thanksgiving is meant to be expressed, not just felt — sung, spoken, and shared.",
+      },
+    ],
+    reflection:
+      "It's easy to treat Thanksgiving as a day for gratitude and the other 364 as ordinary. But Scripture frames thanksgiving as a way of seeing, not a date on the calendar. Psalm 100 doesn't say give thanks when life is good — it says enter his gates with thanksgiving because he is good.\n\nThat distinction matters, because most Thanksgiving tables hold a mix of joy and ache: an empty chair, a hard year, a relationship that's strained. Biblical gratitude doesn't pretend the hard things away. It simply refuses to let them be the only thing we see.\n\nThis year, before the plates are passed, name the good gifts out loud — the people, the provision, the mercies that were new every morning even in a difficult season. Gratitude spoken has a way of warming a room.",
+    prayer:
+      "Father, thank you. For this food, the hands that prepared it, and every face gathered around this table — we thank you.\n\nWe know that every good gift comes down from you, the Father of lights, and we don't want to take a single one for granted. Thank you for your provision this year, for carrying us through the hard parts, and for mercies that were new every morning even when we forgot to notice them.\n\nWe remember those who aren't at the table this year, and we hold them before you with love. Comfort the empty chairs and the quiet aches that holidays can stir.\n\nMake us truly grateful people — not just today, but every day. Let thanksgiving be the way we see our lives. And thank you, most of all, for your unspeakable gift in Jesus.\n\nIn his name we pray, Amen.",
+    actionStep:
+      "Before the meal this Thanksgiving, go around the table and have each person name one specific thing they're thankful for from this year — not a generic blessing, but a named moment, person, or provision. Then read Psalm 100:4–5 aloud over the table before you eat.",
+    devotional: {
+      heading: "A 5-Minute Devotional for Thanksgiving Morning",
+      passage: {
+        ref: "1 Thessalonians 5:18 (KJV)",
+        text: "In every thing give thanks: for this is the will of God in Christ Jesus concerning you.",
+      },
+      reflection:
+        "Notice the small word Paul chooses: give thanks 'in' every thing, not 'for' every thing. He is not asking you to be grateful for cancer, grief, or a hard year. He is saying that in the middle of every circumstance, there is something to thank God for — his presence, his past faithfulness, the people still beside you. Thanksgiving morning is the easy day to be grateful; the kitchen is warm and the table is full. But the gratitude that changes a person is the kind that learns to find one true thing to thank God for on the hard mornings too. Today, practice for those days. Look hard at this year — the good and the difficult — and find the mercy threaded through it.",
+      question:
+        "What is one good gift from this past year that you almost overlooked — and have you thanked God for it out loud?",
+    },
+    reflectionQuestions: {
+      heading: "Reflect or Discuss",
+      questions: [
+        "What is one thing you're grateful for this year that you didn't expect at the start of it?",
+        "Who in your life has been a 'good gift from above' that you've never actually thanked?",
+        "Where is it hardest for you to be thankful right now — and what could it look like to give thanks 'in' that thing, even without being thankful 'for' it?",
+      ],
+    },
+    discussionGuide: {
+      heading: "For Small Groups & Families",
+      text: "If you're gathered as a family or a small group this season, read the verses and the prayer aloud, then let each person share one specific thing from the year they want to thank God for. Write them down on a slip of paper and keep them in a jar or basket on the table — a simple, lasting reminder that gratitude grows when it's named and shared, not just felt.",
+    },
+    prayerCta: {
+      text: "Carrying something specific this Thanksgiving — a hard year, an empty chair, a heart that wants to be grateful but feels heavy? Tell Faith Companion what's on your heart and get a personal, Scripture-based prayer of thanks written for this moment.",
+      buttonLabel: "Write a Thanksgiving prayer",
+    },
+    shareBlock: {
+      text: "Gathering for Thanksgiving? Share this prayer with someone at your table.",
+    },
+    pdfDownload: {
+      href: "/downloads/prayer-for-thanksgiving.pdf",
+      label: "Download Printable Prayer Card",
+    },
+    related: [
+      { slug: "gratitude", label: "A Prayer for Gratitude" },
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "peace", label: "A Prayer for Peace" },
+      { slug: "prayer-for-protection-over-my-family", label: "A Prayer for Family Protection" },
+    ],
+    datePublished: "2025-11-01",
+    dateModified: "2026-06-14",
+    contentSections: [
+      {
+        kind: "prose",
+        heading: "A Thanksgiving Dinner Prayer & Table Blessing",
+        body: "Before the plates are passed, a few honest words said out loud can change the whole room. Use this short blessing as-is, or let it spark your own:\n\n\"Father, thank you for this food and for the hands that prepared it. Thank you for every person at this table, and for the ones we carry in our hearts who can't be here. You are the giver of every good gift, and we receive this meal — and this day — as one more of them. Bless this food to our bodies and our time together to our hearts. In Jesus' name, Amen.\"\n\nIf you'd rather keep it to a single line, this old table grace still holds: \"Bless us, O Lord, and these thy gifts, which we are about to receive from thy bounty. Through Christ our Lord, Amen.\"",
+        callout: "Tip: keep it short. A two-sentence blessing prayed sincerely lands better around a hungry table than a long one — and invites the kids to pray it next year too.",
+      },
+      {
+        kind: "prose",
+        heading: "Being Thankful in Hard Times",
+        body: "Not every Thanksgiving table is easy. Some hold an empty chair, a hard diagnosis, a job loss, or a relationship that's gone quiet. Paul's instruction in 1 Thessalonians 5:18 is careful: give thanks 'in' every thing, not 'for' every thing. He isn't asking you to be grateful for the loss — he's promising that even in it, there is something true to thank God for: his nearness, his past faithfulness, the people still beside you.\n\nGratitude in hard times isn't pretending the ache away. It's refusing to let the ache be the only thing you can see. If this season is heavy, start small — one true thing — and say it out loud. Gratitude spoken has a way of loosening the grip of grief, even just a little.",
+      },
+      {
+        kind: "verseList",
+        heading: "30 Days of Gratitude: A Reading Plan for November",
+        intro: "One short verse a day through November to carry you into Thanksgiving with a grateful heart. Read it, sit with it for a minute, and name one thing it makes you thankful for.",
+        items: [
+          { ref: "Psalm 100:4", note: "Enter his gates with thanksgiving" },
+          { ref: "1 Thessalonians 5:18", note: "Give thanks in everything" },
+          { ref: "Psalm 107:1", note: "His mercy endures forever" },
+          { ref: "Colossians 3:17", note: "Do everything with thanks" },
+          { ref: "Philippians 4:6", note: "Thankful prayer over anxiety" },
+          { ref: "James 1:17", note: "Every good gift is from above" },
+          { ref: "Psalm 95:2", note: "Come before him with thanksgiving" },
+          { ref: "1 Chronicles 16:34", note: "O give thanks, for he is good" },
+          { ref: "Psalm 118:1", note: "His mercy endures forever" },
+          { ref: "2 Corinthians 9:15", note: "Thanks for his unspeakable gift" },
+          { ref: "Ephesians 5:20", note: "Giving thanks always for all things" },
+          { ref: "Psalm 9:1", note: "Praise with my whole heart" },
+          { ref: "Colossians 2:7", note: "Rooted and abounding with thanksgiving" },
+          { ref: "Psalm 136:1", note: "Give thanks; his mercy endures" },
+          { ref: "Hebrews 12:28", note: "Serve God with reverence and grace" },
+          { ref: "Psalm 28:7", note: "My heart trusts and is helped" },
+          { ref: "Daniel 6:10", note: "Daniel gave thanks as he always did" },
+          { ref: "Luke 17:16", note: "The one leper who returned to thank" },
+          { ref: "Psalm 30:12", note: "I will give thanks forever" },
+          { ref: "1 Corinthians 15:57", note: "Thanks be to God who gives the victory" },
+          { ref: "Psalm 75:1", note: "Unto thee we give thanks" },
+          { ref: "Psalm 103:2", note: "Forget not all his benefits" },
+          { ref: "Philippians 1:3", note: "I thank my God for you" },
+          { ref: "Psalm 7:17", note: "Praise according to his righteousness" },
+          { ref: "Jonah 2:9", note: "I will sacrifice with thanksgiving" },
+          { ref: "Psalm 50:14", note: "Offer unto God thanksgiving" },
+          { ref: "Colossians 4:2", note: "Watch in prayer with thanksgiving" },
+          { ref: "1 Timothy 4:4", note: "Received with thanksgiving" },
+          { ref: "Revelation 7:12", note: "Thanksgiving be unto our God" },
+          { ref: "Psalm 106:1", note: "Praise the LORD; give thanks; he is good" },
+        ],
+      },
+    ],
+    toolCtas: {
+      heading: "Make it personal this Thanksgiving",
+      intro: "Turn this season's gratitude into something you can pray and share.",
+      buttons: [
+        { href: "/tools/prayer", label: "Generate your own Thanksgiving prayer" },
+        { href: "/tools/share-card", label: "Create a shareable gratitude verse card" },
+        { href: "/tools/verse", label: "Find a verse for what you're thankful for" },
+      ],
+    },
+    quizLink: {
+      href: "/biblequiz?category=thanksgiving",
+      label: "Test your knowledge: take the Thanksgiving Bible Quiz →",
+    },
+    hardSeason: {
+      heading: "When the Holidays Are Hard",
+      text: "Thanksgiving can quietly magnify what's missing — a person who isn't at the table, a year that didn't go as hoped, a heaviness that doesn't lift just because it's a holiday. If that's you this year, you're not failing at gratitude, and you're not alone. God is near to the brokenhearted, and there's no rule that says the season has to feel a certain way. Be gentle with yourself, and lean on Scripture that meets you where you actually are.",
+      links: [
+        { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+        { slug: "bible-verses-for-loneliness", label: "Bible Verses for Loneliness" },
+        { slug: "bible-verses-for-depression", label: "Bible Verses for Depression" },
+      ],
+    },
+    faqs: [
+      {
+        question: "What are the best Bible verses for Thanksgiving?",
+        answer: "Some of the most-loved Thanksgiving Bible verses are Psalm 100:4 (\"Enter into his gates with thanksgiving\"), 1 Thessalonians 5:18 (\"In every thing give thanks\"), Psalm 107:1 (\"O give thanks unto the LORD, for he is good\"), Philippians 4:6–7, and James 1:17 (\"Every good gift… is from above\"). Together they frame gratitude as both a command and a doorway into God's presence.",
+      },
+      {
+        question: "What is a good Christian prayer for Thanksgiving dinner?",
+        answer: "A simple, sincere blessing works best: thank God for the food and the hands that prepared it, for the people at the table and the ones who couldn't be there, and receive the meal as one of his good gifts. A short classic grace is: \"Bless us, O Lord, and these thy gifts, which we are about to receive from thy bounty. Through Christ our Lord, Amen.\" You'll find a longer table blessing in the section above.",
+      },
+      {
+        question: "What does the Bible say about gratitude?",
+        answer: "Scripture treats gratitude as a way of seeing, not just a feeling. We're told to give thanks \"in every thing\" (1 Thessalonians 5:18) and to do \"all in the name of the Lord Jesus, giving thanks\" (Colossians 3:17). Gratitude is repeatedly tied to peace (Philippians 4:6–7) and to recognizing that every good gift comes from God (James 1:17).",
+      },
+      {
+        question: "How can I be thankful when life is hard?",
+        answer: "Notice that the Bible says to give thanks \"in\" every thing, not \"for\" every thing (1 Thessalonians 5:18). You don't have to be grateful for the loss or the hardship itself — only to find one true thing to thank God for in the middle of it: his presence, his past faithfulness, or the people still with you. Start small, name one thing out loud, and let gratitude sit beside the grief rather than replace it.",
+      },
+    ],
+  },
+
+  christmas: {
+    topic: "christmas",
+    label: "Christmas",
+    title: "Christmas Bible Verses & the Christmas Story",
+    description:
+      "Christmas Bible verses about the birth of Jesus, the Christmas story (the Nativity), verses on hope, peace, joy and love, an Advent verse-a-day countdown, and a free printable prayer card. Keep Christ at the center of Christmas.",
+    intro:
+      "In the rush of Christmas — the gifts, the gatherings, the long to-do lists — it's easy to lose the wonder at the center of it: God became one of us. Below you'll find the Christmas story retold, the best Bible verses about the birth of Jesus, verses on hope, peace, joy and love, the real meaning of Christmas, an Advent verse-a-day countdown, and a free printable card to keep Christ at the heart of your Christmas.",
+    verses: [
+      {
+        ref: "Luke 2:10–11 (KJV)",
+        text: "And the angel said unto them, Fear not: for, behold, I bring you good tidings of great joy, which shall be to all people. For unto you is born this day in the city of David a Saviour, which is Christ the Lord.",
+        context: "The first Christmas announcement — joy for all people, born into a world that was afraid and waiting.",
+      },
+      {
+        ref: "Luke 2:14 (KJV)",
+        text: "Glory to God in the highest, and on earth peace, good will toward men.",
+        context: "The song of the angels over Bethlehem — heaven's announcement that peace had come to earth in person.",
+      },
+      {
+        ref: "Isaiah 9:6 (KJV)",
+        text: "For unto us a child is born, unto us a son is given: and the government shall be upon his shoulder: and his name shall be called Wonderful, Counsellor, The mighty God, The everlasting Father, The Prince of Peace.",
+        context: "Spoken 700 years before the manger — a promise that the child of Christmas is also the Prince of Peace.",
+      },
+      {
+        ref: "Matthew 1:21 (KJV)",
+        text: "And she shall bring forth a son, and thou shalt call his name JESUS: for he shall save his people from their sins.",
+        context: "The angel's instruction to Joseph — the name Jesus means 'the LORD saves,' and tells us why he came.",
+      },
+      {
+        ref: "Micah 5:2 (KJV)",
+        text: "But thou, Bethlehem Ephratah, though thou be little among the thousands of Judah, yet out of thee shall he come forth unto me that is to be ruler in Israel; whose goings forth have been from of old, from everlasting.",
+        context: "Written ~700 years before the birth — the prophet names the town, and reveals the child is eternal.",
+      },
+      {
+        ref: "Isaiah 7:14 (KJV)",
+        text: "Therefore the Lord himself shall give you a sign; Behold, a virgin shall conceive, and bear a son, and shall call his name Immanuel.",
+        context: "The ancient promise behind the manger — Immanuel, 'God with us,' the name that defines Christmas.",
+      },
+      {
+        ref: "John 3:16 (KJV)",
+        text: "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.",
+        context: "The reason behind the manger — Christmas is, at its heart, the story of God's love giving everything for us.",
+      },
+      {
+        ref: "Luke 1:46–47 (KJV)",
+        text: "And Mary said, My soul doth magnify the Lord, and my spirit hath rejoiced in God my Saviour.",
+        context: "Mary's song, the Magnificat — the first worship of the Christmas story came from the mother who carried him.",
+      },
+    ],
+    reflection:
+      "The world Jesus was born into was not peaceful or comfortable. It was occupied, taxed, anxious, and waiting. And into that exact kind of world — not a tidy one — the angel said, 'Fear not… unto you is born a Saviour.'\n\nThat's worth remembering if this Christmas finds you tired, stretched thin, or quietly grieving. The first Christmas didn't wait for everyone to feel ready. Hope arrived in the middle of an ordinary, overwhelmed world, wrapped in cloths and lying in a feeding trough.\n\nThe names Isaiah gave him still hold: Wonderful Counsellor for the confused, Mighty God for the powerless, Everlasting Father for the lonely, Prince of Peace for the anxious. Whatever you're carrying into Christmas this year, the child in the manger came for exactly that.",
+    prayer:
+      "Father, thank you for Christmas — for the night you stepped into our world as a child, and made your name Emmanuel, God with us.\n\nIn the busyness of this season, quiet our hearts. Help us not to miss the wonder of it: that you so loved the world you gave your only Son, and that the hope of all people was born in a stable for us.\n\nWhere there is anxiety, be our Prince of Peace. Where there is grief or an empty chair this Christmas, be near, Wonderful Counsellor. Where we are tired and stretched thin, be our Mighty God.\n\nFill our home with your peace and good will. Let our gifts and gatherings point back to the greatest gift of all. And help us carry the joy of this news — Christ is born — long after the decorations come down.\n\nIn Jesus' name, Amen.",
+    actionStep:
+      "Sometime over Christmas — Christmas Eve, or before opening gifts — gather the family and read Luke 2:8–14 aloud together before anything else. Let the first words of the day be the reason for it. Then take one quiet minute to thank God that Jesus came for your family by name.",
+    devotional: {
+      heading: "A 5-Minute Devotional for Christmas",
+      passage: {
+        ref: "John 1:14 (KJV)",
+        text: "And the Word was made flesh, and dwelt among us, (and we beheld his glory, the glory as of the only begotten of the Father,) full of grace and truth.",
+      },
+      reflection:
+        "Strip away the tinsel and the shopping, and this is the staggering claim at the center of Christmas: the Word — the God who spoke galaxies into being — was made flesh and moved into the neighborhood. He didn't send a message or a representative. He came himself, as a baby who needed to be fed and held. 'God with us' is not a sentimental phrase; it is the most radical thing ever claimed about God. It means he understands hunger, exhaustion, grief, and the ache of an ordinary hard day, because he lived one. Whatever your Christmas looks like this year — full or lonely, joyful or heavy — you are not facing it from a distance from God. He came near, on purpose, full of grace and truth. That is the gift under all the other gifts.",
+      question:
+        "If God came near at Christmas specifically to be 'with us,' what part of your life have you been facing as though you were on your own?",
+    },
+    reflectionQuestions: {
+      heading: "Reflect or Discuss",
+      questions: [
+        "Which of Jesus' names in Isaiah 9:6 do you most need this Christmas — Wonderful Counsellor, Mighty God, Everlasting Father, or Prince of Peace?",
+        "What tends to crowd out the wonder of Christmas for you, and what is one thing you could do to make room for it this year?",
+        "How could your family's Christmas point more clearly to the gift of Jesus, not just the gifts under the tree?",
+      ],
+    },
+    discussionGuide: {
+      heading: "For Small Groups & Families",
+      text: "If you're gathering as a family or small group this Christmas, read Luke 2:8–14 and the prayer aloud together, then let each person name one way they've seen God 'with' them this year. For families with children, consider lighting a candle as you read and explaining that the light is a picture of the hope Jesus brought into a dark world — a simple tradition little ones remember.",
+    },
+    prayerCta: {
+      text: "Is this Christmas tender for you — a first holiday without someone, a hard year, or a heart that wants to feel the wonder again? Tell Faith Companion what you're carrying and get a personal, Scripture-based Christmas prayer written for this moment.",
+      buttonLabel: "Write a Christmas prayer",
+    },
+    shareBlock: {
+      text: "Celebrating Christmas with people you love? Share this prayer with them this season.",
+    },
+    pdfDownload: {
+      href: "/downloads/prayer-for-christmas.pdf",
+      label: "Download Printable Prayer Card",
+    },
+    related: [
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "peace", label: "A Prayer for Peace" },
+      { slug: "bible-verses-for-love", label: "Bible Verses About Love" },
+      { slug: "gratitude", label: "A Prayer for Gratitude" },
+    ],
+    datePublished: "2025-12-01",
+    dateModified: "2026-06-14",
+    contentSections: [
+      {
+        kind: "prose",
+        heading: "The Christmas Story (the Nativity)",
+        body: "It begins with a young woman in an unremarkable town. An angel tells Mary she will bear a son and call his name Jesus. Her betrothed, Joseph, is reassured in a dream that the child is from God, and is to be named Jesus — \"for he shall save his people from their sins.\"\n\nA Roman census forces the couple to travel to Bethlehem, the town the prophet Micah had named centuries earlier. With no room at the inn, Mary gives birth and lays the baby in a manger — a feeding trough. That same night, angels appear to shepherds in nearby fields: \"Fear not… unto you is born this day… a Saviour, which is Christ the Lord.\" The sky fills with praise — \"Glory to God in the highest, and on earth peace\" — and the shepherds hurry to see him. Later, wise men from the east follow a star to worship the newborn king. The eternal God had stepped into history as a child. That is the Christmas story.",
+        callout: "Surveys suggest only about 1 in 5 Americans feel they could retell the Christmas story from memory. If that's you, you're in good company — read Luke 2 aloud this year, and let the family hear it told start to finish. It's the one part of Christmas worth not losing.",
+      },
+      {
+        kind: "moodVerses",
+        heading: "Christmas Verses About Hope, Peace, Joy & Love",
+        intro: "The first Christmas answered four of the deepest longings of the human heart. Here is a verse for each.",
+        groups: [
+          {
+            mood: "Hope",
+            ref: "Romans 15:13 (KJV)",
+            note: "\"The God of hope fill you with all joy and peace in believing.\" The child in the manger is the hope the prophets waited centuries to see.",
+          },
+          {
+            mood: "Peace",
+            ref: "John 14:27 (KJV)",
+            note: "\"Peace I leave with you, my peace I give unto you: not as the world giveth.\" The Prince of Peace offers a calm the season's rush can't manufacture.",
+          },
+          {
+            mood: "Joy",
+            ref: "Luke 2:10 (KJV)",
+            note: "\"Behold, I bring you good tidings of great joy, which shall be to all people.\" Christmas joy isn't tied to a perfect day — it's good news for everyone.",
+          },
+          {
+            mood: "Love",
+            ref: "1 John 4:9 (KJV)",
+            note: "\"God sent his only begotten Son into the world, that we might live through him.\" Christmas is love made visible — God giving, not demanding.",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        heading: "The Real Meaning of Christmas",
+        body: "Underneath the lights and the gifts, Christmas makes one staggering claim: the God who made the universe became a human being. John puts it plainly — \"the Word was made flesh, and dwelt among us.\" He didn't send a message or a representative. He came himself, as a baby who needed to be fed and held.\n\nThat's the real meaning of Christmas — not mainly generosity or family or nostalgia, good as those are, but Immanuel: God with us. It means God understands hunger, exhaustion, grief, and ordinary hard days, because he lived one. And it means the distance between us and God was closed from his side, on purpose, out of love. The gifts under the tree are a faint echo of the gift the day is actually about.",
+      },
+      {
+        kind: "verseList",
+        heading: "Advent: A Verse a Day to Christmas",
+        intro: "A 25-day Advent countdown from December 1 to Christmas Day — tracing the promise from ancient prophecy to the manger. Read one verse a night, perhaps by candlelight.",
+        items: [
+          { ref: "Genesis 3:15", note: "Dec 1 — The first promise of a deliverer" },
+          { ref: "Isaiah 7:14", note: "Dec 2 — A virgin shall conceive" },
+          { ref: "Isaiah 9:6", note: "Dec 3 — Unto us a child is born" },
+          { ref: "Micah 5:2", note: "Dec 4 — Born in Bethlehem" },
+          { ref: "Isaiah 11:1", note: "Dec 5 — A branch from Jesse's root" },
+          { ref: "Jeremiah 23:5", note: "Dec 6 — A righteous Branch promised" },
+          { ref: "Isaiah 40:3", note: "Dec 7 — Prepare the way of the Lord" },
+          { ref: "Malachi 3:1", note: "Dec 8 — A messenger is coming" },
+          { ref: "Luke 1:26–27", note: "Dec 9 — Gabriel is sent to Mary" },
+          { ref: "Luke 1:30–31", note: "Dec 10 — Fear not, Mary" },
+          { ref: "Luke 1:32–33", note: "Dec 11 — He shall be great" },
+          { ref: "Luke 1:38", note: "Dec 12 — Mary's yes to God" },
+          { ref: "Luke 1:46–47", note: "Dec 13 — Mary's song of praise" },
+          { ref: "Matthew 1:20", note: "Dec 14 — Joseph's dream" },
+          { ref: "Matthew 1:21", note: "Dec 15 — Call his name Jesus" },
+          { ref: "Matthew 1:23", note: "Dec 16 — Emmanuel, God with us" },
+          { ref: "Luke 2:1", note: "Dec 17 — A decree from Caesar" },
+          { ref: "Luke 2:4–5", note: "Dec 18 — The journey to Bethlehem" },
+          { ref: "Luke 2:6–7", note: "Dec 19 — No room; laid in a manger" },
+          { ref: "Luke 2:8–9", note: "Dec 20 — Shepherds and the angel" },
+          { ref: "Luke 2:10–11", note: "Dec 21 — Good tidings of great joy" },
+          { ref: "Luke 2:13–14", note: "Dec 22 — Glory to God in the highest" },
+          { ref: "Luke 2:15–16", note: "Dec 23 — The shepherds go to see him" },
+          { ref: "Matthew 2:1–2", note: "Dec 24 — Wise men seek the king" },
+          { ref: "John 1:14", note: "Dec 25 — The Word made flesh" },
+        ],
+      },
+    ],
+    toolCtas: {
+      heading: "Make Christmas personal",
+      intro: "Bring the wonder of the season home — pray it, share it, and put it on the wall.",
+      buttons: [
+        { href: "/tools/prayer", label: "Generate your own personalized Christmas prayer" },
+        { href: "/tools/share-card", label: "Create a shareable Christmas verse card" },
+        { href: "/tools/verse", label: "Find a Christmas verse for someone you love" },
+      ],
+    },
+    quizLink: {
+      href: "/biblequiz?category=christmas",
+      label: "Test your knowledge: take the Christmas Bible Quiz →",
+    },
+    hardSeason: {
+      heading: "When the Holidays Are Hard",
+      text: "Christmas can be the loneliest time of year for those who are grieving, far from family, or quietly struggling. The carols and the cheer can make a heavy heart feel even more out of step. If that's you this year, remember that the first Christmas came into an anxious, occupied, far-from-perfect world — God drew near precisely because things were not okay. You don't have to manufacture joy you don't feel. Let Christ be near to you exactly as you are, and lean on Scripture written for hard seasons.",
+      links: [
+        { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+        { slug: "bible-verses-for-loneliness", label: "Bible Verses for Loneliness" },
+        { slug: "bible-verses-for-depression", label: "Bible Verses for Depression" },
+      ],
+    },
+    faqs: [
+      {
+        question: "What are the best Bible verses for Christmas?",
+        answer: "The most-loved Christmas Bible verses include Luke 2:10–11 (the angel's announcement), Luke 2:14 (\"Glory to God in the highest\"), Isaiah 9:6 (\"For unto us a child is born\"), John 3:16, and Matthew 1:23 (\"they shall call his name Emmanuel\"). Together they tell who Jesus is, why he came, and what his birth means.",
+      },
+      {
+        question: "What is the Christmas story in the Bible?",
+        answer: "The Christmas story is told in Matthew 1–2 and Luke 1–2. An angel tells Mary she will bear the Son of God; she and Joseph travel to Bethlehem for a census; with no room at the inn, Jesus is born and laid in a manger. Angels announce his birth to shepherds, and wise men later follow a star to worship him. You'll find a short retelling, and a 25-day Advent reading plan, in the sections above.",
+      },
+      {
+        question: "What is the real meaning of Christmas?",
+        answer: "The real meaning of Christmas is the Incarnation — God becoming human in Jesus. As John 1:14 puts it, \"the Word was made flesh, and dwelt among us.\" Beneath the gifts and gatherings, Christmas celebrates that God came near to save and to be \"with us\" (Emmanuel), out of love (John 3:16).",
+      },
+      {
+        question: "What Bible verse is about the birth of Jesus?",
+        answer: "Luke 2:10–11 records the birth announcement: \"Unto you is born this day in the city of David a Saviour, which is Christ the Lord.\" Other key birth verses are Isaiah 9:6 (\"For unto us a child is born\"), Micah 5:2 (foretelling Bethlehem), and Matthew 1:21 (\"thou shalt call his name JESUS\").",
+      },
+    ],
+  },
+
+  "new-year": {
+    topic: "new-year",
+    label: "the New Year",
+    title: "New Year Bible Verses & Prayer for a Fresh Start",
+    description:
+      "New Year Bible verses for a fresh start and new beginnings, a New Year prayer for 2027, ideas for Christian resolutions, and a 'word of the year' you can build a verse card around. Begin the year grounded in Scripture.",
+    intro:
+      "A new year invites us to start again — to set down what's behind and step into what's ahead. But fresh starts can stir up as much anxiety as hope. Below you'll find New Year Bible verses for a fresh start and new beginnings, a New Year prayer for 2027, a healthier way to think about Christian resolutions, and a 'word of the year' to anchor the months ahead — so you cross the threshold with faith instead of fear.",
+    verses: [
+      {
+        ref: "Jeremiah 29:11 (KJV)",
+        text: "For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end.",
+        context: "Whatever the year holds, God's intentions toward you are good — peace and a future, not harm.",
+      },
+      {
+        ref: "Isaiah 43:18–19 (KJV)",
+        text: "Remember ye not the former things, neither consider the things of old. Behold, I will do a new thing; now it shall spring forth; shall ye not know it? I will even make a way in the wilderness, and rivers in the desert.",
+        context: "God's word for a new year — he is not finished, and he specializes in making a way where there wasn't one before.",
+      },
+      {
+        ref: "2 Corinthians 5:17 (KJV)",
+        text: "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new.",
+        context: "The deepest fresh start isn't a resolution — it's the new life God gives. The old is genuinely behind.",
+      },
+      {
+        ref: "Lamentations 3:22–23 (KJV)",
+        text: "It is of the LORD'S mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness.",
+        context: "Every new year — and every new morning within it — comes with mercy that has not run dry. His faithfulness is the constant.",
+      },
+      {
+        ref: "Revelation 21:5 (KJV)",
+        text: "And he that sat upon the throne said, Behold, I make all things new. And he said unto me, Write: for these words are true and faithful.",
+        context: "God's renewal isn't only for January — it's where all of history is headed. He makes all things new.",
+      },
+      {
+        ref: "Philippians 3:13–14 (KJV)",
+        text: "Brethren, I count not myself to have apprehended: but this one thing I do, forgetting those things which are behind, and reaching forth unto those things which are before, I press toward the mark for the prize of the high calling of God in Christ Jesus.",
+        context: "Paul's posture for a new year — forget what's behind, reach forward, and press toward one thing, not ten.",
+      },
+      {
+        ref: "Proverbs 3:5–6 (KJV)",
+        text: "Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.",
+        context: "The wisest plan for an unknown year — trust God with the parts you can't see, and let him direct the path.",
+      },
+      {
+        ref: "Joshua 1:9 (KJV)",
+        text: "Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.",
+        context: "Spoken to Joshua at the threshold of a new chapter — courage for the unknown comes from God's presence, not certainty.",
+      },
+      {
+        ref: "Psalm 121:8 (KJV)",
+        text: "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+        context: "A promise to carry into every day of the year — God watches over your comings and goings, start to finish.",
+      },
+    ],
+    reflection:
+      "New Year's resolutions usually run on willpower, and willpower fades by February. The Bible's vision of a fresh start is different. It doesn't rest on your resolve to do better — it rests on God's mercy, which is new every morning whether you've kept your resolutions or not.\n\nThat's freeing. It means a new year isn't a performance review. You don't have to carry last year's failures across the threshold. 'Old things are passed away; behold, all things are become new.' In Christ, the slate is genuinely clean.\n\nSo as you look at the unknown year ahead — the parts you're excited about and the parts that scare you — the invitation isn't to muster more confidence in yourself. It's to trust the One who already knows the whole year and whose thoughts toward you are thoughts of peace.",
+    prayer:
+      "Father, as I step into this new year, I bring it to you — the hopes, the goals, and the parts I can't see yet.\n\nThank you that your mercies are new every morning, and that I don't have to drag last year's failures and regrets into this one. Where I've fallen short, I receive your forgiveness. Where I'm carrying old wounds, help me to lay them down.\n\nI don't know what this year holds, but I trust the One who does. So I won't lean on my own understanding — I'll acknowledge you in all my ways and trust you to direct my path. Where you want to do a new thing, give me eyes to see it and courage to follow.\n\nGuard my heart from anxiety about the future. Remind me that your thoughts toward me are thoughts of peace and not of harm. Go before me into every unknown day of this year.\n\nIn Jesus' name, Amen.",
+    actionStep:
+      "Instead of (or alongside) your resolutions, pick one verse above as your word for the year — Lamentations 3:22–23 or Proverbs 3:5–6 are good anchors. Write it somewhere you'll see it daily, and when the year gets uncertain, return to it as your reminder of who's holding the year.",
+    devotional: {
+      heading: "A 5-Minute Devotional for the New Year",
+      passage: {
+        ref: "Philippians 3:13–14 (KJV)",
+        text: "Brethren, I count not myself to have apprehended: but this one thing I do, forgetting those things which are behind, and reaching forth unto those things which are before, I press toward the mark for the prize of the high calling of God in Christ Jesus.",
+      },
+      reflection:
+        "Paul names the two directions a new year pulls us. Behind: the regrets, failures, and even the successes we're tempted to coast on. Ahead: the calling still in front of us. His discipline is to forget what's behind — not to erase the memory, but to refuse to let it define or anchor him — and to reach forward. Notice he says 'this one thing I do.' Not ten resolutions. One direction. A new year doesn't require you to fix everything about yourself at once; it asks you to set your face toward God and take the next faithful step. Whatever last year was — a year of loss, of failure, of waiting, or of quiet faithfulness — it is behind you now. The mark is ahead. Reach for it.",
+      question:
+        "What is one thing 'behind' you that you need to stop carrying into this year — and what is the one thing ahead worth pressing toward?",
+    },
+    reflectionQuestions: {
+      heading: "Reflect or Discuss",
+      questions: [
+        "What from this past year do you most need to leave behind as you step into the new one?",
+        "Where do you feel anxious about the year ahead, and what would it look like to trust God with that specific uncertainty?",
+        "If God wanted to 'do a new thing' in your life this year, in what area do you sense he might be starting?",
+      ],
+    },
+    discussionGuide: {
+      heading: "For Small Groups & Families",
+      text: "If you're entering the new year as a family or small group, read the verses and the prayer aloud together, then have each person share one thing they're trusting God for in the year ahead and one thing they're choosing to leave behind. Consider writing them down and revisiting them partway through the year — a simple way to remember God's faithfulness as the year unfolds.",
+    },
+    prayerCta: {
+      text: "Stepping into the new year with something specific on your heart — a big decision, a fear about what's ahead, or a fresh start you're praying for? Tell Faith Companion what you're carrying and get a personal, Scripture-based prayer for the year ahead.",
+      buttonLabel: "Write a New Year prayer",
+    },
+    shareBlock: {
+      text: "Starting the new year with people you love? Share this prayer as you begin it together.",
+    },
+    pdfDownload: {
+      href: "/downloads/prayer-for-new-year.pdf",
+      label: "Download Printable Prayer Card",
+    },
+    related: [
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "faith", label: "Bible Verses About Faith" },
+      { slug: "strength", label: "Bible Verses for Strength" },
+      { slug: "prayer-for-guidance-when-facing-a-big-decision", label: "A Prayer for Guidance" },
+    ],
+    datePublished: "2025-12-15",
+    dateModified: "2026-06-14",
+    contentSections: [
+      {
+        kind: "prose",
+        heading: "A New Year Prayer for 2027",
+        body: "Father, as 2027 begins, I bring this year to you before it unfolds — the hopes I'm carrying, the goals I'm setting, and the parts I can't yet see. Thank you that your mercies are new every morning, and that I don't have to drag last year's failures and regrets across the threshold. Where I fell short, I receive your forgiveness; where I'm still hurting, help me lay it down.\n\nI don't know what 2027 holds, but I trust the One who does. Make a way where I can't see one. Guard my heart from anxiety about the future, give me courage for the unknown, and let me press toward the things that actually matter. Go before me into every day of this year. In Jesus' name, Amen.",
+      },
+      {
+        kind: "prose",
+        heading: "Bible Verses for New Beginnings",
+        body: "Scripture is full of fresh starts. Isaiah 43:19 has God announcing, \"Behold, I will do a new thing\" — and making \"a way in the wilderness.\" 2 Corinthians 5:17 promises that anyone in Christ is \"a new creature; old things are passed away.\" And Revelation 21:5 stretches the theme to the end of all things: \"Behold, I make all things new.\" A new beginning in the Bible is never just willpower turning over a new leaf — it's God doing something only he can do. Whatever you most need to begin again, these verses promise the God who specializes in new beginnings is already at work.",
+      },
+      {
+        kind: "prose",
+        heading: "Christian New Year Resolutions",
+        body: "Most resolutions run on willpower, and willpower fades by February. A Christian approach starts somewhere steadier — not with self-improvement, but with God. Instead of a long list, consider Paul's \"this one thing I do\" (Philippians 3:13–14): pick a single, God-ward direction for the year. A few ideas worth more than a gym streak: read through one Gospel; pray for five minutes every morning before your phone; memorize one verse a month; serve one person regularly; forgive someone you've been carrying. The aim isn't a better version of you by sheer effort — it's a year lived a little closer to God, one faithful step at a time.",
+      },
+      {
+        kind: "wordOfYear",
+        heading: "Choose Your Word of the Year",
+        intro: "Instead of a dozen resolutions, many people choose one word to pray toward all year. Pick the one God seems to be pressing on your heart, sit with its verse — then turn it into a card you'll actually see.",
+        shareHref: "/tools/share-card",
+        words: [
+          { word: "Hope", ref: "Romans 15:13" },
+          { word: "Trust", ref: "Proverbs 3:5" },
+          { word: "Peace", ref: "Isaiah 26:3" },
+          { word: "Courage", ref: "Joshua 1:9" },
+          { word: "Faith", ref: "Hebrews 11:1" },
+          { word: "Joy", ref: "Nehemiah 8:10" },
+        ],
+      },
+    ],
+    toolCtas: {
+      heading: "Step into the year with intention",
+      intro: "Pray over 2027, choose a verse to carry, and put your word of the year somewhere you'll see it.",
+      buttons: [
+        { href: "/tools/prayer", label: "Generate your own personalized New Year prayer" },
+        { href: "/tools/share-card", label: "Create a shareable word-of-the-year verse card" },
+        { href: "/tools/verse", label: "Find a verse for the year ahead" },
+      ],
+    },
+    quizLink: {
+      href: "/biblequiz?category=new-year",
+      label: "Test your knowledge: take the New Year Bible Quiz →",
+    },
+    hardSeason: {
+      heading: "When the Holidays Are Hard",
+      text: "New Year's can be quietly painful. The forced cheer, the year-in-review, the sense that everyone else is hopeful — it can sharpen grief, loneliness, or the weight of a year that hurt. If you're crossing into the new year heavy-hearted, you're not behind and you're not alone. God's mercies are new every morning, including the ones ahead, and he meets you where you actually are — not where the fireworks say you should be. Be gentle with yourself, and lean on Scripture written for the hard seasons.",
+      links: [
+        { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+        { slug: "bible-verses-for-loneliness", label: "Bible Verses for Loneliness" },
+        { slug: "bible-verses-for-depression", label: "Bible Verses for Depression" },
+      ],
+    },
+    faqs: [
+      {
+        question: "What are good Bible verses for the New Year?",
+        answer: "Favorites for the New Year include Jeremiah 29:11 (\"thoughts of peace… to give you an expected end\"), Isaiah 43:18–19 (\"Behold, I will do a new thing\"), Lamentations 3:22–23 (\"new every morning\"), 2 Corinthians 5:17 (\"a new creature\"), and Philippians 3:13–14 (\"forgetting those things which are behind\"). They frame the year ahead around God's faithfulness rather than your willpower.",
+      },
+      {
+        question: "What is a good Christian New Year prayer?",
+        answer: "A good New Year prayer hands the unknown year to God: thank him that his mercies are new every morning, release last year's regrets, ask for courage and guidance for what's ahead, and trust him to direct your path (Proverbs 3:5–6). You'll find a full New Year prayer for 2027 in the section above, and you can generate a personal one for your exact situation with the prayer tool.",
+      },
+      {
+        question: "What does the Bible say about new beginnings?",
+        answer: "The Bible repeatedly points to God as the author of new beginnings. He declares, \"Behold, I will do a new thing\" (Isaiah 43:19), makes anyone in Christ \"a new creature\" (2 Corinthians 5:17), and promises, \"Behold, I make all things new\" (Revelation 21:5). A biblical fresh start rests on God's renewing work, not only on personal resolve.",
+      },
+      {
+        question: "What should my Christian word of the year be?",
+        answer: "There's no single right answer — choose the word that names what you most need from God this year, and anchor it to Scripture. Common choices include Hope (Romans 15:13), Trust (Proverbs 3:5), Peace (Isaiah 26:3), Courage (Joshua 1:9), Faith (Hebrews 11:1), and Joy (Nehemiah 8:10). Pray over it, and let it shape how you read and pray through the months ahead.",
+      },
+    ],
+  },
 };
 
 export const TOPIC_SLUGS = Object.keys(TOPICS);
@@ -2176,5 +2787,9 @@ export const TOPIC_GROUPS: Array<{ title: string; slugs: string[] }> = [
   {
     title: "Faith, Hope & Strength",
     slugs: ["faith", "hope", "strength", "gratitude", "prayer-for-when-you-feel-far-from-god"],
+  },
+  {
+    title: "Holidays & Seasons",
+    slugs: ["thanksgiving", "christmas", "new-year"],
   },
 ];
