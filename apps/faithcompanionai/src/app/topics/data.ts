@@ -999,11 +999,11 @@ export const TOPICS: Record<string, TopicData> = {
   "psalm-91": {
     topic: "psalm-91",
     label: "Protection",
-    title: "Psalm 91: God's Promise of Protection",
+    title: "Psalm 91 Meaning: God's Protection",
     description:
       "Read Psalm 91 in full (KJV), with a plain explanation of what it means and a written prayer for protection. God's promise of refuge for when you're afraid.",
     intro:
-      "When fear is loud — a frightening diagnosis, a dangerous situation, a night you can't stop bracing for the worst — Psalm 91 is the chapter believers have reached for across the centuries. It doesn't pretend danger isn't real; it anchors you to a God who is bigger than it. Here is the full psalm, what it actually promises, and a prayer for when you need to feel safe.",
+      "When fear is loud — a frightening diagnosis, a dangerous situation, a night you can't stop bracing for the worst — Psalm 91 is the chapter believers have reached for across the centuries. It doesn't pretend danger isn't real; it anchors you to a God who is bigger than it. Here is the full psalm, what Psalm 91 means, and a prayer for when you need to feel safe.",
     verses: [],
     passage: {
       ref: "Psalm 91 (KJV)",
@@ -1033,11 +1033,11 @@ export const TOPICS: Record<string, TopicData> = {
   "psalm-23": {
     topic: "psalm-23",
     label: "Comfort",
-    title: "Psalm 23: Comfort in the Valley",
+    title: "Psalm 23 Meaning: Through the Valley",
     description:
       "Read Psalm 23 in full (KJV), with a plain explanation of what it means and a written prayer for comfort. The shepherd's psalm for grief, fear, and hard valleys.",
     intro:
-      "Psalm 23 is the passage people reach for at hospital bedsides, at funerals, and in the quiet middle-of-the-night hours when the future feels dark. There is a reason it has comforted the grieving and the frightened for three thousand years: it doesn't promise an easy road, it promises a Shepherd who walks every step of it with you. Here is the full psalm, what it means, and a prayer for the valley you may be in.",
+      "Psalm 23 is the passage people reach for at hospital bedsides, at funerals, and in the quiet middle-of-the-night hours when the future feels dark. There is a reason it has comforted the grieving and the frightened for three thousand years: it doesn't promise an easy road, it promises a Shepherd who walks every step of it with you. Here is the full psalm, what Psalm 23 means, and a prayer for the valley you may be in.",
     verses: [],
     passage: {
       ref: "Psalm 23 (KJV)",
@@ -1065,11 +1065,11 @@ export const TOPICS: Record<string, TopicData> = {
   "jeremiah-29-11": {
     topic: "jeremiah-29-11",
     label: "Hope",
-    title: "Jeremiah 29:11: God's Plans and Hope",
+    title: "Jeremiah 29:11 Meaning: Plans & Hope",
     description:
       "What Jeremiah 29:11 really means in context (WEB), with a plain explanation and a written prayer for hope. God's thoughts of peace, hope, and a future.",
     intro:
-      "Jeremiah 29:11 shows up on coffee mugs and graduation cards, but people usually search for it in a harder moment — when the future feels uncertain and they need to believe God is still writing a good story. The verse is even better than the poster version once you see who God first said it to. Here is the verse, the context that makes it land, and a prayer for hope.",
+      "Jeremiah 29:11 shows up on coffee mugs and graduation cards, but people usually search for it in a harder moment — when the future feels uncertain and they need to believe God is still writing a good story. The verse is even better than the poster version once you see who God first said it to. Here is the verse, what Jeremiah 29:11 means in context, and a prayer for hope.",
     verses: [],
     passage: {
       ref: "Jeremiah 29:11 (WEB)",
@@ -1097,11 +1097,11 @@ export const TOPICS: Record<string, TopicData> = {
   "isaiah-41-10": {
     topic: "isaiah-41-10",
     label: "Fear and Anxiety",
-    title: "Isaiah 41:10: Fear Not, I Am With You",
+    title: "Isaiah 41:10 Meaning: Fear Not",
     description:
       "Isaiah 41:10 (WEB) in full, with a plain explanation of what it means and a written prayer for fear and anxiety. God's promise to be with you and hold you up.",
     intro:
-      "When fear has its hand around your throat — a frightening unknown, a situation spinning out of your control — Isaiah 41:10 is one of the most repeated reassurances in all of Scripture. God doesn't just tell you to stop being afraid; he tells you why you can. Here is the verse, what it meant to the people who first heard it, and a prayer for when fear won't let go.",
+      "When fear has its hand around your throat — a frightening unknown, a situation spinning out of your control — Isaiah 41:10 is one of the most repeated reassurances in all of Scripture. God doesn't just tell you to stop being afraid; he tells you why you can. Here is the verse, what Isaiah 41:10 means to the people who first heard it, and a prayer for when fear won't let go.",
     verses: [],
     passage: {
       ref: "Isaiah 41:10 (WEB)",
@@ -1131,11 +1131,11 @@ export const TOPICS: Record<string, TopicData> = {
   "romans-8-28": {
     topic: "romans-8-28",
     label: "Hard Seasons",
-    title: "Romans 8:28: All Things Work for Good",
+    title: "Romans 8:28 Meaning: Work for Good",
     description:
       "Romans 8:28 (WEB) in full, with a plain explanation of what it really means and a written prayer for hard seasons. God working all things together for good.",
     intro:
-      "Romans 8:28 is one of the most quoted — and most misquoted — verses in the Bible, often handed to hurting people as a quick fix. Read carefully and in context, it is far more honest and far more comforting than the bumper-sticker version. Here is the verse, what it actually promises (and what it doesn't), and a prayer for a hard season.",
+      "Romans 8:28 is one of the most quoted — and most misquoted — verses in the Bible, often handed to hurting people as a quick fix. Read carefully and in context, it is far more honest and far more comforting than the bumper-sticker version. Here is the verse, what Romans 8:28 means (and what it doesn't), and a prayer for a hard season.",
     verses: [],
     passage: {
       ref: "Romans 8:28 (WEB)",
@@ -1164,11 +1164,11 @@ export const TOPICS: Record<string, TopicData> = {
   "joshua-1-9": {
     topic: "joshua-1-9",
     label: "Courage",
-    title: "Joshua 1:9: Be Strong and Courageous",
+    title: "Joshua 1:9 Meaning: Be Courageous",
     description:
       "Joshua 1:9 (KJV) in full, with a plain explanation of what it means and a written prayer for courage. God's command to be strong because he goes with you.",
     intro:
-      "Some seasons ask more of you than you feel you have — a daunting new responsibility, a hard conversation, a step into the unknown. Joshua 1:9 is God's charge to a man standing exactly there, and it has steadied the fearful ever since. Here is the verse, the moment God spoke it, and a prayer for when you need courage you don't feel.",
+      "Some seasons ask more of you than you feel you have — a daunting new responsibility, a hard conversation, a step into the unknown. Joshua 1:9 is God's charge to a man standing exactly there, and it has steadied the fearful ever since. Here is the verse, what Joshua 1:9 means and the moment God spoke it, and a prayer for when you need courage you don't feel.",
     verses: [],
     passage: {
       ref: "Joshua 1:9 (KJV)",
@@ -1901,11 +1901,11 @@ export const TOPICS: Record<string, TopicData> = {
   "philippians-4-6": {
     topic: "philippians-4-6",
     label: "Peace",
-    title: "Philippians 4:6: Do Not Be Anxious",
+    title: "Philippians 4:6 Meaning: Don't Worry",
     description:
       "Philippians 4:6-7 (WEB) in full, with a plain explanation of what it means and a written prayer for peace. Trade anxiety for the peace that guards your heart.",
     intro:
-      "When worry has a grip on you — the racing thoughts, the what-ifs, the knot in your chest — Philippians 4:6-7 is the passage believers return to again and again. It doesn't just tell you to stop worrying; it tells you what to do instead, and what God promises in return. Here is the passage, what it actually means, and a prayer for trading anxiety for peace.",
+      "When worry has a grip on you — the racing thoughts, the what-ifs, the knot in your chest — Philippians 4:6-7 is the passage believers return to again and again. It doesn't just tell you to stop worrying; it tells you what to do instead, and what God promises in return. Here is the passage, what Philippians 4:6 means, and a prayer for trading anxiety for peace.",
     verses: [],
     passage: {
       ref: "Philippians 4:6–7 (WEB)",
@@ -1933,11 +1933,11 @@ export const TOPICS: Record<string, TopicData> = {
   "psalm-121": {
     topic: "psalm-121",
     label: "God's Help",
-    title: "Psalm 121: God Watches Over You",
+    title: "Psalm 121 Meaning: He Watches Over You",
     description:
       "Psalm 121 (KJV) in full, with a plain explanation of what it means and a written prayer for protection and help. God your keeper, who never slumbers or sleeps.",
     intro:
-      "Psalm 121 is a traveler's psalm — words pilgrims sang as they climbed toward Jerusalem, eyes on the unknown road ahead. It's the chapter to reach for when you feel small against what's in front of you, and you need to remember who is watching over you. Here is the full psalm, what it means, and a prayer for God's protection and help.",
+      "Psalm 121 is a traveler's psalm — words pilgrims sang as they climbed toward Jerusalem, eyes on the unknown road ahead. It's the chapter to reach for when you feel small against what's in front of you, and you need to remember who is watching over you. Here is the full psalm, what Psalm 121 means, and a prayer for God's protection and help.",
     verses: [],
     passage: {
       ref: "Psalm 121 (KJV)",
@@ -1965,11 +1965,11 @@ export const TOPICS: Record<string, TopicData> = {
   "psalm-27": {
     topic: "psalm-27",
     label: "When You're Afraid",
-    title: "Psalm 27: The Lord Is My Light",
+    title: "Psalm 27 Meaning: The Lord Is My Light",
     description:
       "Psalm 27 (KJV) in full, with a plain explanation of what it means and a written prayer for confidence when afraid. The Lord is my light — whom shall I fear?",
     intro:
-      "Psalm 27 is a defiant, hopeful song for frightening times — written by David when enemies pressed in and the outcome was anything but certain. It moves honestly between bold confidence and raw pleading, which is exactly why it rings true when you're afraid. Here is the full psalm, what it means, and a prayer for confidence when fear closes in.",
+      "Psalm 27 is a defiant, hopeful song for frightening times — written by David when enemies pressed in and the outcome was anything but certain. It moves honestly between bold confidence and raw pleading, which is exactly why it rings true when you're afraid. Here is the full psalm, what Psalm 27 means, and a prayer for confidence when fear closes in.",
     verses: [],
     passage: {
       ref: "Psalm 27 (KJV)",
@@ -1997,11 +1997,11 @@ export const TOPICS: Record<string, TopicData> = {
   "psalm-139": {
     topic: "psalm-139",
     label: "When You Feel Unseen",
-    title: "Psalm 139: You Have Searched Me",
+    title: "Psalm 139 Meaning: Fully Known by God",
     description:
       "Psalm 139 (KJV) in full, with a plain explanation of what it means and a written prayer for when you feel unseen or unknown. Fully known, and fully loved by God.",
     intro:
-      "Psalm 139 is for the moments you feel invisible — overlooked, misunderstood, unknown even to the people closest to you. It answers that ache with one of the most staggering claims in all of Scripture: that the God of the universe knows you completely, down to the words on your tongue before you speak them. Here is the passage, what it means, and a prayer for when you feel unseen.",
+      "Psalm 139 is for the moments you feel invisible — overlooked, misunderstood, unknown even to the people closest to you. It answers that ache with one of the most staggering claims in all of Scripture: that the God of the universe knows you completely, down to the words on your tongue before you speak them. Here is the passage, what Psalm 139 means, and a prayer for when you feel unseen.",
     verses: [],
     passage: {
       ref: "Psalm 139:1–18, 23–24 (KJV)",
