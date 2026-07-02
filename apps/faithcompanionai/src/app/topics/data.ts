@@ -2719,9 +2719,393 @@ export const TOPICS: Record<string, TopicData> = {
       },
     ],
   },
+
+  joy: {
+    topic: "joy",
+    title: "Bible Verses for Joy",
+    description:
+      "Bible verses for joy, a written prayer, and one small step for when joy feels out of reach. Scripture-grounded encouragement to find lasting joy in God.",
+    intro:
+      "Biblical joy is not the same as happiness. Happiness rises and falls with circumstances; the joy Scripture describes is rooted in God himself and can hold steady even through sorrow. Here are Bible verses about joy, a short reflection, a prayer for renewed joy, and one small step.",
+    verses: [
+      {
+        ref: "Nehemiah 8:10 (KJV)",
+        text: "Neither be ye sorry; for the joy of the LORD is your strength.",
+        context: "Spoken to people weeping over their failures — joy is not a reward for having it all together, but the source of strength to keep going.",
+      },
+      {
+        ref: "Psalm 16:11 (KJV)",
+        text: "Thou wilt shew me the path of life: in thy presence is fulness of joy; at thy right hand there are pleasures for evermore.",
+        context: "The deepest joy is found in God's presence itself — not only in what he gives, but in nearness to him.",
+      },
+      {
+        ref: "John 15:11 (KJV)",
+        text: "These things have I spoken unto you, that my joy might remain in you, and that your joy might be full.",
+        context: "Jesus wants his own joy to live in you — a joy that remains, not one that flickers out when the day turns hard.",
+      },
+      {
+        ref: "Psalm 30:5 (KJV)",
+        text: "Weeping may endure for a night, but joy cometh in the morning.",
+        context: "Grief is real and has its night, but Scripture promises it is not the final word. Joy is coming.",
+      },
+      {
+        ref: "James 1:2–3 (KJV)",
+        text: "My brethren, count it all joy when ye fall into divers temptations; Knowing this, that the trying of your faith worketh patience.",
+        context: "Joy is possible even in trials — not because the trial is good, but because God is at work through it.",
+      },
+    ],
+    reflection:
+      "The joy of the Lord is not a demand to feel cheerful on command. It is a settled gladness that survives when happiness cannot — because its source is God, not circumstances.\n\nThat is why Nehemiah could call joy 'strength' to a weeping crowd, and why Paul could write of joy from prison. This joy does not deny sorrow; Psalm 30 puts weeping and joy in the same sentence. It simply refuses to let sorrow have the last word.\n\nIf joy feels far off today, you don't have to manufacture it. You can ask for it, and you can return to its source — time in God's presence, where Scripture says there is fullness of joy.",
+    prayer:
+      "Father, I come to you because joy feels distant right now. The weight of things has crowded it out, and I can't simply talk myself into feeling glad.\n\nYour Word says that in your presence is fullness of joy — that the joy of the Lord is my strength even on the days I feel weakest. I am asking you for that joy today. Not a forced smile, but the deep, steady gladness that only you can give.\n\nThank you that weeping may last for a night, but joy comes in the morning. Help me trust that morning is coming, even now.\n\nFill me with your joy as I trust you, and let it become my strength. Amen.",
+    actionStep:
+      "Write down three specific gifts from God in your life right now — however small — and thank him out loud for each one. Then read Psalm 16:11 slowly, and sit for two quiet minutes simply aware that you are in his presence.",
+    prayerCta: {
+      text: "Longing for joy in a specific situation? Tell Faith Companion what has drained your joy and get a joy-filled, Scripture-based prayer written for your exact moment.",
+      buttonLabel: "Write a prayer for joy",
+    },
+    related: [
+      { slug: "gratitude", label: "A Prayer for Gratitude" },
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "peace", label: "A Prayer for Peace" },
+      { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "bible-verses-for-depression", label: "Bible Verses for Depression" },
+    ],
+  },
+
+  renewal: {
+    topic: "renewal",
+    title: "Bible Verses About Renewal",
+    description:
+      "Bible verses about renewal, a written prayer, and one small step for when you feel worn down and need a fresh start. Scripture on how God makes all things new.",
+    intro:
+      "Renewal is one of God's signature works. He does not only forgive the past — he makes people new, restores what was worn down, and brings fresh starts out of dead ends. Here are Bible verses about renewal, a short reflection, a prayer for a fresh start, and one small step.",
+    verses: [
+      {
+        ref: "2 Corinthians 4:16 (KJV)",
+        text: "For which cause we faint not; but though our outward man perish, yet the inward man is renewed day by day.",
+        context: "Renewal is not a one-time event but a daily work — God restores the inner person even as outward strength fades.",
+      },
+      {
+        ref: "Isaiah 40:31 (KJV)",
+        text: "But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.",
+        context: "Renewed strength comes from waiting on God, not from trying harder — an exchange of your depletion for his supply.",
+      },
+      {
+        ref: "Romans 12:2 (KJV)",
+        text: "And be not conformed to this world: but be ye transformed by the renewing of your mind, that ye may prove what is that good, and acceptable, and perfect, will of God.",
+        context: "God renews from the inside out — changing how you think, which changes everything downstream.",
+      },
+      {
+        ref: "Isaiah 43:19 (KJV)",
+        text: "Behold, I will do a new thing; now it shall spring forth; shall ye not know it? I will even make a way in the wilderness, and rivers in the desert.",
+        context: "God specializes in fresh starts in the most barren places — a way where there was no way.",
+      },
+      {
+        ref: "2 Corinthians 5:17 (KJV)",
+        text: "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new.",
+        context: "In Christ, renewal is total — not a patched-up version of the old life, but a genuinely new one.",
+      },
+    ],
+    reflection:
+      "Renewal in Scripture is rarely instant and rarely loud. 2 Corinthians 4:16 describes it as happening 'day by day' — quiet, cumulative, often invisible while it's underway.\n\nThat matters when you feel worn down. You may not feel renewed today, but God's work does not depend on your feeling it. He renews the inner person even while the outer circumstances stay hard, and he is famous for making 'a way in the wilderness.'\n\nRenewal begins not with striving harder but with waiting on God — bringing him your emptiness and letting him do the new thing only he can do.",
+    prayer:
+      "Father, I come to you worn down and in need of renewal. I've been running on empty, and I don't have a fresh start in me to manufacture.\n\nYour Word says you make all things new — that you renew the inner person day by day, and that you make a way in the wilderness. I need that in the specific places where I feel stuck and tired.\n\nRenew my strength as I wait on you. Renew my mind where my thinking has grown weary or cynical. Do the new thing you promise, even here, even now.\n\nThank you that in Christ the old has passed and the new has come. Help me live from that today. Amen.",
+    actionStep:
+      "Name one area where you feel worn down or stuck, and pray Isaiah 43:19 over it — \"Behold, I will do a new thing.\" Then take one small, concrete step of renewal today: rest, a walk, time in Scripture, or a conversation you've been avoiding.",
+    prayerCta: {
+      text: "Needing a fresh start in a specific situation? Tell Faith Companion where you feel worn down and get a renewing, Scripture-based prayer written for your exact moment.",
+      buttonLabel: "Write a prayer for renewal",
+    },
+    related: [
+      { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "new-year", label: "Bible Verses for the New Year" },
+      { slug: "prayer-for-when-you-feel-far-from-god", label: "A Prayer When You Feel Far from God" },
+      { slug: "faith", label: "Bible Verses About Faith" },
+    ],
+  },
+
+  comfort: {
+    topic: "comfort",
+    title: "Bible Verses for Comfort",
+    description:
+      "Comforting Bible verses, a written prayer, and one small step for when you need God's comfort in pain, loss, or fear. Scripture-grounded comfort for hard days.",
+    intro:
+      "When life hurts, we don't need to be told to cheer up — we need to be comforted. Scripture calls God the 'God of all comfort,' and it meets you in pain rather than rushing you past it. Here are comforting Bible verses, a short reflection, a prayer for comfort, and one small step.",
+    verses: [
+      {
+        ref: "2 Corinthians 1:3–4 (KJV)",
+        text: "Blessed be God, even the Father of our Lord Jesus Christ, the Father of mercies, and the God of all comfort; Who comforteth us in all our tribulation.",
+        context: "Comfort is central to who God is — not a rare gesture, but his very character toward those who hurt.",
+      },
+      {
+        ref: "Psalm 23:4 (KJV)",
+        text: "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.",
+        context: "The comfort here is presence — God does not remove the valley, but he walks through it with you.",
+      },
+      {
+        ref: "Matthew 5:4 (KJV)",
+        text: "Blessed are they that mourn: for they shall be comforted.",
+        context: "Jesus calls the grieving 'blessed' — mourning is not a failure of faith but a doorway to God's comfort.",
+      },
+      {
+        ref: "Isaiah 66:13 (KJV)",
+        text: "As one whom his mother comforteth, so will I comfort you; and ye shall be comforted in Jerusalem.",
+        context: "God pictures his comfort as a mother tending her child — tender, personal, and near.",
+      },
+      {
+        ref: "Psalm 34:18 (KJV)",
+        text: "The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.",
+        context: "God draws nearest, not farthest, in the moments your heart is most broken.",
+      },
+    ],
+    reflection:
+      "The Bible never treats comfort as a distraction from pain. It treats it as God's nearness inside the pain. Psalm 23 doesn't skip the valley — it promises company through it.\n\nThis is why Scripture can call the mourning 'blessed.' Not because loss is good, but because God has bound himself especially close to the brokenhearted. He is the 'God of all comfort,' and he comforts 'as one whom his mother comforteth' — tenderly, personally, without hurry.\n\nWhatever you are carrying today, you don't have to be past it to be comforted. God meets you in the middle of it.",
+    prayer:
+      "Father, I come to you in need of comfort. You know exactly what is weighing on me — the ache I can't shake and the fear underneath it.\n\nYour Word calls you the God of all comfort, near to the brokenhearted. I need that nearness today, not someday. Comfort me as a mother comforts her child — gently, personally, in the places no one else can reach.\n\nThank you that you do not rush my sorrow or ask me to pretend I'm fine. Walk with me through this valley. Let your presence itself be my comfort, even before anything changes.\n\nHold me together where I feel I'm coming apart. Amen.",
+    actionStep:
+      "Name honestly to God the one thing hurting most right now — out loud, in your own words. Then read Psalm 23 slowly, and let the promise \"thou art with me\" settle over exactly that pain.",
+    prayerCta: {
+      text: "Carrying something painful right now? Tell Faith Companion what you're walking through and get a comforting, Scripture-based prayer written for your exact situation.",
+      buttonLabel: "Write a prayer for comfort",
+    },
+    related: [
+      { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+      { slug: "peace", label: "A Prayer for Peace" },
+      { slug: "psalm-23", label: "Psalm 23: Comfort in the Valley" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "bible-verses-for-loneliness", label: "Bible Verses for Loneliness" },
+    ],
+  },
+
+  trust: {
+    topic: "trust",
+    title: "Bible Verses About Trust",
+    description:
+      "Bible verses about trusting God, a written prayer, and one small step for when you're afraid or facing the unknown. Scripture on trusting God with what you can't control.",
+    intro:
+      "Trust is not pretending you're not afraid — it is choosing to lean on God in spite of the fear. Scripture calls us to trust God with what we cannot see, control, or understand. Here are Bible verses about trust, a short reflection, a prayer for a trusting heart, and one small step.",
+    verses: [
+      {
+        ref: "Proverbs 3:5–6 (KJV)",
+        text: "Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.",
+        context: "The classic call to trust — not because you understand the path, but because you trust the One directing it.",
+      },
+      {
+        ref: "Psalm 56:3 (KJV)",
+        text: "What time I am afraid, I will trust in thee.",
+        context: "Trust and fear can coexist. This short sentence is a prayer you can pray the moment fear spikes.",
+      },
+      {
+        ref: "Isaiah 26:3 (KJV)",
+        text: "Thou wilt keep him in perfect peace, whose mind is stayed on thee: because he trusteth in thee.",
+        context: "Perfect peace is tied directly to trust — a mind fixed on God rather than on the worst-case scenario.",
+      },
+      {
+        ref: "Psalm 37:5 (KJV)",
+        text: "Commit thy way unto the LORD; trust also in him; and he shall bring it to pass.",
+        context: "Trust is active: you commit the outcome to God and then release your grip, letting him work.",
+      },
+      {
+        ref: "Jeremiah 17:7 (KJV)",
+        text: "Blessed is the man that trusteth in the LORD, and whose hope the LORD is.",
+        context: "Trusting God is not naïve — Scripture calls the one who trusts him 'blessed,' rooted like a tree by water.",
+      },
+    ],
+    reflection:
+      "Proverbs 3:5 does not say 'understand everything and then trust.' It says trust 'with all thine heart' and lean not on your own understanding. Trust begins exactly where your understanding runs out.\n\nThat's why Psalm 56 can hold fear and trust in the same breath: 'What time I am afraid, I will trust in thee.' Trust is not the absence of fear — it is what you do with the fear. You hand it to God.\n\nIf you're facing something uncertain today, you don't need to see the whole path. You only need to take the next step, trusting the One who does.",
+    prayer:
+      "Father, I want to trust you, but I'm holding tightly to things I can't control. The unknowns are loud, and my instinct is to lean on my own understanding — which keeps running out.\n\nYour Word says to trust you with all my heart, and that you will direct my path. So I'm choosing to trust you now, even where I can't see how things will work out. When I am afraid, help me put my trust in you instead of in my worry.\n\nI commit this situation to you. I release my grip on the outcome and place it in hands far stronger and kinder than mine.\n\nKeep my mind stayed on you, and give me your perfect peace. Amen.",
+    actionStep:
+      "Write down the one thing you're most afraid of right now, and underneath it write Psalm 56:3 — \"What time I am afraid, I will trust in thee.\" Then name one part of the outcome you can release to God today, and pray Proverbs 3:5–6 over it.",
+    prayerCta: {
+      text: "Struggling to trust God with a specific situation? Tell Faith Companion what you're facing and get a Scripture-based prayer for trust written for your exact moment.",
+      buttonLabel: "Write a prayer for trust",
+    },
+    related: [
+      { slug: "faith", label: "Bible Verses About Faith" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "peace", label: "A Prayer for Peace" },
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "prayer-for-guidance-when-facing-a-big-decision", label: "A Prayer for Guidance" },
+    ],
+  },
+
+  rest: {
+    topic: "rest",
+    title: "Bible Verses About Rest",
+    description:
+      "Bible verses about rest, a written prayer, and one small step for when you're weary and burned out. Scripture on finding true rest for your soul in God.",
+    intro:
+      "Rest in Scripture is more than sleep — it is a settled soul. In a world that runs on hurry and exhaustion, Jesus offers rest to the weary and heavy-laden. Here are Bible verses about rest, a short reflection, a prayer for the tired, and one small step.",
+    verses: [
+      {
+        ref: "Matthew 11:28–29 (KJV)",
+        text: "Come unto me, all ye that labour and are heavy laden, and I will give you rest. Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and ye shall find rest unto your souls.",
+        context: "Jesus' direct invitation to the exhausted — the rest he offers reaches the soul, not just the body.",
+      },
+      {
+        ref: "Psalm 23:1–3 (KJV)",
+        text: "The LORD is my shepherd; I shall not want. He maketh me to lie down in green pastures: he leadeth me beside the still waters. He restoreth my soul.",
+        context: "God as shepherd doesn't drive his sheep — he leads them to rest, still water, and a restored soul.",
+      },
+      {
+        ref: "Exodus 33:14 (KJV)",
+        text: "And he said, My presence shall go with thee, and I will give thee rest.",
+        context: "The rest God promises is inseparable from his presence — you rest because he goes with you.",
+      },
+      {
+        ref: "Psalm 62:5 (KJV)",
+        text: "My soul, wait thou only upon God; for my expectation is from him.",
+        context: "Real rest comes from waiting on God alone, rather than striving to secure everything yourself.",
+      },
+      {
+        ref: "Psalm 4:8 (KJV)",
+        text: "I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.",
+        context: "A prayer before sleep — trusting God enough to lay down the day and truly rest.",
+      },
+    ],
+    reflection:
+      "Jesus does not offer rest as a reward for the productive. He offers it to the 'heavy laden' — the very people least able to earn it. The rest he gives is 'rest unto your souls,' the kind sleep alone can't provide.\n\nNotice how Psalm 23 works: the shepherd 'maketh me to lie down.' Sometimes rest is something we have to be led into, because we won't stop on our own. God's rest is tied to his presence — 'My presence shall go with thee, and I will give thee rest.'\n\nIf you are worn out today, the invitation is not to push through. It is to come to him, lay the load down, and let your soul rest.",
+    prayer:
+      "Lord, I am tired — the kind of tired that sleep doesn't fully touch. I've been carrying more than I can hold, and I don't know how to put it down.\n\nYou said, \"Come unto me, all ye that labour and are heavy laden, and I will give you rest.\" I'm coming to you now. I bring you the weariness, the striving, and the load I keep trying to carry alone.\n\nMake me lie down in green pastures. Lead me beside still waters. Restore my soul in the places that feel depleted. Let your presence go with me, and give me the rest you promise.\n\nTonight and tomorrow, help me trust you enough to truly rest. Amen.",
+    actionStep:
+      "Before you reach for your phone tonight, pray Psalm 4:8 and deliberately hand God the one worry keeping you from rest. Then take fifteen unhurried, unproductive minutes tomorrow and invite God into them — rest as an act of trust, not a reward for finishing.",
+    prayerCta: {
+      text: "Worn out by something specific right now? Tell Faith Companion what's draining you and get a Scripture-based prayer for rest written for your exact moment.",
+      buttonLabel: "Write a prayer for rest",
+    },
+    related: [
+      { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "peace", label: "A Prayer for Peace" },
+      { slug: "bible-verses-for-when-you-cant-sleep", label: "Verses for When You Can't Sleep" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "gratitude", label: "A Prayer for Gratitude" },
+    ],
+  },
+
+  easter: {
+    topic: "easter",
+    label: "Easter",
+    title: "Easter Bible Verses: He Is Risen",
+    description:
+      "Easter Bible verses walking from Palm Sunday to the empty tomb, a written prayer, and one small step. Celebrate the resurrection and the living hope it brings.",
+    intro:
+      "Easter is the center of the Christian faith: Christ crucified, buried, and risen. These verses trace Holy Week from the shouts of Palm Sunday to the cross and the empty tomb — and to the living hope the resurrection secures for everyone who trusts him. Here are Bible verses for Easter, a short reflection, a prayer, and one small step.",
+    verses: [
+      {
+        ref: "Matthew 21:9 (KJV)",
+        text: "Hosanna to the Son of David: Blessed is he that cometh in the name of the Lord; Hosanna in the highest.",
+        context: "Palm Sunday — the crowds welcome Jesus into Jerusalem, days before the cross. Holy Week begins in praise.",
+      },
+      {
+        ref: "Isaiah 53:5 (KJV)",
+        text: "But he was wounded for our transgressions, he was bruised for our iniquities: the chastisement of our peace was upon him; and with his stripes we are healed.",
+        context: "Written 700 years before the cross — the suffering of Good Friday was no accident, but the means of our healing.",
+      },
+      {
+        ref: "John 3:16 (KJV)",
+        text: "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.",
+        context: "The reason behind Easter in a single sentence: love that gives, so that whoever believes might live.",
+      },
+      {
+        ref: "Luke 24:6 (KJV)",
+        text: "He is not here, but is risen: remember how he spake unto you when he was yet in Galilee.",
+        context: "The angel's words at the empty tomb — the announcement that changed everything: he is risen.",
+      },
+      {
+        ref: "John 11:25 (KJV)",
+        text: "Jesus said unto her, I am the resurrection, and the life: he that believeth in me, though he were dead, yet shall he live.",
+        context: "Jesus doesn't only give resurrection — he is the resurrection. Hope has a person's name.",
+      },
+      {
+        ref: "Romans 6:9 (KJV)",
+        text: "Knowing that Christ being raised from the dead dieth no more; death hath no more dominion over him.",
+        context: "The resurrection is permanent. Death's grip is broken — for Christ, and for all who are his.",
+      },
+      {
+        ref: "1 Corinthians 15:57 (KJV)",
+        text: "But thanks be to God, which giveth us the victory through our Lord Jesus Christ.",
+        context: "Easter's outcome is victory — not earned by us, but given through the risen Christ.",
+      },
+      {
+        ref: "1 Peter 1:3 (KJV)",
+        text: "Blessed be the God and Father of our Lord Jesus Christ, which according to his abundant mercy hath begotten us again unto a lively hope by the resurrection of Jesus Christ from the dead.",
+        context: "The resurrection gives believers a 'lively' — living — hope that outlasts the grave.",
+      },
+    ],
+    reflection:
+      "Easter is not first a lesson to apply but an event to reckon with: a real death, and a real resurrection. Everything the New Testament claims stands or falls on the empty tomb.\n\nAnd because the tomb is empty, the whole shape of hope changes. Death is no longer the end of the story — it is a defeated enemy. The one who says 'I am the resurrection and the life' has walked through death and come out the other side, and he promises the same to all who trust him.\n\nWhatever you carry this Easter — grief, fear, regret, or weariness — the resurrection speaks to it. What is surrendered to the risen Christ is never finally lost. He makes all things new.",
+    prayer:
+      "Risen Lord, on this Easter I come to you in wonder. You went to the cross for me, bore what I could not bear, and rose again so that death would not have the last word.\n\nThank you that the tomb is empty. Thank you that your victory is not distant history but a living hope I can stand on today. Where I am afraid, remind me that you have conquered death. Where I grieve, hold before me the promise that what is kept in you is never lost. Where I feel stuck in an old life, make me new.\n\nHelp me to live as an Easter person — not pretending there is no sorrow, but refusing to let sorrow have the final word. You are risen, and because you live, I can face all that comes.\n\nAmen.",
+    actionStep:
+      "Read Luke 24:1–12 slowly this Easter — the account of the empty tomb — and name one area of your life where you most need resurrection hope. Then tell one person, simply, why the risen Christ gives you hope.",
+    prayerCta: {
+      text: "Carrying something specific into this Easter? Tell Faith Companion what's on your heart and get a personal, Scripture-based Easter prayer written for your exact moment.",
+      buttonLabel: "Write an Easter prayer",
+    },
+    related: [
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "healing", label: "Healing Scriptures" },
+      { slug: "faith", label: "Bible Verses About Faith" },
+      { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
+      { slug: "gratitude", label: "A Prayer for Gratitude" },
+    ],
+  },
 };
 
 export const TOPIC_SLUGS = Object.keys(TOPICS);
+
+/**
+ * Redirect aliases for Pinterest theme slugs → the best-matching existing page.
+ * A pin can point at /topics/{alias} (a clean thematic URL) and land on the right
+ * page. Resolved in topics/[topic]/page.tsx as a 307 (temporary) redirect while
+ * dedicated pages are still being built out — convert finalized ones to 308 later.
+ *
+ * Theme slugs with NO good specific page are intentionally omitted here; they fall
+ * through to the /topics hub via the unknown-slug safety net (light, justice,
+ * meditation, let-it-shine, blessing, fruit-of-the-spirit, priorities).
+ */
+export const TOPIC_ALIASES: Record<string, string> = {
+  // Confident — specific existing page
+  guidance: "prayer-for-guidance-when-facing-a-big-decision",
+  provision: "prayer-for-financial-provision",
+  work: "prayer-for-starting-a-new-job",
+  assurance: "faith",
+  return: "prayer-for-when-you-feel-far-from-god",
+  nearness: "prayer-for-when-you-feel-far-from-god",
+  "he-is-near": "prayer-for-when-you-feel-far-from-god",
+  shelter: "psalm-91",
+  "perfect-peace": "peace",
+  "ruling-peace": "peace",
+  stillness: "peace",
+  mercy: "hope",
+  steadfast: "trust",
+  delight: "joy",
+  "first-loved": "bible-verses-for-love",
+  shield: "strength",
+  portion: "strength",
+  power: "strength",
+  // Judgment calls (approved)
+  affirmation: "psalm-139",
+  mindset: "renewal",
+  trials: "strength",
+  "pure-heart": "renewal",
+  faithful: "faith",
+  grace: "faith",
+  completion: "hope",
+  "joy-and-peace": "hope",
+  // Easter / Holy Week cluster → dedicated Easter page
+  resurrection: "easter",
+  "death-defeated": "easter",
+  "living-hope": "easter",
+  victory: "easter",
+  hosanna: "easter",
+  "he-is-risen": "easter",
+  healed: "easter",
+  "the-gift": "easter",
+};
 
 export function getTopic(slug: string): TopicData | undefined {
   return TOPICS[slug];
@@ -2737,11 +3121,11 @@ export function getTopic(slug: string): TopicData | undefined {
 export const TOPIC_GROUPS: Array<{ title: string; slugs: string[] }> = [
   {
     title: "Anxiety, Fear & Peace",
-    slugs: ["anxiety", "peace", "bible-verses-for-when-you-cant-sleep"],
+    slugs: ["anxiety", "peace", "rest", "bible-verses-for-when-you-cant-sleep"],
   },
   {
     title: "Grief, Depression & Loneliness",
-    slugs: ["bible-verses-for-grief", "bible-verses-for-depression", "bible-verses-for-loneliness"],
+    slugs: ["bible-verses-for-grief", "comfort", "bible-verses-for-depression", "bible-verses-for-loneliness"],
   },
   {
     title: "Health, Sickness & Hard Seasons",
@@ -2786,10 +3170,10 @@ export const TOPIC_GROUPS: Array<{ title: string; slugs: string[] }> = [
   },
   {
     title: "Faith, Hope & Strength",
-    slugs: ["faith", "hope", "strength", "gratitude", "prayer-for-when-you-feel-far-from-god"],
+    slugs: ["faith", "hope", "strength", "joy", "trust", "gratitude", "renewal", "prayer-for-when-you-feel-far-from-god"],
   },
   {
     title: "Holidays & Seasons",
-    slugs: ["thanksgiving", "christmas", "new-year"],
+    slugs: ["thanksgiving", "christmas", "easter", "new-year"],
   },
 ];

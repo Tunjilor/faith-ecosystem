@@ -1,11 +1,14 @@
 // src/app/topics/[topic]/page.tsx
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 import Link from "next/link";
-import { TOPICS, TOPIC_SLUGS, getTopic } from "../data";
+import { TOPICS, TOPIC_SLUGS, TOPIC_ALIASES, getTopic } from "../data";
 import ShareBlock from "./ShareBlock";
 
 export const dynamic = "force-static";
+// Allow slugs outside generateStaticParams to render on demand so the
+// unknown-slug redirect below can fire (instead of Next serving a 404).
+export const dynamicParams = true;
 
 type Props = { params: { topic: string } };
 
@@ -41,7 +44,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function TopicPage({ params }: Props) {
   const data = getTopic(params.topic);
-  if (!data) notFound();
+  if (!data) {
+    // Pinterest theme alias (e.g. /topics/mercy) → redirect to the best-matching page.
+    const alias = TOPIC_ALIASES[params.topic];
+    if (alias) redirect(`/topics/${alias}`);
+    // Safety net: any other unknown slug redirects to the /topics hub rather than
+    // serving a dead 404, so no pin ever hits a dead end.
+    redirect("/topics");
+  }
 
   const otherTopics = TOPIC_SLUGS.filter((s) => s !== data.topic);
 
