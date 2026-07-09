@@ -202,9 +202,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale} suppressHydrationWarning>
       <head>
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        {/* Google AdSense loader — replace ca-pub-PLACEHOLDER with the approved publisher id */}
+        {/* Google AdSense loader */}
         <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-PLACEHOLDER"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4733406265730984"
           strategy="afterInteractive"
           async
           crossOrigin="anonymous"
