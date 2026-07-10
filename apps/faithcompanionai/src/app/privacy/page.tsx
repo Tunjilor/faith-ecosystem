@@ -140,8 +140,8 @@ export default function PrivacyPage() {
             .
           </p>
           <p>
-            For users in the EEA, UK, and Switzerland, we obtain consent for personalized ads through a
-            Google-certified consent management platform.
+            Where required for users in the EEA, UK, and Switzerland, we use a Google-certified consent
+            management platform to obtain consent for personalized advertising.
           </p>
 
           <h2 className="text-xl font-bold text-white">Data Retention</h2>
