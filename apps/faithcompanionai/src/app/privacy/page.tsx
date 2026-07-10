@@ -17,7 +17,7 @@ export default function PrivacyPage() {
         <h1 className="text-3xl font-bold text-white md:text-4xl">Privacy Policy</h1>
 
         <div className="mt-6 space-y-5 text-sm leading-7 text-white/75 md:text-base">
-          <p>Last updated: April 2026</p>
+          <p>Last updated: July 9, 2026</p>
 
           <p>
             Faith Companion AI (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) respects your privacy. This Privacy Policy explains what
@@ -105,6 +105,43 @@ export default function PrivacyPage() {
             We may use third-party services to operate the platform, including payment processors (e.g., Stripe),
             hosting and infrastructure providers, and analytics or performance tools. These providers may process
             data as necessary to perform their functions.
+          </p>
+
+          <h2 className="text-xl font-bold text-white">Third-Party Advertising &amp; Google AdSense</h2>
+          <p>
+            We use third-party advertising, including Google AdSense, to display ads on some pages of this site.
+          </p>
+          <ul className="space-y-1 pl-4">
+            {[
+              "Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this and other websites.",
+              "Google's use of advertising cookies (including the DoubleClick cookie) enables it and its partners to serve ads based on visits to our site and/or other sites.",
+            ].map((item) => (
+              <li key={item} className="flex gap-2">
+                <span className="mt-1 shrink-0 text-white/30">&bull;</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <p>
+            You may opt out of personalized advertising by visiting{" "}
+            <a
+              href="https://www.google.com/settings/ads"
+              className="underline underline-offset-4 hover:text-white"
+            >
+              Google Ads Settings
+            </a>
+            , and you may opt out of some third-party vendors&rsquo; use of cookies at{" "}
+            <a
+              href="http://www.aboutads.info/choices"
+              className="underline underline-offset-4 hover:text-white"
+            >
+              www.aboutads.info/choices
+            </a>
+            .
+          </p>
+          <p>
+            For users in the EEA, UK, and Switzerland, we obtain consent for personalized ads through a
+            Google-certified consent management platform.
           </p>
 
           <h2 className="text-xl font-bold text-white">Data Retention</h2>
