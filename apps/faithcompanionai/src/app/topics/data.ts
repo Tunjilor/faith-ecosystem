@@ -107,14 +107,14 @@ export const TOPICS: Record<string, TopicData> = {
         context: "When anxious thoughts multiply and crowd in, God's comfort is what steadies and delights the soul.",
       },
       {
-        ref: "Philippians 4:6–7 (NIV)",
-        text: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.",
-        context: "Anxiety has an antidote here — not \"try harder,\" but \"hand it over,\" and the result is a peace that stands guard over you.",
+        ref: "John 14:27 (NIV)",
+        text: "Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.",
+        context: "The peace Jesus gives isn't circumstance-dependent, so anxiety can't reach where it rests.",
       },
       {
-        ref: "1 Peter 5:7 (ESV)",
-        text: "casting all your anxieties on him, because he cares for you.",
-        context: "You're not burdening God by bringing him your worry; caring for you is exactly who he is.",
+        ref: "Matthew 11:28 (ESV)",
+        text: "Come to me, all who labor and are heavy laden, and I will give you rest.",
+        context: "Anxiety is a weight; the invitation is to bring it, not carry it alone.",
       },
     ],
     reflection:
