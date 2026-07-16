@@ -735,6 +735,91 @@ export const TOPICS: Record<string, TopicData> = {
     ],
   },
 
+  fear: {
+    topic: "fear",
+    label: "Fear",
+    title: "Bible Verses for Fear — Finding Peace When You're Afraid",
+    description:
+      "Scripture, prayer, and a short devotional for when fear takes hold. Find God's peace in anxious, frightening, or uncertain moments.",
+    intro:
+      "Fear is one of the most human things there is — and Scripture never shames it. \"Do not be afraid\" is one of the most repeated phrases in the Bible, not as a scold but as a promise: you are not facing this alone. Whether your fear is loud and sudden or a quiet dread that won't lift, God meets you in it. These verses aren't meant to erase fear by willpower, but to anchor you to the One who is bigger than what frightens you.",
+    verses: [
+      {
+        ref: "Isaiah 41:10 (NIV)",
+        text: "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.",
+        context: "The promise isn't the absence of danger, but the presence of God inside it.",
+      },
+      {
+        ref: "Psalm 34:4 (ESV)",
+        text: "I sought the Lord, and he answered me and delivered me from all my fears.",
+        context: "Fear is something to bring to God, not hide from him.",
+      },
+      {
+        ref: "2 Timothy 1:7 (KJV)",
+        text: "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.",
+        context: "Fear is real, but it isn't your identity or your source.",
+      },
+      {
+        ref: "Psalm 56:3 (NIV)",
+        text: "When I am afraid, I put my trust in you.",
+        context: "Trust and fear can exist in the same breath; courage is choosing where to put your weight.",
+      },
+      {
+        ref: "Joshua 1:9 (NIV)",
+        text: "Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.",
+        context: "Courage is commanded and companioned — never solo.",
+      },
+      {
+        ref: "John 14:27 (ESV)",
+        text: "Peace I leave with you; my peace I give to you. Not as the world gives do I give to you. Let not your hearts be troubled, neither let them be afraid.",
+        context: "A peace the world can't give and circumstances can't take.",
+      },
+      {
+        ref: "Deuteronomy 31:6 (WEB)",
+        text: "Be strong and courageous. Don't be afraid or scared of them; for Yahweh your God himself is who goes with you. He will not fail you nor forsake you.",
+        context: "God's presence outlasts every frightening season.",
+      },
+    ],
+    reflection:
+      "Name the fear honestly — write it down if it helps. Then read Psalm 56:3 slowly and put your own situation in it. Fear shrinks when it's spoken to God instead of rehearsed alone.",
+    prayer:
+      "Father, I'm afraid, and I'm not going to pretend otherwise. You already know. Would you come close in this? Quiet what I can't quiet myself. Remind me you are here, that you go before me, and that nothing I'm facing is bigger than you. I put my trust in you — help my trust grow. Amen.",
+    devotional: {
+      heading: "A 5-Minute Devotional",
+      passage: {
+        ref: "Isaiah 41:10 (NIV)",
+        text: "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.",
+      },
+      reflection:
+        "Read Isaiah 41:10 slowly and notice it holds four distinct promises: \"I am with you\" (his presence), \"I am your God\" (his claim on you), \"I will strengthen you and help you\" (his action), and \"I will uphold you\" (his grip on you when yours fails). Fear says you're on your own; this verse answers every part of that lie.",
+      question:
+        "Pick the one promise you most need today, and carry it with you.",
+    },
+    reflectionQuestions: {
+      heading: "Reflect or Discuss",
+      questions: [
+        "What is the fear actually telling you — and is it true?",
+        "Where have you seen God show up in a past fear?",
+        "What would trusting God with this, one step, look like today?",
+      ],
+    },
+    discussionGuide: {
+      heading: "For Small Groups & Families",
+      text: "Share one fear you're comfortable naming, and one verse above that speaks to it. Then pray for the person on your left.",
+    },
+    prayerCta: {
+      text: "Facing something specific?",
+      buttonLabel: "Write a prayer for this moment",
+    },
+    related: [
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "hope", label: "Bible Verses for Hope" },
+      { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "peace", label: "A Prayer for Peace" },
+      { slug: "isaiah-41-10", label: "Isaiah 41:10: Fear Not" },
+    ],
+  },
+
   "prayer-for-a-job-interview": {
     topic: "prayer-for-a-job-interview",
     label: "a Job Interview",
