@@ -791,7 +791,7 @@ export const TOPICS: Record<string, TopicData> = {
         text: "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.",
       },
       reflection:
-        "Read Isaiah 41:10 slowly and notice it holds four distinct promises: 'I am with you' (his presence), 'I am your God' (his claim on you), 'I will strengthen you and help you' (his action), and 'I will uphold you' (his grip on you when yours fails). Fear says you're on your own; this verse answers every part of that lie.",
+        "Read Isaiah 41:10 slowly and notice it holds four distinct promises: \"I am with you\" (his presence), \"I am your God\" (his claim on you), \"I will strengthen you and help you\" (his action), and \"I will uphold you\" (his grip on you when yours fails). Fear says you're on your own; this verse answers every part of that lie.",
       question:
         "Which of the four promises — his presence, his claim, his help, or his hold — do you most need to lean on today?",
     },
