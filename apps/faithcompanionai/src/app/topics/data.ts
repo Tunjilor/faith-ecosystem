@@ -159,6 +159,16 @@ export const TOPICS: Record<string, TopicData> = {
         text: "It is of the LORD's mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness.",
         context: "Written in the darkest period of Israel's history — yet here is one of Scripture's greatest declarations of hope.",
       },
+      {
+        ref: "Isaiah 40:31 (KJV)",
+        text: "But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.",
+        context: "Hope isn't passive waiting — it's the very thing that renews strength for the long road.",
+      },
+      {
+        ref: "Psalm 42:11 (KJV)",
+        text: "Why art thou cast down, O my soul? and why art thou disquieted within me? hope thou in God: for I shall yet praise him, who is the health of my countenance, and my God.",
+        context: "Sometimes hope means speaking to your own downcast heart and pointing it back to God.",
+      },
     ],
     prayer:
       "Father God, I come to you when hope feels thin. Circumstances have worn me down, and it is hard to see a future that looks different from today.\n\nYour Word says you are the God of hope — that you fill your people with joy and peace as they trust you. I want to trust you. Help me where my trust falls short.\n\nThank you that your mercies are new every morning. Even when I cannot see the path forward, your faithfulness has not changed.\n\nFill me with hope that doesn't depend on circumstances. Let the Holy Spirit renew my expectation that you are at work, even now, even here. Amen.",
@@ -166,6 +176,29 @@ export const TOPICS: Record<string, TopicData> = {
       "Real hope is tested in difficulty, not confirmed by it. The hope Paul writes about in Romans 8 is not the hope of good circumstances — it is the hope of resurrection, of a God who reverses death itself.\n\nThis kind of hope changes how you live while you wait. You can act with courage, extend grace to others, and face hard days without being destroyed — because you know how the story ends.\n\nIf your hope feels thin today, it may simply need feeding. Hope grows through Scripture, through prayer, and through remembering what God has already done.",
     actionStep:
       "Write down three things God has already done in your life that once required hope — then, when this season feels hopeless, read the list back as evidence. Sit with Romans 8 and the phrase \"with patience wait for it,\" naming what you are waiting for now.",
+    devotional: {
+      heading: "A 5-Minute Devotional: Hope That Renews",
+      passage: {
+        ref: "Isaiah 40:31 (KJV)",
+        text: "But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.",
+      },
+      reflection:
+        "Notice hope here is tied to waiting — but not idle waiting. To 'wait upon the Lord' is to keep turning toward him when you're tired and can't see the outcome. The promise isn't that you'll feel strong immediately, but that strength is renewed as you wait: first to soar, then to run, and finally — on the hardest days — simply to walk and not faint. Hope is what carries you when the feelings run out.",
+      question:
+        "Where in your life do you most need renewed strength right now — and what would 'waiting on the Lord' look like there this week?",
+    },
+    reflectionQuestions: {
+      heading: "Reflect or Discuss",
+      questions: [
+        "What am I hoping for right now, named honestly?",
+        "Where has God been faithful before that I can hold onto today?",
+        "What would it look like to \"hope in God\" even before circumstances change?",
+      ],
+    },
+    discussionGuide: {
+      heading: "For Small Groups & Families",
+      text: "Share one thing you're hoping for and one verse above that steadies you. Pray for one another to hope in God even while you wait.",
+    },
     prayerCta: {
       text: "Holding onto hope in a specific situation? Tell Faith Companion what feels hopeless right now and get a hope-filled, Scripture-based prayer written for it.",
       buttonLabel: "Write a prayer for hope",
