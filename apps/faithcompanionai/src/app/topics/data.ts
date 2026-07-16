@@ -785,15 +785,15 @@ export const TOPICS: Record<string, TopicData> = {
     prayer:
       "Father, I'm afraid, and I'm not going to pretend otherwise. You already know. Would you come close in this? Quiet what I can't quiet myself. Remind me you are here, that you go before me, and that nothing I'm facing is bigger than you. I put my trust in you — help my trust grow. Amen.",
     devotional: {
-      heading: "A 5-Minute Devotional",
+      heading: "A 5-Minute Devotional: Four Promises in One Verse",
       passage: {
         ref: "Isaiah 41:10 (NIV)",
         text: "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.",
       },
       reflection:
-        "Read Isaiah 41:10 slowly and notice it holds four distinct promises: \"I am with you\" (his presence), \"I am your God\" (his claim on you), \"I will strengthen you and help you\" (his action), and \"I will uphold you\" (his grip on you when yours fails). Fear says you're on your own; this verse answers every part of that lie.",
+        "Read Isaiah 41:10 slowly and notice it holds four distinct promises: 'I am with you' (his presence), 'I am your God' (his claim on you), 'I will strengthen you and help you' (his action), and 'I will uphold you' (his grip on you when yours fails). Fear says you're on your own; this verse answers every part of that lie.",
       question:
-        "Pick the one promise you most need today, and carry it with you.",
+        "Which of the four promises — his presence, his claim, his help, or his hold — do you most need to lean on today?",
     },
     reflectionQuestions: {
       heading: "Reflect or Discuss",
