@@ -212,6 +212,16 @@ export const TOPICS: Record<string, TopicData> = {
         text: "Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.",
         context: "God's command to Joshua as he faced an impossible task. The same word applies to any impossible situation you face.",
       },
+      {
+        ref: "Nehemiah 8:10 (KJV)",
+        text: "...neither be ye sorry; for the joy of the LORD is your strength.",
+        context: "Strength doesn't only come from gritting your teeth — sometimes it flows from joy rooted in God, even in a hard season.",
+      },
+      {
+        ref: "Psalm 27:1 (KJV)",
+        text: "The LORD is my light and my salvation; whom shall I fear? the LORD is the strength of my life; of whom shall I be afraid?",
+        context: "When God himself is your strength, fear loses its grip — the source is bigger than the threat.",
+      },
     ],
     reflection:
       "Isaiah 40:31 ties renewed strength to hope in God — not to effort, not to willpower, not to better strategies. The Hebrew word for 'renew' literally means 'to exchange' — as if you hand God your depleted strength and receive his in return.\n\nThis kind of strength is counterintuitive. It comes in the moments you admit you don't have it. It grows in the spaces between striving — in stillness, in prayer, in honest surrender.\n\nIf you are exhausted today, the invitation is not to push harder. It is to wait on the God who renews.",
@@ -219,6 +229,29 @@ export const TOPICS: Record<string, TopicData> = {
       "Lord, I am tired. The kind of tired that sleep doesn't fully fix. I've been pushing through, and I'm running out of my own strength.\n\nYour Word says those who hope in you will renew their strength. I am choosing to hope in you today — even when I don't feel it, even when I can't see how things will improve.\n\nThank you that your power is made perfect in weakness. That means my limits are not a problem for you. Help me to stop straining in my own effort and to rest in yours.\n\nGive me the strength to do what today requires — and nothing more. I trust you with the rest. Amen.",
     actionStep:
       "Name one thing you've been carrying in your own strength, and pray it over to God out loud today. Then rest deliberately — take fifteen unproductive minutes and invite God into them instead of pushing harder.",
+    devotional: {
+      heading: "A 5-Minute Devotional: Where Strength Comes From",
+      passage: {
+        ref: "Nehemiah 8:10 (KJV)",
+        text: "...neither be ye sorry; for the joy of the LORD is your strength.",
+      },
+      reflection:
+        "It's easy to think strength means toughing it out alone. But this verse points somewhere different: 'the joy of the Lord is your strength.' The strength isn't manufactured by willpower — it's drawn from joy that's anchored in God rather than in circumstances. On the days you feel weakest, the question isn't 'how do I push harder,' but 'where can I find joy in God right now, even small' — because that joy is the well strength is drawn from.",
+      question:
+        "Where do you feel you're running on willpower alone — and what would it look like to draw strength from joy in God instead this week?",
+    },
+    reflectionQuestions: {
+      heading: "Reflect or Discuss",
+      questions: [
+        "Where do I most need strength right now, named honestly?",
+        "Have I been trying to be strong alone, apart from God?",
+        "What would leaning on God's strength instead of my own look like today?",
+      ],
+    },
+    discussionGuide: {
+      heading: "For Small Groups & Families",
+      text: "Share one area where you feel weak or worn down, and one verse above that speaks to it. Pray for one another to draw strength from God rather than sheer effort.",
+    },
     prayerCta: {
       text: "Running on empty in a specific situation? Tell Faith Companion what's draining you and get a strengthening, Scripture-based prayer written for your exact moment.",
       buttonLabel: "Write a prayer for strength",
