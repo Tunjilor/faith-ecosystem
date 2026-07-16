@@ -265,6 +265,16 @@ export const TOPICS: Record<string, TopicData> = {
         text: "Bless the LORD, O my soul, and forget not all his benefits: Who forgiveth all thine iniquities; who healeth all thy diseases.",
         context: "Healing positioned alongside forgiveness — both are the work of the same God who restores.",
       },
+      {
+        ref: "Psalm 147:3 (KJV)",
+        text: "He healeth the broken in heart, and bindeth up their wounds.",
+        context: "God's healing reaches the emotional and inner wounds, not only the physical ones.",
+      },
+      {
+        ref: "Exodus 15:26 (KJV)",
+        text: "...for I am the LORD that healeth thee.",
+        context: "Healing isn't only something God does — it's part of who he is; he names himself your healer.",
+      },
     ],
     reflection:
       "The Bible's vision of healing is broader than the medical model. Jesus healed bodies, but he also healed shame (the woman at the well), isolation (the lepers), fear (the disciples in the storm), and grief (Mary at Lazarus's tomb).\n\nHealing in Scripture is always moving toward wholeness — shalom. The Hebrew word means peace, completeness, nothing missing. This kind of healing is available even when physical circumstances don't change.\n\nBring whatever is broken to the God who heals. He may move quickly or slowly. But he moves — and the first movement is always toward you.",
@@ -272,6 +282,29 @@ export const TOPICS: Record<string, TopicData> = {
       "Father, I come to you in need of healing — [for my body / for my heart / for this wound I carry]. You know the exact nature of what needs to be made whole. I don't need to explain it fully.\n\nYour Word says you heal the brokenhearted and bind up their wounds. You are the Lord who heals. I believe that. Help me where my belief falls short.\n\nI ask for your healing touch — in whatever form and timeline you choose. I trust that your ways are higher than mine.\n\nAnd while I wait, give me peace in the waiting. Let your presence itself be the first layer of healing, even before circumstances change. Amen.",
     actionStep:
       "Name the one thing you most need healing in — physical, emotional, or spiritual — and pray Jeremiah 17:14 over it: \"Heal me, O LORD, and I shall be healed.\" Then ask one person you trust to pray with you this week.",
+    devotional: {
+      heading: "A 5-Minute Devotional: The God Who Heals",
+      passage: {
+        ref: "Psalm 147:3 (KJV)",
+        text: "He healeth the broken in heart, and bindeth up their wounds.",
+      },
+      reflection:
+        "We often think of healing as physical first — but this verse leads with the heart: 'He healeth the broken in heart.' God doesn't rank your wounds or wait for the visible ones. He binds up what's broken on the inside — grief, disappointment, the ache no one else sees — with the same care he gives the body. Whatever kind of healing you need today, you're not bringing it to a distant God, but to one who calls himself your healer.",
+      question:
+        "What wound — seen or unseen — do you most need God to bind up right now, and can you bring it to him honestly today?",
+    },
+    reflectionQuestions: {
+      heading: "Reflect or Discuss",
+      questions: [
+        "What kind of healing am I seeking right now — physical, emotional, or spiritual?",
+        "Where do I need patience and trust while I wait for it?",
+        "How has God bound up a past wound in my life?",
+      ],
+    },
+    discussionGuide: {
+      heading: "For Small Groups & Families",
+      text: "Share one area where you're seeking healing, and one verse above that speaks to it. Pray for one another, trusting God as the healer he names himself to be.",
+    },
     prayerCta: {
       text: "Carrying something specific that needs healing? Tell Faith Companion what you're walking through and get a personal prayer for healing written for your exact situation.",
       buttonLabel: "Write a prayer for healing",
@@ -280,6 +313,8 @@ export const TOPICS: Record<string, TopicData> = {
       { slug: "prayer-for-a-sick-parent", label: "A Prayer for a Sick Parent" },
       { slug: "prayer-before-surgery", label: "A Prayer Before Surgery" },
       { slug: "strength", label: "Bible Verses About Strength" },
+      { slug: "anxiety", label: "Bible Verses for Anxiety" },
+      { slug: "bible-verses-for-grief", label: "Bible Verses for Grief" },
     ],
   },
 
