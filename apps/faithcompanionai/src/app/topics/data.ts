@@ -106,6 +106,16 @@ export const TOPICS: Record<string, TopicData> = {
         text: "In the multitude of my thoughts within me, your comforts delight my soul.",
         context: "When anxious thoughts multiply and crowd in, God's comfort is what steadies and delights the soul.",
       },
+      {
+        ref: "Philippians 4:6–7 (NIV)",
+        text: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.",
+        context: "Anxiety has an antidote here — not \"try harder,\" but \"hand it over,\" and the result is a peace that stands guard over you.",
+      },
+      {
+        ref: "1 Peter 5:7 (ESV)",
+        text: "casting all your anxieties on him, because he cares for you.",
+        context: "You're not burdening God by bringing him your worry; caring for you is exactly who he is.",
+      },
     ],
     reflection:
       "Anxiety tells you that you are alone with your problem — that it is all on you to figure out, prevent, or fix. Scripture tells a different story. From Genesis to Revelation, God's repeated message is 'I am with you.' Not 'figure it out,' but 'I am here.'\n\nPhilippians 4:6–7 does not say anxiety will never come. It says when anxiety comes, bring it to God. The result is not always an immediate change in circumstances — it is peace that transcends understanding. A peace that doesn't make logical sense given the situation.\n\nThis is the Christian life: not a life free from trouble, but a life accompanied through it.",
@@ -113,6 +123,29 @@ export const TOPICS: Record<string, TopicData> = {
       "Heavenly Father, I am carrying anxiety that I cannot seem to put down. You know the exact situation — the uncertainty, the fear, the what-ifs that keep cycling through my mind.\n\nYour Word says to bring everything to you in prayer and thanksgiving. So I am doing that now. Thank you for this day, even with its difficulties. Thank you that you are not surprised by anything I face.\n\nI confess that I have been trying to control what I cannot control. Forgive me for doubting your care.\n\nLord, give me the peace that passes understanding — the kind that guards my heart and mind even when nothing around me has changed. Help me to take the next step in front of me, and to leave the rest in your hands.\n\nNot my will, but yours be done. Amen.",
     actionStep:
       "Write down the one specific thing making you anxious right now, and underneath it write: \"God knows this, and he is with me in it.\" Then set a five-minute timer and pray Philippians 4:6–7 out loud over that exact worry — naming it to God instead of rehearsing it to yourself.",
+    devotional: {
+      heading: "A 5-Minute Devotional: From Anxiety to Peace",
+      passage: {
+        ref: "Philippians 4:6–7 (NIV)",
+        text: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.",
+      },
+      reflection:
+        "Notice the movement in these verses. It doesn't start with 'feel calm' — it starts with an action: bring the specific thing to God, by prayer, and with thanksgiving. The peace comes second, and it's described as a guard — something that stands watch over your heart and mind so the anxiety can't overrun them. You don't manufacture that peace; you receive it after you've handed the worry over.",
+      question:
+        "What is the one specific thing you can hand to God right now, instead of carrying it another hour?",
+    },
+    reflectionQuestions: {
+      heading: "Reflect or Discuss",
+      questions: [
+        "What am I most anxious about right now, named plainly?",
+        "What would \"casting\" this on God actually look like in practice this week?",
+        "Where have I felt God's peace guard me before?",
+      ],
+    },
+    discussionGuide: {
+      heading: "For Small Groups & Families",
+      text: "Name one anxiety you're carrying and one verse above that speaks to it. Pray for one another that God's peace would stand guard this week.",
+    },
     prayerCta: {
       text: "Anxious about something specific right now? Tell Faith Companion what's weighing on you and get a calming, Scripture-based prayer written for your exact situation.",
       buttonLabel: "Write a prayer for my anxiety",
