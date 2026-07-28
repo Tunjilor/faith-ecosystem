@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Bible Verse Generator – Scripture for Any Topic | Faith Companion",
   description:
-    "Find the perfect Bible verse for any topic – peace, anxiety, hope, healing, strength, grief, or guidance. Free AI-powered Scripture generator with references and daily encouragement.",
+    "Find the perfect Bible verse for any topic — peace, anxiety, hope, healing, grief, or guidance. Free AI Scripture finder with references and encouragement.",
   keywords: [
     "Bible verse generator",
     "AI Bible verse",

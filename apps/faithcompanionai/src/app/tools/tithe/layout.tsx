@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Tithe Calculator – Work Out 10% of Your Income | Faith Companion",
   description:
-    "Free tithe calculator. Enter your income and pay period to see your tithe — weekly, monthly, or yearly — on gross or net, at any percentage. Scripture-grounded and simple.",
+    "Free tithe calculator: enter your income and pay period to see your tithe — weekly, monthly, or yearly, gross or net, at any percentage. Simple and clear.",
   keywords: [
     "tithe calculator",
     "tithing calculator",
