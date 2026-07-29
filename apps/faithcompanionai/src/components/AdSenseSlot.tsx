@@ -4,6 +4,11 @@
 // Props: dataAdClient = your publisher ID (e.g. "ca-pub-XXXXXXXXXXXXXXXX")
 //        dataAdSlot   = the specific ad unit slot ID from AdSense dashboard
 
+// Ads are disabled until the AdSense application is approved. The loader script in
+// layout.tsx and /ads.txt stay in place — Google's review depends on them.
+// Flip this to true to re-enable the slots.
+const ADS_ENABLED: boolean = false;
+
 export default function AdSenseSlot({
   dataAdClient = "ca-pub-XXXXXXXXXXXXXXXX",
   dataAdSlot = "XXXXXXXXXX",
@@ -13,6 +18,8 @@ export default function AdSenseSlot({
   dataAdSlot?: string;
   className?: string;
 }) {
+  if (!ADS_ENABLED) return null;
+
   return (
     <div className={`flex justify-center py-4 ${className}`}>
       <ins
