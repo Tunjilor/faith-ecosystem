@@ -45,6 +45,10 @@ const icons = [
   { path: 'public/brand/icon-192.png', size: 192 },
   { path: 'public/brand/icon-512.png', size: 512 },
   { path: 'public/brand/icon-180.png', size: 180 },
+  // 32px favicon referenced from layout.tsx metadata
+  { path: 'public/brand/icon-32.png', size: 32 },
+  // Footer mark, rendered at 36x36 CSS px (2x for retina)
+  { path: 'public/brand/logo-dark.png', size: 72 },
 ];
 
 for (const { path, size } of icons) {
