@@ -3,14 +3,23 @@ import { headers } from "next/headers";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { SpiritualAssistant } from "@/components/SpiritualAssistant";
 import { ReferralTracker } from "@/components/ReferralTracker";
 import { UserProvider } from "@/context/UserContext";
 import Script from "next/script";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
-import AddToHomeScreen from "@/components/AddToHomeScreen";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import dynamic from "next/dynamic";
 import { Analytics } from "@vercel/analytics/react";
+
+// Both are fixed-position, non-critical widgets that nothing above the fold depends on
+// (AddToHomeScreen is additionally gated behind a 30s timer). Loading them lazily keeps
+// them out of the initial hydration pass.
+const SpiritualAssistant = dynamic(() => import("@/components/SpiritualAssistant"), {
+  ssr: false,
+});
+const AddToHomeScreen = dynamic(() => import("@/components/AddToHomeScreen"), {
+  ssr: false,
+});
 
 const GA_ID = "G-5WYYE098DH";
 
