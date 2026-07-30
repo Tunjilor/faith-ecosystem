@@ -43,6 +43,7 @@ export default function Footer() {
                 <img
                   src="/brand/logo-dark.png"
                   alt="Faith Companion AI"
+                  loading="lazy"
                   className="mt-1 h-9 w-9 rounded-lg object-contain"
                 />
                 <div>
@@ -174,6 +175,7 @@ export default function Footer() {
                   alt="Faith Companion AI - Personalized Scripture, prayer &amp; devotionals — just for you | Product Hunt"
                   width="200"
                   height="43"
+                  loading="lazy"
                   src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1135218&theme=light&t=1777475820795"
                   style={{ width: "200px", height: "43px" }}
                 />

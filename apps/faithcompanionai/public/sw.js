@@ -8,15 +8,11 @@ const CACHE_VERSION = 'v3';
 const STATIC_CACHE  = `faithai-static-${CACHE_VERSION}`;
 const PAGE_CACHE    = `faithai-pages-${CACHE_VERSION}`;
 
+// Only the offline fallback is precached. Precaching real pages here fired a burst
+// of full page requests during SW install, competing for bandwidth on slow mobile
+// connections while the first load was still in flight. Pages still get cached
+// network-first as the user visits them (see fetch handler below).
 const PRECACHE_PAGES = [
-  '/',
-  '/tools/verse',
-  '/tools/prayer',
-  '/tools/devotional',
-  '/tools/bible-search',
-  '/tools/share-card',
-  '/pricing',
-  '/biblequiz',
   '/offline.html',
 ];
 
