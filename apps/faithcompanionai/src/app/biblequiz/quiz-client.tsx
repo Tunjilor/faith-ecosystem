@@ -56,7 +56,7 @@ type StartResponse = {
   softLimit?: boolean;
 };
 
-type CompletionScore = { score: number; total: number; shareId: string | null };
+type CompletionScore = { score: number; total: number; resultsHref: string | null };
 
 type ReviewItem = {
   questionId: string;
@@ -497,8 +497,13 @@ export default function QuizClient() {
     const total = typeof data?.total === "number" ? data.total : QUESTIONS_PER_QUIZ;
     const shareId = data?.shareId ?? null;
 
+    // The API already returns the canonical results path; only build one ourselves
+    // if it is absent. Either way it must be /biblequiz/results/<shareId> — that is
+    // what the submit, leaderboard, and share routes all link to.
+    const resultsHref = data?.redirectTo ?? (shareId ? `/biblequiz/results/${shareId}` : null);
+
     if (Array.isArray(data?.review)) setReviewItems(data.review);
-    setCompletionScore({ score, total, shareId });
+    setCompletionScore({ score, total, resultsHref });
     setQuizCompleted(true);
   }
 
@@ -752,9 +757,9 @@ export default function QuizClient() {
 
               {/* Actions */}
               <div className="flex flex-wrap gap-3">
-                {completionScore.shareId && (
+                {completionScore.resultsHref && (
                   <Link
-                    href={`/quiz/results/${completionScore.shareId}`}
+                    href={completionScore.resultsHref}
                     className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black hover:opacity-90"
                   >
                     View Results
