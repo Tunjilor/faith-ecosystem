@@ -4,6 +4,7 @@ import { useUser } from "@/context/UserContext";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import DenominationSelect, { readDenomination } from "@/components/DenominationSelect";
 import QuizLimitPrompt from "@/components/QuizLimitPrompt";
 
@@ -205,6 +206,7 @@ function HardStopModal({
 
 // â"€â"€ Main component â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 export default function QuizClient() {
+  const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
@@ -744,13 +746,20 @@ export default function QuizClient() {
                     >
                       Create Free Account
                     </Link>
-                    <button
-                      type="button"
-                      onClick={() => { setQuizCompleted(false); setCompletionScore(null); }}
-                      className="rounded-full border border-white/20 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10"
-                    >
-                      Continue as Guest
-                    </button>
+                    {completionScore.resultsHref && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          // Same destination as "View Results" below. Capture the href
+                          // before touching state so it cannot be nulled out from under us.
+                          const resultsHref = completionScore.resultsHref;
+                          if (resultsHref) router.push(resultsHref);
+                        }}
+                        className="rounded-full border border-white/20 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10"
+                      >
+                        Continue as Guest
+                      </button>
+                    )}
                   </div>
                 </div>
               )}
