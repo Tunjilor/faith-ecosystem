@@ -1,4 +1,5 @@
 // src/lib/premium.ts
+import { cache } from "react";
 import { cookies, headers } from "next/headers";
 import { db } from "@/lib/db";
 import { sha256, dayKeyUTC } from "@/lib/hash";
@@ -64,8 +65,10 @@ export function getAnonymousFallbackKey() {
 
 /**
  * Reads fc_session, verifies it, returns DB user or null.
+ * Wrapped in React cache() so multiple callers within one server render
+ * (e.g. a page and a nested server component) share a single DB lookup.
  */
-export async function getUserFromSession(): Promise<SessionUser | null> {
+export const getUserFromSession = cache(async (): Promise<SessionUser | null> => {
   const secret = process.env.SESSION_SECRET;
   if (!secret) return null;
 
@@ -89,7 +92,7 @@ export async function getUserFromSession(): Promise<SessionUser | null> {
   });
 
   return user ?? null;
-}
+});
 
 export async function requireUserFromSession() {
   const user = await getUserFromSession();
