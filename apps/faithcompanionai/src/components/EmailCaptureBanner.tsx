@@ -43,7 +43,7 @@ export default function EmailCaptureBanner({ source = "quiz-results" }: { source
       <div className="rounded-2xl px-6 py-6 sm:px-8" style={{ background: "rgba(11,10,20,0.96)" }}>
         <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
           <div>
-            <div className="text-2xl">✉️</div>
+            <div className="text-2xl">📖</div>
             <h2 className="mt-2 text-xl font-extrabold text-white">
               Get your daily Bible verse by email — free forever
             </h2>
