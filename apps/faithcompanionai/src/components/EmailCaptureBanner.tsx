@@ -26,7 +26,7 @@ export default function EmailCaptureBanner() {
   if (status === "done") {
     return (
       <div className="rounded-2xl px-6 py-5 text-center text-sm font-semibold text-emerald-300" style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)' }}>
-        ✅ You're in! Check your inbox for your first daily verse.
+        ✅ You're in! Your first daily verse arrives with the next daily send.
       </div>
     );
   }
