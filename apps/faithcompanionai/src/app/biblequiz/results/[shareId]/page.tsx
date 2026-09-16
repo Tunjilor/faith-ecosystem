@@ -7,7 +7,7 @@ import { db } from "@/lib/db";
 import { isPremiumUser } from "@/lib/premium";
 import ShareButtons from "./share-buttons";
 import LeaderboardBlock from "@/components/quiz/LeaderboardBlock";
-import EmailCaptureBanner from "@/components/EmailCaptureBanner";
+import GuestEmailCapture from "@/components/GuestEmailCapture";
 import QuizUpgradeNudge from "@/components/QuizUpgradeNudge";
 import MobileInstallBanner from "@/components/MobileInstallBanner";
 
@@ -251,7 +251,8 @@ export default async function Page({ params }: PageProps) {
       </section>
 
       <QuizUpgradeNudge />
-      {!attempt.userId && <EmailCaptureBanner />}
+      {/* Gated on the viewer's session, not on who owns the attempt */}
+      <GuestEmailCapture source="quiz-results" />
 
       <LeaderboardBlock category={attempt.category} currentShareId={shareId} title="Can anyone beat this score?" />
 
