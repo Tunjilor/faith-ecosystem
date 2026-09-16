@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { safeRedirectPath } from "@/lib/safeRedirect";
 
 type Tab = "magic" | "password";
 
@@ -34,6 +35,9 @@ export default function LoginClient() {
 
   const error = searchParams.get("error");
   const resetSuccess = searchParams.get("reset") === "success";
+  // Where to land after sign-in. Validated to an in-app path (never an
+  // external URL); falls back to /dashboard.
+  const redirectTo = safeRedirectPath(searchParams.get("redirect"));
 
   async function handleMagicLink(e: React.FormEvent) {
     e.preventDefault();
@@ -44,7 +48,7 @@ export default function LoginClient() {
       const res = await fetch("/api/auth/magic/request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, redirect: redirectTo }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error || "Something went wrong");
@@ -75,7 +79,7 @@ export default function LoginClient() {
       // Full page load (not router.push) so the root-layout UserProvider refetches
       // /api/me and the header / client-side guest gates see the new session.
       // Matches what logout and the magic-link callback already do.
-      window.location.assign("/dashboard");
+      window.location.assign(redirectTo);
     } catch {
       setPwError("Network error. Please try again.");
     } finally {

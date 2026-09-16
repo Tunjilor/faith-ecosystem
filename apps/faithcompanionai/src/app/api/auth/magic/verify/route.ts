@@ -7,6 +7,7 @@ import {
   makeSessionExpiry,
   sessionCookieName,
 } from "@/lib/session";
+import { safeRedirectPath } from "@/lib/safeRedirect";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -138,8 +139,10 @@ export async function GET(req: Request) {
     const exp = makeSessionExpiry(30);
     const sessionToken = createSessionToken({ uid: user.id, exp }, secret);
 
-    console.log("[magic/verify] success — redirecting to /dashboard");
-    const res = NextResponse.redirect(new URL("/dashboard", url.origin));
+    // Optional destination carried on the link; never trusted blindly.
+    const redirectTo = safeRedirectPath(url.searchParams.get("next"));
+    console.log("[magic/verify] success — redirecting to", redirectTo);
+    const res = NextResponse.redirect(new URL(redirectTo, url.origin));
 
     res.cookies.set(sessionCookieName(), sessionToken, {
       httpOnly: true,
