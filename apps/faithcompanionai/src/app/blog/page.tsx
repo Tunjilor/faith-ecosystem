@@ -8,16 +8,27 @@ import AdSenseSlot from "@/components/AdSenseSlot";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Blog – Bible Study Tips & Prayer Guides | Faith Companion",
+  // Root layout applies the "%s | Faith Companion AI" title template — no brand here.
+  title: "Blog: Bible Study & Prayer Guides",
   description:
     "Practical guides on prayer, Bible study, devotionals, and Scripture memory. Written to help you grow in faith with Scripture-grounded, actionable content.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Faith Companion AI Blog – Bible Study Tips & Prayer Guides",
-    description: "Practical guides on prayer, Bible study, devotionals, and Scripture memory.",
+    // OG/Twitter titles are not run through the template, so carry the brand explicitly.
+    title: "Blog: Bible Study & Prayer Guides | Faith Companion AI",
+    description:
+      "Practical guides on prayer, Bible study, devotionals, and Scripture memory. Written to help you grow in faith with Scripture-grounded, actionable content.",
     url: "https://faithcompanionai.com/blog",
+    siteName: "Faith Companion AI",
     type: "website",
     images: [{ url: "/brand/og-quiz.png", width: 1200, height: 630, alt: "Faith Companion AI Blog" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog: Bible Study & Prayer Guides | Faith Companion AI",
+    description:
+      "Practical guides on prayer, Bible study, devotionals, and Scripture memory. Written to help you grow in faith with Scripture-grounded, actionable content.",
+    images: ["/brand/og-quiz.png"],
   },
 };
 

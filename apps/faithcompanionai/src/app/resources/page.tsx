@@ -4,9 +4,12 @@ import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Christian Resources – Bible & Prayer Tools | Faith Companion",
+  // Root layout applies the "%s | Faith Companion AI" title template — no brand here.
+  // Title/description lead with "AI prayer" + "Bible verse" — the terms this page is
+  // already surfacing for in Search Console ("prayer bible verses using ai").
+  title: "Free AI Prayer & Bible Verse Tools",
   description:
-    "Free Christian resources for daily Bible study, AI-powered prayer, devotionals, and Scripture memory. Explore Bible quiz, verse finder, and faith tools designed for daily spiritual growth.",
+    "Free Christian resources: AI prayer generator, Bible verse finder, devotionals, Bible quiz, and Scripture memory. Scripture-grounded, made for daily use.",
   keywords: [
     "Christian resources",
     "Bible study tools",
@@ -20,9 +23,10 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/resources" },
   openGraph: {
-    title: "Christian Resources – Faith Companion",
+    // OG/Twitter titles are not run through the template, so carry the brand explicitly.
+    title: "Free AI Prayer & Bible Verse Tools | Faith Companion AI",
     description:
-      "Free tools for daily Bible study, prayer, devotionals, and spiritual growth. AI-powered and Scripture-grounded.",
+      "Free Christian resources: AI prayer generator, Bible verse finder, devotionals, Bible quiz, and Scripture memory. Scripture-grounded, made for daily use.",
     url: "https://faithcompanionai.com/resources",
     siteName: "Faith Companion AI",
     type: "website",
@@ -30,8 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Christian Resources – Faith Companion",
-    description: "Free tools for daily Bible study, prayer, devotionals, and spiritual growth.",
+    title: "Free AI Prayer & Bible Verse Tools | Faith Companion AI",
+    description:
+      "Free Christian resources: AI prayer generator, Bible verse finder, devotionals, Bible quiz, and Scripture memory. Scripture-grounded, made for daily use.",
     images: ["/brand/og-quiz.png"],
   },
 };
