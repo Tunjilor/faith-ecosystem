@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Bible Search – Find Verses by Keyword | Faith Companion",
+  // Root layout applies the "%s | Faith Companion AI" title template — no brand here.
+  title: "Bible Search – Find Verses by Keyword",
   description:
     "Search Scripture by reference (e.g. John 3:16) or keyword (e.g. peace, faith, love). Free Bible verse search with KJV, WEB, and ASV translations.",
   keywords: [
@@ -16,8 +17,10 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/tools/bible-search" },
   openGraph: {
-    title: "Bible Search – Faith Companion",
-    description: "Search Scripture by reference or keyword. Free Bible verse lookup tool.",
+    // OG/Twitter titles are not run through the template, so carry the brand explicitly.
+    title: "Bible Search – Find Verses by Keyword | Faith Companion AI",
+    description:
+      "Search Scripture by reference (e.g. John 3:16) or keyword (e.g. peace, faith, love). Free Bible verse search with KJV, WEB, and ASV translations.",
     url: "https://faithcompanionai.com/tools/bible-search",
     siteName: "Faith Companion AI",
     type: "website",
@@ -25,8 +28,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bible Search – Faith Companion",
-    description: "Search Scripture by reference or keyword.",
+    title: "Bible Search – Find Verses by Keyword | Faith Companion AI",
+    description:
+      "Search Scripture by reference (e.g. John 3:16) or keyword (e.g. peace, faith, love). Free Bible verse search with KJV, WEB, and ASV translations.",
     images: ["/brand/og-quiz.png"],
   },
 };

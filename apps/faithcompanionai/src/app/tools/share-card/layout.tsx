@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Verse Card Maker – Shareable Bible Images | Faith Companion",
+  // Root layout applies the "%s | Faith Companion AI" title template — no brand here.
+  title: "Bible Verse Card Maker – Free Images",
   description:
-    "Turn any Bible verse into a beautiful, shareable image card. Download as PNG for Instagram, Facebook, Twitter/X, or share directly from your phone. Free verse card maker.",
+    "Turn any Bible verse into a beautiful, shareable image card. Free PNG download for Instagram, Facebook, or Twitter/X — or share straight from your phone.",
   keywords: [
     "Bible verse card",
     "shareable Bible image",
@@ -15,9 +16,10 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/tools/share-card" },
   openGraph: {
-    title: "Verse Card Maker – Faith Companion",
+    // OG/Twitter titles are not run through the template, so carry the brand explicitly.
+    title: "Bible Verse Card Maker – Free Images | Faith Companion AI",
     description:
-      "Turn any Bible verse into a beautiful shareable image. Free PNG download for Instagram, Facebook, and Twitter/X.",
+      "Turn any Bible verse into a beautiful, shareable image card. Free PNG download for Instagram, Facebook, or Twitter/X — or share straight from your phone.",
     url: "https://faithcompanionai.com/tools/share-card",
     siteName: "Faith Companion AI",
     type: "website",
@@ -32,8 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Verse Card Maker – Faith Companion",
-    description: "Turn any Bible verse into a beautiful shareable image.",
+    title: "Bible Verse Card Maker – Free Images | Faith Companion AI",
+    description:
+      "Turn any Bible verse into a beautiful, shareable image card. Free PNG download for Instagram, Facebook, or Twitter/X — or share straight from your phone.",
     images: ["/api/og/verse"],
   },
 };
