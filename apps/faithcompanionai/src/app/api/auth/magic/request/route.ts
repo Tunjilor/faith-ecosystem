@@ -3,6 +3,7 @@ import crypto from "crypto";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { sendMagicLinkEmail } from "@/lib/email";
+import { safeRedirectPath, DEFAULT_POST_LOGIN_PATH } from "@/lib/safeRedirect";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -20,6 +21,9 @@ export async function POST(req: Request) {
     const body = await req.json();
     const rawEmail = typeof body?.email === "string" ? body.email : "";
     const email = normalizeEmail(rawEmail);
+    // Optional post-login destination from the login page. Validated here and
+    // again in /verify — the emailed link is user-visible and editable.
+    const redirectTo = safeRedirectPath(body?.redirect);
 
     if (!email || !email.includes("@")) {
       return NextResponse.json(
@@ -47,7 +51,9 @@ export async function POST(req: Request) {
     const appUrl =
       process.env.NEXT_PUBLIC_APP_URL?.trim() || reqOrigin;
 
-    const magicLink = `${appUrl}/api/auth/magic/verify?token=${token}`;
+    const nextParam =
+      redirectTo === DEFAULT_POST_LOGIN_PATH ? "" : `&next=${encodeURIComponent(redirectTo)}`;
+    const magicLink = `${appUrl}/api/auth/magic/verify?token=${token}${nextParam}`;
 
     await sendMagicLinkEmail({ to: email, magicLink });
 
