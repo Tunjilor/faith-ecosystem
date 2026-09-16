@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import HomeCtaLayer from "@/components/home/HomeCtaLayer";
+import GuestEmailCapture from "@/components/GuestEmailCapture";
 import JsonLd from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
@@ -429,6 +430,11 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+
+      {/* Daily-verse email capture — logged-out visitors only (server-gated; the footer instance hides on "/") */}
+      <div className="mt-10">
+        <GuestEmailCapture source="homepage" />
+      </div>
 
       <section className="mt-10">
         <h2 className="text-2xl font-bold text-white md:text-3xl">

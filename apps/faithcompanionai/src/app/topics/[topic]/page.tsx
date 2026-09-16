@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { TOPICS, TOPIC_SLUGS, getTopic } from "../data";
 import ShareBlock from "./ShareBlock";
+import GuestEmailCaptureClient from "@/components/GuestEmailCaptureClient";
 
 export const dynamic = "force-static";
 
@@ -439,6 +440,13 @@ export default function TopicPage({ params }: Props) {
           </div>
         </section>
       )}
+
+      {/* ── Daily-verse email capture (logged-out visitors only) ──
+          Client-gated: this route is force-static, so the server gate can't see
+          the session. The footer instance hides on /topics/* to avoid a double ask. */}
+      <div className="mt-12">
+        <GuestEmailCaptureClient source={`topic:${data.topic}`} />
+      </div>
 
       {/* ── Related (explicit) or Explore other topics (auto) ── */}
       {data.related && data.related.length > 0 ? (

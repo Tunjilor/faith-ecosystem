@@ -17,13 +17,15 @@ export interface UserData {
   hasPassword?: boolean;
   referralCount?: number;
   guest: { id: string; createdAt: string; trial: any } | null;
+  /** true once the /api/me fetch has settled (success or failure) */
+  loaded: boolean;
 }
 
 const defaultUser: UserData = {
   premium: false, isPremium: false, authed: false, signedIn: false,
   userId: null, email: null, premiumUntil: null, customerId: null,
   subscriptionId: null, actorKey: null, guestName: null, displayName: null,
-  referralCount: 0, guest: null,
+  referralCount: 0, guest: null, loaded: false,
 };
 
 const UserContext = createContext<UserData>(defaultUser);
@@ -33,8 +35,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     fetch("/api/me", { cache: "no-store" })
       .then((r) => r.json())
-      .then(setUser)
-      .catch(() => setUser(defaultUser));
+      .then((data) => setUser({ ...data, loaded: true }))
+      .catch(() => setUser({ ...defaultUser, loaded: true }));
   }, []);
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 }
