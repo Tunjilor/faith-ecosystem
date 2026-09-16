@@ -1,5 +1,6 @@
 // src/components/Footer.tsx
 import Link from "next/link";
+import GuestEmailCaptureClient from "@/components/GuestEmailCaptureClient";
 
 const sitemapLinks = [
   { label: "Home", href: "/" },
@@ -159,6 +160,17 @@ export default function Footer() {
                 Part of the Faith Companion AI ecosystem — free tools for prayer, Bible study, and tithing.
               </p>
             </div>
+          </div>
+
+          {/* Daily-verse email capture — logged-out visitors only. Client-gated because the
+              footer also renders on force-static routes. Hidden on pages that carry their own
+              inline capture so a guest is never asked twice. */}
+          <div className="mt-10 border-t border-white/10 pt-6 empty:hidden">
+            <GuestEmailCaptureClient
+              source="footer"
+              variant="compact"
+              hideOnPathPrefixes={["/", "/topics/", "/biblequiz/results/"]}
+            />
           </div>
 
           <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
