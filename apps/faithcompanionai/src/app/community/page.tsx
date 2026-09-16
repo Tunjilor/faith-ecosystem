@@ -63,7 +63,7 @@ export default function CommunityPage() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-bold text-white md:text-3xl">What's coming</h2>
+        <h2 className="text-2xl font-bold text-white md:text-3xl">What&apos;s coming</h2>
 
         <div className="mt-6 grid gap-5 md:grid-cols-3">
           {upcomingFeatures.map((feature) => (

@@ -143,7 +143,7 @@ export default function TopicPage({ params }: Props) {
             >
               <div className="text-sm font-bold text-orange-300">{verse.ref}</div>
               <blockquote className="mt-3 text-base leading-7 text-white italic">
-                "{verse.text}"
+                &quot;{verse.text}&quot;
               </blockquote>
               <p className="mt-3 text-sm text-white/55">{verse.context}</p>
             </div>
@@ -311,7 +311,7 @@ export default function TopicPage({ params }: Props) {
           <div className="mt-6 rounded-[22px] border border-white/10 bg-white/5 p-6 md:p-8">
             <div className="text-sm font-bold text-orange-300">{data.devotional.passage.ref}</div>
             <blockquote className="mt-3 text-base leading-7 text-white italic">
-              "{data.devotional.passage.text}"
+              &quot;{data.devotional.passage.text}&quot;
             </blockquote>
             <p className="mt-5 whitespace-pre-line text-sm leading-7 text-white/75">
               {data.devotional.reflection}

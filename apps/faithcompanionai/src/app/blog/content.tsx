@@ -48,9 +48,9 @@ const cta = "mt-8 rounded-[24px] border border-white/10 bg-white/5 p-6 text-cent
 const post1Body: ReactNode = (
   <article>
     <p className={p}>
-      Whether you're hosting a church trivia night, studying with your family, or just testing your own
+      Whether you&apos;re hosting a church trivia night, studying with your family, or just testing your own
       Scripture knowledge, Bible quiz questions are one of the most engaging ways to grow in faith.
-      Below you'll find 60 curated Bible quiz questions and answers across six categories — from easy
+      Below you&apos;ll find 60 curated Bible quiz questions and answers across six categories — from easy
       questions for beginners to harder ones that will challenge even seasoned believers.
     </p>
 
@@ -214,15 +214,15 @@ const post1Body: ReactNode = (
 const post2Body: ReactNode = (
   <article>
     <p className={p}>
-      Many people want to pray but don't know where to start. Maybe you feel like your words are not
-      good enough, or you're not sure of the right format. The good news is that there is no perfect
+      Many people want to pray but don&apos;t know where to start. Maybe you feel like your words are not
+      good enough, or you&apos;re not sure of the right format. The good news is that there is no perfect
       formula for prayer. God cares about your heart, not the poetry of your words. This guide walks
       you through a simple, Scripture-grounded method for writing and speaking a personal prayer.
     </p>
 
     <div className={blockquote}>
-      "Do not be anxious about anything, but in every situation, by prayer and petition, with
-      thanksgiving, present your requests to God." — Philippians 4:6
+      &quot;Do not be anxious about anything, but in every situation, by prayer and petition, with
+      thanksgiving, present your requests to God.&quot; — Philippians 4:6
     </div>
 
     <h2 className={h2}>What Is a Personal Prayer?</h2>
@@ -233,9 +233,9 @@ const post2Body: ReactNode = (
       They can be long or short — from a one-sentence cry for help to a structured 20-minute reflection.
     </p>
     <p className={p}>
-      The Bible is full of examples of personal prayers: David's raw honesty in the Psalms, Hannah's
-      weeping prayer for a child (1 Samuel 1:10–11), and even Jesus' prayer in Gethsemane — "Not my
-      will, but yours be done" (Luke 22:42). Every one of these was deeply personal.
+      The Bible is full of examples of personal prayers: David&apos;s raw honesty in the Psalms, Hannah&apos;s
+      weeping prayer for a child (1 Samuel 1:10–11), and even Jesus&apos; prayer in Gethsemane — &quot;Not my
+      will, but yours be done&quot; (Luke 22:42). Every one of these was deeply personal.
     </p>
 
     <h2 className={h2}>The ACTS Method: A Simple Framework</h2>
@@ -248,11 +248,11 @@ const post2Body: ReactNode = (
     <h3 className={h3}>A — Adoration</h3>
     <p className={p}>
       Begin by praising God for who he is — not for what he does, but for his character. This shifts
-      your focus from your problems to God's greatness.
+      your focus from your problems to God&apos;s greatness.
     </p>
     <div className={blockquote}>
-      Example: "Lord, you are holy and faithful. You are the God who does not change, who keeps every
-      promise. I worship you simply because you are God."
+      Example: &quot;Lord, you are holy and faithful. You are the God who does not change, who keeps every
+      promise. I worship you simply because you are God.&quot;
     </div>
 
     <h3 className={h3}>C — Confession</h3>
@@ -261,8 +261,8 @@ const post2Body: ReactNode = (
       (you already have it in Christ) but to keep your relationship with God honest and uncluttered.
     </p>
     <div className={blockquote}>
-      Example: "Father, I confess that I have been anxious this week instead of trusting you. I have
-      said words that were unkind. Forgive me and help me to do better."
+      Example: &quot;Father, I confess that I have been anxious this week instead of trusting you. I have
+      said words that were unkind. Forgive me and help me to do better.&quot;
     </div>
 
     <h3 className={h3}>T — Thanksgiving</h3>
@@ -271,8 +271,8 @@ const post2Body: ReactNode = (
       gratitude shifts mental and emotional state. In prayer, it also reorients your perspective.
     </p>
     <div className={blockquote}>
-      Example: "Thank you for another morning. Thank you for the people in my life who love me. Thank
-      you for your Word, which gives me direction when I feel lost."
+      Example: &quot;Thank you for another morning. Thank you for the people in my life who love me. Thank
+      you for your Word, which gives me direction when I feel lost.&quot;
     </div>
 
     <h3 className={h3}>S — Supplication</h3>
@@ -281,19 +281,19 @@ const post2Body: ReactNode = (
       love, and for situations beyond your control.
     </p>
     <div className={blockquote}>
-      Example: "Lord, I need wisdom for this decision at work. Please give my friend strength as she
-      goes through this illness. And help me to trust you even when I can't see what you're doing."
+      Example: &quot;Lord, I need wisdom for this decision at work. Please give my friend strength as she
+      goes through this illness. And help me to trust you even when I can&apos;t see what you&apos;re doing.&quot;
     </div>
 
     <h2 className={h2}>Step-by-Step Guide to Writing a Personal Prayer</h2>
     <ol className={ol}>
-      <li className={li}><strong>Choose a quiet space and time.</strong> Prayer doesn't require silence, but for beginners, removing distractions helps. Morning, evening, or lunch — pick what works for your rhythm.</li>
-      <li className={li}><strong>Start with a simple opening.</strong> "Lord," "Father," "God," or "Heavenly Father" — any is fine. You're starting a conversation, not writing a legal document.</li>
+      <li className={li}><strong>Choose a quiet space and time.</strong> Prayer doesn&apos;t require silence, but for beginners, removing distractions helps. Morning, evening, or lunch — pick what works for your rhythm.</li>
+      <li className={li}><strong>Start with a simple opening.</strong> &quot;Lord,&quot; &quot;Father,&quot; &quot;God,&quot; or &quot;Heavenly Father&quot; — any is fine. You&apos;re starting a conversation, not writing a legal document.</li>
       <li className={li}><strong>Praise before you request.</strong> Even one sentence of worship shifts the tone of the whole prayer. Try starting with something God has done or a quality you admire in him.</li>
-      <li className={li}><strong>Be specific, not vague.</strong> "Help me" is fine, but "Help me find peace about this job decision by the end of this week" is more honest and more connected to your real situation.</li>
-      <li className={li}><strong>Use Scripture in your prayer.</strong> You can pray Bible verses directly. "Lord, your Word says you work all things together for good (Romans 8:28). I'm trusting that even this situation is in your hands."</li>
-      <li className={li}><strong>Include others.</strong> Praying for others (intercession) expands your heart and aligns your desires with God's.</li>
-      <li className={li}><strong>Close with trust.</strong> End your prayer by releasing the outcome to God. "Your will be done" is one of the most powerful prayer closings in Scripture.</li>
+      <li className={li}><strong>Be specific, not vague.</strong> &quot;Help me&quot; is fine, but &quot;Help me find peace about this job decision by the end of this week&quot; is more honest and more connected to your real situation.</li>
+      <li className={li}><strong>Use Scripture in your prayer.</strong> You can pray Bible verses directly. &quot;Lord, your Word says you work all things together for good (Romans 8:28). I&apos;m trusting that even this situation is in your hands.&quot;</li>
+      <li className={li}><strong>Include others.</strong> Praying for others (intercession) expands your heart and aligns your desires with God&apos;s.</li>
+      <li className={li}><strong>Close with trust.</strong> End your prayer by releasing the outcome to God. &quot;Your will be done&quot; is one of the most powerful prayer closings in Scripture.</li>
     </ol>
 
     <h2 className={h2}>Common Types of Personal Prayers</h2>
@@ -302,15 +302,15 @@ const post2Body: ReactNode = (
       <li className={li}><strong>Prayer of gratitude</strong> — deliberately thanking God for specific blessings</li>
       <li className={li}><strong>Prayer for guidance</strong> — asking for wisdom in a decision or direction in life</li>
       <li className={li}><strong>Prayer of lament</strong> — expressing grief, confusion, or pain honestly to God</li>
-      <li className={li}><strong>Intercessory prayer</strong> — praying on behalf of someone else's needs</li>
-      <li className={li}><strong>Prayer of surrender</strong> — releasing a situation or outcome fully to God's will</li>
+      <li className={li}><strong>Intercessory prayer</strong> — praying on behalf of someone else&apos;s needs</li>
+      <li className={li}><strong>Prayer of surrender</strong> — releasing a situation or outcome fully to God&apos;s will</li>
     </ul>
 
     <h2 className={h2}>A Complete Example: Personal Prayer for Anxiety</h2>
     <div className={card}>
       <p className="text-sm italic leading-7 text-white/75">
-        "Heavenly Father, I come to you today carrying a weight of worry that I haven't been able to
-        shake. You know the situation I'm facing — you know it better than I do. Your Word tells me
+        &quot;Heavenly Father, I come to you today carrying a weight of worry that I haven&apos;t been able to
+        shake. You know the situation I&apos;m facing — you know it better than I do. Your Word tells me
         not to be anxious, but to bring my requests to you with thanksgiving (Philippians 4:6). So I
         am doing that now.
         <br /><br />
@@ -320,22 +320,22 @@ const post2Body: ReactNode = (
         I confess that I have let fear lead me more than faith this week. Forgive me, and help me
         to choose trust.
         <br /><br />
-        Lord, I need your peace that passes understanding (Philippians 4:7) — the kind that doesn't
+        Lord, I need your peace that passes understanding (Philippians 4:7) — the kind that doesn&apos;t
         make logical sense but settles my heart anyway. Guard my mind and heart today. Help me to
-        take the next step in front of me, not the ten steps I can't see yet.
+        take the next step in front of me, not the ten steps I can&apos;t see yet.
         <br /><br />
-        Not my will, but yours be done. Amen."
+        Not my will, but yours be done. Amen.&quot;
       </p>
     </div>
 
     <h2 className={h2}>Should Prayers Be Long or Short?</h2>
     <p className={p}>
-      Jesus himself warned against prayers that are long for the sake of sounding impressive: "When
+      Jesus himself warned against prayers that are long for the sake of sounding impressive: &quot;When
       you pray, do not keep on babbling like pagans, for they think they will be heard because of their
-      many words" (Matthew 6:7). A sincere two-sentence prayer is worth more than a long performance.
+      many words&quot; (Matthew 6:7). A sincere two-sentence prayer is worth more than a long performance.
     </p>
     <p className={p}>
-      That said, spending extended time in prayer — what Christians call "the prayer closet" — can
+      That said, spending extended time in prayer — what Christians call &quot;the prayer closet&quot; — can
       deepen your relationship with God significantly. The goal is quality of connection, not quantity
       of words.
     </p>
@@ -361,7 +361,7 @@ const post3Body: ReactNode = (
   <article>
     <p className={p}>
       A daily devotional is one of the simplest and most powerful spiritual habits you can build.
-      It doesn't require hours of time or years of Bible study experience. If you're just getting started
+      It doesn&apos;t require hours of time or years of Bible study experience. If you&apos;re just getting started
       — or restarting after a long gap — this guide will walk you through what a devotional is, how to
       structure one, and how to make it a consistent part of your day.
     </p>
@@ -369,7 +369,7 @@ const post3Body: ReactNode = (
     <h2 className={h2}>What Is a Daily Devotional?</h2>
     <p className={p}>
       A daily devotional is a short, intentional time set aside to read Scripture, reflect on it, and
-      respond in prayer. The word "devotional" comes from "devotion" — it's an act of dedicating time
+      respond in prayer. The word &quot;devotional&quot; comes from &quot;devotion&quot; — it&apos;s an act of dedicating time
       specifically to God. Most devotionals last between 10 and 30 minutes, though some people spend
       much longer.
     </p>
@@ -380,18 +380,18 @@ const post3Body: ReactNode = (
     </p>
 
     <div className={blockquote}>
-      "Your word is a lamp for my feet, a light on my path." — Psalm 119:105
+      &quot;Your word is a lamp for my feet, a light on my path.&quot; — Psalm 119:105
     </div>
 
     <h2 className={h2}>Why Start a Daily Devotional?</h2>
     <p className={p}>
       The benefits of consistent devotional practice are well-documented — both spiritually and
-      psychologically. Here's what regular devotional time tends to produce over time:
+      psychologically. Here&apos;s what regular devotional time tends to produce over time:
     </p>
     <ul className={ul}>
       <li className={li}><strong>Reduced anxiety</strong> — Scripture and prayer consistently lower stress hormones and shift focus away from worry</li>
       <li className={li}><strong>Increased clarity</strong> — spending quiet time in reflection before the day begins helps with decision-making and focus</li>
-      <li className={li}><strong>Deeper faith</strong> — consistent exposure to Scripture builds a framework for understanding life's challenges</li>
+      <li className={li}><strong>Deeper faith</strong> — consistent exposure to Scripture builds a framework for understanding life&apos;s challenges</li>
       <li className={li}><strong>Stronger relationships</strong> — people who pray regularly tend to extend more grace to others</li>
       <li className={li}><strong>A sense of rhythm</strong> — devotionals provide a daily anchor that grounds the rest of your routine</li>
     </ul>
@@ -406,7 +406,7 @@ const post3Body: ReactNode = (
     <p className={p}>
       Before you open your Bible or read anything, take a moment to be quiet. Put your phone face-down.
       Take a few slow breaths. The goal is to shift your mind from the noise of your day into a
-      receptive, present state. Psalm 46:10 says "Be still, and know that I am God." This isn't wasted
+      receptive, present state. Psalm 46:10 says &quot;Be still, and know that I am God.&quot; This isn&apos;t wasted
       time — it makes everything that follows more effective.
     </p>
 
@@ -415,7 +415,7 @@ const post3Body: ReactNode = (
       Read a passage of Scripture. For beginners, a few approaches work well:
     </p>
     <ul className={ul}>
-      <li className={li}><strong>Start with the Gospels</strong> — Matthew, Mark, Luke, or John. These are the most direct accounts of Jesus' life and teaching.</li>
+      <li className={li}><strong>Start with the Gospels</strong> — Matthew, Mark, Luke, or John. These are the most direct accounts of Jesus&apos; life and teaching.</li>
       <li className={li}><strong>Use a reading plan</strong> — many apps and websites offer structured reading plans that guide you through the Bible in a year or at your own pace.</li>
       <li className={li}><strong>Start with Psalms and Proverbs</strong> — both books speak directly to daily life, emotion, and wisdom.</li>
       <li className={li}><strong>Follow a theme</strong> — pick a topic like peace, gratitude, or courage, and read verses related to it.</li>
@@ -428,29 +428,29 @@ const post3Body: ReactNode = (
     <ol className={ol}>
       <li className={li}><strong>What does this say about God?</strong> — his character, his actions, his promises</li>
       <li className={li}><strong>What does this say about me?</strong> — how does it challenge, encourage, or correct me?</li>
-      <li className={li}><strong>What is one thing I can do differently today?</strong> — a practical response to what you've read</li>
+      <li className={li}><strong>What is one thing I can do differently today?</strong> — a practical response to what you&apos;ve read</li>
     </ol>
     <p className={p}>
       Writing your reflections in a journal significantly increases retention and makes the practice
-      feel more personal. You don't need to write much — even two or three sentences is valuable.
+      feel more personal. You don&apos;t need to write much — even two or three sentences is valuable.
     </p>
 
     <h3 className={h3}>4. Prayer (3–5 minutes)</h3>
     <p className={p}>
       Close your devotional with prayer. Use what you read to inform what you pray. If you read about
-      God's faithfulness, thank him for a specific way he has been faithful in your life. If you read
-      about forgiveness, confess something you've been holding onto. The devotional and the prayer
+      God&apos;s faithfulness, thank him for a specific way he has been faithful in your life. If you read
+      about forgiveness, confess something you&apos;ve been holding onto. The devotional and the prayer
       should connect.
     </p>
 
     <h2 className={h2}>When Should You Do Your Devotional?</h2>
     <p className={p}>
-      The best time for a devotional is the time you can actually keep consistently. Here's how
+      The best time for a devotional is the time you can actually keep consistently. Here&apos;s how
       different times of day work for different people:
     </p>
     <ul className={ul}>
       <li className={li}><strong>Morning</strong> — most commonly recommended; sets the tone for the day before distractions begin. Even 10 minutes before checking your phone makes a measurable difference.</li>
-      <li className={li}><strong>Lunchtime</strong> — a good reset point. Works well for people who can't manage mornings and need a midday anchor.</li>
+      <li className={li}><strong>Lunchtime</strong> — a good reset point. Works well for people who can&apos;t manage mornings and need a midday anchor.</li>
       <li className={li}><strong>Evening</strong> — helps with reflection on the day and sleep quality. Works best for those who wind down slowly.</li>
     </ul>
     <p className={p}>
@@ -458,7 +458,7 @@ const post3Body: ReactNode = (
       theoretically plan to do at 6am but skip most days.
     </p>
 
-    <h2 className={h2}>Beginner's First Week: A Sample Plan</h2>
+    <h2 className={h2}>Beginner&apos;s First Week: A Sample Plan</h2>
     <div className="mt-4 space-y-3">
       {[
         ["Day 1", "Read Psalm 23. Reflect: What does it mean that God is your shepherd? Pray: thank God for one way he has provided for you."],
@@ -480,9 +480,9 @@ const post3Body: ReactNode = (
     <ul className={ul}>
       <li className={li}><strong>Keep it short at first.</strong> Ten consistent minutes beats forty inconsistent ones. Build the habit before adding length.</li>
       <li className={li}><strong>Use the same spot.</strong> A physical location — a chair, a desk, a corner of your bedroom — creates a mental anchor for the practice.</li>
-      <li className={li}><strong>Don't let perfect be the enemy of good.</strong> If you miss a day, start again the next day. Guilt about missed devotionals is not spiritually productive.</li>
-      <li className={li}><strong>Tell someone.</strong> Accountability partners improve habit formation dramatically. Even texting a friend "had my devotional this morning" makes a difference.</li>
-      <li className={li}><strong>Use a devotional guide if you need direction.</strong> Structured guides remove the decision fatigue of "what do I read today?"</li>
+      <li className={li}><strong>Don&apos;t let perfect be the enemy of good.</strong> If you miss a day, start again the next day. Guilt about missed devotionals is not spiritually productive.</li>
+      <li className={li}><strong>Tell someone.</strong> Accountability partners improve habit formation dramatically. Even texting a friend &quot;had my devotional this morning&quot; makes a difference.</li>
+      <li className={li}><strong>Use a devotional guide if you need direction.</strong> Structured guides remove the decision fatigue of &quot;what do I read today?&quot;</li>
     </ul>
 
     <div className={cta}>
@@ -1358,7 +1358,7 @@ const post11Body: ReactNode = (
       <li className={li}><strong>Exhaustion.</strong> Spiritual dryness often tracks physical and emotional depletion. The soul gets tired. Rest is not unspiritual — it is sometimes the most faithful thing you can do.</li>
       <li className={li}><strong>Unanswered prayer.</strong> When you asked and nothing came, or something came that you did not ask for, trust erodes. This is honest. It deserves honest engagement, not cheerful deflection.</li>
       <li className={li}><strong>Grief or loss.</strong> Loss reorders everything, including how God feels. The silence after loss is one of the most disorienting spiritual experiences there is.</li>
-      <li className={li}><strong>Disconnection from practice.</strong> Faith is not purely intellectual. When the habits that feed it — prayer, Scripture, community — fade, the sense of God's presence often fades with them. Not because God has moved, but because the channels of connection have narrowed.</li>
+      <li className={li}><strong>Disconnection from practice.</strong> Faith is not purely intellectual. When the habits that feed it — prayer, Scripture, community — fade, the sense of God&apos;s presence often fades with them. Not because God has moved, but because the channels of connection have narrowed.</li>
       <li className={li}><strong>Intellectual questions.</strong> Sometimes doubts about what you believe arise. This is normal adult faith development. Doubt that is brought honestly into conversation with God is different from doubt that is suppressed or avoided.</li>
     </ul>
 
