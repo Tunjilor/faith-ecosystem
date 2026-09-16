@@ -2,9 +2,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "AI Prayer Generator – Personal Prayers | Faith Companion",
+  // Root layout applies the "%s | Faith Companion AI" title template — no brand here.
+  title: "AI Prayer Assistant & Generator",
   description:
-    "Generate a personal, Scripture-grounded prayer for any moment in seconds. Free AI prayer generator for peace, healing, strength, and daily faith.",
+    "Get a personal, Scripture-grounded prayer in seconds — free and instant. AI prayer generator for peace, healing, strength, and any moment you face.",
   keywords: [
     "AI prayer generator",
     "Christian prayer app",
@@ -17,9 +18,10 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/tools/prayer" },
   openGraph: {
-    title: "AI Prayer Generator – Faith Companion",
+    // OG/Twitter titles are not run through the template, so carry the brand explicitly.
+    title: "AI Prayer Assistant & Generator | Faith Companion AI",
     description:
-      "Generate a personal, Scripture-grounded prayer in seconds. Free AI prayer tool for any situation.",
+      "Get a personal, Scripture-grounded prayer in seconds — free and instant. AI prayer generator for peace, healing, strength, and any moment you face.",
     url: "https://faithcompanionai.com/tools/prayer",
     siteName: "Faith Companion AI",
     type: "website",
@@ -27,8 +29,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Prayer Generator – Faith Companion",
-    description: "Personal, Scripture-grounded prayers for any need.",
+    title: "AI Prayer Assistant & Generator | Faith Companion AI",
+    description:
+      "Get a personal, Scripture-grounded prayer in seconds — free and instant. AI prayer generator for peace, healing, strength, and any moment you face.",
     images: ["/brand/og-quiz.png"],
   },
 };

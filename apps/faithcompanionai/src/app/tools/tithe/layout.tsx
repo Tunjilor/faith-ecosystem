@@ -2,7 +2,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Tithe Calculator – Work Out 10% of Your Income | Faith Companion",
+  // Root layout applies the "%s | Faith Companion AI" title template — no brand here.
+  title: "Tithe Calculator – 10% of Any Income",
   description:
     "Free tithe calculator: enter your income and pay period to see your tithe — weekly, monthly, or yearly, gross or net, at any percentage. Simple and clear.",
   keywords: [
@@ -17,9 +18,10 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/tools/tithe" },
   openGraph: {
-    title: "Tithe Calculator – Faith Companion",
+    // OG/Twitter titles are not run through the template, so carry the brand explicitly.
+    title: "Tithe Calculator – 10% of Any Income | Faith Companion AI",
     description:
-      "Work out your tithe in seconds — any income, any pay period, gross or net. Free and Scripture-grounded.",
+      "Free tithe calculator: enter your income and pay period to see your tithe — weekly, monthly, or yearly, gross or net, at any percentage. Simple and clear.",
     url: "https://faithcompanionai.com/tools/tithe",
     siteName: "Faith Companion AI",
     type: "website",
@@ -27,8 +29,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tithe Calculator – Faith Companion",
-    description: "Work out 10% of your income in seconds — gross or net, any pay period. Free.",
+    title: "Tithe Calculator – 10% of Any Income | Faith Companion AI",
+    description:
+      "Free tithe calculator: enter your income and pay period to see your tithe — weekly, monthly, or yearly, gross or net, at any percentage. Simple and clear.",
     images: ["/brand/og-quiz.png"],
   },
 };

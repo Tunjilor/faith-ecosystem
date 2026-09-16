@@ -2,7 +2,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Daily Devotional Generator – Faith Companion",
+  // Root layout applies the "%s | Faith Companion AI" title template — no brand here.
+  title: "Daily Devotional Generator",
   description:
     "Generate a personalized Christian devotional with Scripture, reflection, prayer, and action steps. Free AI devotional app for daily spiritual growth.",
   keywords: [
@@ -17,9 +18,10 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/tools/devotional" },
   openGraph: {
-    title: "Daily Devotional Generator – Faith Companion",
+    // OG/Twitter titles are not run through the template, so carry the brand explicitly.
+    title: "Daily Devotional Generator | Faith Companion AI",
     description:
-      "AI-generated devotionals with Scripture, reflection, prayer, and action steps. Free for daily spiritual growth.",
+      "Generate a personalized Christian devotional with Scripture, reflection, prayer, and action steps. Free AI devotional app for daily spiritual growth.",
     url: "https://faithcompanionai.com/tools/devotional",
     siteName: "Faith Companion AI",
     type: "website",
@@ -27,8 +29,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Daily Devotional Generator – Faith Companion",
-    description: "AI devotionals with Scripture, reflection, prayer, and action steps.",
+    title: "Daily Devotional Generator | Faith Companion AI",
+    description:
+      "Generate a personalized Christian devotional with Scripture, reflection, prayer, and action steps. Free AI devotional app for daily spiritual growth.",
     images: ["/brand/og-quiz.png"],
   },
 };

@@ -2,9 +2,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Bible Verse Generator – Scripture for Any Topic | Faith Companion",
+  // Root layout applies the "%s | Faith Companion AI" title template — no brand here.
+  title: "Bible Verse Generator for Any Need",
   description:
-    "Find the perfect Bible verse for any topic — peace, anxiety, hope, healing, grief, or guidance. Free AI Scripture finder with references and encouragement.",
+    "Find the right Bible verse for any topic — peace, anxiety, hope, healing, grief, or guidance. Free, instant Scripture with references and encouragement.",
   keywords: [
     "Bible verse generator",
     "AI Bible verse",
@@ -17,9 +18,10 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/tools/verse" },
   openGraph: {
-    title: "Bible Verse Generator – Faith Companion",
+    // OG/Twitter titles are not run through the template, so carry the brand explicitly.
+    title: "Bible Verse Generator for Any Need | Faith Companion AI",
     description:
-      "Get a Scripture-based verse for any topic in seconds. Free AI Bible verse generator for daily encouragement.",
+      "Find the right Bible verse for any topic — peace, anxiety, hope, healing, grief, or guidance. Free, instant Scripture with references and encouragement.",
     url: "https://faithcompanionai.com/tools/verse",
     siteName: "Faith Companion AI",
     type: "website",
@@ -27,8 +29,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bible Verse Generator – Faith Companion",
-    description: "AI-powered Scripture for peace, hope, healing, and more.",
+    title: "Bible Verse Generator for Any Need | Faith Companion AI",
+    description:
+      "Find the right Bible verse for any topic — peace, anxiety, hope, healing, grief, or guidance. Free, instant Scripture with references and encouragement.",
     images: ["/brand/og-quiz.png"],
   },
 };
