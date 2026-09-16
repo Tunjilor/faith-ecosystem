@@ -621,7 +621,7 @@ export default function DashboardPage() {
               </p>
               {typeof me.referralCount === "number" && (
                 <div className="mt-2 text-sm font-semibold text-orange-300">
-                  🙌 You've invited {me.referralCount} friend{me.referralCount !== 1 ? "s" : ""}
+                  🙌 You&apos;ve invited {me.referralCount} friend{me.referralCount !== 1 ? "s" : ""}
                 </div>
               )}
             </div>

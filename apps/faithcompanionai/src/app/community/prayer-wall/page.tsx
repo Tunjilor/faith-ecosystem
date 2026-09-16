@@ -116,7 +116,7 @@ export default function PrayerWallPage() {
           Prayer Wall
         </h1>
         <p className="mt-3 text-sm leading-7 text-white/65 md:text-base">
-          Share what you're believing for. Anyone can pray — no account needed.
+          Share what you&apos;re believing for. Anyone can pray — no account needed.
           Every request is met with real people praying.
         </p>
       </header>
@@ -125,7 +125,7 @@ export default function PrayerWallPage() {
       <section className="rounded-[24px] p-6 md:p-8" style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)' }}>
         <h2 className="text-lg font-bold text-white">Submit a prayer request</h2>
         <p className="mt-1 text-sm text-white/50">
-          Share what's on your heart. Posts are public. Max 200 characters.
+          Share what&apos;s on your heart. Posts are public. Max 200 characters.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
@@ -161,7 +161,7 @@ export default function PrayerWallPage() {
 
           {formSuccess && (
             <p className="text-sm text-emerald-400">
-              🙏 Your prayer request has been submitted. We're believing with you.
+              🙏 Your prayer request has been submitted. We&apos;re believing with you.
             </p>
           )}
 
