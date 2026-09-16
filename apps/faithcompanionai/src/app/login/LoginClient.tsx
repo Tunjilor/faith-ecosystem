@@ -2,14 +2,13 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 type Tab = "magic" | "password";
 
 export default function LoginClient() {
   const searchParams = useSearchParams();
-  const router = useRouter();
 
   const [tab, setTab] = useState<Tab>("magic");
 
@@ -73,7 +72,10 @@ export default function LoginClient() {
         setPwError(data?.error || "Login failed.");
         return;
       }
-      router.push("/dashboard");
+      // Full page load (not router.push) so the root-layout UserProvider refetches
+      // /api/me and the header / client-side guest gates see the new session.
+      // Matches what logout and the magic-link callback already do.
+      window.location.assign("/dashboard");
     } catch {
       setPwError("Network error. Please try again.");
     } finally {
