@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Support",
+  description:
+    "Get help with Faith Companion AI — app issues, Premium billing questions, and how to reach our support team.",
+  alternates: {
+    canonical: "/support",
+  },
+};
+
 export default function SupportPage() {
   return (
     <main className="mx-auto max-w-4xl px-6 py-10">

@@ -1,7 +1,11 @@
 // src/app/sitemap.ts
 import type { MetadataRoute } from "next";
-import { POSTS } from "./blog/content";
+import { getPublishedPosts } from "./blog/content";
 import { TOPIC_SLUGS } from "./topics/data";
+
+// Regenerate daily so scheduled blog posts appear on their publishDate
+// (blog/[slug] 404s until then, so they must not be listed early).
+export const revalidate = 86400;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://faithcompanionai.com";
@@ -37,7 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const blog_posts: Array<{ route: string; priority: number; freq: Freq }> =
-    POSTS.map((p) => ({
+    getPublishedPosts().map((p) => ({
       route: `/blog/${p.slug}`,
       priority: 0.8,
       freq: "monthly",
