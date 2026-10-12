@@ -1,6 +1,7 @@
 // src/app/contact/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
+import ContactClient from "./contact-client";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -64,6 +65,16 @@ export default function ContactPage() {
               ))}
             </ul>
           </div>
+        </div>
+      </section>
+
+      <section className="mt-8 rounded-[28px] border border-white/10 bg-white/5 p-8 md:p-10">
+        <h2 className="text-2xl font-bold text-white md:text-3xl">Send us a message</h2>
+        <p className="mt-3 max-w-2xl text-sm leading-7 text-white/70">
+          Prefer a form? Send your question here and we&rsquo;ll reply by email.
+        </p>
+        <div className="mt-6">
+          <ContactClient />
         </div>
       </section>
 
