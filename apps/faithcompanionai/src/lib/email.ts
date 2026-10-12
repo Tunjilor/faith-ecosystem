@@ -425,3 +425,107 @@ export async function sendMagicLinkEmail(opts: {
 
   return { ok: true, provider: "resend" as const };
 }
+
+function escapeHtml(s: string) {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/**
+ * Recipient for contact-form messages. Preview deployments are locked to Resend's
+ * test address (which accepts and discards mail) — Preview shares the production
+ * Resend key, so no env setting can route a Preview submission to a real inbox.
+ * Elsewhere CONTACT_TO_EMAIL wins when set; otherwise only Production delivers to
+ * the real support inbox and local development uses the test address.
+ */
+export function contactRecipient() {
+  if (process.env.VERCEL_ENV === "preview") return "delivered@resend.dev";
+  const override = process.env.CONTACT_TO_EMAIL?.trim();
+  if (override) return override;
+  return process.env.VERCEL_ENV === "production"
+    ? "support@faithcompanionai.com"
+    : "delivered@resend.dev";
+}
+
+export type ContactEmailPayload = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
+export type ContactEmailResult =
+  | { ok: true; provider: "resend"; id: string }
+  | { ok: true; provider: "dev-console" }
+  | { ok: false; reason: "not_configured" | "provider_error" };
+
+// Returns ok only once Resend has accepted the message (2xx with an id).
+// Never logs the message body or the sender's address.
+export async function sendContactEmail(opts: ContactEmailPayload): Promise<ContactEmailResult> {
+  const resendApiKey = process.env.RESEND_API_KEY;
+  const fromEmail =
+    process.env.EMAIL_FROM || "Faith Companion AI <noreply@faithcompanionai.com>";
+  const isProduction = process.env.VERCEL_ENV === "production";
+
+  if (!resendApiKey) {
+    // Production must never report success without a real send.
+    if (isProduction) return { ok: false, reason: "not_configured" };
+    console.log(`[ContactEmail - DEV] subject chars: ${opts.subject.length} | message chars: ${opts.message.length}`);
+    return { ok: true, provider: "dev-console" };
+  }
+
+  const subject = `${isProduction ? "" : "[Preview] "}[Contact] ${opts.subject}`;
+  const text = [
+    `Name: ${opts.name}`,
+    `Email: ${opts.email}`,
+    `Subject: ${opts.subject}`,
+    "",
+    opts.message,
+    "",
+    "— Sent from the faithcompanionai.com contact form. Reply to this email to respond.",
+  ].join("\n");
+
+  const messageHtml = escapeHtml(opts.message).replace(/\r?\n/g, "<br/>");
+  const html = `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111;">
+      <h2 style="margin:0 0 12px;">New contact form message</h2>
+      <p style="margin:0;"><strong>Name:</strong> ${escapeHtml(opts.name)}</p>
+      <p style="margin:0;"><strong>Email:</strong> ${escapeHtml(opts.email)}</p>
+      <p style="margin:0 0 16px;"><strong>Subject:</strong> ${escapeHtml(opts.subject)}</p>
+      <div style="border-left:4px solid #7c3aed;padding-left:12px;">${messageHtml}</div>
+      <p style="margin-top:20px;font-size:12px;color:#888;">Sent from the faithcompanionai.com contact form. Reply to this email to respond.</p>
+    </div>
+  `;
+
+  try {
+    const resp = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: fromEmail,
+        to: [contactRecipient()],
+        reply_to: opts.email,
+        subject,
+        text,
+        html,
+      }),
+    });
+
+    const data = (await resp.json().catch(() => null)) as { id?: string } | null;
+    if (!resp.ok || !data?.id) {
+      console.error(`[ContactEmail] Resend rejected the message (status ${resp.status})`);
+      return { ok: false, reason: "provider_error" };
+    }
+    return { ok: true, provider: "resend", id: data.id };
+  } catch {
+    console.error("[ContactEmail] Resend request failed");
+    return { ok: false, reason: "provider_error" };
+  }
+}
