@@ -155,7 +155,8 @@ export const metadata: Metadata = {
   creator: "Faith Companion AI",
   publisher: "Faith Companion AI",
   category: "Religion & Spirituality",
-  alternates: { canonical: "/" },
+  // No site-wide canonical: it is inherited by every route that doesn't set its own,
+  // which pointed those pages at the homepage. Each indexable route sets its own.
   manifest: "/manifest.json",
   icons: {
     icon: [{ url: "/brand/icon-32.png", sizes: "32x32", type: "image/png" },{ url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" }],
