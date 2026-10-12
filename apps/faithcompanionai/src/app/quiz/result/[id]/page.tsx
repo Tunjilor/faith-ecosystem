@@ -1,9 +1,16 @@
 // src/app/quiz/result/[id]/page.tsx
+import type { Metadata } from "next";
 import { db } from "@/lib/db";
 import Link from "next/link";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+// Individual quiz attempts are per-user pages — keep them out of search results.
+export const metadata: Metadata = {
+  title: "Quiz Result",
+  robots: { index: false, follow: true },
+};
 
 export default async function ResultPage({
   params,

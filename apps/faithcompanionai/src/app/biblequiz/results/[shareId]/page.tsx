@@ -105,6 +105,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `Bible Quiz Results - ${scoreText}`,
     description: `Category: ${categoryName}. Score: ${scoreText}.`,
     alternates: { canonical: urlPath },
+    // Shareable by link, but each result is a thin per-user page — keep it out of search results.
+    robots: { index: false, follow: true },
     openGraph: {
       title: `Bible Quiz Results - ${scoreText}`,
       description: `Category: ${categoryName}. Can your friends beat this score?`,

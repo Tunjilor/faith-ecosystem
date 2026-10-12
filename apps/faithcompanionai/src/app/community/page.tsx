@@ -13,7 +13,7 @@ const upcomingFeatures = [
     title: "Prayer Wall",
     description: "Share prayer requests and lift one another up. See what the community is believing for.",
     href: "/community/prayer-wall",
-    status: "Coming soon",
+    status: "Live now",
   },
   {
     title: "Faith Challenges",
@@ -42,8 +42,8 @@ export default function CommunityPage() {
         </h1>
 
         <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70 md:text-base">
-          Community features are being built. Share prayer requests, join faith challenges, and connect with
-          believers who are on the same journey.
+          Share prayer requests on the Prayer Wall today — with faith challenges and study groups on the way to
+          help you connect with believers who are on the same journey.
         </p>
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -63,7 +63,7 @@ export default function CommunityPage() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-bold text-white md:text-3xl">What&apos;s coming</h2>
+        <h2 className="text-2xl font-bold text-white md:text-3xl">Community features</h2>
 
         <div className="mt-6 grid gap-5 md:grid-cols-3">
           {upcomingFeatures.map((feature) => (
@@ -83,7 +83,7 @@ export default function CommunityPage() {
                   href={feature.href}
                   className="mt-4 inline-block text-sm font-semibold text-orange-300 hover:text-orange-200"
                 >
-                  Preview →
+                  Visit Prayer Wall →
                 </Link>
               )}
             </div>
@@ -94,7 +94,7 @@ export default function CommunityPage() {
       <section className="mt-10 rounded-[28px] border border-white/10 bg-white/5 p-8 md:p-10">
         <h2 className="text-xl font-bold text-white">Stay connected</h2>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-white/70">
-          While community features are in development, the best way to grow is with the tools already available —
+          While more community features are in development, the best way to grow is with the tools already available —
           daily verses, prayers, devotionals, and the Bible quiz.
         </p>
 
