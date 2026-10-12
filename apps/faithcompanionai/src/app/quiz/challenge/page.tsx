@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import ChallengeClient from "./ChallengeClient";
 
 export const metadata: Metadata = {
-  title: "Bible Quiz Challenge | Faith Companion AI",
+  title: "Bible Quiz Challenge",
   description:
     "Challenge a friend, compare Bible quiz scores, and invite others to test their knowledge on Faith Companion AI.",
   alternates: {

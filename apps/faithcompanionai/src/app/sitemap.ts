@@ -1,7 +1,7 @@
 // src/app/sitemap.ts
 import type { MetadataRoute } from "next";
 import { getPublishedPosts } from "./blog/content";
-import { TOPIC_SLUGS } from "./topics/data";
+import { TOPICS, TOPIC_SLUGS } from "./topics/data";
 
 // Regenerate daily so scheduled blog posts appear on their publishDate
 // (blog/[slug] 404s until then, so they must not be listed early).
@@ -9,11 +9,13 @@ export const revalidate = 86400;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://faithcompanionai.com";
-  const now = new Date();
 
   type Freq = "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
+  // lastModified is only set where the content carries a real date (YYYY-MM-DD).
+  // Pages without one omit <lastmod> rather than claiming they changed at build time.
+  type Entry = { route: string; priority: number; freq: Freq; lastModified?: string };
 
-  const static_pages: Array<{ route: string; priority: number; freq: Freq }> = [
+  const static_pages: Entry[] = [
     { route: "",                          priority: 1.0, freq: "weekly" },
     { route: "/tools/verse",              priority: 0.9, freq: "weekly" },
     { route: "/tools/tithe",              priority: 0.9, freq: "weekly" },
@@ -40,23 +42,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: "/refund",                   priority: 0.4, freq: "monthly" },
   ];
 
-  const blog_posts: Array<{ route: string; priority: number; freq: Freq }> =
+  const blog_posts: Entry[] =
     getPublishedPosts().map((p) => ({
       route: `/blog/${p.slug}`,
       priority: 0.8,
       freq: "monthly",
+      lastModified: p.dateISO,
     }));
 
-  const topic_pages: Array<{ route: string; priority: number; freq: Freq }> =
+  const topic_pages: Entry[] =
     TOPIC_SLUGS.map((t) => ({
       route: `/topics/${t}`,
       priority: 0.8,
       freq: "monthly",
+      lastModified: TOPICS[t].dateModified ?? TOPICS[t].datePublished,
     }));
 
-  return [...static_pages, ...blog_posts, ...topic_pages].map(({ route, priority, freq }) => ({
+  return [...static_pages, ...blog_posts, ...topic_pages].map(({ route, priority, freq, lastModified }) => ({
     url: `${base}${route}`,
-    lastModified: now,
+    ...(lastModified ? { lastModified } : {}),
     changeFrequency: freq,
     priority,
   }));
