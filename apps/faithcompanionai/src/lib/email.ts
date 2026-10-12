@@ -436,12 +436,14 @@ function escapeHtml(s: string) {
 }
 
 /**
- * Recipient for contact-form messages. CONTACT_TO_EMAIL wins when set;
- * otherwise only Production delivers to the real support inbox and every other
- * environment (Preview, local) uses Resend's test address, which accepts and
- * discards mail — Preview shares the production Resend key.
+ * Recipient for contact-form messages. Preview deployments are locked to Resend's
+ * test address (which accepts and discards mail) — Preview shares the production
+ * Resend key, so no env setting can route a Preview submission to a real inbox.
+ * Elsewhere CONTACT_TO_EMAIL wins when set; otherwise only Production delivers to
+ * the real support inbox and local development uses the test address.
  */
 export function contactRecipient() {
+  if (process.env.VERCEL_ENV === "preview") return "delivered@resend.dev";
   const override = process.env.CONTACT_TO_EMAIL?.trim();
   if (override) return override;
   return process.env.VERCEL_ENV === "production"
