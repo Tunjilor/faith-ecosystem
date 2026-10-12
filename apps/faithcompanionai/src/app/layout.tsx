@@ -31,7 +31,7 @@ const siteJsonLd = {
       "@id": "https://faithcompanionai.com/#organization",
       name: "Faith Companion AI",
       url: "https://faithcompanionai.com",
-      logo: "https://faithcompanionai.com/logo.png",
+      logo: "https://faithcompanionai.com/brand/icon-512.png",
       description:
         "A faith ecosystem of free AI-powered Christian tools for prayer, Bible study, and giving",
       sameAs: [],
@@ -55,51 +55,6 @@ const siteJsonLd = {
       description:
         "Daily Bible verses, personalized prayers, devotionals, and faith quizzes – grounded in Scripture.",
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    },
-    {
-      "@type": "FAQPage",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "What is Faith Companion AI?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Faith Companion AI is a free ecosystem of Christian AI tools including an AI prayer generator, Bible verse generator, and tithe calculator – all designed to support your spiritual growth.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "What is the best AI app for Christians?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Faith Companion AI offers a suite of free tools built specifically for Christians – AI prayer writing, Bible verse discovery by topic and mood, and a biblical tithe calculator. All free, no subscription required.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Can AI help with Bible study?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Yes. Our AI Bible verse generator finds scriptures by topic, mood, keyword, and translation, while our faith companion AI can discuss passages, provide context, and suggest reflection questions.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Is there a free Christian AI tool?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Yes. All Faith Companion AI tools are completely free – including the AI prayer generator, random Bible verse generator, and tithe calculator. No account required to get started.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "How can AI improve my prayer life?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "AI can help when you struggle to find the right words. Our prayer generator creates personalized, scripture-inspired prayers for any situation – helping you pray with more depth, consistency, and confidence.",
-          },
-        },
-      ],
     },
   ],
 };

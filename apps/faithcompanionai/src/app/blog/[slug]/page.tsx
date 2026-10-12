@@ -19,7 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post || !isPublished(post)) return { title: "Post not found" };
 
   return {
-    title: `${post.title} | Faith Companion AI Blog`,
+    // Root layout applies the "%s | Faith Companion AI" title template — no brand here.
+    title: post.title,
     description: post.description,
     keywords: post.keywords,
     alternates: { canonical: `/blog/${post.slug}` },
