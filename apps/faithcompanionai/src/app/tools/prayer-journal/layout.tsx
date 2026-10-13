@@ -2,13 +2,16 @@
 import type { Metadata } from "next";
 
 const description =
-  "Write down your prayers in a simple online prayer journal, and keep a record of what you are bringing to God.";
+  "Write a personal prayer with the Prayer tool, and save the prayers that matter to you with Premium.";
 
 export const metadata: Metadata = {
   // Root layout applies the "%s | Faith Companion AI" title template — no brand here.
   title: "Prayer Journal",
   description,
   alternates: { canonical: "/tools/prayer-journal" },
+  // A standalone journal isn't available yet — the page points to Prayer and Saved.
+  // Keep it out of search results, but let crawlers follow those links.
+  robots: { index: false, follow: true },
   openGraph: {
     // OG/Twitter titles are not run through the template, so carry the brand explicitly.
     title: "Prayer Journal | Faith Companion AI",

@@ -1,73 +1,39 @@
-"use client";
-
-import { useState } from "react";
+import Link from "next/link";
 
 export default function VerseFinderPage() {
-  const [topic, setTopic] = useState("");
-  const [length, setLength] = useState<"short" | "medium" | "long">("short");
-
   return (
-    <main className="mx-auto max-w-5xl px-6 py-12">
+    <main className="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-12">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold">VerseFinder</h1>
-        <p className="mt-2 text-slate-600 max-w-2xl">
-          Generate a short VerseFinder thought with Scripture and a simple next step. (Wiring to your AI/API comes next.)
+        <h1 className="text-3xl font-bold text-white md:text-4xl">Verse Finder</h1>
+        <p className="mt-2 max-w-2xl text-sm leading-7 text-white/70 md:text-base">
+          Verse Finder isn&rsquo;t available as a separate tool. These two tools already do what you&rsquo;re looking for.
         </p>
       </header>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-6">
-        <div className="grid gap-4 md:grid-cols-3">
-          <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-slate-700">Topic (optional)</label>
-            <input
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-              placeholder="e.g., peace, anxiety, forgiveness, guidance"
-              className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-black/10"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-slate-700">Length</label>
-            <select
-              value={length}
-              onChange={(e) => setLength(e.target.value as any)}
-              className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-black/10"
-            >
-              <option value="short">Short</option>
-              <option value="medium">Medium</option>
-              <option value="long">Long</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="mt-6 flex flex-wrap gap-3">
-          <button
-            type="button"
-            className="rounded-full brand-gradient px-5 py-3 text-sm font-semibold text-white hover:opacity-95 transition"
-            onClick={() => alert("VerseFinder generation will be connected next.")}
-          >
-            Generate devotional
-          </button>
-
-          <button
-            type="button"
-            className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 transition"
-            onClick={() => {
-              setTopic("");
-              setLength("short");
-            }}
-          >
-            Reset
-          </button>
-        </div>
-
-        <div className="mt-8 rounded-xl bg-slate-50 p-5">
-          <p className="text-sm text-slate-600">
-            <span className="font-semibold text-slate-800">Coming soon:</span> devotional results will appear here
-            with Scripture references, a reflection, and a short prayer.
+      <div className="grid gap-4 md:grid-cols-2">
+        <Link
+          href="/tools/verse"
+          className="flex flex-col rounded-[28px] border border-white/10 bg-white p-6 shadow-2xl transition hover:opacity-95 md:p-8"
+        >
+          <h2 className="text-xl font-bold text-slate-900">Verse</h2>
+          <p className="mt-2 flex-1 text-sm leading-7 text-slate-600">
+            Get a Bible verse for any topic or season — peace, anxiety, forgiveness, or guidance — with a short
+            reflection and a simple next step.
           </p>
-        </div>
+          <span className="mt-4 text-sm font-semibold text-slate-900">Get a verse →</span>
+        </Link>
+
+        <Link
+          href="/tools/bible-search"
+          className="flex flex-col rounded-[28px] border border-white/10 bg-white p-6 shadow-2xl transition hover:opacity-95 md:p-8"
+        >
+          <h2 className="text-xl font-bold text-slate-900">Bible Search</h2>
+          <p className="mt-2 flex-1 text-sm leading-7 text-slate-600">
+            Look up a passage by reference, such as John 3:16 or Psalm 23, or search by keyword to find verses on
+            peace, hope, love, or strength.
+          </p>
+          <span className="mt-4 text-sm font-semibold text-slate-900">Search the Bible →</span>
+        </Link>
       </div>
     </main>
   );
