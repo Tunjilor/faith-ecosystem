@@ -32,11 +32,15 @@ export default function PrayerWallPage() {
   const [text, setText] = useState("");
   const [formError, setFormError] = useState("");
   const [formSuccess, setFormSuccess] = useState(false);
+  const [fcHp, setFcHp] = useState(""); // honeypot — real visitors never see or fill this
+  const [prayError, setPrayError] = useState("");
+  const startedAt = useRef<number>(0);
 
   // Track which prayers this session already prayed for (prevent double-count)
   const prayedSet = useRef<Set<string>>(new Set());
 
   useEffect(() => {
+    startedAt.current = Date.now();
     loadPrayers();
   }, []);
 
@@ -67,10 +71,15 @@ export default function PrayerWallPage() {
       const res = await fetch("/api/prayer-requests", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ name: name.trim() || null, text: text.trim() }),
+        body: JSON.stringify({
+          name: name.trim() || null,
+          text: text.trim(),
+          fc_hp: fcHp,
+          elapsedMs: Date.now() - startedAt.current,
+        }),
       });
       const data = await res.json().catch(() => null);
-      if (!res.ok) {
+      if (!res.ok || !data?.prayer) {
         setFormError(data?.error || "Could not submit. Please try again.");
         return;
       }
@@ -80,6 +89,8 @@ export default function PrayerWallPage() {
       setName("");
       setFormSuccess(true);
       setTimeout(() => setFormSuccess(false), 3000);
+    } catch {
+      setFormError("We couldn't reach the server. Please check your connection and try again.");
     } finally {
       setSubmitting(false);
     }
@@ -88,21 +99,30 @@ export default function PrayerWallPage() {
   async function handlePray(id: string) {
     if (prayedSet.current.has(id)) return; // already prayed this session
     prayedSet.current.add(id);
+    setPrayError("");
+
+    const original = prayers.find((p) => p.id === id)?.prayCount ?? 0;
+    const setCount = (count: number) =>
+      setPrayers((prev) => prev.map((p) => (p.id === id ? { ...p, prayCount: count } : p)));
 
     // Optimistic update
-    setPrayers((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, prayCount: p.prayCount + 1 } : p))
-    );
+    setCount(original + 1);
 
     try {
-      await fetch(`/api/prayer-requests/${id}/pray`, { method: "POST" });
+      const res = await fetch(`/api/prayer-requests/${id}/pray`, { method: "POST" });
+      const data = await res.json().catch(() => null);
+      if (res.ok && typeof data?.prayCount === "number") {
+        // The server's count is authoritative — a repeat prayer today doesn't add to it.
+        setCount(data.prayCount);
+        return;
+      }
+      setPrayError(data?.error || "We couldn't record your prayer. Please try again later.");
     } catch {
-      // Revert on failure
-      prayedSet.current.delete(id);
-      setPrayers((prev) =>
-        prev.map((p) => (p.id === id ? { ...p, prayCount: p.prayCount - 1 } : p))
-      );
+      setPrayError("We couldn't reach the server. Please check your connection and try again.");
     }
+    // Revert on any failure
+    prayedSet.current.delete(id);
+    setCount(original);
   }
 
   return (
@@ -126,6 +146,10 @@ export default function PrayerWallPage() {
         <h2 className="text-lg font-bold text-white">Submit a prayer request</h2>
         <p className="mt-1 text-sm text-white/50">
           Share what&apos;s on your heart. Posts are public. Max 200 characters.
+        </p>
+        <p className="mt-1 text-sm text-white/50">
+          Anyone can read prayer requests, so please don&apos;t include contact details or other people&apos;s
+          private information.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
@@ -155,8 +179,21 @@ export default function PrayerWallPage() {
             />
           </div>
 
+          {/* Honeypot: hidden from people and assistive tech; bots that fill every field are ignored. */}
+          <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+            <label htmlFor="prayer-fc-hp">Leave this field empty</label>
+            <input
+              id="prayer-fc-hp"
+              name="fc_hp"
+              tabIndex={-1}
+              autoComplete="off"
+              value={fcHp}
+              onChange={(e) => setFcHp(e.target.value)}
+            />
+          </div>
+
           {formError && (
-            <p className="text-sm text-red-400">{formError}</p>
+            <p role="alert" className="text-sm text-red-400">{formError}</p>
           )}
 
           {formSuccess && (
@@ -183,6 +220,10 @@ export default function PrayerWallPage() {
             <span className="text-xs text-white/40">{prayers.length} requests</span>
           )}
         </div>
+
+        {prayError && (
+          <p role="alert" className="mb-4 text-sm text-red-400">{prayError}</p>
+        )}
 
         {loading ? (
           <div className="rounded-[22px] p-6 text-sm text-white/50" style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)' }}>
