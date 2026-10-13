@@ -36,7 +36,7 @@ export default async function ResultPage({
           We couldn&apos;t find that quiz attempt.
         </p>
         <div className="mt-6 flex gap-3">
-          <Link className="fc-btn" href="/quiz">
+          <Link className="fc-btn" href="/biblequiz">
             Back to Quiz
           </Link>
           <Link className="fc-btn-outline" href="/dashboard">
@@ -80,7 +80,7 @@ export default async function ResultPage({
           <span className="text-base font-semibold opacity-70">({percent}%)</span>
         </div>
         <div className="mt-5 flex gap-3">
-          <Link className="fc-btn" href="/quiz">
+          <Link className="fc-btn" href="/biblequiz">
             Take another quiz
           </Link>
           <Link className="fc-btn-outline" href="/dashboard">

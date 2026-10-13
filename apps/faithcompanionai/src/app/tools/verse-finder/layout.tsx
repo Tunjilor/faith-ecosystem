@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Verse Finder",
   description,
   alternates: { canonical: "/tools/verse-finder" },
+  // Not a standalone tool — the page points to Verse and Bible Search. Keep it out of
+  // search results, but let crawlers follow those links.
+  robots: { index: false, follow: true },
   openGraph: {
     // OG/Twitter titles are not run through the template, so carry the brand explicitly.
     title: "Verse Finder | Faith Companion AI",

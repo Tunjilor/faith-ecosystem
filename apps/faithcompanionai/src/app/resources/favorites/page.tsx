@@ -1,75 +1,35 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import BrandHeader from "@/components/BrandHeader";
-
-type FavoriteItem = {
-  id: string;
-  type: "Verse" | "Prayer" | "Devotional";
-  title: string;
-  preview: string;
-  createdAt: string;
-};
+import Link from "next/link";
 
 export default function FavoritesPage() {
-  const [items, setItems] = useState<FavoriteItem[]>([]);
-
-  // Temporary: localStorage demo (until Supabase DB is wired)
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("fc_favorites");
-      if (!raw) return;
-      const parsed = JSON.parse(raw) as FavoriteItem[];
-      setItems(parsed);
-    } catch {
-      // ignore
-    }
-  }, []);
-
   return (
-    <main className="min-h-screen px-6 py-10 app-bg">
-      <div className="max-w-6xl mx-auto">
-        <BrandHeader
-          title="Favorites"
-          subtitle="Your saved verses, prayers, and devotionals in one place."
-        />
+    <main className="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-12">
+      <header className="mb-8">
+        <h1 className="text-3xl font-bold text-white md:text-4xl">Favorites</h1>
+        <p className="mt-2 max-w-2xl text-sm leading-7 text-white/70 md:text-base">
+          Your saved verses, prayers, and devotionals live on the Saved page.
+        </p>
+      </header>
 
-        <div className="brand-surface p-8">
-          {items.length === 0 ? (
-            <div>
-              <h2 className="text-xl font-extrabold text-slate-900">No favorites yet</h2>
-              <p className="text-slate-700 mt-2 max-w-2xl">
-                Once we connect Supabase, this page will automatically show each user’s saved content.
-                For now, it’s ready and working—just waiting on data.
-              </p>
+      <div className="rounded-[28px] border border-white/10 bg-white p-6 shadow-2xl md:p-8">
+        <h2 className="text-xl font-bold text-slate-900">Favorites aren&rsquo;t kept on this page</h2>
+        <p className="mt-2 max-w-2xl text-sm leading-7 text-slate-600">
+          Premium members can save verses, prayers, and devotionals from our tools and find them on the Saved page.
+          You&rsquo;ll need to sign in with a Premium account to save and view them.
+        </p>
 
-              <div className="mt-6 rounded-2xl border border-black/10 bg-white/80 backdrop-blur p-5 text-slate-700">
-                <div className="font-semibold">Next step</div>
-                <div className="text-sm mt-1">
-                  Save content from Verse / Prayer / Devotional pages into a DB table like{" "}
-                  <code className="px-2 py-1 rounded bg-black/5">saved_content</code>.
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {items.map((it) => (
-                <div
-                  key={it.id}
-                  className="rounded-2xl border border-black/10 bg-white/80 backdrop-blur p-5"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <div className="text-xs font-semibold text-slate-600">{it.type}</div>
-                      <div className="text-lg font-extrabold text-slate-900 mt-1">{it.title}</div>
-                      <div className="text-sm text-slate-700 mt-2">{it.preview}</div>
-                    </div>
-                    <div className="text-xs text-slate-500">{it.createdAt}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href="/saved"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-5 py-2 text-sm font-semibold text-white transition hover:opacity-95"
+          >
+            Go to Saved →
+          </Link>
+          <Link
+            href="/pricing"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-50"
+          >
+            See Premium plans
+          </Link>
         </div>
       </div>
     </main>

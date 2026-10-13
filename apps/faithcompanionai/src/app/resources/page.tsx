@@ -78,11 +78,11 @@ const goDeeper = [
     cta: "Take the quiz →",
   },
   {
-    label: "Verse Finder",
+    label: "Bible Search",
     tag: "Search",
     description:
-      "Search the Bible by topic or keyword and find the passages most relevant to what you're studying or facing.",
-    href: "/tools/verse-finder",
+      "Look up any passage by reference, like John 3:16 or Psalm 23, or search by keyword to find verses on peace, hope, love, or strength.",
+    href: "/tools/bible-search",
     cta: "Search Scripture →",
   },
   {
@@ -265,8 +265,8 @@ export default function ResourcesPage() {
           Pray together
         </h2>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-white/70">
-          Community features are coming. The Prayer Wall will let you share requests, read what others are
-          believing for, and lift one another up. For now, use the Prayer tool for personal support.
+          The Prayer Wall is live. Share a prayer request, read what others are believing for, and lift one
+          another up — no account needed. For personal support, the Prayer tool can help you put your heart into words.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-3">
