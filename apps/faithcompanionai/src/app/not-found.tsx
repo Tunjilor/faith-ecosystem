@@ -67,13 +67,6 @@ export default function NotFoundPage() {
           >
             Explore Resources
           </Link>
-
-          <Link
-            href="/pricing"
-            className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-          >
-            View Premium
-          </Link>
         </div>
 
         <div className="mt-8 border-t border-white/10 pt-6">

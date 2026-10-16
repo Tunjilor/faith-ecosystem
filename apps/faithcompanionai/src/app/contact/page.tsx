@@ -21,7 +21,7 @@ const helpTopics = [
   {
     title: "Billing Questions",
     description:
-      "Questions about Premium, subscriptions, pricing, or charges?",
+      "Questions about a past subscription or a charge?",
   },
   {
     title: "General Feedback",
@@ -97,11 +97,11 @@ export default function ContactPage() {
           Before you email us
         </h2>
 
-        <div className="mt-6 grid gap-5 md:grid-cols-2">
+        <div className="mt-6">
           <div className="rounded-[22px] border border-white/10 bg-black/15 p-5">
             <h3 className="text-base font-semibold text-white">Check the FAQ</h3>
             <p className="mt-2 text-sm leading-7 text-white/70">
-              Many common questions about accounts, Premium, and free usage are already answered there.
+              Many common questions about accounts, tools, and saved content are already answered there.
             </p>
             <p className="mt-1 text-xs text-white/40">Visit FAQ &rarr;</p>
             <Link
@@ -109,20 +109,6 @@ export default function ContactPage() {
               className="mt-4 inline-flex min-h-[44px] items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90"
             >
               Visit FAQ
-            </Link>
-          </div>
-
-          <div className="rounded-[22px] border border-white/10 bg-black/15 p-5">
-            <h3 className="text-base font-semibold text-white">Review Pricing</h3>
-            <p className="mt-2 text-sm leading-7 text-white/70">
-              If your question is about Premium access or what&rsquo;s included, you may find your answer here.
-            </p>
-            <p className="mt-1 text-xs text-white/40">View Pricing &rarr;</p>
-            <Link
-              href="/pricing"
-              className="mt-4 inline-flex min-h-[44px] items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
-            >
-              View Pricing
             </Link>
           </div>
         </div>

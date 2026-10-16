@@ -4,11 +4,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
-import { isPremiumUser } from "@/lib/premium";
 import ShareButtons from "./share-buttons";
 import LeaderboardBlock from "@/components/quiz/LeaderboardBlock";
 import GuestEmailCapture from "@/components/GuestEmailCapture";
-import QuizUpgradeNudge from "@/components/QuizUpgradeNudge";
 import MobileInstallBanner from "@/components/MobileInstallBanner";
 
 type AttemptWithQuestions = Prisma.QuizAttemptGetPayload<{
@@ -63,7 +61,7 @@ function getResultTier(percent: number): ResultTier {
     steps: [
       "Revisit the questions you missed and spend a few minutes reading the surrounding passage",
       "Try the Verse tool daily for a week — let Scripture speak to where you are right now",
-      "Consider going premium to unlock deeper devotionals and save your journey",
+      "Try the Devotional tool for deeper reflection, and save what speaks to you in your journal",
     ],
   };
   if (percent >= 50) return {
@@ -142,8 +140,6 @@ export default async function Page({ params }: PageProps) {
 
   if (!attempt) return notFound();
 
-  const userIsPremium = await isPremiumUser();
-
   const categoryName = titleCase(attempt.category || "general");
   let correctCount = 0;
   attempt.questions.forEach((aq: AttemptWithQuestions["questions"][number]) => {
@@ -186,9 +182,6 @@ export default async function Page({ params }: PageProps) {
           <Link href="/biblequiz" className="rounded-md bg-gradient-to-r from-purple-600 to-orange-500 px-5 py-3 text-center text-sm font-semibold text-white hover:opacity-95">
             Take Another Quiz
           </Link>
-          <Link href="/pricing" className="rounded-md border border-white/15 bg-white/5 px-5 py-3 text-center text-sm font-semibold text-white/85 hover:bg-white/10 hover:text-white">
-            Go Premium
-          </Link>
         </div>
       </div>
 
@@ -225,12 +218,6 @@ export default async function Page({ params }: PageProps) {
                 >
                   Get Personalized Guidance
                 </Link>
-                <p className="text-xs text-white/45">
-                  Want to go deeper?{" "}
-                  <Link href="/pricing" className="text-white/65 underline underline-offset-2 hover:text-white/90 transition">
-                    Unlock Your Faith Journey
-                  </Link>
-                </p>
               </div>
 
               <MobileInstallBanner />
@@ -239,79 +226,37 @@ export default async function Page({ params }: PageProps) {
         );
       })()}
 
-      <section className="fc-surface rounded-2xl p-6 sm:p-8 text-center space-y-3">
-        <h2 className="text-xl font-extrabold text-white">Go deeper in your faith journey</h2>
-        <p className="text-sm text-white/70 max-w-md mx-auto">
-          Unlock personalized devotionals, unlimited guidance, and saved progress.
-        </p>
-        <Link
-          href="/pricing"
-          className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-6 py-2.5 text-sm font-semibold text-white hover:opacity-95 transition"
-        >
-          Unlock Your Faith Journey
-        </Link>
-      </section>
-
-      <QuizUpgradeNudge />
       {/* Gated on the viewer's session, not on who owns the attempt */}
       <GuestEmailCapture source="quiz-results" />
 
       <LeaderboardBlock category={attempt.category} currentShareId={shareId} title="Can anyone beat this score?" />
 
-      {userIsPremium ? (
-        <section className="space-y-4">
-          <div className="text-xl font-extrabold text-white">Review</div>
-          {attempt.questions.map((aq: AttemptWithQuestions["questions"][number], i: number) => {
-            const q = aq.question;
-            const chosen = (aq.chosen ?? null) as Choice | null;
-            const correct = (q.answer ?? null) as Choice | null;
-            const isCorrect = !!chosen && !!correct && chosen === correct;
-            const chosenText = chosen === "A" ? q.optionA : chosen === "B" ? q.optionB : chosen === "C" ? q.optionC : chosen === "D" ? q.optionD : null;
-            const correctText = correct === "A" ? q.optionA : correct === "B" ? q.optionB : correct === "C" ? q.optionC : correct === "D" ? q.optionD : null;
-            return (
-              <div key={aq.id} className={`rounded-2xl border p-5 ${chosen ? isCorrect ? "border-green-500/60 bg-green-900/15" : "border-red-500/60 bg-red-900/15" : "border-white/10 bg-white/5"}`}>
-                <div className="flex items-start justify-between gap-4">
-                  <div className="font-semibold text-white">{i + 1}. {q.prompt}</div>
-                  <div className="text-xs font-bold">
-                    {chosen ? isCorrect ? <span className="text-green-400">Correct</span> : <span className="text-red-400">Incorrect</span> : <span className="text-white/50">Not answered</span>}
-                  </div>
-                </div>
-                <div className="mt-3 space-y-2 text-sm">
-                  <div className="text-white/80">Your answer: <span className={chosen ? isCorrect ? "text-green-300" : "text-red-300" : "text-white/50"}>{chosen ? `${chosen}. ${chosenText}` : "-"}</span></div>
-                  <div className="text-white/80">Correct answer: <span className="text-green-300">{correct ? `${correct}. ${correctText}` : "-"}</span></div>
-                  {q.explanation ? <div className="mt-2 text-xs text-white/70"><span className="font-semibold text-white/80">Explanation: </span>{q.explanation}</div> : null}
+      <section className="space-y-4">
+        <div className="text-xl font-extrabold text-white">Review</div>
+        {attempt.questions.map((aq: AttemptWithQuestions["questions"][number], i: number) => {
+          const q = aq.question;
+          const chosen = (aq.chosen ?? null) as Choice | null;
+          const correct = (q.answer ?? null) as Choice | null;
+          const isCorrect = !!chosen && !!correct && chosen === correct;
+          const chosenText = chosen === "A" ? q.optionA : chosen === "B" ? q.optionB : chosen === "C" ? q.optionC : chosen === "D" ? q.optionD : null;
+          const correctText = correct === "A" ? q.optionA : correct === "B" ? q.optionB : correct === "C" ? q.optionC : correct === "D" ? q.optionD : null;
+          return (
+            <div key={aq.id} className={`rounded-2xl border p-5 ${chosen ? isCorrect ? "border-green-500/60 bg-green-900/15" : "border-red-500/60 bg-red-900/15" : "border-white/10 bg-white/5"}`}>
+              <div className="flex items-start justify-between gap-4">
+                <div className="font-semibold text-white">{i + 1}. {q.prompt}</div>
+                <div className="text-xs font-bold">
+                  {chosen ? isCorrect ? <span className="text-green-400">Correct</span> : <span className="text-red-400">Incorrect</span> : <span className="text-white/50">Not answered</span>}
                 </div>
               </div>
-            );
-          })}
-        </section>
-      ) : (
-        <section className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-8 text-center space-y-4">
-          <div className="text-2xl">🔒</div>
-          <h2 className="text-xl font-extrabold text-white">Answer Review is a Premium Feature</h2>
-          <p className="text-sm leading-7 text-amber-200/80 max-w-md mx-auto">
-            See exactly which questions you missed, what the correct answers were, and get
-            detailed explanations for every question. Upgrade to unlock the full review.
-          </p>
-          <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Link
-              href="/pricing"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-8 py-3 text-sm font-semibold text-white hover:opacity-95 transition"
-            >
-              Upgrade to Premium
-            </Link>
-            <Link
-              href="/biblequiz"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/15 bg-white/5 px-8 py-3 text-sm font-semibold text-white hover:bg-white/10 transition"
-            >
-              Take Another Quiz
-            </Link>
-          </div>
-          <p className="text-xs text-white/40">
-            Your score and progress are saved — upgrade any time to review past results.
-          </p>
-        </section>
-      )}
+              <div className="mt-3 space-y-2 text-sm">
+                <div className="text-white/80">Your answer: <span className={chosen ? isCorrect ? "text-green-300" : "text-red-300" : "text-white/50"}>{chosen ? `${chosen}. ${chosenText}` : "-"}</span></div>
+                <div className="text-white/80">Correct answer: <span className="text-green-300">{correct ? `${correct}. ${correctText}` : "-"}</span></div>
+                {q.explanation ? <div className="mt-2 text-xs text-white/70"><span className="font-semibold text-white/80">Explanation: </span>{q.explanation}</div> : null}
+              </div>
+            </div>
+          );
+        })}
+      </section>
     </main>
   );
 }

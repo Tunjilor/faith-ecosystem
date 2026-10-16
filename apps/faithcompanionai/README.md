@@ -2,7 +2,7 @@
 
 # Faith Companion AI
 
-Faith Companion AI is a Next.js + Prisma application providing Bible-based quizzes, scripture guidance, and premium faith tools.
+Faith Companion AI is a Next.js + Prisma application providing Bible-based quizzes, scripture guidance, and faith tools.
 
 ---
 
@@ -12,7 +12,6 @@ Faith Companion AI is a Next.js + Prisma application providing Bible-based quizz
 - Prisma ORM
 - SQLite (local development)
 - PostgreSQL (production – Vercel / Neon)
-- Stripe (subscriptions)
 - TypeScript
 
 ---
@@ -38,18 +37,10 @@ Seeds quiz questions into local SQLite database
 Admin scripts are never exposed to users.
 
 npm run admin:count-questions
-npm run admin:make-premium -- user@example.com 30
-npm run admin:revoke-premium -- user@example.com
 npm run admin:reset-attempts -- user@example.com
 🔐 ENVIRONMENT SETUP
 Local (.env.local)
 DATABASE_URL="file:./prisma/dev.db"
-
-STRIPE_SECRET_KEY=sk_test_...
-STRIPE_WEBHOOK_SECRET=whsec_...
-STRIPE_PRICE_MONTHLY=price_...
-STRIPE_PRICE_YEARLY=price_...
-STRIPE_PRICE_LIFETIME=price_...
 
 SESSION_SECRET=some-long-random-string
 Production (Vercel)
@@ -57,7 +48,7 @@ DATABASE_URL → PostgreSQL (Neon)
 
 NEVER use file: in production
 
-All Stripe + SESSION_SECRET required
+SESSION_SECRET required
 
 🧪 PRE-DEPLOY CHECKLIST (RUN BEFORE PUSH)
 npm run predeploy
@@ -100,9 +91,7 @@ SQLite never allowed in production
 
 Admin routes require secret token
 
-Premium logic enforced server-side
-
-Free users rate-limited daily
+AI usage rate-limited daily per user/guest
 
 🧭 TROUBLESHOOTING RULES
 If something feels “off”:
@@ -123,8 +112,6 @@ Local dev: ✅ stable
 Seeding: ✅ stable
 
 API routes: ✅ working
-
-Premium logic: ✅ enforced
 
 Ready for production when PostgreSQL is connected
 

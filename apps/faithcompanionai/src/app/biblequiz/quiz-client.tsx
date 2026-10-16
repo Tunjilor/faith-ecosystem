@@ -6,7 +6,6 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import DenominationSelect, { readDenomination } from "@/components/DenominationSelect";
-import QuizLimitPrompt from "@/components/QuizLimitPrompt";
 
 type Choice = "A" | "B" | "C" | "D";
 type CategoryId =
@@ -23,7 +22,6 @@ type CategoryId =
 type Category = {
   id: CategoryId;
   name: string;
-  premium: boolean;
   hover?: string;
 };
 
@@ -34,27 +32,13 @@ type ServerQuestion = {
   chosen?: Choice | null;
 };
 
-type UsageInfo = {
-  todayUsedQuestions: number;
-  todayLimitQuestions: number;
-  totalUsedQuestions: number;
-  totalLimitQuestions: number;
-  daysUsed: number;
-  daysLimit: number;
-};
-
 type StartResponse = {
   ok?: boolean;
   attemptId: string;
   questions: ServerQuestion[];
   category?: CategoryId;
-  isPremium?: boolean;
-  usage?: UsageInfo | null;
   error?: string;
   message?: string;
-  upgradePrompt?: boolean;
-  existingCategory?: string;
-  softLimit?: boolean;
 };
 
 type CompletionScore = { score: number; total: number; resultsHref: string | null };
@@ -79,7 +63,6 @@ type SubmitResponse = {
   redirectTo?: string;
   error?: string;
   review?: ReviewItem[];
-  premiumExplanationsIncluded?: boolean;
 };
 
 function classNames(...xs: Array<string | false | null | undefined>) {
@@ -89,15 +72,15 @@ function classNames(...xs: Array<string | false | null | undefined>) {
 const QUESTIONS_PER_QUIZ = 10;
 
 const categories: Category[] = [
-  { id: "general", name: "General Bible Knowledge", premium: false },
-  { id: "women", name: "Women of the Bible", premium: false },
-  { id: "parables", name: "Jesus' Parables", premium: false },
-  { id: "christmas", name: "Christmas & the Nativity", premium: false, hover: "Seasonal: the Christmas story" },
-  { id: "thanksgiving", name: "Thanksgiving & Gratitude", premium: false, hover: "Seasonal: gratitude in Scripture" },
-  { id: "new-year", name: "New Year & New Beginnings", premium: false, hover: "Seasonal: fresh starts in Scripture" },
-  { id: "ai", name: "AI Bible Questions", premium: true, hover: "Premium: unlimited AI-generated questions" },
-  { id: "theology", name: "Theology", premium: true, hover: "Premium: unlimited AI-generated questions" },
-  { id: "history", name: "Church History", premium: true, hover: "Premium: unlimited AI-generated questions" },
+  { id: "general", name: "General Bible Knowledge" },
+  { id: "women", name: "Women of the Bible" },
+  { id: "parables", name: "Jesus' Parables" },
+  { id: "christmas", name: "Christmas & the Nativity", hover: "Seasonal: the Christmas story" },
+  { id: "thanksgiving", name: "Thanksgiving & Gratitude", hover: "Seasonal: gratitude in Scripture" },
+  { id: "new-year", name: "New Year & New Beginnings", hover: "Seasonal: fresh starts in Scripture" },
+  { id: "ai", name: "AI Bible Questions", hover: "Fresh AI-generated questions" },
+  { id: "theology", name: "Theology", hover: "Fresh AI-generated questions" },
+  { id: "history", name: "Church History", hover: "Fresh AI-generated questions" },
 ];
 
 async function postJSON<T>(url: string, body?: unknown): Promise<{ ok: boolean; data: T | any; status: number }> {
@@ -131,79 +114,6 @@ function addLocalSeenIds(cat: string, ids: string[]): void {
   } catch {}
 }
 
-// â"€â"€ Hard stop modal â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
-function HardStopModal({
-  title,
-  message,
-  usage,
-  onClose,
-}: {
-  title: string;
-  message: string;
-  usage: UsageInfo | null;
-  onClose: () => void;
-}) {
-  const quizzesUsed = usage ? Math.floor(usage.totalUsedQuestions / QUESTIONS_PER_QUIZ) : null;
-  const quizzesLimit = usage ? Math.floor(usage.totalLimitQuestions / QUESTIONS_PER_QUIZ) : null;
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 backdrop-blur-sm">
-      <div className="w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-black/80 shadow-2xl">
-        {/* header */}
-        <div className="bg-gradient-to-r from-purple-600 to-orange-500 px-6 py-5 text-white">
-          <div className="text-lg font-extrabold">{title}</div>
-          <div className="mt-1 text-sm text-white/80">{message}</div>
-        </div>
-
-        {/* usage summary */}
-        {usage && quizzesUsed !== null && quizzesLimit !== null && (
-          <div className="grid grid-cols-3 divide-x divide-white/10 border-b border-white/10 text-center text-xs">
-            <div className="px-4 py-3">
-              <div className="font-bold text-white">{quizzesUsed}/{quizzesLimit}</div>
-              <div className="mt-0.5 text-white/55">Quizzes used</div>
-            </div>
-            <div className="px-4 py-3">
-              <div className="font-bold text-white">{usage.daysUsed}/{usage.daysLimit}</div>
-              <div className="mt-0.5 text-white/55">Days used</div>
-            </div>
-            <div className="px-4 py-3">
-              <div className="font-bold text-white">{usage.todayUsedQuestions}/{usage.todayLimitQuestions}</div>
-              <div className="mt-0.5 text-white/55">Today</div>
-            </div>
-          </div>
-        )}
-
-        {/* cta */}
-        <div className="space-y-3 p-6">
-          <p className="text-sm text-white/70">
-            Premium removes all limits — unlimited quizzes, all categories, and your personal faith journal.
-          </p>
-
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/pricing"
-              className="flex-1 rounded-xl bg-gradient-to-r from-purple-600 to-orange-500 py-3 text-center text-sm font-bold text-white hover:opacity-95"
-            >
-              Upgrade to Premium
-            </Link>
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 rounded-xl border border-white/10 bg-white/5 py-3 text-sm font-semibold text-white/80 hover:bg-white/10"
-            >
-              Dismiss
-            </button>
-          </div>
-
-          <p className="text-center text-xs text-white/40">
-            Free plan resets tomorrow at midnight UTC.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // â"€â"€ Main component â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 export default function QuizClient() {
   const router = useRouter();
@@ -211,8 +121,6 @@ export default function QuizClient() {
   const [submitting, setSubmitting] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
-  const [premiumLoaded, setPremiumLoaded] = useState(false);
-  const [premium, setPremium] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [userDisplayName, setUserDisplayName] = useState<string>("");
@@ -223,25 +131,15 @@ export default function QuizClient() {
   const [questions, setQuestions] = useState<ServerQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const [usage, setUsage] = useState<UsageInfo | null>(null);
-
-  // Hard stop modal state
-  const [hardStop, setHardStop] = useState(false);
-  const [hardStopTitle, setHardStopTitle] = useState("");
-  const [hardStopMsg, setHardStopMsg] = useState("");
-
-  // Generic inline error (non-limit errors)
+  // Generic inline error
   const [inlineError, setInlineError] = useState<string | null>(null);
 
   // Completion state (replaces immediate redirect after submit)
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [completionScore, setCompletionScore] = useState<CompletionScore | null>(null);
-  // Single calm prompt shown once the 3 free quiz days are used up.
-  const [showLimitPrompt, setShowLimitPrompt] = useState(false);
 
   const [displayName, setDisplayName] = useState("");
   const [savingName, setSavingName] = useState(false);
-  const [showAnswerGate, setShowAnswerGate] = useState(false);
   const [reviewItems, setReviewItems] = useState<ReviewItem[]>([]);
   const [showInlineReview, setShowInlineReview] = useState(false);
 
@@ -249,11 +147,9 @@ export default function QuizClient() {
 
   const _me = useUser();
   useEffect(() => {
-    setPremium(Boolean(_me.premium || _me.isPremium));
     setSignedIn(Boolean(_me.signedIn || _me.authed));
     setUserEmail(_me.email ?? null);
     setUserDisplayName(_me.displayName ?? "");
-    setPremiumLoaded(true);
   }, [_me]);
 
   useEffect(() => {
@@ -276,18 +172,13 @@ export default function QuizClient() {
     if (autoStartedRef.current || typeof window === "undefined") return;
     const requested = new URLSearchParams(window.location.search).get("category");
     if (!requested) return;
-    const match = categories.find((c) => c.id === requested && !c.premium);
+    const match = categories.find((c) => c.id === requested);
     if (!match) return;
     autoStartedRef.current = true;
     setCategory(match.id);
     void startQuiz(match.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const statusLabel = useMemo(() => {
-    if (!premiumLoaded) return "Checking…";
-    return premium ? "Premium active ✅" : "Free plan";
-  }, [premiumLoaded, premium]);
 
   const activeCategoryName = useMemo(
     () => categories.find((c) => c.id === category)?.name ?? "General Bible Knowledge",
@@ -305,70 +196,14 @@ export default function QuizClient() {
   // Questions remaining in this quiz session (for soft prompt)
   const questionsLeftInQuiz = questions.length > 0 ? questions.length - currentIndex - 1 : null;
   const showSoftPrompt =
-    !premium &&
     questions.length > 0 &&
     questionsLeftInQuiz !== null &&
     questionsLeftInQuiz <= 2 &&
     questionsLeftInQuiz > 0;
 
-  // Usage display strings
-  const usageDisplay = useMemo(() => {
-    if (premium || !usage) return null;
-    const quizzesUsed = Math.floor(usage.totalUsedQuestions / QUESTIONS_PER_QUIZ);
-    const quizzesLeft = Math.floor((usage.totalLimitQuestions - usage.totalUsedQuestions) / QUESTIONS_PER_QUIZ);
-    const daysLeft = usage.daysLimit - usage.daysUsed;
-    return { quizzesUsed, quizzesLeft, daysLeft };
-  }, [premium, usage]);
-
-  function triggerHardStop(title: string, msg: string) {
-    setHardStopTitle(title);
-    setHardStopMsg(msg);
-    setHardStop(true);
-    // Clear quiz state so they can't continue
-    setAttemptId(null);
-    setQuestions([]);
-    setCurrentIndex(0);
-  }
-
   function handleApiError(data: any) {
     if (!data) {
       setInlineError("Something went wrong. Please try again.");
-      return;
-    }
-
-    // Capture usage from error responses too
-    if (data.usage) setUsage(data.usage);
-
-    if (data.error === "daily_limit_reached") {
-      triggerHardStop(
-        "You've used today's free quiz",
-        data.message || "Free users get 10 questions per day. Come back tomorrow or upgrade for unlimited access."
-      );
-      return;
-    }
-
-    if (data.error === "trial_limit_reached") {
-      triggerHardStop(
-        "Free trial complete",
-        data.message || "You've used all 30 free questions across 3 days. Upgrade to keep going."
-      );
-      return;
-    }
-
-    if (data.error === "signin_required") {
-      triggerHardStop(
-        "Sign in to continue",
-        data.message || "Your guest trial has ended. Sign in to continue for free or upgrade for unlimited access."
-      );
-      return;
-    }
-
-    if (data.error === "premium_required") {
-      // Replace the easily-missed inline banner with the upgrade modal (Go Premium → /pricing).
-      triggerHardStop(
-        "Premium category",
-        data.message || "This category is part of Premium. Go Premium to unlock every category."
-      );
       return;
     }
 
@@ -390,8 +225,6 @@ export default function QuizClient() {
     setCurrentIndex(0);
     setQuizCompleted(false);
     setCompletionScore(null);
-    setShowLimitPrompt(false);
-    setShowAnswerGate(false);
     setReviewItems([]);
     setShowInlineReview(false);
 
@@ -432,13 +265,6 @@ export default function QuizClient() {
     setAttemptId(attempt.attemptId);
     setQuestions(dedupedQuestions);
     setCurrentIndex(0);
-    if (attempt.usage) setUsage(attempt.usage);
-    // Single calm prompt: only once the 3 free quiz days (3 x 10 questions) are used up
-    // and the user is starting/returning for another quiz. Not a wall — quiz still loads.
-    const u = attempt.usage;
-    const usedAllFreeDays =
-      !!u && (u.totalUsedQuestions > u.totalLimitQuestions || u.daysUsed > u.daysLimit);
-    if (!premium && usedAllFreeDays) setShowLimitPrompt(true);
     setBusy(false);
     setTimeout(() => quizAreaRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
   }
@@ -452,8 +278,6 @@ export default function QuizClient() {
     setCurrentIndex(0);
     setQuizCompleted(false);
     setCompletionScore(null);
-    setShowLimitPrompt(false);
-    setShowAnswerGate(false);
 
     const reset = await postJSON("/api/quiz/reset", { attemptId: prevAttemptId });
     if (!reset.ok) {
@@ -511,21 +335,6 @@ export default function QuizClient() {
 
   return (
     <>
-      {/* Hard stop modal */}
-      {hardStop && (
-        <HardStopModal
-          title={hardStopTitle}
-          message={hardStopMsg}
-          usage={usage}
-          onClose={() => setHardStop(false)}
-        />
-      )}
-
-      {/* Single calm prompt — fires only after the 3 free quiz days are used up */}
-      {showLimitPrompt && !premium && (
-        <QuizLimitPrompt signedIn={signedIn} onClose={() => setShowLimitPrompt(false)} />
-      )}
-
       <div className="mx-auto w-full max-w-5xl px-4 py-10">
         {/* â"€â"€ Header â"€â"€ */}
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -535,10 +344,6 @@ export default function QuizClient() {
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            <div className="rounded-full bg-white/10 px-3 py-1 text-sm text-white/80">
-              {statusLabel}
-            </div>
-
             <DenominationSelect className="rounded-full bg-white/10 px-3 py-1.5 text-sm text-white/80 border-0 outline-none" />
 
             <button
@@ -549,15 +354,6 @@ export default function QuizClient() {
             >
               Restart
             </button>
-
-            {!premium && (
-              <Link
-                href="/pricing"
-                className="rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-4 py-2 text-sm font-semibold text-white hover:opacity-95"
-              >
-                Go Premium
-              </Link>
-            )}
           </div>
         </div>
 
@@ -573,9 +369,6 @@ export default function QuizClient() {
           <div className="mb-6 rounded-2xl border border-yellow-500/20 bg-yellow-500/10 px-4 py-4 text-white">
             <div className="font-semibold">âš ï¸ {inlineError}</div>
             <div className="mt-3 flex flex-wrap gap-2">
-              <Link href="/pricing" className="rounded-md bg-white px-4 py-2 text-sm font-semibold text-black hover:opacity-90">
-                Go Premium
-              </Link>
               <button onClick={() => setInlineError(null)} className="rounded-md bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15">
                 Close
               </button>
@@ -590,17 +383,12 @@ export default function QuizClient() {
               <div className="text-white/80">
                 Playing as{" "}
                 <span className="font-semibold text-white">{userDisplayName || userEmail || "Member"}</span>
-                <span className="ml-2 text-sm">
-                  {premium
-                    ? <span className="text-emerald-400">Premium ✅</span>
-                    : <span className="text-white/50">Free plan</span>}
-                </span>
                 <span className="ml-2 text-white/40 text-sm">• {answeredCount}/{QUESTIONS_PER_QUIZ} answered</span>
               </div>
             ) : (
               <div className="text-white/80">
                 Playing as <span className="font-semibold text-white">Guest</span>
-                <span className="ml-2 text-white/50 text-sm">(Free mode • {answeredCount}/{QUESTIONS_PER_QUIZ} answered)</span>
+                <span className="ml-2 text-white/50 text-sm">• {answeredCount}/{QUESTIONS_PER_QUIZ} answered</span>
               </div>
             )}
 
@@ -628,28 +416,6 @@ export default function QuizClient() {
               </div>
             )}
           </div>
-
-          {/* Usage tracker — free/guest users; reflects the real 3 quiz days × 10 questions model */}
-          {usageDisplay && (
-            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-white/10 pt-3 text-xs text-white/50">
-              <span>
-                Free plan:{" "}
-                <span className={classNames("font-semibold", usageDisplay.daysLeft <= 1 ? "text-orange-400" : "text-white/70")}>
-                  {Math.max(0, usageDisplay.daysLeft)} of {usage!.daysLimit} quiz {usageDisplay.daysLeft === 1 ? "day" : "days"} left
-                </span>{" "}
-                <span className="text-white/40">· 10 questions each</span>
-              </span>
-              <span>
-                Today:{" "}
-                <span className="font-semibold text-white/70">
-                  {usage!.todayUsedQuestions}/{usage!.todayLimitQuestions} questions
-                </span>
-              </span>
-              <Link href="/pricing" className="ml-auto text-orange-400 underline underline-offset-2 hover:text-orange-300">
-                Upgrade for unlimited →
-              </Link>
-            </div>
-          )}
         </div>
 
         {/* â"€â"€ Category grid â"€â"€ */}
@@ -662,15 +428,6 @@ export default function QuizClient() {
                 title={c.hover || c.name}
                 disabled={busy}
                 onClick={async () => {
-                  // Premium category + known non-premium user → show the upgrade modal
-                  // (clear "Go Premium" CTA to /pricing) instead of a silent/failed start.
-                  if (c.premium && premiumLoaded && !premium) {
-                    triggerHardStop(
-                      "Premium category",
-                      "This category is part of Premium — unlimited quizzes and every category. Go Premium to unlock it."
-                    );
-                    return;
-                  }
                   setCategory(c.id);
                   await startQuiz(c.id);
                 }}
@@ -681,21 +438,8 @@ export default function QuizClient() {
                   busy && "opacity-60"
                 )}
               >
-                <div className="flex items-center justify-between gap-3">
-                  <div className="font-semibold text-white">{c.name}</div>
-                  {c.premium ? (
-                    <span className="rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-3 py-1 text-xs font-bold text-white">
-                      Premium
-                    </span>
-                  ) : (
-                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/80">
-                      Free
-                    </span>
-                  )}
-                </div>
-                <div className="mt-1 text-sm text-white/60">
-                  {c.premium ? "Premium category" : "Free category"}
-                </div>
+                <div className="font-semibold text-white">{c.name}</div>
+                {c.hover && <div className="mt-1 text-sm text-white/60">{c.hover}</div>}
               </button>
             );
           })}
@@ -784,27 +528,18 @@ export default function QuizClient() {
                 </button>
               </div>
 
-              {/* See Correct Answers — inline for premium, gated for free */}
+              {/* See Correct Answers — inline per-question review */}
               {completionScore.score < completionScore.total && (
                 <div>
                   <button
                     type="button"
-                    onClick={() => {
-                      if (premium) {
-                        setShowInlineReview((v) => !v);
-                      } else {
-                        setShowAnswerGate((v) => !v);
-                      }
-                    }}
+                    onClick={() => setShowInlineReview((v) => !v)}
                     className="rounded-full border border-white/20 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10"
                   >
-                    {premium
-                      ? showInlineReview ? "Hide Answers" : "See Correct Answers"
-                      : "🔒 See Correct Answers"}
+                    {showInlineReview ? "Hide Answers" : "See Correct Answers"}
                   </button>
 
-                  {/* Premium: inline per-question review */}
-                  {premium && showInlineReview && (
+                  {showInlineReview && (
                     <div className="mt-5 space-y-3">
                       {reviewItems.length > 0 ? reviewItems.map((item, idx) => (
                         <div
@@ -854,30 +589,6 @@ export default function QuizClient() {
                     </div>
                   )}
 
-                  {/* Free: upgrade gate */}
-                  {showAnswerGate && !premium && (
-                    <div className="mt-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 p-5">
-                      <div className="font-semibold text-amber-100">Unlock Correct Answers</div>
-                      <p className="mt-2 text-sm leading-6 text-amber-200/80">
-                        See which questions you missed and get detailed explanations for every answer. Available on Premium.
-                      </p>
-                      <div className="mt-4 flex flex-wrap gap-3">
-                        <Link
-                          href="/pricing"
-                          className="rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-5 py-2.5 text-sm font-semibold text-white hover:opacity-95"
-                        >
-                          Upgrade to Premium
-                        </Link>
-                        <button
-                          type="button"
-                          onClick={() => setShowAnswerGate(false)}
-                          className="rounded-full border border-white/20 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10"
-                        >
-                          Dismiss
-                        </button>
-                      </div>
-                    </div>
-                  )}
                 </div>
               )}
             </div>
@@ -887,8 +598,7 @@ export default function QuizClient() {
             </div>
           ) : (
             <div className="space-y-5">
-              {/* Gentle progress note near the end of a quiz (no upgrade push — the single
-                  upgrade/devotional prompt lives in QuizLimitPrompt, shown only after 3 quiz days) */}
+              {/* Gentle progress note near the end of a quiz */}
               {showSoftPrompt && (
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/70">
                   {questionsLeftInQuiz === 1

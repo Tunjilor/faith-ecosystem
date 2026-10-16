@@ -23,7 +23,7 @@ export default function WrappedPage() {
         <h2 className="text-xl font-bold text-slate-900">Not available yet</h2>
         <p className="mt-2 max-w-2xl text-sm leading-7 text-slate-600">
           Your Faith Companion Wrapped recap isn&rsquo;t available yet. In the meantime, your Dashboard shows your
-          daily streak and account details, and Premium members can see their saved prayers there.
+          daily streak, account details, and saved prayers.
         </p>
 
         <Link

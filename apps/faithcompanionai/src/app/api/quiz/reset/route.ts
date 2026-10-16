@@ -3,13 +3,12 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { db } from "@/lib/db";
 import { readSessionToken, sessionCookieName } from "@/lib/session";
-import { ensureGuestCookie, guestTrialStatus } from "@/lib/guest";
+import { ensureGuestCookie } from "@/lib/guest";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const QUESTIONS_PER_QUIZ = 10;
-const FREE_DAYS_TRIAL = 3;
 
 type SessionPayload = { uid: string; exp: number };
 
@@ -19,7 +18,7 @@ function getUtcDayRange(d = new Date()) {
   return { start, end };
 }
 
-async function getActorAndPremium() {
+async function getActor() {
   const secret = process.env.SESSION_SECRET;
   if (!secret) return { ok: false as const, error: "missing_secret" as const };
 
@@ -31,31 +30,22 @@ async function getActorAndPremium() {
   if (isAuthed) {
     const user = await db.user.findUnique({ where: { id: payload!.uid } });
     if (user) {
-      const now = new Date();
-      const isPremium = user.isPremium && (!user.premiumUntil || user.premiumUntil.getTime() > now.getTime());
       return {
         ok: true as const,
         actorKey: `user:${user.id}`,
         userId: user.id,
         email: user.email,
-        isPremium,
-        isGuest: false,
-        trial: null,
       };
     }
   }
 
   const guest = ensureGuestCookie(secret);
-  const trial = guestTrialStatus(guest, FREE_DAYS_TRIAL);
 
   return {
     ok: true as const,
     actorKey: `guest:${guest.id}`,
     userId: null as string | null,
     email: null as string | null,
-    isPremium: false,
-    isGuest: true,
-    trial,
   };
 }
 
@@ -65,19 +55,8 @@ export async function POST(req: Request) {
     const attemptId = String(body?.attemptId || "").trim();
     if (!attemptId) return NextResponse.json({ ok: false, error: "missing_attemptId" }, { status: 400 });
 
-    const ident = await getActorAndPremium();
+    const ident = await getActor();
     if (!ident.ok) return NextResponse.json({ ok: false, error: ident.error }, { status: 500 });
-
-    // Guest trial check (same as start)
-    if (ident.isGuest && !ident.trial?.isWithinTrial) {
-      return NextResponse.json(
-        { ok: false, error: "signin_required", message: "Your 3-day free quiz trial has ended. Please sign in to continue." },
-        { status: 403 }
-      );
-    }
-
-    const trialDaysLeft =
-      ident.isGuest ? Math.max(0, FREE_DAYS_TRIAL - Math.floor(ident.trial!.daysSinceFirstSeen)) : null;
 
     // Load attempt + verify ownership
     const attempt = await db.quizAttempt.findUnique({ where: { id: attemptId } });
@@ -133,8 +112,6 @@ const questions = linked.map((row: any) => ({
       category: attempt.category,
       timed: attempt.timed,
       questions,
-      isPremium: ident.isPremium,
-      trialDaysLeft,
     });
   } catch (err) {
     console.error("RESET QUIZ ERROR:", err);

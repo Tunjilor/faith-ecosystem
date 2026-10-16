@@ -20,8 +20,6 @@ type LocalSavedItem = {
 type MeResponse = {
   signedIn?: boolean;
   email?: string | null;
-  isPremium?: boolean;
-  premiumUntil?: string | null;
   userId?: string | null;
 };
 
@@ -29,12 +27,6 @@ const STORAGE_KEY = "faithcompanion_favorites_v1";
 
 function formatDate(ts: number) {
   return new Date(ts).toLocaleString();
-}
-
-function isPremiumActive(me: MeResponse | null) {
-  if (!me?.isPremium) return false;
-  if (!me?.premiumUntil) return false;
-  return new Date(me.premiumUntil).getTime() > Date.now();
 }
 
 export default function ToolsPage() {
@@ -240,12 +232,6 @@ export default function ToolsPage() {
       return;
     }
 
-    if (!isPremiumActive(me)) {
-      setError("Saving to your account is a premium feature. You can still save on this device for now.");
-      saveLocally();
-      return;
-    }
-
     setIsSaving(true);
 
     try {
@@ -308,7 +294,7 @@ export default function ToolsPage() {
   }
 
   const showingAnswer = activeSaved ? activeSaved.answer : answer;
-  const premiumActive = isPremiumActive(me);
+  const signedIn = !!(me?.signedIn && me?.userId);
 
   return (
     <main className="min-h-screen app-bg text-slate-900 px-6 py-10">
@@ -423,9 +409,9 @@ export default function ToolsPage() {
             </div>
 
             <div className="mt-4 text-xs text-slate-500">
-              {premiumActive
-                ? "Premium active: saves go to your account and this device."
-                : "Not premium or not signed in: saves are stored on this device for now."}
+              {signedIn
+                ? "Saves go to your account and this device."
+                : "Not signed in: saves are stored on this device for now."}
             </div>
 
             {error && (
@@ -524,7 +510,7 @@ export default function ToolsPage() {
           )}
 
           <div className="mt-4 text-xs text-slate-500">
-            Local saves stay on this device. Premium account saves are also written to your database.
+            Local saves stay on this device. When you are signed in, saves are also written to your account.
           </div>
         </aside>
       </div>

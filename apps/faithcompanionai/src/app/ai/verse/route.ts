@@ -69,17 +69,16 @@ export async function POST(req: Request) {
   const { userKey } = getUserKeyMaybeEmail();
   const dayKey = dayKeyUTC();
 
-  // Free daily limit: 10/day per userKey
-  // (Later, when your premium auth is wired, you can skip this for premium users.)
+  // Daily abuse/cost limit per userKey
   const usage = await db.aiUsage.upsert({
     where: { dayKey_userKey: { dayKey, userKey } },
     update: { count: { increment: 1 } },
     create: { dayKey, userKey, count: 1 },
   });
 
-  if (usage.count > 10) {
+  if (usage.count > 500) {
     return NextResponse.json(
-      { error: "Daily free limit reached (10/day). Please upgrade for unlimited." },
+      { error: "Daily limit reached. Please try again tomorrow." },
       { status: 429 }
     );
   }

@@ -32,7 +32,6 @@ export default function PrivacyPage() {
               ["User Content", "including saved items, inputs, and activity within the service"],
               ["Usage Data", "such as interactions with features, pages visited, and general usage patterns"],
               ["Technical Information", "including device type, browser, IP address, and basic system data"],
-              ["Subscription Information", "such as your plan status and billing-related metadata"],
             ].map(([label, detail]) => (
               <li key={label} className="flex gap-2">
                 <span className="mt-1 shrink-0 text-white/30">&bull;</span>
@@ -49,7 +48,6 @@ export default function PrivacyPage() {
               "Provide, operate, and improve the service",
               "Personalize your experience and generated content",
               "Authenticate user access and manage accounts",
-              "Process payments and manage subscriptions",
               "Store and retrieve saved content",
               "Prevent abuse, fraud, or misuse of the service",
               "Respond to support requests and inquiries",
@@ -80,8 +78,7 @@ export default function PrivacyPage() {
 
           <h2 className="text-xl font-bold text-white">Payments</h2>
           <p>
-            Payments are processed securely by third-party providers such as Stripe. We do not store full payment card details on our servers.
-            Payment information is handled directly by the payment processor under their privacy policies.
+            Faith Companion AI is free to use. We do not collect payments or payment information.
           </p>
 
           <h2 className="text-xl font-bold text-white">Cookies and Tracking</h2>
@@ -102,8 +99,8 @@ export default function PrivacyPage() {
 
           <h2 className="text-xl font-bold text-white">Third-Party Services</h2>
           <p>
-            We may use third-party services to operate the platform, including payment processors (e.g., Stripe),
-            hosting and infrastructure providers, and analytics or performance tools. These providers may process
+            We may use third-party services to operate the platform, including hosting and infrastructure
+            providers, and analytics or performance tools. These providers may process
             data as necessary to perform their functions.
           </p>
 

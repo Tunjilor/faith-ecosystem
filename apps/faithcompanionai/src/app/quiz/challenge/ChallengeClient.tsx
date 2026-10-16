@@ -62,10 +62,10 @@ export default function ChallengeClient() {
             </Link>
 
             <Link
-              href="/pricing"
+              href="/tools"
               className="inline-flex min-h-[52px] items-center justify-center rounded-2xl border border-white/10 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/15"
             >
-              Go Premium
+              Explore Faith Tools
             </Link>
           </div>
 

@@ -3,7 +3,7 @@ import crypto from "crypto";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { db } from "@/lib/db";
-import { getUserFromSession, isUserPremium } from "@/lib/premium";
+import { getUserFromSession } from "@/lib/access";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -114,7 +114,7 @@ function buildShareLinks(
   };
 }
 
-async function buildPremiumExplanations(reviewItems: ReviewItem[]) {
+async function buildAiExplanations(reviewItems: ReviewItem[]) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     return reviewItems.map((item) => ({
@@ -288,7 +288,6 @@ export async function POST(req: Request) {
     });
 
     const sessionUser = await getUserFromSession();
-    const premiumActive = sessionUser ? isUserPremium(sessionUser) : false;
 
     const reviewItems: ReviewItem[] = updates.map((row) => ({
       questionId: row.questionId,
@@ -306,12 +305,7 @@ export async function POST(req: Request) {
       },
     }));
 
-    const explanations = premiumActive
-      ? await buildPremiumExplanations(reviewItems)
-      : reviewItems.map((item) => ({
-          questionId: item.questionId,
-          explanation: null,
-        }));
+    const explanations = await buildAiExplanations(reviewItems);
 
     const mergedReview = reviewItems.map((item) => ({
       ...item,
@@ -333,7 +327,6 @@ export async function POST(req: Request) {
       shareId,
       score,
       total,
-      premiumExplanationsIncluded: premiumActive,
       review: mergedReview,
       share,
       redirectTo: `/biblequiz/results/${shareId}`,

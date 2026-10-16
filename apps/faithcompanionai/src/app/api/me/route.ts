@@ -36,15 +36,10 @@ export async function GET() {
   if (!secret) {
     return NextResponse.json(
       {
-        premium: false,
-        isPremium: false,
         authed: false,
         signedIn: false,
         userId: null,
         email: null,
-        premiumUntil: null,
-        customerId: null,
-        subscriptionId: null,
         actorKey: null,
         guestName: null,
         displayName: null,
@@ -70,15 +65,10 @@ export async function GET() {
 
     if (!user) {
       return NextResponse.json({
-        premium: false,
-        isPremium: false,
         authed: false,
         signedIn: false,
         userId: null,
         email: null,
-        premiumUntil: null,
-        customerId: null,
-        subscriptionId: null,
         actorKey: null,
         guestName: null,
         displayName: null,
@@ -87,24 +77,14 @@ export async function GET() {
       });
     }
 
-    const now = new Date();
-    const premium =
-      user.isPremium &&
-      (!user.premiumUntil || user.premiumUntil.getTime() > now.getTime());
-
     const displayName = user.displayName?.trim() || makeUserDisplayName(user.email);
     const referralCount = await db.user.count({ where: { referredBy: user.id } }).catch(() => 0);
 
     return NextResponse.json({
-      premium,
-      isPremium: premium,
       authed: true,
       signedIn: true,
       userId: user.id,
       email: user.email,
-      premiumUntil: user.premiumUntil ? user.premiumUntil.toISOString() : null,
-      customerId: user.stripeCustomerId ?? null,
-      subscriptionId: user.stripeSubscriptionId ?? null,
       actorKey: `user:${user.id}`,
       guestName: displayName,
       displayName,
@@ -121,15 +101,10 @@ export async function GET() {
   const guestName = savedGuestName || makeGuestDisplayName(guest.id);
 
   return NextResponse.json({
-    premium: false,
-    isPremium: false,
     authed: false,
     signedIn: false,
     userId: null,
     email: null,
-    premiumUntil: null,
-    customerId: null,
-    subscriptionId: null,
     actorKey: actorKeyForGuest(guest.id),
     guestName,
     displayName: guestName,

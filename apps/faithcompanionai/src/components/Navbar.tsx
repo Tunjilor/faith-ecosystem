@@ -27,7 +27,6 @@ const NAV: NavItem[] = [
     { label: "Saved", href: "/saved" },
     { label: "Blog", href: "/blog" },
     { label: "Topics", href: "/topics" },
-    { label: "Pricing", href: "/pricing" },
     { label: "About", href: "/about" },
     { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },
@@ -43,12 +42,6 @@ function classNames(...xs: Array<string | false | null | undefined>) {
 function isActivePath(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(href + "/");
-}
-function isPremiumActive(me: UserData) {
-  const premiumFlag = !!(me.isPremium || me.premium);
-  if (!premiumFlag) return false;
-  if (!me.premiumUntil) return true;
-  return new Date(me.premiumUntil).getTime() > Date.now();
 }
 function useOnClickOutside(ref: React.RefObject<HTMLElement | null>, handler: () => void, enabled: boolean) {
   useEffect(() => {
@@ -110,7 +103,6 @@ function AccountMenu({ me }: { me: UserData }) {
   const [loggingOut, setLoggingOut] = useState(false);
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const signedIn = !!(me.signedIn || me.authed);
-  const premiumActive = isPremiumActive(me);
   useOnClickOutside(wrapRef, () => setOpen(false), open);
   useEffect(() => {
     if (!open) return;
@@ -131,7 +123,6 @@ function AccountMenu({ me }: { me: UserData }) {
       <div className="hidden items-center gap-2 md:flex">
         <Link href="/login" className={classNames("rounded-md px-3 py-2 text-sm font-medium transition",
           isActivePath(pathname, "/login") ? "bg-white/10 text-white" : "text-white/80 hover:bg-white/10 hover:text-white")}>Sign in</Link>
-        <Link href="/pricing" className="rounded-md bg-gradient-to-r from-purple-600 to-orange-500 px-3 py-2 text-sm font-semibold text-white hover:opacity-95">Premium</Link>
       </div>
     );
   }
@@ -141,7 +132,6 @@ function AccountMenu({ me }: { me: UserData }) {
         className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-white hover:bg-white/10"
         aria-haspopup="menu" aria-expanded={open}>
         <span className="max-w-[160px] truncate">{me.displayName || me.email || "Account"}</span>
-        {premiumActive && <span className="rounded-full bg-amber-400/20 px-2 py-0.5 text-xs font-semibold text-amber-200">Premium</span>}
         <span className={classNames("transition", open && "rotate-180")}>▾</span>
       </button>
       {open && (
@@ -149,14 +139,10 @@ function AccountMenu({ me }: { me: UserData }) {
           <div className="border-b border-white/10 px-4 py-3">
             <div className="truncate text-sm font-semibold text-white">{me.displayName || me.email || "Account"}</div>
             {me.displayName && <div className="truncate text-xs text-white/40">{me.email}</div>}
-            <div className="mt-1 text-xs text-white/50">{premiumActive ? "Premium active" : "Free account"}</div>
           </div>
           <Link href="/dashboard" className="block px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white" onClick={() => setOpen(false)}>Dashboard</Link>
           <Link href="/saved" className="block px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white" onClick={() => setOpen(false)}>Saved</Link>
           <Link href="/profile" className="block px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white" onClick={() => setOpen(false)}>Profile &amp; Settings</Link>
-          <Link href="/pricing" className="block px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white" onClick={() => setOpen(false)}>
-            {premiumActive ? "Manage plan" : "Upgrade to Premium"}
-          </Link>
           <button type="button" onClick={handleLogout} disabled={loggingOut}
             className="block w-full px-4 py-2 text-left text-sm text-white/80 transition hover:bg-white/10 hover:text-white disabled:opacity-60">
             {loggingOut ? "Logging out..." : "Log out"}
@@ -174,7 +160,6 @@ export function Navbar() {
   const me = useUser();
   useEffect(() => { setMobileOpen(false); }, [pathname]);
   const signedIn = !!(me.signedIn || me.authed);
-  const premiumActive = isPremiumActive(me);
   function toggleSection(label: string) {
     setMobileSections((prev) => ({ ...prev, [label]: !prev[label] }));
   }
@@ -261,16 +246,11 @@ export function Navbar() {
                   <>
                     <div className="text-sm font-semibold text-white">{me.displayName || me.email || "Account"}</div>
                     {me.displayName && <div className="truncate text-xs text-white/40">{me.email}</div>}
-                    <div className="mt-1 text-xs text-white/50">{premiumActive ? "Premium active" : "Free account"}</div>
                     <div className="mt-3 flex flex-col gap-2">
                       <Link href="/profile" onClick={() => setMobileOpen(false)}
                         className="rounded-md border border-white/10 px-3 py-2 text-center text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">Profile &amp; Settings</Link>
                       <Link href="/saved" onClick={() => setMobileOpen(false)}
                         className="rounded-md border border-white/10 px-3 py-2 text-center text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">Saved</Link>
-                      <Link href="/pricing" onClick={() => setMobileOpen(false)}
-                        className="rounded-md bg-gradient-to-r from-purple-600 to-orange-500 px-3 py-2 text-center text-sm font-semibold text-white">
-                        {premiumActive ? "Manage plan" : "Upgrade to Premium"}
-                      </Link>
                       <button type="button" onClick={handleMobileLogout}
                         className="rounded-md border border-white/10 px-3 py-2 text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">Log out</button>
                     </div>
@@ -279,8 +259,6 @@ export function Navbar() {
                   <div className="flex flex-col gap-2">
                     <Link href="/login" onClick={() => setMobileOpen(false)}
                       className="rounded-md border border-white/10 px-3 py-2 text-center text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">Sign in</Link>
-                    <Link href="/pricing" onClick={() => setMobileOpen(false)}
-                      className="rounded-md bg-gradient-to-r from-purple-600 to-orange-500 px-3 py-2 text-center text-sm font-semibold text-white">Premium</Link>
                   </div>
                 )}
               </div>

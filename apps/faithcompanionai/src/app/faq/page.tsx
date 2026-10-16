@@ -18,11 +18,7 @@ const faqs = [
   },
   {
     q: "Can I use Faith Companion AI for free?",
-    a: "Yes. Faith Companion AI offers free access with limited daily usage. Free users can explore features like Scripture generation, prayers, devotionals, and quiz results. Premium unlocks unlimited access and deeper guidance.",
-  },
-  {
-    q: "What does Premium include?",
-    a: "Premium gives you unlimited access to all tools, including personalized Scripture, AI-generated prayers, devotionals, and deeper insights based on your faith journey. It is designed for users who want a more consistent and in-depth experience.",
+    a: "Yes. Faith Companion AI is free to use. Scripture generation, prayers, devotionals, the Bible quiz, and your saved faith journal are available to everyone.",
   },
   {
     q: "Is this a replacement for church or pastoral care?",
@@ -42,11 +38,7 @@ const faqs = [
   },
   {
     q: "Is my data private and secure?",
-    a: "Yes. We take your privacy seriously. Your account information and activity are handled securely and used only to provide and improve the service. We do not sell your personal data, and payment information is processed securely through trusted third-party providers like Stripe.",
-  },
-  {
-    q: "Can I cancel Premium at any time?",
-    a: "Yes. You can cancel your subscription at any time. Your access will continue until the end of your current billing period, and you will not be charged again after cancellation.",
+    a: "Yes. We take your privacy seriously. Your account information and activity are handled securely and used only to provide and improve the service. We do not sell your personal data.",
   },
 ];
 

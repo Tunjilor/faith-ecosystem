@@ -98,11 +98,11 @@ const goDeeper = [
 const faqs = [
   {
     q: "Are these resources free?",
-    a: "Yes. The core tools — Verse, Prayer, and Devotional — are free to try with daily limits. Premium removes those limits and lets you save content to your personal faith journal.",
+    a: "Yes. The core tools — Verse, Prayer, and Devotional — are free, and a free account lets you save content to your personal faith journal.",
   },
   {
     q: "Do I need to create an account?",
-    a: "No account is required to try any of the tools. Creating a free account gives you more daily uses. Upgrading to Premium gives you unlimited access and lets you save everything.",
+    a: "No account is required to use any of the tools. Creating a free account lets you save everything to your personal faith journal.",
   },
   {
     q: "Is this denominational?",
@@ -111,10 +111,6 @@ const faqs = [
   {
     q: "What is the best way to start?",
     a: "Most people start with Verse for quick encouragement, Prayer when they need help articulating something, or Devotional for a fuller daily practice. The Bible Quiz is great for learning Scripture in a fun way.",
-  },
-  {
-    q: "What does Premium unlock?",
-    a: "Premium removes all daily limits, lets you save verses, prayers, and devotionals to your personal faith journal, and unlocks premium Bible quiz categories including Theology and Church History.",
   },
   {
     q: "Can I use this on my phone?",
@@ -281,51 +277,6 @@ export default function ResourcesPage() {
             className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-white px-5 py-2 text-sm font-semibold text-black transition hover:opacity-90"
           >
             Generate a Prayer
-          </Link>
-        </div>
-      </section>
-
-      {/* ── Premium upsell ── */}
-      <section className="mt-12 rounded-[28px] bg-gradient-to-r from-violet-700/70 via-fuchsia-700/60 to-orange-600/70 p-8 md:p-10">
-        <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-white/70">
-          Premium
-        </div>
-        <h2 className="text-2xl font-bold text-white md:text-3xl">
-          Remove limits and save your journey
-        </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-7 text-white/80">
-          Premium removes all daily limits, lets you save your favourite verses, prayers, and devotionals, and
-          unlocks premium Bible quiz categories including Theology and Church History. Starting at $4.99/month.
-        </p>
-
-        <ul className="mt-5 grid gap-2 text-sm text-white/85 sm:grid-cols-2">
-          {[
-            "Unlimited verses, prayers & devotionals",
-            "Save content to your personal faith journal",
-            "Premium quiz categories (Theology, History)",
-            "AI-generated explanations on quiz results",
-            "Use on mobile or desktop — no app needed",
-            "Cancel anytime on monthly plan",
-          ].map((f) => (
-            <li key={f} className="flex items-start gap-2">
-              <span className="mt-0.5 text-orange-300">✓</span>
-              <span>{f}</span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link
-            href="/pricing"
-            className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:opacity-90"
-          >
-            See Pricing
-          </Link>
-          <Link
-            href="/tools/verse"
-            className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/15"
-          >
-            Try Free First
           </Link>
         </div>
       </section>

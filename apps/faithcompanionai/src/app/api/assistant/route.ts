@@ -1,6 +1,6 @@
 // src/app/api/assistant/route.ts
 import { NextResponse } from "next/server";
-import { enforceAskQuotaFromSessionOrThrow } from "@/lib/premium";
+import { enforceAskQuotaFromSessionOrThrow } from "@/lib/access";
 import { extractOutputText, getModel, getOpenAI } from "@/lib/openai-ts";
 
 export const runtime = "nodejs";

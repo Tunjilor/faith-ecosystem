@@ -1,7 +1,7 @@
 // src/app/api/me/email-prefs/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { getUserFromSession } from "@/lib/premium";
+import { getUserFromSession } from "@/lib/access";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

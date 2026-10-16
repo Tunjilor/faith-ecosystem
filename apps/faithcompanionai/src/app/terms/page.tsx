@@ -70,20 +70,8 @@ export default function TermsPage() {
           </ul>
           <p>We may suspend or terminate accounts that violate these Terms.</p>
 
-          <h2 className="text-xl font-bold text-white">Payments and Subscriptions</h2>
-          <p>Premium features may be offered through recurring or one-time payments. By purchasing:</p>
-          <ul className="space-y-1 pl-4">
-            {[
-              "You agree to the pricing and billing terms shown at checkout",
-              "Subscriptions may renew automatically unless canceled",
-            ].map((item) => (
-              <li key={item} className="flex gap-2">
-                <span className="mt-1 shrink-0 text-white/30">&bull;</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-          <p>Payments are processed by third-party providers such as Stripe.</p>
+          <h2 className="text-xl font-bold text-white">Payments</h2>
+          <p>Faith Companion AI is free to use. We do not offer paid plans or subscriptions and do not collect payments.</p>
 
           <h2 className="text-xl font-bold text-white">No Guarantees</h2>
           <p>We make no guarantees regarding:</p>

@@ -10,7 +10,7 @@ Four apps:
 
 | App | Stack | Role |
 | --- | --- | --- |
-| `apps/faithcompanionai` | Next **14.2.35**, React 18, Tailwind **v3**, Prisma + Postgres, Stripe, OpenAI, Resend | Flagship product: accounts, premium subscriptions, Bible quiz, prayer wall, daily email. The complex app. |
+| `apps/faithcompanionai` | Next **14.2.35**, React 18, Tailwind **v3**, Prisma + Postgres, OpenAI, Resend | Flagship product: accounts, Bible quiz, prayer wall, daily email. All features are free. The complex app. |
 | `apps/prayergeneratorai` | Next **16.2.4**, React 19, Tailwind **v4** | AI prayer generator. Uses OpenAI + Resend (email-a-prayer). |
 | `apps/bibleversegeneratorai` | Next 16.2.4, React 19, Tailwind v4 | Bible-verse landing pages + OG images. |
 | `apps/tithecalculatorai` | Next 16.2.4, React 19, Tailwind v4 | Tithe calculator + OG images. |
@@ -38,8 +38,6 @@ npm run studio             # prisma studio
 npm run seed:ai            # tsx scripts/seed-questions.ts  (generates quiz questions via OpenAI)
 
 # Admin one-offs (tsx scripts/*.ts):
-npm run admin:make-premium
-npm run admin:revoke-premium
 npm run admin:reset-attempts
 npm run admin:count-questions
 ```
@@ -51,12 +49,11 @@ App Router under `src/app`. Business logic lives in `src/lib`; pages/routes stay
 
 - **Database** — Prisma + PostgreSQL (Neon serverless), ~19 models in `prisma/schema.prisma` (User, Subscription, QuizAttempt, SavedItem, UserStreak, PrayerRequest, referrals, email prefs, etc.). Schema changes require a migration in `prisma/migrations/`. The Prisma client is a global singleton; **import `db` from `@/lib/db`** (`lib/db.ts` appends Neon pooling params — `connection_limit=1` etc. — to `DATABASE_URL`). `lib/prisma.ts` is an older, simpler duplicate of the same singleton; prefer `lib/db.ts`.
 - **Auth is custom — there is no NextAuth.** Sessions are stateless HMAC-signed cookies (`fc_session`) implemented in `lib/session.ts` (`createSessionToken` / `readSessionToken`, SHA-256 HMAC over a base64url payload, `timingSafeEqual`). Login paths: password (bcryptjs, `lib/hash.ts`) and email magic links (`lib/magicLink.ts`, routes under `api/auth/`). Anonymous users get a guest cookie (`lib/guest.ts`).
-- **Premium / quotas** — `lib/premium.ts` is the gatekeeper. It resolves the current actor (session user or guest), checks `isPremium`/`premiumUntil`, and enforces per-day usage limits, throwing typed HTTP errors (`status` + `code`, e.g. 401 `UNAUTHORIZED`, 429 `LIMIT_REACHED`). Route handlers translate these into responses. Premium is granted via Stripe.
-- **Stripe** — checkout in `api/auth/stripe/`, fulfillment via the webhook at `api/webhooks/stripe/route.ts` (writes `Subscription` rows and flips `User.isPremium`). `lib/stripe.ts` holds the client.
-- **Cron jobs** — declared in `vercel.json`, implemented under `api/cron/` (`daily-email` hourly, `premium-expiry-reminder`, plus `neon-warm` / retention jobs). Email via Resend (`lib/email.ts`, `lib/email-prefs.ts`).
+- **Access / quotas** — `lib/access.ts` resolves the current session user (`getUserFromSession` / `requireUserFromSession`) and enforces a per-day AI usage cap for every actor (session user or guest), throwing typed HTTP errors (`status` + `code`, e.g. 401 `UNAUTHORIZED`, 429 `LIMIT_REACHED`). Route handlers translate these into responses. There is no paid tier: every feature is available to everyone (saving content requires sign-in). Stripe/premium were removed; the old `User.isPremium`/`premiumUntil`/`stripe*` columns and the `Subscription`/`StripeEvent` tables remain in the schema but are no longer read or written.
+- **Cron jobs** — declared in `vercel.json`, implemented under `api/cron/` (`daily-email` once daily at 09:00 UTC, plus `neon-warm` / `daily-verse`). Email via Resend (`lib/email.ts`, `lib/email-prefs.ts`).
 - **OpenAI** — quiz generation and assistant features. Note three overlapping helpers exist (`lib/openai.ts`, `lib/openai-text.ts`, `lib/openai-ts.ts`, and `lib/ai/openai.ts`); check which a feature already uses before adding a new one.
 - **OG / share images** — generated with the Next `ImageResponse` route runtime (`api/og/*`, `opengraph-image.tsx`). Standalone PDF/icon generators live in `scripts/` (pdf-lib, sharp).
-- **Client state** — `src/context/UserContext.tsx` plus `src/hooks/useMe.ts` / `usePremium.ts` for reading auth/premium state in client components.
+- **Client state** — `src/context/UserContext.tsx` plus `src/hooks/useMe.ts` for reading auth state in client components.
 
 ## Conventions
 

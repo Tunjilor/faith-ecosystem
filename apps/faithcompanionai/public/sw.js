@@ -52,7 +52,7 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Only handle same-origin requests (Stripe and all external domains pass through)
+  // Only handle same-origin requests (all external domains pass through)
   if (url.origin !== location.origin) return;
 
   // Never cache API routes, Next.js internals, auth paths, or payment-related pages
