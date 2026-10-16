@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Support",
   description:
-    "Get help with Faith Companion AI — app issues, Premium billing questions, and how to reach our support team.",
+    "Get help with Faith Companion AI — app issues, account questions, and how to reach our support team.",
   alternates: {
     canonical: "/support",
   },
@@ -21,7 +21,7 @@ export default function SupportPage() {
 
         <h2 className="mt-8 text-xl font-bold text-slate-900">Need help with the app?</h2>
         <p className="mt-2 text-slate-700">
-          If something isn’t working (pages not loading, errors, billing questions), please visit{" "}
+          If something isn’t working (pages not loading, errors, account questions), please visit{" "}
           <span className="font-semibold">Contact</span> and send a message with:
         </p>
         <ul className="mt-3 list-disc pl-6 text-slate-700 space-y-1">
@@ -31,10 +31,10 @@ export default function SupportPage() {
           <li>Your device/browser (optional but helpful)</li>
         </ul>
 
-        <h2 className="mt-8 text-xl font-bold text-slate-900">Premium & billing</h2>
+        <h2 className="mt-8 text-xl font-bold text-slate-900">Pricing</h2>
         <p className="mt-2 text-slate-700">
-          If you purchased Premium and have a billing question, we’ll help you sort it out quickly. For refunds, see the{" "}
-          <span className="font-semibold">Refund</span> page.
+          Faith Companion AI is free. There are no paid plans or subscriptions, and every feature is available to
+          everyone.
         </p>
 
         <h2 className="mt-8 text-xl font-bold text-slate-900">Transparency</h2>
