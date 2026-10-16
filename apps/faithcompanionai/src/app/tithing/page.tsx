@@ -172,9 +172,6 @@ export default function TithingPage() {
         </div>
       </section>
 
-      {/* ── 3. AD SLOT 1 ── */}
-      <div id="ad-slot-1" className="w-full" aria-hidden="true">{/* AdSense Slot 1 */}</div>
-
       {/* ── 4. BIBLE VERSES ── */}
       <section>
         <div className="mb-6 text-center">
@@ -379,9 +376,6 @@ export default function TithingPage() {
         </div>
       </section>
 
-      {/* ── 7. AD SLOT 2 ── */}
-      <div id="ad-slot-2" className="w-full" aria-hidden="true">{/* AdSense Slot 2 */}</div>
-
       {/* ── 8. DO CHRISTIANS STILL TITHE? ── */}
       <section
         className="rounded-[30px] p-8 md:p-10"
@@ -563,9 +557,6 @@ export default function TithingPage() {
           ))}
         </div>
       </section>
-
-      {/* ── 11. AD SLOT 3 ── */}
-      <div id="ad-slot-3" className="w-full" aria-hidden="true">{/* AdSense Slot 3 */}</div>
 
       {/* ── 12. FINAL CTA ── */}
       <section
