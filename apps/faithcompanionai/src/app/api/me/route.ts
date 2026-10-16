@@ -5,7 +5,6 @@ import { db } from "@/lib/db";
 import { readSessionToken, sessionCookieName } from "@/lib/session";
 import {
   ensureGuestCookie,
-  guestTrialStatus,
   actorKeyForGuest,
   readGuestName,
 } from "@/lib/guest";
@@ -96,7 +95,6 @@ export async function GET() {
   }
 
   const guest = ensureGuestCookie(cookieStore as any, secret);
-  const trial = guestTrialStatus(guest, 3);
   const savedGuestName = readGuestName(cookieStore as any);
   const guestName = savedGuestName || makeGuestDisplayName(guest.id);
 
@@ -111,7 +109,6 @@ export async function GET() {
     guest: {
       id: guest.id,
       createdAt: guest.createdAt,
-      trial,
     },
     debug: { step: "ok_guest" },
   });

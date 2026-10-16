@@ -23,7 +23,6 @@ const legalLinks = [
   { label: "Contact", href: "/contact" },
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
-  { label: "Refund", href: "/refund" },
 ];
 
 const ecosystemLinks = [
@@ -169,21 +168,6 @@ export default function Footer() {
             <div>&copy; {new Date().getFullYear()} Faith Companion AI. All rights reserved.</div>
             <div className="flex flex-wrap items-center gap-4">
               <div>Scripture-based support for daily encouragement and growth.</div>
-              <a
-                href="https://www.producthunt.com/products/faith-companion-ai?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-faith-companion-ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="opacity-90 transition hover:opacity-100"
-              >
-                <img
-                  alt="Faith Companion AI - Personalized Scripture, prayer &amp; devotionals — just for you | Product Hunt"
-                  width="200"
-                  height="43"
-                  loading="lazy"
-                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1135218&theme=light&t=1777475820795"
-                  style={{ width: "200px", height: "43px" }}
-                />
-              </a>
             </div>
           </div>
         </div>

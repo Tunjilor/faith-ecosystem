@@ -17,7 +17,6 @@ type MeResponse = {
   guest?: {
     id?: string;
     createdAt?: number;
-    trial?: { daysSinceFirstSeen?: number; isWithinTrial?: boolean };
   } | null;
 };
 
