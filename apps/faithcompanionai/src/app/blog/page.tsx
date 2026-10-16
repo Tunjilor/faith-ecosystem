@@ -2,7 +2,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getPublishedPosts } from "./content";
-import AdSenseSlot from "@/components/AdSenseSlot";
 
 // Re-evaluate on every request so the publish-date filter uses the real current date.
 export const dynamic = "force-dynamic";
@@ -50,8 +49,6 @@ export default function BlogPage() {
           devotionals, and daily faith practice.
         </p>
       </header>
-
-      <AdSenseSlot className="mb-4" />
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
