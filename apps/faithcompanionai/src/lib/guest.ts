@@ -94,15 +94,6 @@ export function ensureGuestCookie(a: any, b?: any): GuestPayload {
   return payload;
 }
 
-export function guestTrialStatus(payload: GuestPayload, trialDays = 3) {
-  const ms = Date.now() - payload.createdAt;
-  const days = ms / (1000 * 60 * 60 * 24);
-  return {
-    daysSinceFirstSeen: days,
-    isWithinTrial: days < trialDays,
-  };
-}
-
 const GUEST_NAME_COOKIE = "fc_name";
 
 export function readGuestName(store?: CookieStore): string | null {

@@ -19,11 +19,6 @@ const helpTopics = [
       "Need help signing in, accessing your account, or managing your saved content?",
   },
   {
-    title: "Billing Questions",
-    description:
-      "Questions about a past subscription or a charge?",
-  },
-  {
     title: "General Feedback",
     description:
       "Have a suggestion, found a bug, or want to share your experience?",
@@ -38,8 +33,7 @@ export default function ContactPage() {
           <h1 className="text-3xl font-bold text-white md:text-4xl">Contact</h1>
 
           <p className="mt-4 text-sm leading-7 text-white/75 md:text-base">
-            Whether you need support, have a billing question, or want to share feedback,
-            we&rsquo;d love to hear from you.
+            Whether you need support or want to share feedback, we&rsquo;d love to hear from you.
           </p>
 
           <div className="mt-6 rounded-[22px] border border-white/10 bg-black/15 p-5">
@@ -78,7 +72,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="mt-8 grid gap-5 md:grid-cols-3">
+      <section className="mt-8 grid gap-5 md:grid-cols-2">
         {helpTopics.map((item) => (
           <div
             key={item.title}

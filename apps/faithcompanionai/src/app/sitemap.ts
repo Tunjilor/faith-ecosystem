@@ -39,7 +39,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: "/support",                  priority: 0.55, freq: "monthly" },
     { route: "/privacy",                  priority: 0.4, freq: "monthly" },
     { route: "/terms",                    priority: 0.4, freq: "monthly" },
-    { route: "/refund",                   priority: 0.4, freq: "monthly" },
   ];
 
   const blog_posts: Entry[] =
