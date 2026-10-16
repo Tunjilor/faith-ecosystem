@@ -1,7 +1,7 @@
 // src/app/api/saved/[id]/answer/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { requirePremiumUserFromSession } from "@/lib/premium";
+import { requireUserFromSession } from "@/lib/access";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -11,7 +11,7 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
-    const user = await requirePremiumUserFromSession();
+    const user = await requireUserFromSession();
 
     const itemId = params.id?.trim();
     if (!itemId) {

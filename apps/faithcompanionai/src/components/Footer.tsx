@@ -9,7 +9,6 @@ const sitemapLinks = [
   { label: "Prayer Library", href: "/topics" },
   { label: "Resources", href: "/resources" },
   { label: "Quiz", href: "/biblequiz" },
-  { label: "Pricing", href: "/pricing" },
 ];
 
 const toolLinks = [
@@ -61,15 +60,8 @@ export default function Footer() {
 
               <div className="mt-5 flex flex-wrap gap-3">
                 <Link
-                  href="/pricing"
-                  className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-gradient-to-r from-purple-600 to-orange-500 px-4 py-2 text-sm font-semibold text-white transition hover:opacity-95"
-                >
-                  Go Premium
-                </Link>
-
-                <Link
                   href="/biblequiz"
-                  className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+                  className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-gradient-to-r from-purple-600 to-orange-500 px-4 py-2 text-sm font-semibold text-white transition hover:opacity-95"
                 >
                   Take the Quiz
                 </Link>

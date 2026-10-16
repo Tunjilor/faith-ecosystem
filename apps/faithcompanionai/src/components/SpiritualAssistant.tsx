@@ -77,16 +77,6 @@ export default function SpiritualAssistant() {
     el.scrollTop = el.scrollHeight;
   }, [open, msgs]);
 
-  // Index of the assistant reply that follows the 3rd user message — where we inject the nudge
-  const nudgeAfterIndex = useMemo(() => {
-    let userCount = 0;
-    for (let i = 0; i < msgs.length; i++) {
-      if (msgs[i].role === "user") userCount++;
-      if (userCount === 3 && msgs[i].role === "assistant") return i;
-    }
-    return -1;
-  }, [msgs]);
-
   const transcript = useMemo(() => {
     return msgs
       .map((m) => {
@@ -121,7 +111,7 @@ export default function SpiritualAssistant() {
       const replyContent = res.ok && data?.reply
         ? data.reply
         : data?.error === "LIMIT_REACHED" || res.status === 429
-        ? "You've reached your daily limit. Upgrade to Premium for unlimited conversations."
+        ? "You've reached your daily limit. Please try again tomorrow."
         : data?.error || "Something went wrong. Please try again.";
 
       setMsgs((prev) => [
@@ -273,14 +263,6 @@ export default function SpiritualAssistant() {
                 >
                   {m.content}
                 </div>
-                {idx === nudgeAfterIndex && (
-                  <div className="rounded-xl border border-orange-500/20 bg-orange-900/10 px-3 py-2.5 text-xs text-white/65 leading-relaxed">
-                    Want deeper, longer conversations?{" "}
-                    <Link href="/pricing" className="font-semibold text-orange-400 hover:text-orange-300">
-                      Unlock Your Faith Journey
-                    </Link>{" "}for extended guidance.
-                  </div>
-                )}
               </React.Fragment>
             ))}
             {thinking && (
@@ -288,17 +270,6 @@ export default function SpiritualAssistant() {
                 Thinking...
               </div>
             )}
-          </div>
-
-          {/* Premium soft hint */}
-          <div className="mx-4 mb-1 mt-1 rounded-xl border border-purple-500/20 bg-purple-900/20 px-3 py-2 text-center">
-            <p className="text-xs text-white/50">
-              Want deeper, longer guidance?{" "}
-              <span className="text-white/60">Premium unlocks more room to reflect.</span>{" "}
-              <Link href="/pricing" className="font-semibold text-orange-400 hover:text-orange-300">
-                Unlock Your Faith Journey
-              </Link>
-            </p>
           </div>
 
           {/* Input */}

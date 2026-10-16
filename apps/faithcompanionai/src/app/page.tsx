@@ -170,7 +170,7 @@ const faqItems = [
   },
   {
     q: "Can I use it for free?",
-    a: "Yes. Free users can explore the tools with limits. Premium unlocks unlimited usage and saved faith journal access.",
+    a: "Yes. Every tool is free to use, and a free account lets you save your journey in a personal faith journal.",
   },
   {
     q: "What should I start with first?",
@@ -398,21 +398,21 @@ export default function HomePage() {
         </div>
 
         <div className="rounded-[28px] p-8" style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)' }}>
-          <div className="text-sm font-semibold text-orange-300">Premium</div>
+          <div className="text-sm font-semibold text-orange-300">Faith Journal</div>
           <h2 className="mt-3 text-2xl font-bold text-white md:text-3xl">
             Keep your journey in one place
           </h2>
           <p className="mt-4 text-sm leading-7 text-white/70 md:text-base">
-            Premium is for people who want more than occasional inspiration. It unlocks unlimited use and lets you
-            save meaningful verses, prayers, and devotionals in your personal faith journal.
+            For people who want more than occasional inspiration. Save meaningful verses, prayers, and
+            devotionals in your personal faith journal and revisit them any time.
           </p>
 
           <div className="mt-6">
             <Link
-              href="/pricing"
+              href="/dashboard"
               className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:opacity-90"
             >
-              View Pricing
+              Open Your Journal
             </Link>
           </div>
         </div>

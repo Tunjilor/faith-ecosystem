@@ -13,7 +13,9 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   "/Search": "/tools/bible-search",
   "/bible-quiz": "/biblequiz",
   "/sign-in": "/login",
-  "/premium": "/pricing",
+  // Premium/pricing pages were removed; send old links and bookmarks home.
+  "/premium": "/",
+  "/pricing": "/",
 };
 function hasLocalePrefix(pathname: string) {
   return LOCALES.some((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`));

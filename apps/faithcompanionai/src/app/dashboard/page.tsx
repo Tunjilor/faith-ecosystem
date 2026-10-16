@@ -4,21 +4,15 @@ import { useUser } from "@/context/UserContext";
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import UpgradeCTA from "@/components/UpgradeCTA";
 
 // â”€â”€ Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 type MeResponse = {
   signedIn?: boolean;
   authed?: boolean;
-  isPremium?: boolean;
-  premium?: boolean;
-  premiumUntil?: string | null;
   email?: string | null;
   userId?: string | null;
   actorKey?: string | null;
-  customerId?: string | null;
-  subscriptionId?: string | null;
   referralCount?: number;
   guest?: {
     id?: string;
@@ -50,20 +44,7 @@ type EmailPrefs = {
   emailTimezone: string;
 };
 
-const HOUR_OPTIONS = Array.from({ length: 18 }, (_, i) => {
-  const h = i + 5;
-  const label = h < 12 ? h + ':00 AM' : h === 12 ? '12:00 PM' : (h - 12) + ':00 PM';
-  return { value: String(h).padStart(2, '0') + ':00', label };
-});
-
 // â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-
-function isPremiumActive(me: MeResponse | null) {
-  const premiumFlag = !!(me?.isPremium ?? me?.premium);
-  if (!premiumFlag) return false;
-  if (!me?.premiumUntil) return true;
-  return new Date(me.premiumUntil).getTime() > Date.now();
-}
 
 function formatDate(input: string) {
   return new Date(input).toLocaleDateString(undefined, {
@@ -356,10 +337,6 @@ export default function DashboardPage() {
     setEmailPrefsDraft(d => d ? { ...d, emailOptIn: on } : d);
   }
 
-  function handleEmailPrefsField(field: keyof EmailPrefs, value: string | boolean) {
-    setEmailPrefsDraft(d => d ? { ...d, [field]: value } : d);
-  }
-
   function handlePrayerAnswered(id: string, answeredAt: string, answerNote: string | null) {
     setSavedItems((prev) =>
       prev.map((item) =>
@@ -371,7 +348,6 @@ export default function DashboardPage() {
   }
 
   const signedIn = !!(me?.signedIn ?? me?.authed);
-  const premiumActive = isPremiumActive(me);
 
   const counts = useMemo(() => ({
     total: savedItems.length,
@@ -418,9 +394,7 @@ export default function DashboardPage() {
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-white/70 md:text-base">
               {signedIn
-                ? premiumActive
-                  ? "Your premium faith journal is active. Revisit what matters, stay consistent, and keep growing."
-                  : "You're signed in. Upgrade to Premium to save your journey, unlock unlimited use, and build your personal faith journal."
+                ? "Your faith journal is ready. Revisit what matters, stay consistent, and keep growing."
                 : "Sign in to save your spiritual journey, revisit meaningful verses, and build your personal faith journal."}
             </p>
             {signedIn && me?.email && (
@@ -458,9 +432,9 @@ export default function DashboardPage() {
       {/* â”€â”€ Stats grid â”€â”€ */}
       <section className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <div className="rounded-[24px] border border-white/10 bg-white/5 p-5">
-          <div className="text-sm text-white/60">Plan</div>
+          <div className="text-sm text-white/60">Account</div>
           <div className="mt-2 text-2xl font-bold text-white">
-            {premiumActive ? "Premium" : signedIn ? "Free Account" : "Guest"}
+            {signedIn ? "Member" : "Guest"}
           </div>
         </div>
 
@@ -482,7 +456,7 @@ export default function DashboardPage() {
 
       {/* â”€â”€ Daily Streak â”€â”€ */}
       <section className="mt-8">
-        {!signedIn ? null : premiumActive ? (
+        {signedIn && (
           <div className="rounded-[24px] border border-orange-500/25 bg-gradient-to-r from-orange-500/10 to-amber-500/10 p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center gap-4">
@@ -529,56 +503,16 @@ export default function DashboardPage() {
               </div>
             </div>
           </div>
-        ) : (
-          <div className="rounded-[24px] border border-white/10 bg-white/5 p-6">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">🔥</span>
-              <div>
-                <div className="font-semibold text-white">Daily streak tracker</div>
-                <div className="mt-0.5 text-sm text-white/60">
-                  Track your consecutive days of faith practice and build lasting consistency.
-                </div>
-              </div>
-              <Link href="/pricing" className="ml-auto shrink-0 rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-4 py-2 text-xs font-bold text-white hover:opacity-95">
-                🔖 Premium
-              </Link>
-            </div>
-          </div>
         )}
       </section>
 
-      {/* â”€â”€ Billing + Support â”€â”€ */}
+      {/* â”€â”€ Support â”€â”€ */}
       {signedIn && (
-        <section className="mt-8 grid gap-5 lg:grid-cols-2">
-          <div className="rounded-[24px] border border-white/10 bg-white/5 p-6">
-            <h2 className="text-xl font-bold text-white">Billing & plan</h2>
-            <div className="mt-4 space-y-3 text-sm text-white/75">
-              <p><span className="font-semibold text-white">Current plan:</span> {premiumActive ? "Premium" : "Free"}</p>
-              {premiumActive && me?.premiumUntil && (
-                <p><span className="font-semibold text-white">Premium until:</span> {formatDate(me.premiumUntil)}</p>
-              )}
-              {me?.customerId && (
-                <p><span className="font-semibold text-white">Customer record:</span> Connected</p>
-              )}
-              {me?.subscriptionId && (
-                <p><span className="font-semibold text-white">Subscription:</span> Active record found</p>
-              )}
-            </div>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Link href="/pricing" className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90">
-                {premiumActive ? "View plan options" : "Upgrade to Premium"}
-              </Link>
-              <a href="mailto:support@faithcompanionai.com?subject=Billing%20Help%20-%20Faith%20Companion%20AI"
-                className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10">
-                Billing support
-              </a>
-            </div>
-          </div>
-
+        <section className="mt-8">
           <div className="rounded-[24px] border border-white/10 bg-white/5 p-6">
             <h2 className="text-xl font-bold text-white">Support</h2>
             <div className="mt-4 space-y-3 text-sm text-white/75">
-              <p>Need help with your account, access, saved content, or billing?</p>
+              <p>Need help with your account, access, or saved content?</p>
               <p>The fastest path is to email support with the email tied to your account.</p>
             </div>
             <div className="mt-5 flex flex-wrap gap-3">
@@ -593,20 +527,20 @@ export default function DashboardPage() {
         </section>
       )}
 
-      {/* â”€â”€ Upgrade prompts â”€â”€ */}
       {!signedIn && (
-        <section className="mt-8">
-          <UpgradeCTA variant="dashboard" title="Create a free account to keep your journey"
-            description="Sign in to save meaningful verses later, then upgrade when you're ready for unlimited guidance and your full faith journal."
-            primaryHref="/login" primaryLabel="Sign in" secondaryHref="/pricing" secondaryLabel="See Premium" showFeatures={false} />
-        </section>
-      )}
-
-      {signedIn && !premiumActive && (
-        <section className="mt-8">
-          <UpgradeCTA variant="dashboard" title="Unlock your full faith journal"
-            description="Premium removes interruptions, unlocks unlimited use, streak tracking, and your complete prayer journal in one place."
-            primaryHref="/pricing" primaryLabel="Upgrade to Premium" secondaryHref="/tools/verse" secondaryLabel="Keep Exploring" showFeatures />
+        <section className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-5">
+          <div className="text-base font-bold text-white">Create a free account to keep your journey</div>
+          <p className="mt-2 text-sm leading-6 text-white/75">
+            Sign in to save meaningful verses, track your streak, and build your personal prayer journal.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link
+              href="/login"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-black px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+            >
+              Sign in
+            </Link>
+          </div>
         </section>
       )}
 
@@ -651,7 +585,7 @@ export default function DashboardPage() {
             <div>
               <h2 className="text-xl font-bold text-white">Daily Email Devotionals</h2>
               <p className="mt-1 text-sm text-white/60">
-                Receive a verse, devotional, or prayer straight to your inbox each morning.
+                Receive a verse, devotional, or prayer straight to your inbox each day.
               </p>
             </div>
             <button
@@ -674,33 +608,9 @@ export default function DashboardPage() {
           </div>
 
           {emailPrefsDraft.emailOptIn && (
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              <div>
-                <label className="block text-xs font-semibold text-white/60">Delivery time</label>
-                <select
-                  value={emailPrefsDraft.emailTime}
-                  onChange={(e) => handleEmailPrefsField("emailTime", e.target.value)}
-                  className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-3 py-2 text-sm text-white outline-none"
-                >
-                  {HOUR_OPTIONS.map((o) => (
-                    <option key={o.value} value={o.value}>{o.label}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-white/60">Timezone</label>
-                <input
-                  type="text"
-                  value={emailPrefsDraft.emailTimezone}
-                  onChange={(e) => handleEmailPrefsField("emailTimezone", e.target.value)}
-                  placeholder="e.g. America/New_York"
-                  className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-3 py-2 text-sm text-white outline-none"
-                />
-                <p className="mt-1 text-xs text-white/35">
-                  Auto-detected. Use IANA format (e.g. Europe/London).
-                </p>
-              </div>
-            </div>
+            <p className="mt-5 text-xs text-white/50">
+              Emails are sent once a day at 9:00 AM UTC.
+            </p>
           )}
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -734,13 +644,13 @@ export default function DashboardPage() {
           <div>
             <h2 className="text-2xl font-bold text-white">My Prayer Journal</h2>
             <p className="mt-1 text-sm text-white/60">
-              {premiumActive && prayers.length > 0
+              {prayers.length > 0
                 ? `${prayers.length} prayer${prayers.length !== 1 ? "s" : ""} saved — ${answeredCount} answered`
                 : "Save prayers from the Prayer tool to build your journal."}
             </p>
           </div>
 
-          {premiumActive && prayers.length > 0 && (
+          {prayers.length > 0 && (
             <div className="flex gap-2">
               {(["all", "unanswered", "answered"] as const).map((f) => (
                 <button key={f} type="button" onClick={() => setJournalFilter(f)}
@@ -759,23 +669,6 @@ export default function DashboardPage() {
         {!signedIn ? (
           <div className="rounded-[24px] border border-dashed border-white/10 bg-black/10 p-6 text-sm text-white/60">
             Sign in to start building your prayer journal.
-          </div>
-        ) : !premiumActive ? (
-          <div className="rounded-[24px] border border-white/10 bg-white/5 p-6">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-              <div className="text-3xl">🙏</div>
-              <div className="flex-1">
-                <div className="font-semibold text-white">Prayer Journal is a Premium feature</div>
-                <p className="mt-2 text-sm leading-6 text-white/65">
-                  Save prayers from the Prayer tool, track which ones have been answered, and add notes
-                  about how God responded. Your whole prayer history in one place.
-                </p>
-                <Link href="/pricing"
-                  className="mt-4 inline-flex min-h-[44px] items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-5 py-2 text-sm font-semibold text-white hover:opacity-95">
-                  Upgrade to Premium
-                </Link>
-              </div>
-            </div>
           </div>
         ) : prayers.length === 0 ? (
           <div className="rounded-[24px] border border-dashed border-white/10 bg-black/10 p-6 text-sm text-white/60">
@@ -811,12 +704,6 @@ export default function DashboardPage() {
               className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/15">
               Generate More
             </Link>
-            {!premiumActive && (
-              <Link href="/pricing"
-                className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90">
-                Upgrade
-              </Link>
-            )}
           </div>
         </div>
 

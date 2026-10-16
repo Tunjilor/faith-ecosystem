@@ -3,15 +3,13 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { db } from "@/lib/db";
 import { readSessionToken, sessionCookieName } from "@/lib/session";
-import { ensureGuestCookie, guestTrialStatus } from "@/lib/guest";
+import { ensureGuestCookie } from "@/lib/guest";
 import { generateQuizQuestions, supportsGeneration } from "@/lib/quiz-generate";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const QUESTIONS_PER_QUIZ = 10;
-const FREE_DAYS_TRIAL = 3;
-const FREE_TOTAL_QUESTIONS = 30;
 
 type SessionPayload = { uid: string; exp: number };
 type CategoryId =
@@ -38,29 +36,9 @@ const CATEGORY_LABELS: Record<CategoryId, string> = {
   "new-year": "New Year & New Beginnings",
 };
 
-const PREMIUM_CATEGORIES = new Set<CategoryId>(["ai", "theology", "history"]);
-
-// Seasonal categories are FREE FOREVER and UNLIMITED. They bypass every free-tier gate
-// (per-day cap, 3-day/30-question trial, no-repeat seen tracking) and never count toward
-// — nor are blocked by — the general-pool limits. Keyed off this flag set, not scattered
-// slug checks. General/AI categories are unaffected.
-const FREE_FOREVER_CATEGORIES = new Set<CategoryId>(["christmas", "thanksgiving", "new-year"]);
-
-function getUtcDayRange(d = new Date()) {
-  const start = new Date(
-    Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 0, 0, 0)
-  );
-  const end = new Date(
-    Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1, 0, 0, 0)
-  );
-  return { start, end };
-}
-
-function utcDayKey(d: Date) {
-  return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}-${String(
-    d.getUTCDate()
-  ).padStart(2, "0")}`;
-}
+// Seasonal categories skip no-repeat seen tracking and always draw from the full pool.
+// Keyed off this flag set, not scattered slug checks.
+const SEASONAL_CATEGORIES = new Set<CategoryId>(["christmas", "thanksgiving", "new-year"]);
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -109,7 +87,7 @@ function shuffle<T>(items: T[]) {
   return arr;
 }
 
-async function getActorAndPremium() {
+async function getActor() {
   const secret = process.env.SESSION_SECRET;
   if (!secret) {
     return { ok: false as const, error: "missing_secret" as const };
@@ -128,70 +106,23 @@ async function getActorAndPremium() {
     );
 
     if (user) {
-      const now = Date.now();
-      const isPremium =
-        Boolean(user.isPremium) &&
-        (!user.premiumUntil || user.premiumUntil.getTime() > now);
-
       return {
         ok: true as const,
         actorKey: `user:${user.id}`,
         userId: user.id,
         email: user.email,
-        isPremium,
-        isGuest: false,
-        trial: null,
       };
     }
   }
 
   const guest = ensureGuestCookie(cookieStore as any, secret);
-  const trial = guestTrialStatus(guest, FREE_DAYS_TRIAL);
 
   return {
     ok: true as const,
     actorKey: `guest:${guest.id}`,
     userId: null as string | null,
     email: null as string | null,
-    isPremium: false,
-    isGuest: true,
-    trial,
   };
-}
-
-function normalizeChoice(value: string | null | undefined): Choice | null {
-  if (value === "A" || value === "B" || value === "C" || value === "D") {
-    return value;
-  }
-  return null;
-}
-
-function toClientQuestions(
-  linked: Array<{
-    question: {
-      id: string;
-      prompt: string;
-      category: string;
-      optionA: string;
-      optionB: string;
-      optionC: string;
-      optionD: string;
-    };
-    chosen: string | null;
-  }>
-) {
-  return linked.map((row) => ({
-    id: row.question.id,
-    category: row.question.category,
-    prompt: row.question.prompt,
-    choices: {
-      A: row.question.optionA,
-      B: row.question.optionB,
-      C: row.question.optionC,
-      D: row.question.optionD,
-    },
-    chosen: normalizeChoice(row.chosen),
-  }));
 }
 
 export async function POST(req: Request) {
@@ -224,9 +155,9 @@ export async function POST(req: Request) {
 
     // Narrowed to CategoryId after the set check above
     const category = rawCategory as CategoryId;
-    const isFreeForever = FREE_FOREVER_CATEGORIES.has(category);
+    const isSeasonal = SEASONAL_CATEGORIES.has(category);
 
-    const ident = await getActorAndPremium();
+    const ident = await getActor();
     if (!ident.ok) {
       return NextResponse.json(
         { ok: false, error: ident.error },
@@ -234,132 +165,9 @@ export async function POST(req: Request) {
       );
     }
 
-    if (PREMIUM_CATEGORIES.has(category) && !ident.isPremium) {
-      return NextResponse.json(
-        {
-          ok: false,
-          error: "premium_required",
-          message: "That category is available on Premium.",
-          upgradePrompt: true,
-        },
-        { status: 403 }
-      );
-    }
-
-    const { start, end } = getUtcDayRange();
-
-    const allAttempts = await withDbRetry(() =>
-      db.quizAttempt.findMany({
-        where: {
-          actorKey: ident.actorKey,
-        },
-        select: {
-          id: true,
-          category: true,
-          createdAt: true,
-          timed: true,
-        },
-        orderBy: { createdAt: "desc" },
-      })
-    );
-
-    // Free-forever (seasonal) attempts are invisible to the limit math: they neither
-    // count toward the cap nor block other categories. Only "limited" attempts gate.
-    const limitedAttempts = allAttempts.filter(
-      (a) => !FREE_FOREVER_CATEGORIES.has(a.category as CategoryId)
-    );
-
-    const todayAttempts = limitedAttempts.filter(
-      (a) => a.createdAt >= start && a.createdAt < end
-    );
-
-    const distinctDaysUsed = new Set(
-      limitedAttempts.map((a) => utcDayKey(a.createdAt))
-    ).size;
-
-    const totalQuestionsUsed = limitedAttempts.length * QUESTIONS_PER_QUIZ;
-    const todayQuestionsUsed = todayAttempts.length * QUESTIONS_PER_QUIZ;
-
-    const usage = {
-      todayUsedQuestions: todayQuestionsUsed,
-      todayLimitQuestions: QUESTIONS_PER_QUIZ,
-      totalUsedQuestions: totalQuestionsUsed,
-      totalLimitQuestions: FREE_TOTAL_QUESTIONS,
-      daysUsed: distinctDaysUsed,
-      daysLimit: FREE_DAYS_TRIAL,
-    };
-
-    let softLimit = false;
-
-    // Seasonal categories skip the entire free-tier gate (no daily cap, no trial cap).
-    if (!ident.isPremium && !isFreeForever) {
-      const todayAttempt = todayAttempts[0] ?? null;
-
-      if (todayAttempt) {
-        if (todayAttempt.category === category) {
-          const existingAttempt = await withDbRetry(() =>
-            db.quizAttempt.findUnique({
-              where: { id: todayAttempt.id },
-              include: {
-                questions: {
-                  include: { question: true },
-                  orderBy: { id: "asc" },
-                },
-              },
-            })
-          );
-
-          if (existingAttempt) {
-            // Write seen records idempotently: guards against the case where the original
-            // quizSeenQuestion.createMany failed (Neon cold-start 503) and the user is
-            // returning to the same-day attempt. Without this, next-day sessions start
-            // with an empty seen set and repeat today's questions.
-            await withDbRetry(() =>
-              db.quizSeenQuestion.createMany({
-                data: existingAttempt.questions.map((row) => ({
-                  actorKey: ident.actorKey,
-                  category: existingAttempt.category,
-                  questionId: row.question.id,
-                })),
-                skipDuplicates: true,
-              })
-            );
-
-            return NextResponse.json({
-              ok: true,
-              attemptId: existingAttempt.id,
-              category: existingAttempt.category,
-              timed: existingAttempt.timed,
-              questions: toClientQuestions(existingAttempt.questions),
-              isPremium: ident.isPremium,
-              usage,
-            });
-          }
-        }
-
-        return NextResponse.json(
-          {
-            ok: false,
-            error: "daily_limit_reached",
-            message:
-              "Free users can answer 10 questions per day total. Come back tomorrow or upgrade to Premium.",
-            upgradePrompt: true,
-            usage,
-            existingCategory: todayAttempt.category,
-          },
-          { status: 403 }
-        );
-      }
-
-      // All free users (guests and registered): soft limit after trial threshold
-      if (totalQuestionsUsed >= FREE_TOTAL_QUESTIONS || (ident.isGuest && distinctDaysUsed >= FREE_DAYS_TRIAL)) {
-        softLimit = true;
-      }
-    }
-
-    // Seasonal (free-forever) categories have no no-repeat tracking: skip the seen read
+    // Seasonal categories have no no-repeat tracking: skip the seen read
     // entirely and allow repeats from the full pool.
-    const seenRows = isFreeForever
+    const seenRows = isSeasonal
       ? []
       : await withDbRetry(() =>
           db.quizSeenQuestion.findMany({
@@ -376,7 +184,7 @@ export async function POST(req: Request) {
     // Merge server-tracked seen IDs with any client-side localStorage IDs (guests).
     // Skipped for seasonal categories so they never de-duplicate.
     const clientSeenIds =
-      !isFreeForever && Array.isArray(body.clientSeenIds)
+      !isSeasonal && Array.isArray(body.clientSeenIds)
         ? (body.clientSeenIds as unknown[]).filter((s): s is string => typeof s === "string").slice(0, 500)
         : [];
     const seenIds = [...new Set([...seenRows.map((row) => row.questionId), ...clientSeenIds])];
@@ -391,8 +199,8 @@ export async function POST(req: Request) {
     );
 
     if (candidateRows.length < QUESTIONS_PER_QUIZ) {
-      if (ident.isPremium && supportsGeneration(category)) {
-        // Premium: generate fresh questions to fill the gap and save them to the bank.
+      if (supportsGeneration(category)) {
+        // Generate fresh questions to fill the gap and save them to the bank.
         const deficit = QUESTIONS_PER_QUIZ - candidateRows.length;
         try {
           // Fetch recent prompts so OpenAI avoids near-duplicates.
@@ -449,7 +257,7 @@ export async function POST(req: Request) {
             }
           }
         } catch (err) {
-          console.error("[quiz/start] premium question generation failed:", err);
+          console.error("[quiz/start] question generation failed:", err);
         }
 
         // If generation didn't fully cover the deficit (API failure, low yield, etc.),
@@ -460,8 +268,7 @@ export async function POST(req: Request) {
           );
         }
       } else {
-        // Free / guest: allow repeats from the full pool and surface the soft limit.
-        softLimit = true;
+        // No generator for this category: allow repeats from the full pool.
         candidateRows = await withDbRetry(() =>
           db.question.findMany({ where: { category } })
         );
@@ -513,7 +320,7 @@ export async function POST(req: Request) {
     );
 
     // Seasonal categories are not tracked for no-repeat, so don't record seen questions.
-    if (!isFreeForever) {
+    if (!isSeasonal) {
       await withDbRetry(() =>
         db.quizSeenQuestion.createMany({
           data: rows.map((q) => ({
@@ -539,26 +346,12 @@ export async function POST(req: Request) {
       chosen: null as Choice | null,
     }));
 
-    const nextUsage = ident.isPremium || isFreeForever
-      ? null
-      : {
-          todayUsedQuestions: todayQuestionsUsed + QUESTIONS_PER_QUIZ,
-          todayLimitQuestions: QUESTIONS_PER_QUIZ,
-          totalUsedQuestions: totalQuestionsUsed + QUESTIONS_PER_QUIZ,
-          totalLimitQuestions: FREE_TOTAL_QUESTIONS,
-          daysUsed: todayQuestionsUsed > 0 ? distinctDaysUsed : distinctDaysUsed + 1,
-          daysLimit: FREE_DAYS_TRIAL,
-        };
-
     return NextResponse.json({
       ok: true,
       attemptId: attempt.id,
       category,
       timed,
       questions,
-      isPremium: ident.isPremium,
-      usage: nextUsage,
-      ...(softLimit ? { softLimit: true } : {}),
     });
   } catch (err) {
     console.error("START QUIZ ERROR:", err);

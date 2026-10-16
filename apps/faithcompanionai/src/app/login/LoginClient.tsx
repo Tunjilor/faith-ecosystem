@@ -361,12 +361,6 @@ export default function LoginClient() {
                 Turn one-time encouragement into a more consistent spiritual rhythm.
               </p>
             </div>
-            <div className="rounded-[22px] border border-white/10 bg-black/15 p-5">
-              <div className="text-base font-semibold text-white">Upgrade whenever you are ready</div>
-              <p className="mt-2 text-sm leading-7 text-white/70">
-                Free users can explore first. Premium unlocks unlimited usage and saved journal power.
-              </p>
-            </div>
           </div>
           <div className="mt-8 rounded-[22px] border border-white/10 bg-white/5 p-5">
             <div className="text-sm font-semibold text-white/80">New here?</div>
@@ -377,10 +371,6 @@ export default function LoginClient() {
               <Link href="/tools/verse"
                 className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:opacity-90">
                 Try Verse
-              </Link>
-              <Link href="/pricing"
-                className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10">
-                View Premium
               </Link>
             </div>
           </div>

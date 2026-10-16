@@ -27,10 +27,7 @@ export async function GET(req: Request) {
   const user = await db.user.upsert({
     where: { email },
     update: {},
-    create: {
-      email,
-      isPremium: false,
-    },
+    create: { email },
   });
 
   const token = createSessionToken(

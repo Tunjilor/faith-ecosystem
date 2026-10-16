@@ -17,15 +17,7 @@ type SavedItem = {
 
 type MeResponse = {
   signedIn?: boolean;
-  isPremium?: boolean;
-  premiumUntil?: string | null;
 };
-
-function isPremiumActive(me: MeResponse | null) {
-  if (!me?.isPremium) return false;
-  if (!me?.premiumUntil) return false;
-  return new Date(me.premiumUntil).getTime() > Date.now();
-}
 
 export default function SavedPage() {
   const [items, setItems] = useState<SavedItem[]>([]);
@@ -77,8 +69,6 @@ export default function SavedPage() {
     };
   }, []);
 
-  const premiumActive = isPremiumActive(me);
-
   return (
     <main className="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-12">
       <header className="mb-8">
@@ -101,34 +91,11 @@ export default function SavedPage() {
             >
               Sign in
             </Link>
-            <Link
-              href="/pricing"
-              className="rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white"
-            >
-              See Premium
-            </Link>
           </div>
         </div>
       )}
 
-      {me?.signedIn && !premiumActive && (
-        <div className="rounded-3xl border border-amber-300/20 bg-amber-500/10 p-6 text-white">
-          <div className="text-lg font-semibold">Saved content is a Premium feature</div>
-          <p className="mt-2 text-sm text-white/80">
-            Upgrade to Premium to keep your favorite verses, prayers, and reflections in one place.
-          </p>
-          <div className="mt-4">
-            <Link
-              href="/pricing"
-              className="rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-5 py-3 text-sm font-semibold text-white"
-            >
-              Upgrade to Premium
-            </Link>
-          </div>
-        </div>
-      )}
-
-      {me?.signedIn && premiumActive && (
+      {me?.signedIn && (
         <div className="rounded-[28px] border border-white/10 bg-white p-6 shadow-2xl md:p-8">
           {loading ? (
             <div className="text-sm text-slate-600">Loading saved content...</div>

@@ -37,21 +37,11 @@ type ReviewItem = {
 };
 
 type MeResponse = {
-  premium?: boolean;
-  isPremium?: boolean;
   authed?: boolean;
   signedIn?: boolean;
   email?: string | null;
   guestName?: string | null;
   displayName?: string | null;
-  guest?: {
-    isWithinTrial?: boolean;
-    daysSinceFirstSeen?: number;
-    trial?: {
-      isWithinTrial?: boolean;
-      daysSinceFirstSeen?: number;
-    };
-  } | null;
 };
 
 type StartQuizResponse = {
@@ -60,19 +50,8 @@ type StartQuizResponse = {
   category?: CategoryId;
   timed?: boolean;
   questions?: QuizQuestion[];
-  isPremium?: boolean;
-  usage?: {
-    todayUsedQuestions: number;
-    todayLimitQuestions: number;
-    totalUsedQuestions: number;
-    totalLimitQuestions: number;
-    daysUsed: number;
-    daysLimit: number;
-  } | null;
   error?: string;
   message?: string;
-  upgradePrompt?: boolean;
-  existingCategory?: string;
 };
 
 type SubmitQuizResponse = {
@@ -81,7 +60,6 @@ type SubmitQuizResponse = {
   shareId?: string;
   score?: number;
   total?: number;
-  premiumExplanationsIncluded?: boolean;
   review?: ReviewItem[];
   share?: {
     shareText: string;
@@ -97,83 +75,54 @@ type SubmitQuizResponse = {
 const CATEGORIES: Array<{
   id: CategoryId;
   title: string;
-  premium: boolean;
   description: string;
 }> = [
   {
     id: "general",
     title: "General Bible Knowledge",
-    premium: false,
     description: "Core Scripture knowledge for all levels.",
   },
   {
     id: "women",
     title: "Women of the Bible",
-    premium: false,
     description: "Stories, lessons, and key figures.",
   },
   {
     id: "parables",
     title: "Jesus’ Parables",
-    premium: false,
     description: "Teachings and meaning behind the parables.",
   },
   {
     id: "christmas",
     title: "Christmas & the Nativity",
-    premium: false,
     description: "The Christmas story, from the angel’s announcement to the manger.",
   },
   {
     id: "thanksgiving",
     title: "Thanksgiving & Gratitude",
-    premium: false,
     description: "What Scripture says about thankfulness and giving thanks.",
   },
   {
     id: "new-year",
     title: "New Year & New Beginnings",
-    premium: false,
     description: "Fresh starts, new beginnings, and trusting God for the year ahead.",
   },
   {
     id: "ai",
     title: "AI Bible Questions",
-    premium: true,
-    description: "Premium AI-assisted category.",
+    description: "Fresh AI-generated questions.",
   },
   {
     id: "theology",
     title: "Theology",
-    premium: true,
     description: "Doctrine, meaning, and deeper understanding.",
   },
   {
     id: "history",
     title: "Church History",
-    premium: true,
     description: "Important moments across Christian history.",
   },
 ];
-
-function isPremiumActive(me: MeResponse | null) {
-  return !!(me?.premium ?? me?.isPremium);
-}
-
-function getTrialDaysSinceFirstSeen(me: MeResponse | null) {
-  const guest = me?.guest;
-  if (!guest) return null;
-
-  if (typeof guest.daysSinceFirstSeen === "number") {
-    return guest.daysSinceFirstSeen;
-  }
-
-  if (typeof guest.trial?.daysSinceFirstSeen === "number") {
-    return guest.trial.daysSinceFirstSeen;
-  }
-
-  return null;
-}
 
 export default function QuizPage() {
   const [loading, setLoading] = useState(false);
@@ -182,8 +131,6 @@ export default function QuizPage() {
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [answers, setAnswers] = useState<Record<string, Choice>>({});
   const [error, setError] = useState<string | null>(null);
-  const [upgradePrompt, setUpgradePrompt] = useState(false);
-  const [usage, setUsage] = useState<StartQuizResponse["usage"]>(null);
   const [result, setResult] = useState<{ score: number; total: number } | null>(null);
   const [review, setReview] = useState<ReviewItem[]>([]);
   const [share, setShare] = useState<SubmitQuizResponse["share"] | null>(null);
@@ -192,7 +139,6 @@ export default function QuizPage() {
   const [nameDraft, setNameDraft] = useState("");
   const [savingName, setSavingName] = useState(false);
 
-  const premiumActive = isPremiumActive(me);
   const displayName =
     me?.displayName || me?.guestName || me?.email?.split("@")[0] || "Faith Friend";
 
@@ -244,7 +190,6 @@ export default function QuizPage() {
   async function startQuiz(category: CategoryId) {
     setLoading(true);
     setError(null);
-    setUpgradePrompt(false);
     setResult(null);
     setReview([]);
     setShare(null);
@@ -261,26 +206,9 @@ export default function QuizPage() {
       });
 
       const data = (await res.json()) as StartQuizResponse;
-      setUsage(data.usage ?? null);
 
       if (!res.ok || !data.ok) {
-        setUpgradePrompt(!!data.upgradePrompt);
-
-        if (data.error === "daily_limit_reached") {
-          setError(
-            data.message ||
-              "You’ve already used your 10 free questions today. Upgrade to Premium or come back tomorrow."
-          );
-        } else if (data.error === "trial_limit_reached") {
-          setError(
-            data.message ||
-              "You’ve used all 30 free questions across 3 days. Upgrade to Premium to continue."
-          );
-        } else if (data.error === "premium_required") {
-          setError(data.message || "That category is available on Premium.");
-        } else if (data.error === "signin_required") {
-          setError(data.message || "Please sign in to continue.");
-        } else if (data.error === "no_more_free_questions") {
+        if (data.error === "no_more_free_questions") {
           setError(
             data.message ||
               "No more new questions are available in this category without repeats."
@@ -350,12 +278,6 @@ export default function QuizPage() {
     loadMe();
   }, []);
 
-  const trialDaysSinceFirstSeen = getTrialDaysSinceFirstSeen(me);
-  const trialNote =
-    !me?.authed && !me?.signedIn && typeof trialDaysSinceFirstSeen === "number"
-      ? `Guest mode • Day ${Math.min(Math.floor(trialDaysSinceFirstSeen) + 1, 3)} of 3`
-      : null;
-
   const scoreTone = useMemo(() => {
     if (!result) return "neutral";
     const pct = result.total > 0 ? result.score / result.total : 0;
@@ -371,13 +293,12 @@ export default function QuizPage() {
           <div className="min-w-0">
             <h1 className="text-3xl font-bold text-white md:text-4xl">Bible Quiz</h1>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-white/70 md:text-base">
-              Test your Bible knowledge, challenge your friends, and unlock deeper explanations with Premium.
+              Test your Bible knowledge, challenge your friends, and learn from explanations on every answer.
             </p>
 
             <div className="mt-3 text-sm text-white/75">
               Playing as{" "}
               <span className="font-semibold text-white">{displayName}</span>
-              {trialNote ? <span className="ml-2 text-white/50">({trialNote})</span> : null}
             </div>
 
             <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
@@ -407,10 +328,6 @@ export default function QuizPage() {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <div className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-200">
-              {premiumActive ? "Premium active ✅" : "Free plan"}
-            </div>
-
             <button
               onClick={() => {
                 setAttemptId(null);
@@ -420,7 +337,6 @@ export default function QuizPage() {
                 setReview([]);
                 setShare(null);
                 setError(null);
-                setUpgradePrompt(false);
               }}
               className="rounded-full bg-white/10 px-4 py-2 text-sm text-white hover:bg-white/15"
             >
@@ -430,37 +346,9 @@ export default function QuizPage() {
         </div>
       </section>
 
-      {usage && !premiumActive && (
-        <section className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/80">
-          <div className="font-semibold text-white">Free quiz usage</div>
-          <div className="mt-2">Today: {usage.todayUsedQuestions} / {usage.todayLimitQuestions} questions</div>
-          <div className="mt-1">Total: {usage.totalUsedQuestions} / {usage.totalLimitQuestions} questions</div>
-          <div className="mt-1">Days used: {usage.daysUsed} / {usage.daysLimit}</div>
-        </section>
-      )}
-
       {error && (
         <section className="mt-6 rounded-2xl border border-red-300/20 bg-red-500/10 p-4 text-sm text-red-100">
           {error}
-        </section>
-      )}
-
-      {upgradePrompt && !premiumActive && (
-        <section className="mt-6 rounded-2xl border border-amber-400/30 bg-amber-500/10 p-5">
-          <h2 className="text-lg font-semibold text-white">
-            Upgrade to continue your quiz journey
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-white/80">
-            Free users get 10 questions per day total, 30 questions total across 3 non-consecutive days, with no repeated free questions.
-          </p>
-          <div className="mt-4">
-            <Link
-              href="/pricing"
-              className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-5 py-3 text-sm font-semibold text-white"
-            >
-              Upgrade to Monthly
-            </Link>
-          </div>
         </section>
       )}
 
@@ -469,7 +357,6 @@ export default function QuizPage() {
           <h2 className="text-xl font-semibold text-white">Choose a category</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {CATEGORIES.map((cat) => {
-              const locked = cat.premium && !premiumActive;
               const active = selectedCategory === cat.id;
 
               return (
@@ -484,17 +371,8 @@ export default function QuizPage() {
                       : "border-white/10 bg-white/5 hover:bg-white/10"
                   } ${loading ? "opacity-70" : ""}`}
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <div className="text-base font-semibold text-white">{cat.title}</div>
-                      <div className="mt-2 text-sm leading-6 text-white/70">{cat.description}</div>
-                    </div>
-                    {locked ? (
-                      <span className="rounded-full bg-amber-400/15 px-2 py-1 text-xs font-semibold text-amber-200">
-                        Premium
-                      </span>
-                    ) : null}
-                  </div>
+                  <div className="text-base font-semibold text-white">{cat.title}</div>
+                  <div className="mt-2 text-sm leading-6 text-white/70">{cat.description}</div>
                   <div className="mt-4 text-sm font-medium text-white/80">
                     {loading && active ? "Loading..." : "Start 10-question quiz"}
                   </div>
@@ -642,7 +520,7 @@ export default function QuizPage() {
           <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
             <h2 className="text-lg font-semibold text-white">Answer Review</h2>
             <p className="mt-2 text-sm leading-6 text-white/70">
-              Review each answer to learn and keep growing. Premium members get enhanced explanations.
+              Review each answer to learn and keep growing.
             </p>
 
             <div className="mt-5 space-y-4">
@@ -703,10 +581,6 @@ export default function QuizPage() {
                       <span className="font-semibold text-white">Explanation:</span>{" "}
                       {item.explanation}
                     </div>
-                  ) : !premiumActive ? (
-                    <div className="mt-3 rounded-xl border border-amber-400/20 bg-amber-500/10 p-3 text-sm leading-6 text-white/80">
-                      Upgrade to Premium for answer explanations and deeper learning.
-                    </div>
                   ) : null}
                 </article>
               ))}
@@ -724,21 +598,11 @@ export default function QuizPage() {
                 setReview([]);
                 setShare(null);
                 setError(null);
-                setUpgradePrompt(false);
               }}
               className="min-h-[44px] rounded-full bg-white px-4 py-2 text-sm font-semibold text-black"
             >
               Take Another Quiz
             </button>
-
-            {!premiumActive ? (
-              <Link
-                href="/pricing"
-                className="min-h-[44px] rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-4 py-2 text-sm font-semibold text-white"
-              >
-                Upgrade to Premium
-              </Link>
-            ) : null}
           </div>
         </section>
       )}

@@ -107,7 +107,7 @@ export async function GET(req: Request) {
     if (!user) {
       try {
         user = await withDbRetry(() =>
-          db.user.create({ data: { email, isPremium: false } })
+          db.user.create({ data: { email } })
         );
         console.log("[magic/verify] created new user", user.id);
       } catch (dbErr) {

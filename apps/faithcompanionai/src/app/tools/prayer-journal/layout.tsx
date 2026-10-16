@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 const description =
-  "Write a personal prayer with the Prayer tool, and save the prayers that matter to you with Premium.";
+  "Write a personal prayer with the Prayer tool, and save the prayers that matter to you.";
 
 export const metadata: Metadata = {
   // Root layout applies the "%s | Faith Companion AI" title template — no brand here.

@@ -1,7 +1,7 @@
 // src/app/api/save/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { requirePremiumUserFromSession } from "@/lib/premium";
+import { requireUserFromSession } from "@/lib/access";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -12,7 +12,7 @@ const ALLOWED_TYPES: SaveType[] = ["answer", "prayer", "verse", "plan_note"];
 
 export async function POST(req: Request) {
   try {
-    const user = await requirePremiumUserFromSession();
+    const user = await requireUserFromSession();
     const body = await req.json();
 
     const type = String(body?.type || "") as SaveType;

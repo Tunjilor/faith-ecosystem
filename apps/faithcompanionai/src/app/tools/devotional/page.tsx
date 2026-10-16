@@ -4,12 +4,9 @@
 import { useUser } from "@/context/UserContext";
 
 import React from "react";
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import UpgradeCTA from "@/components/UpgradeCTA";
+import { useEffect, useState } from "react";
 import DenominationSelect, { getDenominationNote, readDenomination } from "@/components/DenominationSelect";
 import MobileInstallBanner from "@/components/MobileInstallBanner";
-import { FreeUpsellNudge } from "@/components/FreeUpsellNudge";
 
 function inlineBold(text: string): React.ReactNode {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
@@ -82,35 +79,13 @@ type Tone = "gentle" | "firm" | "short" | "detailed";
 
 type MeResponse = {
   signedIn?: boolean;
-  isPremium?: boolean;
-  premiumUntil?: string | null;
-};
-
-type QuotaInfo = {
-  kind?: "guest" | "free_user" | "premium_user";
-  softUpsell?: boolean;
-  quota?: {
-    todayUsed: number;
-    todayLimit: number;
-    totalUsed?: number;
-    totalLimit?: number;
-    daysUsed?: number;
-    daysLimit?: number;
-  };
 };
 
 type AskResponse = {
   answer?: string;
-  quota?: QuotaInfo;
   error?: string;
   code?: string | null;
 };
-
-function isPremiumActive(me: MeResponse | null) {
-  if (!me?.isPremium) return false;
-  if (!me?.premiumUntil) return true;
-  return new Date(me.premiumUntil).getTime() > Date.now();
-}
 
 export default function DevotionalPage() {
   const [topic, setTopic] = useState("");
@@ -124,12 +99,7 @@ export default function DevotionalPage() {
   const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [hardStopped, setHardStopped] = useState(false);
-  const [quota, setQuota] = useState<QuotaInfo | null>(null);
   const [me, setMe] = useState<MeResponse | null>(null);
-  const [responseCount, setResponseCount] = useState(0);
-  const [nudgeTrigger] = useState(() => Math.random() < 0.5 ? 3 : 4);
-  const [nudgeVisible, setNudgeVisible] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -161,7 +131,6 @@ export default function DevotionalPage() {
   async function handleGenerate() {
     setError("");
     setSuccess("");
-    setHardStopped(false);
 
     const denomNote = getDenominationNote(denomination);
     const prompt =
@@ -201,12 +170,7 @@ export default function DevotionalPage() {
 
       if (!res.ok) {
         if (res.status === 429) {
-          setHardStopped(true);
-          setQuota(data.quota ?? null);
-          setError(
-            data.error ||
-              "You’ve reached your free limit. Upgrade to Premium for unlimited devotionals, prayers, and verses."
-          );
+          setError(data.error || "Daily limit reached. Please try again tomorrow.");
           return;
         }
 
@@ -218,12 +182,6 @@ export default function DevotionalPage() {
       }
 
       setResult(data.answer);
-      setQuota(data.quota ?? null);
-      const newCount = responseCount + 1;
-      setResponseCount(newCount);
-      if (!isPremiumActive(me) && newCount % nudgeTrigger === 0) {
-        setNudgeVisible(true);
-      }
     } catch (err: any) {
       setError(err?.message || "Something went wrong.");
     } finally {
@@ -240,8 +198,8 @@ export default function DevotionalPage() {
       return;
     }
 
-    if (!isPremiumActive(me)) {
-      setError("Upgrade to Premium to save your devotionals and build your personal faith journal.");
+    if (!me?.signedIn) {
+      setError("Sign in to save your devotionals and build your personal faith journal.");
       return;
     }
 
@@ -290,35 +248,7 @@ export default function DevotionalPage() {
     setResult("");
     setError("");
     setSuccess("");
-    setHardStopped(false);
-    setQuota(null);
   }
-
-  const premiumActive = isPremiumActive(me);
-
-  const remainingToday =
-    typeof quota?.quota?.todayUsed === "number" && typeof quota?.quota?.todayLimit === "number"
-      ? quota.quota.todayLimit - quota.quota.todayUsed
-      : null;
-
-  const remainingTotal =
-    typeof quota?.quota?.totalUsed === "number" && typeof quota?.quota?.totalLimit === "number"
-      ? quota.quota.totalLimit - quota.quota.totalUsed
-      : null;
-
-  const remainingDays =
-    typeof quota?.quota?.daysUsed === "number" && typeof quota?.quota?.daysLimit === "number"
-      ? quota.quota.daysLimit - quota.quota.daysUsed
-      : null;
-
-  const showSoftUpsell = !!quota?.softUpsell && !hardStopped;
-
-  const usageTone = useMemo(() => {
-    if (remainingToday === null) return "neutral";
-    if (remainingToday <= 1) return "danger";
-    if (remainingToday <= 3) return "warn";
-    return "neutral";
-  }, [remainingToday]);
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-12">
@@ -400,32 +330,20 @@ export default function DevotionalPage() {
           <button
             type="button"
             onClick={handleGenerate}
-            disabled={isLoading || hardStopped}
+            disabled={isLoading}
             className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-black px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
           >
             {isLoading ? "Generating..." : "Generate devotional"}
           </button>
 
-          {premiumActive ? (
-            <button
-              type="button"
-              onClick={handleSave}
-              disabled={!result || isSaving}
-              className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 disabled:opacity-50"
-            >
-              {isSaving ? "Saving..." : "Save"}
-            </button>
-          ) : (
-            <div className="flex flex-col gap-1">
-              <Link
-                href="/pricing"
-                className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-50"
-              >
-                Unlock Your Faith Journey
-              </Link>
-              <p className="text-center text-xs text-slate-400">Save devotionals with Premium</p>
-            </div>
-          )}
+          <button
+            type="button"
+            onClick={handleSave}
+            disabled={!result || isSaving}
+            className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 disabled:opacity-50"
+          >
+            {isSaving ? "Saving..." : "Save"}
+          </button>
 
           <button
             type="button"
@@ -436,77 +354,7 @@ export default function DevotionalPage() {
           </button>
         </div>
 
-        {quota?.quota && !hardStopped && (
-          <div
-            className={`mt-5 rounded-2xl p-4 text-sm ${
-              usageTone === "danger"
-                ? "border border-red-200 bg-red-50 text-red-800"
-                : usageTone === "warn"
-                ? "border border-amber-200 bg-amber-50 text-amber-900"
-                : "border border-slate-200 bg-slate-50 text-slate-700"
-            }`}
-          >
-            <div className="mb-2 font-semibold">Your free usage</div>
-
-            <div>Used today: {quota.quota.todayUsed} / {quota.quota.todayLimit}</div>
-
-            {remainingToday !== null && (
-              <div className="mt-1 font-medium">
-                Remaining today: {remainingToday}
-              </div>
-            )}
-
-            {typeof quota.quota.totalUsed === "number" && typeof quota.quota.totalLimit === "number" && (
-              <div className="mt-2">
-                Total guest uses: {quota.quota.totalUsed} / {quota.quota.totalLimit}
-                {remainingTotal !== null && (
-                  <span className="ml-2 font-medium">({remainingTotal} left)</span>
-                )}
-              </div>
-            )}
-
-            {typeof quota.quota.daysUsed === "number" && typeof quota.quota.daysLimit === "number" && (
-              <div className="mt-1">
-                Trial days used: {quota.quota.daysUsed} / {quota.quota.daysLimit}
-                {remainingDays !== null && (
-                  <span className="ml-2 font-medium">({remainingDays} left)</span>
-                )}
-              </div>
-            )}
-          </div>
-        )}
-
-        {showSoftUpsell && (
-          <div className="mt-5">
-            <UpgradeCTA
-              variant="soft"
-              title="You’re on your last few free devotionals."
-              description="Upgrade now to keep going without interruptions and save your devotionals to your faith journal."
-              primaryHref="/pricing"
-              primaryLabel="Upgrade to Premium"
-              showFeatures={false}
-            />
-          </div>
-        )}
-
-        {hardStopped && (
-          <div className="mt-5">
-            <UpgradeCTA
-              variant="hard_stop"
-              title="Your free devotional limit has been reached"
-              description={
-                error ||
-                "You’ve reached your free limit. Upgrade now to continue instantly with unlimited devotionals, prayers, and verses."
-              }
-              primaryHref="/pricing"
-              primaryLabel="Upgrade Now"
-              secondaryHref="/tools/devotional"
-              secondaryLabel="Reset"
-            />
-          </div>
-        )}
-
-        {error && !hardStopped && (
+        {error && (
           <div className="mt-5 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
             {error}
           </div>
@@ -525,10 +373,6 @@ export default function DevotionalPage() {
             <div className="mt-3 space-y-1">
               {renderMarkdown(result)}
             </div>
-
-            {nudgeVisible && (
-              <FreeUpsellNudge onDismiss={() => setNudgeVisible(false)} />
-            )}
 
             <MobileInstallBanner />
           </div>

@@ -12,7 +12,7 @@
 //
 // Signed-in users already have an email on file and opt in from the dashboard
 // (User.emailOptIn), so they never see this.
-import { getUserFromSession } from "@/lib/premium";
+import { getUserFromSession } from "@/lib/access";
 import EmailCaptureBanner from "@/components/EmailCaptureBanner";
 
 type Props = {

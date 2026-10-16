@@ -3,10 +3,8 @@
 import { useUser } from "@/context/UserContext";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 
 const STORAGE_KEY = "fcai_scripture_memory_v1";
-const FREE_LIMIT = 3;
 
 type MemoryVerse = {
   id: string;
@@ -41,15 +39,8 @@ function scoreWords(target: string, attempt: string): WordResult[] {
   });
 }
 
-function isPremiumActive(me: { isPremium?: boolean; premiumUntil?: string | null } | null) {
-  if (!me?.isPremium) return false;
-  if (!me?.premiumUntil) return true;
-  return new Date(me.premiumUntil).getTime() > Date.now();
-}
-
 export default function ScriptureMemoryPage() {
   const [verses, setVerses] = useState<MemoryVerse[]>([]);
-  const [me, setMe] = useState<{ isPremium?: boolean; premiumUntil?: string | null } | null>(null);
 
   // Add form
   const [ref, setRef] = useState("");
@@ -68,11 +59,6 @@ export default function ScriptureMemoryPage() {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) setVerses(JSON.parse(raw) as MemoryVerse[]);
     } catch { /* ignore */ }
-
-    fetch("/api/me", { cache: "no-store" })
-      .then((r) => r.ok ? r.json() : null)
-      .then((d) => setMe(d))
-      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -81,17 +67,10 @@ export default function ScriptureMemoryPage() {
     } catch { /* ignore */ }
   }, [verses]);
 
-  const premium = isPremiumActive(me);
-  const atLimit = !premium && verses.length >= FREE_LIMIT;
-
   function addVerse() {
     setAddError("");
     if (!ref.trim() || !text.trim()) {
       setAddError("Both reference and verse text are required.");
-      return;
-    }
-    if (atLimit) {
-      setAddError(`Free accounts can save up to ${FREE_LIMIT} verses. Upgrade to Premium for unlimited.`);
       return;
     }
     const verse: MemoryVerse = {
@@ -302,18 +281,6 @@ export default function ScriptureMemoryPage() {
       <section className="rounded-[24px] border border-white/10 bg-white/5 p-6">
         <h2 className="text-lg font-bold text-white">Add a verse</h2>
 
-        {!premium && (
-          <div className="mt-2 text-xs text-white/50">
-            Free:{" "}
-            <span className={verses.length >= FREE_LIMIT ? "text-orange-400 font-semibold" : "text-white/50"}>
-              {verses.length}/{FREE_LIMIT} verses saved
-            </span>
-            {verses.length >= FREE_LIMIT && (
-              <> — <Link href="/pricing" className="text-orange-300 underline">Upgrade for unlimited</Link></>
-            )}
-          </div>
-        )}
-
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           <input
             value={ref}
@@ -339,7 +306,6 @@ export default function ScriptureMemoryPage() {
         <button
           type="button"
           onClick={addVerse}
-          disabled={atLimit}
           className="mt-3 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black hover:opacity-90 disabled:opacity-40"
         >
           Save verse
@@ -400,21 +366,6 @@ export default function ScriptureMemoryPage() {
           </div>
         )}
       </section>
-
-      {!premium && verses.length > 0 && (
-        <div className="mt-6 rounded-[22px] border border-white/10 bg-white/5 p-5">
-          <div className="text-sm font-semibold text-white">Unlimited verse cards with Premium</div>
-          <p className="mt-1 text-sm text-white/60">
-            Free accounts save up to 3 verses. Upgrade to add as many as you want.
-          </p>
-          <Link
-            href="/pricing"
-            className="mt-3 inline-flex rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-5 py-2.5 text-sm font-semibold text-white hover:opacity-95"
-          >
-            Upgrade to Premium
-          </Link>
-        </div>
-      )}
     </div>
   );
 }

@@ -3,19 +3,15 @@
 "use client";
 import { useUser } from "@/context/UserContext";
 
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import DenominationSelect, { getDenominationNote, readDenomination } from "@/components/DenominationSelect";
 import ShareCardModal from "@/components/ShareCardModal";
-import { FreeUpsellNudge } from "@/components/FreeUpsellNudge";
 import { ImageIcon } from "lucide-react";
 
 type Length = "short" | "medium" | "long";
 
 type MeResponse = {
   signedIn?: boolean;
-  isPremium?: boolean;
-  premiumUntil?: string | null;
 };
 
 type VerseResponse = {
@@ -30,12 +26,6 @@ type ResultData = {
   encouragement: string;
   nextStep: string;
 };
-
-function isPremiumActive(me: MeResponse | null) {
-  if (!me?.isPremium) return false;
-  if (!me?.premiumUntil) return true;
-  return new Date(me.premiumUntil).getTime() > Date.now();
-}
 
 function resultToText(data: ResultData): string {
   return [
@@ -59,9 +49,6 @@ export default function VersePage() {
   const [isSaving, setIsSaving] = useState(false);
   const [showShareCard, setShowShareCard] = useState(false);
   const [me, setMe] = useState<MeResponse | null>(null);
-  const [responseCount, setResponseCount] = useState(0);
-  const [nudgeTrigger] = useState(() => Math.random() < 0.5 ? 3 : 4);
-  const [nudgeVisible, setNudgeVisible] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -131,11 +118,6 @@ export default function VersePage() {
         nextStep: data.nextStep,
       };
       setResult(newResult);
-      const newCount = responseCount + 1;
-      setResponseCount(newCount);
-      if (!isPremiumActive(me) && newCount % nudgeTrigger === 0) {
-        setNudgeVisible(true);
-      }
     } catch (err: any) {
       setError(err?.message || "Something went wrong.");
       setResult(null);
@@ -153,8 +135,8 @@ export default function VersePage() {
       return;
     }
 
-    if (!isPremiumActive(me)) {
-      setError("Upgrade to Premium to save your verses and build your personal faith journal.");
+    if (!me?.signedIn) {
+      setError("Sign in to save your verses and build your personal faith journal.");
       return;
     }
 
@@ -206,8 +188,6 @@ export default function VersePage() {
     setError("");
     setSuccess("");
   }
-
-  const premiumActive = isPremiumActive(me);
 
   const lengthHelp = useMemo(() => {
     switch (length) {
@@ -287,24 +267,14 @@ export default function VersePage() {
             {isLoading ? "Generating..." : "Generate verse thought"}
           </button>
 
-          {premiumActive ? (
-            <button
-              type="button"
-              onClick={handleSave}
-              disabled={!result || isSaving}
-              className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 disabled:opacity-50"
-            >
-              {isSaving ? "Saving..." : "Save"}
-            </button>
-          ) : (
-            <Link
-              href="/pricing"
-              className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-500 transition hover:bg-slate-50"
-              title="Upgrade to Premium to save verses"
-            >
-              🔖 Save
-            </Link>
-          )}
+          <button
+            type="button"
+            onClick={handleSave}
+            disabled={!result || isSaving}
+            className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 disabled:opacity-50"
+          >
+            {isSaving ? "Saving..." : "Save"}
+          </button>
 
           <button
             type="button"
@@ -370,10 +340,6 @@ export default function VersePage() {
                 <p className="mt-1">{result.nextStep}</p>
               </div>
             </div>
-
-            {nudgeVisible && (
-              <FreeUpsellNudge onDismiss={() => setNudgeVisible(false)} />
-            )}
           </div>
         ) : (
           <div className="mt-8 rounded-2xl bg-slate-50 p-5">

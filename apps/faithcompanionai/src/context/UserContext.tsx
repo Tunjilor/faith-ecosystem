@@ -2,15 +2,10 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
 export interface UserData {
-  premium: boolean;
-  isPremium: boolean;
   authed: boolean;
   signedIn: boolean;
   userId: string | null;
   email: string | null;
-  premiumUntil: string | null;
-  customerId: string | null;
-  subscriptionId: string | null;
   actorKey: string | null;
   guestName: string | null;
   displayName: string | null;
@@ -22,9 +17,8 @@ export interface UserData {
 }
 
 const defaultUser: UserData = {
-  premium: false, isPremium: false, authed: false, signedIn: false,
-  userId: null, email: null, premiumUntil: null, customerId: null,
-  subscriptionId: null, actorKey: null, guestName: null, displayName: null,
+  authed: false, signedIn: false, userId: null, email: null,
+  actorKey: null, guestName: null, displayName: null,
   referralCount: 0, guest: null, loaded: false,
 };
 

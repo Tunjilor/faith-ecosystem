@@ -1,14 +1,14 @@
 // src/app/api/saved/route.ts
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { requirePremiumUserFromSession } from "@/lib/premium";
+import { requireUserFromSession } from "@/lib/access";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const user = await requirePremiumUserFromSession();
+    const user = await requireUserFromSession();
 
     const items = await db.savedItem.findMany({
       where: {

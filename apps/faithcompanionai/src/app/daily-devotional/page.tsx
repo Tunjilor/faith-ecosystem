@@ -115,9 +115,8 @@ export default function DailyDevotionalPage() {
         <h2 className="text-2xl font-extrabold text-white">How to get started</h2>
         <p className="mt-4 text-sm leading-7 text-white/70 md:text-base">
           You do not need an account to try it. Open the devotional tool, type a topic or describe what
-          you are going through, and receive a full devotional in seconds. Free users can generate several
-          devotionals each day. Premium members get unlimited access and can save their devotionals to a
-          personal faith journal.
+          you are going through, and receive a full devotional in seconds. Sign in to save your devotionals
+          to a personal faith journal.
         </p>
         <p className="mt-4 text-sm leading-7 text-white/70 md:text-base">
           Topics that work well: anxiety, loneliness, grief, gratitude, purpose, relationships, forgiveness,
