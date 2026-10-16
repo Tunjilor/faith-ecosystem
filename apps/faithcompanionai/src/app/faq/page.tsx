@@ -5,7 +5,7 @@ import JsonLd from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: "FAQ",
   description:
-    "Frequently asked questions about Faith Companion AI, including pricing, free access, and how the tools work.",
+    "Frequently asked questions about Faith Companion AI, including free access and how the tools work.",
   alternates: {
     canonical: "/faq",
   },

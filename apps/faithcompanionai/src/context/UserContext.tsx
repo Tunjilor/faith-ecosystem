@@ -11,7 +11,7 @@ export interface UserData {
   displayName: string | null;
   hasPassword?: boolean;
   referralCount?: number;
-  guest: { id: string; createdAt: string; trial: any } | null;
+  guest: { id: string; createdAt: string } | null;
   /** true once the /api/me fetch has settled (success or failure) */
   loaded: boolean;
 }

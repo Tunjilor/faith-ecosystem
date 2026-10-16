@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { db } from "@/lib/db";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -28,24 +29,7 @@ export default async function ResultPage({
     },
   });
 
-  if (!attempt) {
-    return (
-      <div className="fc-surface p-8">
-        <h1 className="text-2xl font-semibold">Result not found</h1>
-        <p className="mt-2 opacity-80">
-          We couldn&apos;t find that quiz attempt.
-        </p>
-        <div className="mt-6 flex gap-3">
-          <Link className="fc-btn" href="/biblequiz">
-            Back to Quiz
-          </Link>
-          <Link className="fc-btn-outline" href="/dashboard">
-            Dashboard
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  if (!attempt) notFound();
 
   const score = attempt.score ?? 0;
   const total = attempt.total ?? 10;
