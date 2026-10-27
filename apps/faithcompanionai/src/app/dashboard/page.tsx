@@ -309,15 +309,16 @@ export default function DashboardPage() {
     }
   }
 
-  async function handleEmailPrefsSave() {
-    if (!emailPrefsDraft) return;
+  async function handleEmailPrefsSave(override?: EmailPrefs) {
+    const toSave = override ?? emailPrefsDraft;
+    if (!toSave) return;
     setEmailPrefsSaving(true);
     setEmailPrefsStatus("");
     try {
       const res = await fetch("/api/me/email-prefs", {
         method: "PATCH",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify(emailPrefsDraft),
+        body: JSON.stringify(toSave),
       });
       if (!res.ok) throw new Error("Failed to save");
       const updated: EmailPrefs = await res.json();
@@ -332,8 +333,14 @@ export default function DashboardPage() {
     }
   }
 
+  // The switch saves immediately: previously it only changed the draft, so
+  // users who flipped it on and left without pressing "Save preferences"
+  // were never subscribed.
   function handleEmailPrefsToggle(on: boolean) {
-    setEmailPrefsDraft(d => d ? { ...d, emailOptIn: on } : d);
+    if (!emailPrefsDraft) return;
+    const next = { ...emailPrefsDraft, emailOptIn: on };
+    setEmailPrefsDraft(next);
+    void handleEmailPrefsSave(next);
   }
 
   function handlePrayerAnswered(id: string, answeredAt: string, answerNote: string | null) {
@@ -590,6 +597,7 @@ export default function DashboardPage() {
             <button
               type="button"
               onClick={() => handleEmailPrefsToggle(!emailPrefsDraft.emailOptIn)}
+              disabled={emailPrefsSaving}
               className={[
                 "mt-3 sm:mt-0 flex h-8 w-14 shrink-0 items-center rounded-full transition-colors",
                 emailPrefsDraft.emailOptIn
@@ -615,7 +623,7 @@ export default function DashboardPage() {
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <button
               type="button"
-              onClick={handleEmailPrefsSave}
+              onClick={() => handleEmailPrefsSave()}
               disabled={emailPrefsSaving}
               className="inline-flex min-h-[40px] items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-5 py-2 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-60"
             >

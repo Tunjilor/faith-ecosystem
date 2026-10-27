@@ -18,7 +18,7 @@
 // output can be reviewed before real subscribers receive it.
 
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { db, withDbRetry } from "@/lib/db";
 import { sendDevotionalEmail } from "@/lib/email";
 import { generateDailyDevotional } from "@/lib/devotional";
 import { makeUnsubscribeToken, makeLeadUnsubscribeToken } from "@/lib/email-prefs";
@@ -90,10 +90,14 @@ export async function GET(req: Request) {
       sentGuardKey = force ? null : `daily-devotional-sent:${dayKey}:test`;
     } else {
       // All opted-in users.
-      const users = (await db.user.findMany({
-        where: { emailOptIn: true },
-        select: { id: true, email: true },
-      })) as DailyEmailUser[];
+      // withDbRetry: Neon scales to zero, so the first query of the day can
+      // hit a cold compute (this failed on 2026-10-25).
+      const users = (await withDbRetry(() =>
+        db.user.findMany({
+          where: { emailOptIn: true },
+          select: { id: true, email: true },
+        })
+      )) as DailyEmailUser[];
 
       for (const u of users) {
         const token = makeUnsubscribeToken(u.id, sessionSecret);
@@ -106,9 +110,11 @@ export async function GET(req: Request) {
 
       // Leads, deduped against opted-in user emails.
       const optedInEmails = new Set(users.map((u) => u.email.toLowerCase()));
-      const leads = (await db.lead.findMany({
-        select: { email: true },
-      })) as Array<{ email: string }>;
+      const leads = (await withDbRetry(() =>
+        db.lead.findMany({
+          select: { email: true },
+        })
+      )) as Array<{ email: string }>;
       for (const l of leads) {
         if (optedInEmails.has(l.email.toLowerCase())) continue;
         const token = makeLeadUnsubscribeToken(l.email, sessionSecret);
