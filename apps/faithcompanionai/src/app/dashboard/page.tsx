@@ -591,7 +591,7 @@ export default function DashboardPage() {
             <div>
               <h2 className="text-xl font-bold text-white">Daily Email Devotionals</h2>
               <p className="mt-1 text-sm text-white/60">
-                Receive a verse, devotional, or prayer straight to your inbox each day.
+                A short devotional in your inbox every morning: a Bible verse, a brief reflection, and a word of encouragement.
               </p>
             </div>
             <button
@@ -616,7 +616,7 @@ export default function DashboardPage() {
 
           {emailPrefsDraft.emailOptIn && (
             <p className="mt-5 text-xs text-white/50">
-              Emails are sent once a day at 9:00 AM UTC.
+              Emails go out once a day at 9:00 AM UTC (early morning in the US).
             </p>
           )}
 
@@ -639,7 +639,7 @@ export default function DashboardPage() {
 
           {!emailPrefsDraft.emailOptIn && (
             <p className="mt-4 text-xs text-white/35">
-              Schedule: verses Mon and Wed, devotionals Tue and Thu, prayers Fri through Sun.
+              Every morning: a Bible verse, a short reflection, and a word of encouragement.
             </p>
           )}
         </section>

@@ -113,7 +113,7 @@ export default function EmailCaptureBanner({ source = "quiz-results", variant = 
               Get your daily Bible verse by email — free forever
             </h2>
             <p className="mt-1 text-sm leading-6 text-white/70">
-              One verse, one prayer, every morning. No spam. Unsubscribe anytime.
+              A Bible verse and a short devotional every morning. No spam. Unsubscribe anytime.
             </p>
           </div>
 
