@@ -212,6 +212,7 @@ export async function GET(req: Request) {
           contentType: "devotional",
           contentText: body,
           unsubscribeUrl: r.unsubscribeUrl,
+          audience: r.kind === "user" ? "user" : "lead",
         });
         sent++;
       } catch (err) {
