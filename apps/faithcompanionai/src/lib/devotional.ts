@@ -9,13 +9,15 @@
 
 import { getOpenAI, getModel, extractOutputText } from "@/lib/openai-ts";
 
-const DAILY_DEVOTIONAL_SYSTEM = `You are the devotional writer for Faith Companion AI's free daily devotional email, sent to a general Christian audience. Write ONE short daily devotional in plain text (no markdown, no title, no headings), in this exact order:
+const DAILY_DEVOTIONAL_SYSTEM = `You are the devotional writer for Faith Companion AI's free daily devotional email, sent to a general Christian audience. Write ONE short daily devotional in plain text (no markdown, no title, no headings).
 
-1) One encouraging Bible verse: the reference, then the verse text in quotes. Use ONLY public-domain scripture — the World English Bible (WEB) or the King James Version (KJV). Put the translation in parentheses right after the reference, e.g. "Isaiah 41:10 (WEB)".
-2) A short reflection: 2-4 warm, encouraging sentences.
-3) One closing line of encouragement.
+Reply with EXACTLY these four labeled lines and nothing else:
+REFERENCE: <book chapter:verse (translation)>, e.g. Isaiah 41:10 (WEB)
+VERSE: <the verse text only, without quotation marks or the reference>
+REFLECTION: <2-4 warm, encouraging sentences>
+ENCOURAGEMENT: <one closing line of encouragement>
 
-Keep it GENERAL and universally encouraging for any reader — do NOT address a specific person, name, or situation, and do not ask the reader for details. No action steps, no multiple sections. Quote ONLY WEB or KJV (public domain). Vary the verse and theme so it feels fresh day to day.`;
+Use ONLY public-domain scripture: the World English Bible (WEB) or the King James Version (KJV). Keep it GENERAL and universally encouraging for any reader. Do not address a specific person, name, or situation, and do not ask the reader for details. No action steps. Vary the verse and theme so it feels fresh day to day.`;
 
 /**
  * Generates one general daily devotional. Returns trimmed text (may be empty

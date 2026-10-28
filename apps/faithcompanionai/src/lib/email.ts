@@ -1,10 +1,14 @@
 // src/lib/email.ts
+import { parseDevotional } from "@/lib/devotional-format";
+
 export type DevotionalEmailPayload = {
   to: string;
   subject: string;
   contentType: "verse" | "devotional" | "prayer";
   contentText: string;
   unsubscribeUrl: string;
+  /** "lead" = email-only signup with no account, so no dashboard links. */
+  audience?: "user" | "lead";
 };
 
 export async function sendDevotionalEmail(opts: DevotionalEmailPayload) {
@@ -26,18 +30,28 @@ export async function sendDevotionalEmail(opts: DevotionalEmailPayload) {
       ? "#f97316"
       : "#10b981";
 
-  const contentHtml = opts.contentText
-    .split("\n")
-    .map((line) => {
-      const escaped = line
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
-      return escaped.trim()
-        ? `<p style="margin:0 0 12px;color:#1a1a1a;font-size:15px;line-height:1.7;">${escaped}</p>`
-        : `<p style="margin:0 0 8px;">&nbsp;</p>`;
-    })
-    .join("");
+  const para = (text: string, extra = "") =>
+    `<p style="margin:0 0 14px;color:#1a1a1a;font-size:15px;line-height:1.7;${extra}">${escapeHtml(text).replace(/\n/g, "<br/>")}</p>`;
+
+  // Structured devotional: verse block on its own, then reflection and the
+  // closing line. Falls back to line-by-line rendering for free-form text.
+  const parts = parseDevotional(opts.contentText);
+  const contentHtml = parts
+    ? `<div style="border-left:4px solid ${accentColor};padding:4px 0 4px 18px;margin-bottom:24px;">
+                <p style="margin:0 0 10px;font-family:Georgia,'Times New Roman',serif;font-size:19px;line-height:1.55;font-style:italic;color:#1a1a1a;">&ldquo;${escapeHtml(parts.verse)}&rdquo;</p>
+                <p style="margin:0;font-size:13px;font-weight:700;letter-spacing:.5px;color:${accentColor};">${escapeHtml(parts.reference)}</p>
+              </div>
+              ${para(parts.reflection)}
+              ${parts.encouragement ? para(parts.encouragement, "font-weight:700;margin-bottom:24px;") : ""}`
+    : `<div style="border-left:4px solid ${accentColor};padding-left:16px;margin-bottom:24px;">
+                ${opts.contentText
+                  .split("\n")
+                  .filter((line) => line.trim())
+                  .map((line) => para(line))
+                  .join("")}
+              </div>`;
+
+  const isLead = opts.audience === "lead";
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -67,15 +81,13 @@ export async function sendDevotionalEmail(opts: DevotionalEmailPayload) {
           <!-- Body -->
           <tr>
             <td style="background:#fff;padding:36px 36px 28px;border-left:1px solid #e9e0ff;border-right:1px solid #e9e0ff;">
-              <div style="border-left:4px solid ${accentColor};padding-left:16px;margin-bottom:24px;">
-                ${contentHtml}
-              </div>
+              ${contentHtml}
               <table cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="background:linear-gradient(to right,#7c3aed,#f97316);border-radius:999px;padding:1px;">
-                    <a href="https://faithcompanionai.com/dashboard"
+                    <a href="https://faithcompanionai.com/tools/prayer"
                        style="display:inline-block;padding:12px 28px;background:linear-gradient(to right,#7c3aed,#f97316);color:#fff;text-decoration:none;border-radius:999px;font-size:14px;font-weight:700;">
-                      Open Faith Companion &rarr;
+                      Get a prayer for your day &rarr;
                     </a>
                   </td>
                 </tr>
@@ -92,11 +104,15 @@ export async function sendDevotionalEmail(opts: DevotionalEmailPayload) {
               <p style="margin:0;font-size:12px;">
                 <a href="${opts.unsubscribeUrl}" style="color:#7c3aed;text-decoration:underline;">
                   Unsubscribe
-                </a>
+                </a>${
+                  isLead
+                    ? ""
+                    : `
                 &nbsp;&middot;&nbsp;
                 <a href="https://faithcompanionai.com/dashboard" style="color:#7c3aed;text-decoration:underline;">
                   Manage preferences
-                </a>
+                </a>`
+                }
               </p>
             </td>
           </tr>
@@ -107,6 +123,16 @@ export async function sendDevotionalEmail(opts: DevotionalEmailPayload) {
   </table>
 </body>
 </html>`;
+
+  const plainText = [
+    parts
+      ? `"${parts.verse}"\n${parts.reference}\n\n${parts.reflection}${parts.encouragement ? `\n\n${parts.encouragement}` : ""}`
+      : opts.contentText,
+    "",
+    "Get a prayer for your day: https://faithcompanionai.com/tools/prayer",
+    "",
+    `Unsubscribe: ${opts.unsubscribeUrl}`,
+  ].join("\n");
 
   if (!resendApiKey) {
     console.log(`[DevotionalEmail - DEV] To: ${opts.to} | Subject: ${opts.subject}`);
@@ -124,6 +150,8 @@ export async function sendDevotionalEmail(opts: DevotionalEmailPayload) {
       to: [opts.to],
       subject: opts.subject,
       html,
+      text: plainText,
+      headers: { "List-Unsubscribe": `<${opts.unsubscribeUrl}>` },
     }),
   });
 
