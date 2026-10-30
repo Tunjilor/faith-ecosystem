@@ -92,6 +92,11 @@ export async function sendDevotionalEmail(opts: DevotionalEmailPayload) {
                   </td>
                 </tr>
               </table>
+              <p style="margin:24px 0 0;padding-top:18px;border-top:1px solid #eee;font-size:14px;line-height:1.6;color:#555;">
+                Know someone who&rsquo;d be encouraged by this? Forward this email, or invite them to
+                <a href="https://faithcompanionai.com" style="color:#7c3aed;font-weight:700;text-decoration:none;">faithcompanionai.com</a>
+                for their own free daily devotional.
+              </p>
             </td>
           </tr>
 
@@ -130,6 +135,8 @@ export async function sendDevotionalEmail(opts: DevotionalEmailPayload) {
       : opts.contentText,
     "",
     "Get a prayer for your day: https://faithcompanionai.com/tools/prayer",
+    "",
+    "Know someone who'd be encouraged by this? Forward this email, or invite them to https://faithcompanionai.com for their own free daily devotional.",
     "",
     `Unsubscribe: ${opts.unsubscribeUrl}`,
   ].join("\n");
