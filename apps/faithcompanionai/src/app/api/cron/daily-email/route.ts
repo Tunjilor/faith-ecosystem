@@ -21,6 +21,7 @@ import { NextResponse } from "next/server";
 import { db, withDbRetry } from "@/lib/db";
 import { sendDevotionalEmail } from "@/lib/email";
 import { generateDailyDevotional } from "@/lib/devotional";
+import { extractReference } from "@/lib/devotional-format";
 import { makeUnsubscribeToken, makeLeadUnsubscribeToken } from "@/lib/email-prefs";
 
 export const runtime = "nodejs";
@@ -167,8 +168,23 @@ export async function GET(req: Request) {
     if (cached) {
       body = cached.outputText;
     } else {
+      // Verses used in the last 30 days, so the model doesn't repeat them.
+      const recent = (await withDbRetry(() =>
+        db.aiCache.findMany({
+          where: {
+            kind: "daily-devotional",
+            createdAt: { gte: new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000) },
+          },
+          select: { reference: true, outputText: true },
+          orderBy: { createdAt: "desc" },
+        })
+      )) as Array<{ reference: string | null; outputText: string }>;
+      const recentRefs = recent
+        .map((r) => r.reference || extractReference(r.outputText))
+        .filter((r): r is string => Boolean(r));
+
       try {
-        body = await generateDailyDevotional();
+        body = await generateDailyDevotional(recentRefs);
       } catch (err) {
         console.error(`[daily-email] devotional generation failed for ${dayKey} — skipping send:`, err);
         return NextResponse.json(
@@ -191,6 +207,7 @@ export async function GET(req: Request) {
           cacheKey: genKey,
           kind: "daily-devotional",
           translation: "",
+          reference: extractReference(body) || null,
           inputJson: JSON.stringify({ dayKey }),
           outputText: body,
         },

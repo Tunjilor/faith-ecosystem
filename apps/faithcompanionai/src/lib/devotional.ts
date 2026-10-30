@@ -8,6 +8,7 @@
 // scripture, consistent with the rest of the site.
 
 import { getOpenAI, getModel, extractOutputText } from "@/lib/openai-ts";
+import { extractReference, normalizeReference } from "@/lib/devotional-format";
 
 const DAILY_DEVOTIONAL_SYSTEM = `You are the devotional writer for Faith Companion AI's free daily devotional email, sent to a general Christian audience. Write ONE short daily devotional in plain text (no markdown, no title, no headings).
 
@@ -21,21 +22,36 @@ Use ONLY public-domain scripture: the World English Bible (WEB) or the King Jame
 
 /**
  * Generates one general daily devotional. Returns trimmed text (may be empty
- * if the model returns nothing — callers must handle the empty case and skip
+ * if the model returns nothing; callers must handle the empty case and skip
  * sending rather than mailing a blank email). Throws on API/transport errors.
+ *
+ * `avoidReferences` lists verses used recently (e.g. the last 30 days). They
+ * are given to the model, and if it still repeats one we ask once more.
  */
-export async function generateDailyDevotional(): Promise<string> {
+export async function generateDailyDevotional(avoidReferences: string[] = []): Promise<string> {
   const client = getOpenAI();
   const model = getModel();
+  const avoid = new Set(avoidReferences.map(normalizeReference).filter(Boolean));
 
-  const resp = await client.responses.create({
-    model,
-    input: [
-      { role: "system", content: DAILY_DEVOTIONAL_SYSTEM },
-      { role: "user", content: "Write today's general daily devotional." },
-    ],
-    temperature: 0.7,
-  });
+  const ask = async (extra: string) => {
+    const avoidNote = avoidReferences.length
+      ? `\n\nThese verses were used recently. Do NOT use any of them, or a verse from the same passage: ${avoidReferences.join("; ")}.`
+      : "";
+    const resp = await client.responses.create({
+      model,
+      input: [
+        { role: "system", content: DAILY_DEVOTIONAL_SYSTEM },
+        { role: "user", content: `Write today's general daily devotional.${avoidNote}${extra}` },
+      ],
+      temperature: 0.9,
+    });
+    return extractOutputText(resp).trim();
+  };
 
-  return extractOutputText(resp).trim();
+  const first = await ask("");
+  const firstRef = normalizeReference(extractReference(first));
+  if (!firstRef || !avoid.has(firstRef)) return first;
+
+  const second = await ask(`\n\nYou just chose ${extractReference(first)}, which was used recently. Pick a different verse.`);
+  return second || first;
 }
