@@ -23,7 +23,7 @@ export async function GET(req: Request) {
       return htmlResponse("This unsubscribe link is invalid or has expired.", false);
     }
     await db.lead.deleteMany({ where: { email: leadEmail.trim().toLowerCase() } });
-    return htmlResponse("You have been unsubscribed from the daily devotional email.", true);
+    return htmlResponse("You have been unsubscribed from the daily devotional email.", true, "lead");
   }
 
   // Registered user.
@@ -36,10 +36,20 @@ export async function GET(req: Request) {
     data: { emailOptIn: false },
   });
 
-  return htmlResponse("You have been unsubscribed from daily devotional emails.", true);
+  return htmlResponse("You have been unsubscribed from daily devotional emails.", true, "user");
 }
 
-function htmlResponse(message: string, success: boolean) {
+function htmlResponse(message: string, success: boolean, audience: "user" | "lead" = "lead") {
+  // Email-only leads have no account, so point them home, not to the dashboard.
+  const followUp = !success
+    ? ""
+    : audience === "user"
+    ? " You can re-enable emails anytime from your dashboard."
+    : " Changed your mind? You can sign up again anytime on our homepage.";
+  const button =
+    success && audience === "user"
+      ? { href: "https://faithcompanionai.com/dashboard", label: "Back to dashboard" }
+      : { href: "https://faithcompanionai.com", label: "Back to Faith Companion" };
   const color = success ? "#10b981" : "#ef4444";
   const icon = success ? "&#10003;" : "&#10007;";
   const html = `<!DOCTYPE html>
@@ -61,8 +71,8 @@ function htmlResponse(message: string, success: boolean) {
   <div class="card">
     <div class="icon">${icon}</div>
     <h1>${success ? "Unsubscribed" : "Invalid link"}</h1>
-    <p>${message}${success ? " You can re-enable emails anytime from your dashboard." : ""}</p>
-    <a href="https://faithcompanionai.com/dashboard">Back to dashboard</a>
+    <p>${message}${followUp}</p>
+    <a href="${button.href}">${button.label}</a>
   </div>
 </body>
 </html>`;
