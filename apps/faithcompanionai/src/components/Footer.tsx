@@ -160,7 +160,7 @@ export default function Footer() {
             <GuestEmailCaptureClient
               source="footer"
               variant="compact"
-              hideOnPathPrefixes={["/", "/topics/", "/biblequiz/results/", "/tools/prayer"]}
+              hideOnPathPrefixes={["/", "/topics/", "/biblequiz/results/", "/tools/prayer", "/daily"]}
             />
           </div>
 
