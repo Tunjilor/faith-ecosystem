@@ -30,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: "/how-to-pray",              priority: 0.8, freq: "monthly" },
     { route: "/tithing",                  priority: 0.8, freq: "monthly" },
     { route: "/daily-devotional",         priority: 0.8, freq: "monthly" },
+    { route: "/daily",                    priority: 0.8, freq: "daily" },
     { route: "/tools/scripture-memory",   priority: 0.75, freq: "monthly" },
     { route: "/community",                priority: 0.7, freq: "monthly" },
     { route: "/community/prayer-wall",    priority: 0.7, freq: "monthly" },

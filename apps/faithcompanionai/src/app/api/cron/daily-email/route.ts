@@ -128,15 +128,9 @@ export async function GET(req: Request) {
         });
       }
 
-      if (recipients.length === 0) {
-        return NextResponse.json({
-          ok: true,
-          sent: 0,
-          reason: "no recipients",
-          dayKey,
-        });
-      }
-
+      // No early return when nobody is subscribed: today's devotional is still
+      // generated below, because it also powers /daily/[date] and the feed
+      // that posts to social media.
       sentGuardKey = `daily-devotional-sent:${dayKey}`;
     }
 
@@ -211,6 +205,15 @@ export async function GET(req: Request) {
           inputJson: JSON.stringify({ dayKey }),
           outputText: body,
         },
+      });
+    }
+
+    if (recipients.length === 0) {
+      return NextResponse.json({
+        ok: true,
+        sent: 0,
+        reason: "no recipients (devotional generated for the site)",
+        dayKey,
       });
     }
 
