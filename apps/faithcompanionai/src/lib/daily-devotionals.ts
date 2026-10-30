@@ -76,5 +76,7 @@ export function socialPostText(d: DailyDevotional): string {
         d.parts.encouragement ? `\n\n${d.parts.encouragement}` : ""
       }`
     : d.text;
-  return `${body}\n\nGet a free devotional like this in your inbox every morning: ${link}`;
+  // The link sits mid-text, not at the end: Facebook hides a trailing URL once it
+  // turns it into a preview card, which left a dangling "every morning:".
+  return `${body}\n\nGet a free devotional like this in your inbox every morning:\n${link}\n\nTap the link to sign up. It's free.`;
 }
