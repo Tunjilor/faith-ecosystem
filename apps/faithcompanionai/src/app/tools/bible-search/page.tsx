@@ -253,7 +253,9 @@ export default function BibleSearchPage() {
       </header>
 
       {/* Search card */}
-      <div className="rounded-[28px] border border-white/10 bg-white p-6 shadow-2xl md:p-8">
+      {/* colorScheme "light": the site sets color-scheme dark globally, which makes
+          native inputs render dark-on-dark inside this white card. */}
+      <div className="rounded-[28px] border border-white/10 bg-white p-6 shadow-2xl md:p-8 text-slate-900" style={{ colorScheme: "light" }}>
 
         {/* Mode toggle */}
         <div className="mb-6 flex gap-1 rounded-xl bg-slate-100 p-1">

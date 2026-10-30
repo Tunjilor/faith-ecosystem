@@ -112,7 +112,9 @@ export default function ShareCardPage() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Left — controls */}
-        <div className="rounded-[28px] border border-white/10 bg-white p-6 shadow-2xl md:p-8">
+        {/* colorScheme "light": the site sets color-scheme dark globally, which makes
+            native inputs render dark-on-dark inside this white card. */}
+        <div className="rounded-[28px] border border-white/10 bg-white p-6 shadow-2xl md:p-8 text-slate-900" style={{ colorScheme: "light" }}>
           <div className="space-y-5">
             <div>
               <label className="block text-sm font-medium text-slate-700">Verse text</label>
