@@ -22,9 +22,17 @@ type Props = {
   source: string;
   variant?: "card" | "compact";
   hideOnPathPrefixes?: string[];
+  heading?: string;
+  subtext?: string;
 };
 
-export default function GuestEmailCaptureClient({ source, variant, hideOnPathPrefixes = [] }: Props) {
+export default function GuestEmailCaptureClient({
+  source,
+  variant,
+  hideOnPathPrefixes = [],
+  heading,
+  subtext,
+}: Props) {
   const user = useUser();
   const pathname = usePathname() ?? "";
 
@@ -32,5 +40,5 @@ export default function GuestEmailCaptureClient({ source, variant, hideOnPathPre
   if (hidden) return null;
   if (!user.loaded || user.signedIn || user.authed) return null;
 
-  return <EmailCaptureBanner source={source} variant={variant} />;
+  return <EmailCaptureBanner source={source} variant={variant} heading={heading} subtext={subtext} />;
 }

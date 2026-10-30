@@ -5,6 +5,8 @@ import { useUser } from "@/context/UserContext";
 
 import { useEffect, useState } from "react";
 import DenominationSelect, { getDenominationNote, readDenomination } from "@/components/DenominationSelect";
+import GuestEmailCaptureClient from "@/components/GuestEmailCaptureClient";
+import Link from "next/link";
 
 type Tone = "gentle" | "firm" | "short" | "detailed";
 
@@ -306,6 +308,29 @@ export default function PrayerPage() {
           </div>
         )}
       </div>
+
+      {/* Ask right after a prayer is generated, when the visitor has just
+          received value. Guests get the email signup (source "prayer-result");
+          signed-in users get a link to switch daily emails on. */}
+      {result && (
+        <div className="mt-8">
+          {me?.signedIn ? (
+            <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-5 text-sm text-white/80">
+              Want a verse and devotional like this every morning?{" "}
+              <Link href="/dashboard" className="font-semibold text-white underline">
+                Turn on daily emails in your dashboard
+              </Link>
+              .
+            </div>
+          ) : (
+            <GuestEmailCaptureClient
+              source="prayer-result"
+              heading="Want encouragement like this every morning?"
+              subtext="Get a free Bible verse and short devotional in your inbox each day. No spam. Unsubscribe anytime."
+            />
+          )}
+        </div>
+      )}
     </main>
   );
 }

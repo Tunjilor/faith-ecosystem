@@ -15,9 +15,17 @@ import { useState } from "react";
 type Props = {
   source?: string;
   variant?: "card" | "compact";
+  /** Card variant only: override the default heading / subtext for context. */
+  heading?: string;
+  subtext?: string;
 };
 
-export default function EmailCaptureBanner({ source = "quiz-results", variant = "card" }: Props) {
+export default function EmailCaptureBanner({
+  source = "quiz-results",
+  variant = "card",
+  heading,
+  subtext,
+}: Props) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
 
@@ -110,10 +118,10 @@ export default function EmailCaptureBanner({ source = "quiz-results", variant = 
           <div>
             <div className="text-2xl">📖</div>
             <h2 className="mt-2 text-xl font-extrabold text-white">
-              Get your daily Bible verse by email — free forever
+              {heading ?? "Get your daily Bible verse by email \u2014 free forever"}
             </h2>
             <p className="mt-1 text-sm leading-6 text-white/70">
-              A Bible verse and a short devotional every morning. No spam. Unsubscribe anytime.
+              {subtext ?? "A Bible verse and a short devotional every morning. No spam. Unsubscribe anytime."}
             </p>
           </div>
 
