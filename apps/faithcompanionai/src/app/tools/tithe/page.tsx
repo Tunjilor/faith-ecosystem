@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import TitheGuide from "./TitheGuide";
 
 type Frequency = "weekly" | "biweekly" | "monthly" | "quarterly" | "yearly";
 
@@ -215,6 +216,8 @@ export default function TithePage() {
           .
         </p>
       </section>
+
+      <TitheGuide />
     </main>
   );
 }

@@ -25,14 +25,14 @@ export const metadata: Metadata = {
     url: "https://faithcompanionai.com/tools/tithe",
     siteName: "Faith Companion AI",
     type: "website",
-    images: [{ url: "/brand/og-quiz.png", width: 1200, height: 630, alt: "Faith Companion AI Tithe Calculator" }],
+    images: [{ url: "/brand/og-tithe.png", width: 1200, height: 630, alt: "Faith Companion AI Tithe Calculator" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Tithe Calculator – 10% of Any Income | Faith Companion AI",
     description:
       "Free tithe calculator: enter your income and pay period to see your tithe — weekly, monthly, or yearly, gross or net, at any percentage. Simple and clear.",
-    images: ["/brand/og-quiz.png"],
+    images: ["/brand/og-tithe.png"],
   },
 };
 
