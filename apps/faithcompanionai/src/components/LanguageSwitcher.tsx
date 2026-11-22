@@ -1,39 +1,34 @@
 "use client";
+// src/components/LanguageSwitcher.tsx
+// EN | ES toggle that keeps the reader on the same page (and query/hash).
+// The current locale comes from LocaleContext, which the server fills from the
+// URL, so server and client render the same markup (no window access in render).
+import { useLocale } from "@/context/LocaleContext";
+import { LOCALES, LOCALE_COOKIE, splitLocale, withLocale, type Locale } from "@/lib/i18n/config";
 
-const LOCALES = [
-  { code: "en", label: "EN" },
-  { code: "es", label: "ES" },
-] as const;
-
-function getCurrentLocale(): string {
-  if (typeof window === "undefined") return "en";
-  const segments = window.location.pathname.split("/").filter(Boolean);
-  return ["en", "es"].includes(segments[0]) ? segments[0] : "en";
-}
-
-function getPathWithoutLocale(): string {
-  if (typeof window === "undefined") return "/";
-  const segments = window.location.pathname.split("/").filter(Boolean);
-  const withoutLocale = ["en", "es"].includes(segments[0]) ? segments.slice(1) : segments;
-  return "/" + withoutLocale.join("/");
-}
+const LABELS: Record<Locale, string> = { en: "EN", es: "ES" };
+const NAMES: Record<Locale, string> = { en: "English", es: "Español" };
 
 export default function LanguageSwitcher() {
-  function switchTo(code: string) {
-    document.cookie = `NEXT_LOCALE=${code};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
-    window.location.href = `/${code}${getPathWithoutLocale()}`;
-  }
+  const current = useLocale();
 
-  const current = getCurrentLocale();
+  function switchTo(code: Locale) {
+    document.cookie = `${LOCALE_COOKIE}=${code};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
+    // Read the browser URL at click time (never during render).
+    const { path } = splitLocale(window.location.pathname);
+    window.location.href = `${withLocale(path, code)}${window.location.search}${window.location.hash}`;
+  }
 
   return (
     <div className="flex items-center gap-1.5 text-xs font-semibold" aria-label="Language switcher">
-      {LOCALES.map(({ code, label }, i) => (
+      {LOCALES.map((code, i) => (
         <span key={code} className="flex items-center gap-1.5">
           {i > 0 && <span className="text-white/20">|</span>}
           <button
             type="button"
             onClick={() => switchTo(code)}
+            lang={code}
+            aria-label={NAMES[code]}
             className={
               code === current
                 ? "text-white cursor-default"
@@ -42,7 +37,7 @@ export default function LanguageSwitcher() {
             aria-current={code === current ? "true" : undefined}
             disabled={code === current}
           >
-            {label}
+            {LABELS[code]}
           </button>
         </span>
       ))}
