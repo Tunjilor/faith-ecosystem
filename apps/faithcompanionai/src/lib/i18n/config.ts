@@ -25,7 +25,9 @@ export const ROUTE_PATH_HEADER = "x-route-path";
  * Long-form pages (tithing guide, FAQ, topics) join only after a native
  * speaker has reviewed the Spanish.
  */
-export const TRANSLATED_ROUTES: readonly string[] = [];
+export const TRANSLATED_ROUTES: readonly string[] = [
+  "/tools/tithe",
+];
 
 export function isLocale(value: unknown): value is Locale {
   return typeof value === "string" && (LOCALES as readonly string[]).includes(value);

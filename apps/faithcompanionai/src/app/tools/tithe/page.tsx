@@ -4,16 +4,11 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import TitheGuide from "./TitheGuide";
+import { useDictionary, useLocale } from "@/context/LocaleContext";
+import { localizedHref } from "@/lib/i18n/links";
+import { tithe, type Frequency } from "@/lib/i18n/dictionaries/tithe";
 
-type Frequency = "weekly" | "biweekly" | "monthly" | "quarterly" | "yearly";
-
-const frequencyLabels: Record<Frequency, string> = {
-  weekly: "Weekly",
-  biweekly: "Bi-weekly",
-  monthly: "Monthly",
-  quarterly: "Quarterly",
-  yearly: "Yearly",
-};
+const FREQUENCIES: Frequency[] = ["weekly", "biweekly", "monthly", "quarterly", "yearly"];
 
 const yearlyMultiplier: Record<Frequency, number> = {
   weekly: 52,
@@ -23,14 +18,17 @@ const yearlyMultiplier: Record<Frequency, number> = {
   yearly: 1,
 };
 
-function money(value: number) {
-  return value.toLocaleString("en-US", {
+function money(value: number, numberLocale: string) {
+  return value.toLocaleString(numberLocale, {
     style: "currency",
     currency: "USD",
   });
 }
 
 export default function TithePage() {
+  const t = useDictionary(tithe);
+  const locale = useLocale();
+  const fmt = (value: number) => money(value, t.numberLocale);
   const [income, setIncome] = useState("");
   const [frequency, setFrequency] = useState<Frequency>("monthly");
   const [percentage, setPercentage] = useState(10);
@@ -61,10 +59,9 @@ export default function TithePage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-12">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-white md:text-4xl">Tithe Calculator</h1>
+        <h1 className="text-3xl font-bold text-white md:text-4xl">{t.heading}</h1>
         <p className="mt-2 max-w-2xl text-sm leading-7 text-white/70 md:text-base">
-          Enter your income, choose your pay period, and adjust the percentage to see your
-          tithe broken down per period and across the year — on gross or net, whichever you give on.
+          {t.intro}
         </p>
       </header>
 
@@ -72,7 +69,7 @@ export default function TithePage() {
         {/* ── Inputs ── */}
         <div className="rounded-[28px] border border-white/10 bg-white p-6 shadow-2xl md:p-8">
           <label htmlFor="income" className="block text-sm font-medium text-slate-700">
-            Income per pay period
+            {t.incomeLabel}
           </label>
           <input
             id="income"
@@ -81,30 +78,30 @@ export default function TithePage() {
             min="0"
             value={income}
             onChange={(e) => setIncome(e.target.value)}
-            placeholder="Enter your income"
+            placeholder={t.incomePlaceholder}
             className="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-100 px-4 py-3 text-base text-slate-900 placeholder:text-slate-500 outline-none focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-black/10"
           />
 
-          <label className="mt-6 block text-sm font-medium text-slate-700">Pay period</label>
+          <label className="mt-6 block text-sm font-medium text-slate-700">{t.payPeriodLabel}</label>
           <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-5">
-            {Object.entries(frequencyLabels).map(([key, label]) => (
+            {FREQUENCIES.map((key) => (
               <button
                 key={key}
                 type="button"
-                onClick={() => setFrequency(key as Frequency)}
+                onClick={() => setFrequency(key)}
                 className={`rounded-xl px-3 py-2.5 text-sm font-semibold transition ${
                   frequency === key
                     ? "bg-gradient-to-r from-purple-600 to-orange-500 text-white"
                     : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
-                {label}
+                {t.frequency[key]}
               </button>
             ))}
           </div>
 
           <label htmlFor="percentage" className="mt-6 block text-sm font-medium text-slate-700">
-            Tithe percentage: <span className="font-bold text-slate-900">{percentage}%</span>
+            {t.percentageLabel} <span className="font-bold text-slate-900">{percentage}%</span>
           </label>
           <input
             id="percentage"
@@ -133,7 +130,7 @@ export default function TithePage() {
           </div>
 
           <label htmlFor="offering" className="mt-6 block text-sm font-medium text-slate-700">
-            Optional offering per pay period
+            {t.offeringLabel}
           </label>
           <input
             id="offering"
@@ -142,7 +139,7 @@ export default function TithePage() {
             min="0"
             value={offering}
             onChange={(e) => setOffering(e.target.value)}
-            placeholder="Example: 25"
+            placeholder={t.offeringPlaceholder}
             className="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-100 px-4 py-3 text-base text-slate-900 placeholder:text-slate-500 outline-none focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-black/10"
           />
         </div>
@@ -157,63 +154,59 @@ export default function TithePage() {
           }}
         >
           <p className="text-xs font-semibold uppercase tracking-widest text-orange-300">
-            Your estimated tithe
+            {t.resultEyebrow}
           </p>
           <h2 className="mt-3 text-4xl font-bold text-white md:text-5xl">
-            {money(results.tithePerPeriod)}
+            {fmt(results.tithePerPeriod)}
           </h2>
           <p className="mt-2 text-sm text-white/70">
-            {percentage}% of your {frequencyLabels[frequency].toLowerCase()} income.
+            {t.resultLine(String(percentage), frequency)}
           </p>
 
           <div className="mt-6 grid gap-3">
             <div className="rounded-2xl bg-black/20 p-4">
-              <p className="text-xs text-white/60">Total with offering</p>
-              <p className="mt-1 text-2xl font-bold text-white">{money(results.totalPerPeriod)}</p>
+              <p className="text-xs text-white/60">{t.totalWithOffering}</p>
+              <p className="mt-1 text-2xl font-bold text-white">{fmt(results.totalPerPeriod)}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="rounded-2xl bg-black/20 p-4">
-                <p className="text-xs text-white/60">Weekly average</p>
-                <p className="mt-1 text-xl font-bold text-white">{money(results.weeklyAverage)}</p>
+                <p className="text-xs text-white/60">{t.weeklyAverage}</p>
+                <p className="mt-1 text-xl font-bold text-white">{fmt(results.weeklyAverage)}</p>
               </div>
               <div className="rounded-2xl bg-black/20 p-4">
-                <p className="text-xs text-white/60">Monthly average</p>
-                <p className="mt-1 text-xl font-bold text-white">{money(results.monthlyAverage)}</p>
+                <p className="text-xs text-white/60">{t.monthlyAverage}</p>
+                <p className="mt-1 text-xl font-bold text-white">{fmt(results.monthlyAverage)}</p>
               </div>
             </div>
 
             <div className="rounded-2xl bg-black/20 p-4">
-              <p className="text-xs text-white/60">Yearly giving projection</p>
-              <p className="mt-1 text-2xl font-bold text-white">{money(results.annualTotal)}</p>
+              <p className="text-xs text-white/60">{t.yearlyProjection}</p>
+              <p className="mt-1 text-2xl font-bold text-white">{fmt(results.annualTotal)}</p>
               <p className="mt-1 text-xs text-white/60">
-                Tithe: {money(results.annualTithe)} · Offering: {money(results.annualOffering)}
+                {t.yearlySplit(fmt(results.annualTithe), fmt(results.annualOffering))}
               </p>
             </div>
           </div>
 
           <Link
-            href="/tithing"
+            href={localizedHref("/tithing", locale)}
             className="mt-6 block rounded-2xl bg-white px-6 py-3 text-center text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
           >
-            What does the Bible say about tithing? →
+            {t.bibleLink}
           </Link>
         </div>
       </div>
 
       {/* ── Short explainer (full guide lives at /tithing) ── */}
       <section className="mt-10 rounded-[28px] border border-white/10 bg-white/[0.06] p-6 md:p-8">
-        <h2 className="text-xl font-bold text-white md:text-2xl">Gross or net — which do I use?</h2>
+        <h2 className="text-xl font-bold text-white md:text-2xl">{t.explainer.heading}</h2>
         <p className="mt-3 text-sm leading-7 text-white/70 md:text-base">
-          The Bible doesn&apos;t specify gross versus net, and sincere believers land in both places.
-          Some give on gross (pre-tax) income as the &ldquo;firstfruits&rdquo; of everything they earn;
-          others give on net (take-home) pay, the portion they actually receive. This calculator works
-          for either — just enter the income figure you&apos;ve decided to give on. For the full
-          breakdown, including tithe vs. offering and what Scripture says, see the{" "}
-          <Link href="/tithing" className="font-semibold text-orange-300 underline-offset-2 hover:underline">
-            complete tithing guide
+          {t.explainer.beforeLink}{" "}
+          <Link href={localizedHref("/tithing", locale)} className="font-semibold text-orange-300 underline-offset-2 hover:underline">
+            {t.explainer.linkText}
           </Link>
-          .
+          {t.explainer.afterLink}
         </p>
       </section>
 
