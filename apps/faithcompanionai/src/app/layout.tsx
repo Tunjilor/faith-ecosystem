@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { headers } from "next/headers";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -8,6 +7,8 @@ import { UserProvider } from "@/context/UserContext";
 import Script from "next/script";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { LocaleProvider } from "@/context/LocaleContext";
+import { getLocale } from "@/lib/i18n/server";
 import dynamic from "next/dynamic";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -162,7 +163,7 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const locale = (await headers()).get("x-locale") ?? "en";
+  const locale = getLocale();
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
@@ -181,6 +182,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
         />
         <div className="fc-bg" />
+        <LocaleProvider locale={locale}>
         <UserProvider>
           <div className="fixed right-4 top-3 z-50">
             <LanguageSwitcher />
@@ -195,6 +197,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <AddToHomeScreen />
           <ServiceWorkerRegistration />
         </UserProvider>
+        </LocaleProvider>
         <Analytics />
       </body>
     </html>

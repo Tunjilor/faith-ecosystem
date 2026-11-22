@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-const LOCALES = ["en", "es"] as const;
-const DEFAULT_LOCALE = "en";
-const COOKIE = "NEXT_LOCALE";
+import {
+  DEFAULT_LOCALE,
+  LOCALES,
+  LOCALE_COOKIE as COOKIE,
+  LOCALE_HEADER,
+  isTranslatedRoute,
+} from "@/lib/i18n/config";
 const LEGACY_REDIRECTS: Record<string, string> = {
   "/Verse": "/verse",
   "/Refund": "/refund",
@@ -50,15 +54,20 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(url, 301);
     }
     const requestHeaders = new Headers(request.headers);
-    requestHeaders.set("x-locale", locale);
+    requestHeaders.set(LOCALE_HEADER, locale);
     const response = NextResponse.rewrite(new URL(stripped, request.url), {
       request: { headers: requestHeaders },
     });
+    // Untranslated pages under /es render English content; keep them out of
+    // search indexes until they join TRANSLATED_ROUTES. Links stay followable.
+    if (!isTranslatedRoute(stripped)) {
+      response.headers.set("X-Robots-Tag", "noindex, follow");
+    }
     response.cookies.set(COOKIE, locale, { path: "/", maxAge: 60 * 60 * 24 * 365, sameSite: "lax" });
     return response;
   }
   const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-locale", DEFAULT_LOCALE);
+  requestHeaders.set(LOCALE_HEADER, DEFAULT_LOCALE);
   const response = NextResponse.next({
     request: { headers: requestHeaders },
   });
