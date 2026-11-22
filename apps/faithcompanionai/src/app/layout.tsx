@@ -6,7 +6,6 @@ import { ReferralTracker } from "@/components/ReferralTracker";
 import { UserProvider } from "@/context/UserContext";
 import Script from "next/script";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { LocaleProvider } from "@/context/LocaleContext";
 import { getLocale, getRoutePath } from "@/lib/i18n/server";
 import { isTranslatedRoute } from "@/lib/i18n/config";
@@ -216,9 +215,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <div className="fc-bg" />
         <LocaleProvider locale={locale}>
         <UserProvider>
-          <div className="fixed right-4 top-3 z-50">
-            <LanguageSwitcher />
-          </div>
           <Navbar />
           <main
             className="mx-auto w-full max-w-6xl px-4 pb-16 pt-8 md:px-6"

@@ -25,7 +25,7 @@ const VARIANTS = [
   },
   {
     out: 'public/brand/og-tithe-es.png',
-    title: 'Calculadora de Diezmo',
+    title: 'Calculadora de diezmo',
     tagline: 'Tu diezmo por pago, por mes o por año',
   },
 ];

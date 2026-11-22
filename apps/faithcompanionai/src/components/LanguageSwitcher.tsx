@@ -21,20 +21,20 @@ export default function LanguageSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-1.5 text-xs font-semibold" aria-label={nav[current].languageSwitcher}>
+    <div className="flex items-center gap-0.5 px-1 text-xs font-semibold" aria-label={nav[current].languageSwitcher}>
       {LOCALES.map((code, i) => (
-        <span key={code} className="flex items-center gap-1.5">
+        <span key={code} className="flex items-center gap-0.5">
           {i > 0 && <span className="text-white/20">|</span>}
           <button
             type="button"
             onClick={() => switchTo(code)}
             lang={code}
             aria-label={NAMES[code]}
-            className={
+            className={`inline-flex min-h-[32px] min-w-[32px] items-center justify-center rounded-md px-1.5 ${
               code === current
                 ? "text-white cursor-default"
-                : "text-white/40 hover:text-white/80 transition"
-            }
+                : "text-white/60 transition hover:bg-white/10 hover:text-white"
+            }`}
             aria-current={code === current ? "true" : undefined}
             disabled={code === current}
           >

@@ -1,10 +1,13 @@
 // Faith Companion AI — Service Worker
 // Strategy:
-//   - Static assets (JS/CSS/images/fonts): cache-first, 30-day TTL
+//   - Static assets (JS/CSS/images/fonts): cache-first, no expiry; bump
+//     CACHE_VERSION to clear every visitor's cache when an asset is replaced
 //   - HTML pages: network-first, fall back to cache, then /offline.html
 //   - /api/* routes: network-only (never cache)
 
-const CACHE_VERSION = 'v3';
+// v4: clears v3 caches that still hold the 0-byte /brand/logo-dark.png served
+// before the 2026-07-29 asset fix (cache-first entries never expire).
+const CACHE_VERSION = 'v4';
 const STATIC_CACHE  = `faithai-static-${CACHE_VERSION}`;
 const PAGE_CACHE    = `faithai-pages-${CACHE_VERSION}`;
 
@@ -84,7 +87,10 @@ self.addEventListener('fetch', (event) => {
         const cached = await cache.match(request);
         if (cached) return cached;
         const response = await fetch(request);
-        if (response.ok) cache.put(request, response.clone());
+        // Never cache an empty body: a broken deploy would otherwise stick forever.
+        if (response.ok && response.headers.get('content-length') !== '0') {
+          cache.put(request, response.clone());
+        }
         return response;
       })
     );
