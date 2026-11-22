@@ -8,7 +8,10 @@ import Script from "next/script";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { LocaleProvider } from "@/context/LocaleContext";
-import { getLocale } from "@/lib/i18n/server";
+import { getLocale, getRoutePath } from "@/lib/i18n/server";
+import { isTranslatedRoute } from "@/lib/i18n/config";
+import { site, SPANISH_KEYWORDS } from "@/lib/i18n/dictionaries/site";
+import UntranslatedNotice from "@/components/UntranslatedNotice";
 import dynamic from "next/dynamic";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -60,14 +63,15 @@ const siteJsonLd = {
   ],
 };
 
-export const metadata: Metadata = {
+const enMeta = site.en.meta;
+
+const baseMetadata: Metadata = {
   metadataBase: new URL("https://faithcompanionai.com"),
   title: {
-    default: "Faith Companion AI – Free AI Tools for Prayer & Bible",
+    default: enMeta.defaultTitle,
     template: "%s | Faith Companion AI",
   },
-  description:
-    "Your complete faith ecosystem powered by AI. Free tools for prayer generation, Bible verse discovery, tithe calculation, and daily devotion. The best Christian AI companion for spiritual growth.",
+  description: enMeta.description,
   applicationName: "Faith Companion AI",
   keywords: [
     "faith companion AI",
@@ -123,17 +127,15 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://faithcompanionai.com",
     siteName: "Faith Companion AI",
-    title: "Faith Companion AI – Free AI Tools for Prayer & Bible",
-    description:
-      "Your complete faith ecosystem powered by AI. Free tools for prayer generation, Bible verse discovery, tithe calculation, and daily devotion.",
-    images: [{ url: "/brand/og-quiz.png", width: 1200, height: 630, alt: "Faith Companion AI" }],
+    title: enMeta.defaultTitle,
+    description: enMeta.ogDescription,
+    images: [{ url: enMeta.image, width: 1200, height: 630, alt: "Faith Companion AI" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Faith Companion AI – Free AI Tools for Prayer & Bible",
-    description:
-      "Your complete faith ecosystem powered by AI. Free tools for prayer, Bible verses, and tithing.",
-    images: ["/brand/og-quiz.png"],
+    title: enMeta.defaultTitle,
+    description: enMeta.twitterDescription,
+    images: [enMeta.image],
   },
   robots: {
     index: true,
@@ -158,12 +160,42 @@ export const metadata: Metadata = {
   },
 };
 
+// English output is exactly baseMetadata. Spanish swaps the defaults that
+// /es pages inherit when they don't set their own.
+export function generateMetadata(): Metadata {
+  if (getLocale() !== "es") return baseMetadata;
+  const es = site.es.meta;
+  return {
+    ...baseMetadata,
+    title: { default: es.defaultTitle, template: "%s | Faith Companion AI" },
+    description: es.description,
+    keywords: SPANISH_KEYWORDS,
+    openGraph: {
+      ...baseMetadata.openGraph,
+      url: "https://faithcompanionai.com/es",
+      title: es.defaultTitle,
+      description: es.ogDescription,
+      locale: "es_LA",
+      images: [{ url: es.image, width: 1200, height: 630, alt: "Faith Companion AI" }],
+    },
+    twitter: {
+      ...baseMetadata.twitter,
+      title: es.defaultTitle,
+      description: es.twitterDescription,
+      images: [es.image],
+    },
+  };
+}
+
 export const viewport: Viewport = {
   width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#6d28d9",
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = getLocale();
+  const routePath = getRoutePath();
+  // Null on force-static routes (no request headers): no notice there.
+  const showUntranslatedNotice = locale === "es" && routePath !== null && !isTranslatedRoute(routePath);
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
@@ -188,7 +220,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <LanguageSwitcher />
           </div>
           <Navbar />
-          <main className="mx-auto w-full max-w-6xl px-4 pb-16 pt-8 md:px-6">
+          <main
+            className="mx-auto w-full max-w-6xl px-4 pb-16 pt-8 md:px-6"
+            lang={showUntranslatedNotice ? "en" : undefined}
+          >
+            {showUntranslatedNotice && <UntranslatedNotice />}
             {children}
           </main>
           <Footer />

@@ -12,6 +12,8 @@ export const DEFAULT_LOCALE: Locale = "en";
 export const LOCALE_COOKIE = "NEXT_LOCALE";
 /** Request header the middleware sets for server components. */
 export const LOCALE_HEADER = "x-locale";
+/** Request header carrying the route path without its locale prefix ("/es/x" -> "/x"). */
+export const ROUTE_PATH_HEADER = "x-route-path";
 
 /**
  * Routes (English paths, no /es prefix) whose Spanish version is fully

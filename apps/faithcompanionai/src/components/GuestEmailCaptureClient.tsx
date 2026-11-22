@@ -12,16 +12,23 @@
 // `hideOnPathPrefixes` lets one instance (the footer) step aside on routes
 // that already carry an inline capture, so a guest is never asked twice on
 // one page. "/" matches the homepage exactly; anything else is a prefix.
+//
+// `hideOnSpanish` hides it on /es pages while the daily emails are English-only.
+// It reads the browser URL, which works on force-static routes too (their
+// server-rendered locale is always English); safe because this component only
+// renders on the client, after /api/me has settled.
 "use client";
 
 import { usePathname } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import EmailCaptureBanner from "@/components/EmailCaptureBanner";
+import { splitLocale } from "@/lib/i18n/config";
 
 type Props = {
   source: string;
   variant?: "card" | "compact";
   hideOnPathPrefixes?: string[];
+  hideOnSpanish?: boolean;
   heading?: string;
   subtext?: string;
 };
@@ -30,6 +37,7 @@ export default function GuestEmailCaptureClient({
   source,
   variant,
   hideOnPathPrefixes = [],
+  hideOnSpanish = false,
   heading,
   subtext,
 }: Props) {
@@ -39,6 +47,7 @@ export default function GuestEmailCaptureClient({
   const hidden = hideOnPathPrefixes.some((p) => (p === "/" ? pathname === "/" : pathname.startsWith(p)));
   if (hidden) return null;
   if (!user.loaded || user.signedIn || user.authed) return null;
+  if (hideOnSpanish && splitLocale(window.location.pathname).locale === "es") return null;
 
   return <EmailCaptureBanner source={source} variant={variant} heading={heading} subtext={subtext} />;
 }
