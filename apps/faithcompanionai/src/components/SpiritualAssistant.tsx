@@ -3,11 +3,18 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { RotateCcw, X, Send } from "lucide-react";
+import { useDictionary, useLocale } from "@/context/LocaleContext";
+import { assistant } from "@/lib/i18n/dictionaries/assistant";
+import { localizedHref } from "@/lib/i18n/links";
+
+type Verse = { reference: string; text: string };
 
 type Msg = {
   role: "assistant" | "user";
   content: string;
   ts: number;
+  // RV1909 text from bible-api.com for references in a Spanish reply.
+  verses?: Verse[];
 };
 
 function cn(...xs: Array<string | false | null | undefined>) {
@@ -15,6 +22,18 @@ function cn(...xs: Array<string | false | null | undefined>) {
 }
 
 const STORAGE_KEY = "fcai_chat_v1";
+
+// The greeting used to be stored as the first message. It is now rendered from
+// the dictionary at display time (so it matches the page language and is never
+// sent as history), so drop any stored copy left over from the old widget.
+const LEGACY_GREETINGS = new Set([
+  "Hello! I'm your Faith Companion AI assistant. I can help with Scripture-based encouragement, short prayers, and faith questions. What would you like help with today?",
+  "Hello! I'm your Faith Companion AI assistant. How can I help you today?",
+]);
+
+function withoutLegacyGreeting(msgs: Msg[]) {
+  return msgs.filter((m) => !(m.role === "assistant" && LEGACY_GREETINGS.has(m.content)));
+}
 
 function downloadText(filename: string, text: string) {
   const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
@@ -29,7 +48,10 @@ function downloadText(filename: string, text: string) {
 }
 
 export default function SpiritualAssistant() {
+  const locale = useLocale();
+  const t = useDictionary(assistant);
   const [open, setOpen] = useState(false);
+  const [cleared, setCleared] = useState(false);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
   const [savedFlash, setSavedFlash] = useState(false);
@@ -38,7 +60,7 @@ export default function SpiritualAssistant() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       const parsed = raw ? (JSON.parse(raw) as Msg[]) : [];
-      return Array.isArray(parsed) ? parsed : [];
+      return Array.isArray(parsed) ? withoutLegacyGreeting(parsed) : [];
     } catch {
       return [];
     }
@@ -46,19 +68,8 @@ export default function SpiritualAssistant() {
 
   const listRef = useRef<HTMLDivElement | null>(null);
 
-  // Seed message if empty
-  useEffect(() => {
-    if (msgs.length > 0) return;
-    setMsgs([
-      {
-        role: "assistant",
-        content:
-          "Hello! I'm your Faith Companion AI assistant. I can help with Scripture-based encouragement, short prayers, and faith questions. What would you like help with today?",
-        ts: Date.now(),
-      },
-    ]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // Built from the dictionary at display time; not stored, not sent as history.
+  const greeting = cleared ? t.greetingAfterClear : t.greeting;
 
   // Persist
   useEffect(() => {
@@ -78,14 +89,17 @@ export default function SpiritualAssistant() {
   }, [open, msgs]);
 
   const transcript = useMemo(() => {
-    return msgs
-      .map((m) => {
-        const who = m.role === "user" ? "You" : "Assistant";
-        const time = new Date(m.ts).toLocaleString();
-        return `[${time}] ${who}: ${m.content}`;
-      })
-      .join("\n\n");
-  }, [msgs]);
+    const greetingLine = `${t.assistant}: ${greeting}${t.spanishOffer ? ` ${t.spanishOffer}` : ""}`;
+    return [
+      greetingLine,
+      ...msgs.map((m) => {
+        const who = m.role === "user" ? t.you : t.assistant;
+        const time = new Date(m.ts).toLocaleString(locale);
+        const verses = (m.verses ?? []).map((v) => `\n${v.reference} (RV1909): ${v.text}`).join("");
+        return `[${time}] ${who}: ${m.content}${verses}`;
+      }),
+    ].join("\n\n");
+  }, [msgs, greeting, t, locale]);
 
   async function addUserMessage(text: string) {
     const trimmed = text.trim();
@@ -103,7 +117,7 @@ export default function SpiritualAssistant() {
       const res = await fetch("/api/assistant", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ message: trimmed, history }),
+        body: JSON.stringify({ message: trimmed, history, locale }),
       });
 
       const data = await res.json().catch(() => null);
@@ -111,19 +125,23 @@ export default function SpiritualAssistant() {
       const replyContent = res.ok && data?.reply
         ? data.reply
         : data?.error === "LIMIT_REACHED" || res.status === 429
-        ? "You've reached your daily limit. Please try again tomorrow."
-        : data?.error || "Something went wrong. Please try again.";
+        ? t.limitReached
+        : t.genericError || data?.error || t.fallbackError;
+      const verses: Verse[] | undefined =
+        res.ok && Array.isArray(data?.verses) && data.verses.length > 0
+          ? data.verses.map((v: Verse) => ({ reference: v.reference, text: v.text }))
+          : undefined;
 
       setMsgs((prev) => [
         ...prev,
-        { role: "assistant", content: replyContent, ts: Date.now() },
+        { role: "assistant", content: replyContent, ts: Date.now(), ...(verses ? { verses } : {}) },
       ]);
     } catch {
       setMsgs((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: "I couldn't reach the server. Please check your connection and try again.",
+          content: t.offline,
           ts: Date.now(),
         },
       ]);
@@ -133,14 +151,8 @@ export default function SpiritualAssistant() {
   }
 
   function clearChat() {
-    setMsgs([
-      {
-        role: "assistant",
-        content:
-          "Hello! I'm your Faith Companion AI assistant. How can I help you today?",
-        ts: Date.now(),
-      },
-    ]);
+    setMsgs([]);
+    setCleared(true);
   }
 
   return (
@@ -151,9 +163,9 @@ export default function SpiritualAssistant() {
           type="button"
           onClick={() => setOpen(true)}
           className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-4 py-3 text-sm font-semibold text-white shadow-lg hover:opacity-95"
-          aria-label="Open Spiritual Assistant"
+          aria-label={t.openAria}
         >
-          {"💬"} <span className="hidden sm:inline">Spiritual Assistant</span>
+          {"💬"} <span className="hidden sm:inline">{t.openLabel}</span>
         </button>
       )}
 
@@ -162,14 +174,14 @@ export default function SpiritualAssistant() {
         <div className="fixed bottom-5 right-5 z-50 w-[92vw] max-w-md overflow-hidden rounded-2xl border border-white/10 bg-black/70 backdrop-blur-xl shadow-2xl">
           {/* Header */}
           <div className="flex items-center justify-between bg-gradient-to-r from-purple-600 to-orange-500 px-4 py-3 text-white">
-            <div className="font-semibold">Spiritual Assistant</div>
+            <div className="font-semibold">{t.title}</div>
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={clearChat}
                 className="rounded-md bg-white/15 px-2 py-1 text-xs hover:bg-white/25"
-                aria-label="Clear conversation"
-                title="Clear chat (keeps widget open)"
+                aria-label={t.clearAria}
+                title={t.clearTitle}
               >
                 <RotateCcw size={14} />
               </button>
@@ -177,8 +189,8 @@ export default function SpiritualAssistant() {
                 type="button"
                 onClick={() => setOpen(false)}
                 className="rounded-md bg-white/15 px-2 py-1 text-xs hover:bg-white/25"
-                aria-label="Close chat"
-                title="Close (conversation is saved)"
+                aria-label={t.closeAria}
+                title={t.closeTitle}
               >
                 <X size={14} />
               </button>
@@ -187,25 +199,25 @@ export default function SpiritualAssistant() {
 
           {/* Quick actions */}
           <div className="px-4 py-3">
-            <div className="text-xs font-semibold text-white/70">Quick Actions</div>
+            <div className="text-xs font-semibold text-white/70">{t.quickActions}</div>
             <div className="mt-2 flex flex-wrap gap-2">
               <Link
-                href="/tools/prayer"
+                href={localizedHref("/tools/prayer", locale)}
                 className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/80 hover:bg-white/15 hover:text-white"
               >
-                Generate a Prayer
+                {t.actions.prayer}
               </Link>
               <Link
-                href="/tools/verse"
+                href={localizedHref("/tools/verse", locale)}
                 className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/80 hover:bg-white/15 hover:text-white"
               >
-                Find a Verse
+                {t.actions.verse}
               </Link>
               <Link
-                href="/tools/devotional"
+                href={localizedHref("/tools/devotional", locale)}
                 className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/80 hover:bg-white/15 hover:text-white"
               >
-                Daily Devotional
+                {t.actions.devotional}
               </Link>
             </div>
 
@@ -220,7 +232,7 @@ export default function SpiritualAssistant() {
                 }}
                 className="rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white/80 hover:bg-white/10 hover:text-white"
               >
-                {savedFlash ? "Saved \u2014 you can access this later." : "Save Conversation"}
+                {savedFlash ? t.saved : t.save}
               </button>
               <button
                 type="button"
@@ -234,14 +246,14 @@ export default function SpiritualAssistant() {
                 }
                 className="rounded-md bg-gradient-to-r from-purple-600 to-orange-500 px-3 py-2 text-xs font-semibold text-white hover:opacity-95"
               >
-                Download (.txt)
+                {t.download}
               </button>
               <button
                 type="button"
                 onClick={clearChat}
                 className="rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white/50 hover:bg-white/10 hover:text-white/80"
               >
-                Clear chat
+                {t.clear}
               </button>
             </div>
           </div>
@@ -251,6 +263,14 @@ export default function SpiritualAssistant() {
             ref={listRef}
             className="max-h-[48vh] space-y-3 overflow-y-auto px-4 pb-4"
           >
+            <div className="max-w-[92%] rounded-2xl bg-white/5 px-3 py-2 text-sm leading-relaxed text-white/80">
+              {greeting}
+              {t.spanishOffer && (
+                <span lang="es" className="mt-1 block">
+                  {t.spanishOffer}
+                </span>
+              )}
+            </div>
             {msgs.map((m, idx) => (
               <React.Fragment key={idx}>
                 <div
@@ -262,12 +282,22 @@ export default function SpiritualAssistant() {
                   )}
                 >
                   {m.content}
+                  {m.verses?.map((v) => (
+                    <blockquote
+                      key={v.reference}
+                      lang="es"
+                      className="mt-2 border-l-2 border-white/20 pl-2 text-xs text-white/70"
+                    >
+                      <span className="block font-semibold text-white/80">{v.reference} (RV1909)</span>
+                      <span className="block">{v.text}</span>
+                    </blockquote>
+                  ))}
                 </div>
               </React.Fragment>
             ))}
             {thinking && (
               <div className="max-w-[92%] rounded-2xl bg-white/5 px-3 py-2 text-sm text-white/50">
-                Thinking...
+                {t.thinking}
               </div>
             )}
           </div>
@@ -284,20 +314,20 @@ export default function SpiritualAssistant() {
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask a spiritual question..."
+                placeholder={t.placeholder}
                 className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 outline-none focus:border-white/20"
               />
               <button
                 type="submit"
                 disabled={thinking}
                 className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 text-white hover:bg-white/15 disabled:opacity-50"
-                aria-label="Send"
+                aria-label={t.send}
               >
                 {thinking ? "..." : <Send size={16} />}
               </button>
             </div>
             <p className="mt-1.5 text-center text-[10px] text-white/30">
-              Your conversation is not saved unless you click Save.
+              {t.footnote}
             </p>
           </form>
         </div>

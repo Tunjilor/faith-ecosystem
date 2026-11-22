@@ -2,6 +2,8 @@
 import { NextResponse } from "next/server";
 import { enforceAskQuotaFromSessionOrThrow } from "@/lib/access";
 import { extractOutputText, getModel, getOpenAI } from "@/lib/openai-ts";
+import { languageInstruction, parseLocaleField, replyLanguage } from "@/lib/i18n/reply-language";
+import { formatSpanishReferences, rv1909VersesFor } from "@/lib/i18n/scripture-es";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -55,6 +57,10 @@ export async function POST(req: Request) {
     const name = (body?.name ?? "") as string;
     const situation = (body?.situation ?? "") as string;
     const tone = (body?.tone ?? "gentle") as Tone;
+    // The person's own words (topic, situation) when the page wraps them in an
+    // English prompt template; used only to pick the reply language.
+    const userText = typeof body?.userText === "string" ? body.userText : "";
+    const localeField = parseLocaleField(body?.locale);
 
     if (!prompt || typeof prompt !== "string") {
       return NextResponse.json(
@@ -62,6 +68,11 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+    if (!localeField.ok) {
+      return NextResponse.json({ error: localeField.error }, { status: 400 });
+    }
+
+    const lang = replyLanguage(userText.trim() || `${prompt} ${situation}`, localeField.locale);
 
     const client = getOpenAI();
     const model = getModel();
@@ -80,16 +91,24 @@ export async function POST(req: Request) {
     const resp = await client.responses.create({
       model,
       input: [
-        { role: "system", content: systemForMode(mode, tone) },
+        { role: "system", content: `${systemForMode(mode, tone)}
+${languageInstruction(lang)}` },
         { role: "user", content: userMessage },
       ],
       temperature: tone === "short" ? 0.4 : 0.7,
     });
 
-    const answer = extractOutputText(resp);
+    const raw = extractOutputText(resp);
+
+    if (lang === "es") {
+      const answer = formatSpanishReferences(raw);
+      const verses = await rv1909VersesFor(answer, 3);
+      return NextResponse.json({ answer, lang, verses, quota: quotaInfo });
+    }
 
     return NextResponse.json({
-      answer,
+      answer: raw,
+      lang,
       quota: quotaInfo,
     });
   } catch (err: any) {
