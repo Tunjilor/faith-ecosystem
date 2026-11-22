@@ -3,77 +3,13 @@
 "use client";
 import { useUser } from "@/context/UserContext";
 
-import React from "react";
 import { useEffect, useState } from "react";
 import DenominationSelect, { getDenominationNote, readDenomination } from "@/components/DenominationSelect";
 import MobileInstallBanner from "@/components/MobileInstallBanner";
-
-function inlineBold(text: string): React.ReactNode {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
-  if (parts.length === 1) return text;
-  return parts.map((part, i) => {
-    const m = part.match(/^\*\*([^*]+)\*\*$/);
-    return m ? <strong key={i} className="font-semibold text-slate-900">{m[1]}</strong> : part;
-  });
-}
-
-function renderMarkdown(text: string): React.ReactNode[] {
-  const lines = text.split("\n");
-  const output: React.ReactNode[] = [];
-  let key = 0;
-
-  for (const raw of lines) {
-    const line = raw.trimEnd();
-
-    if (!line) {
-      output.push(<div key={key++} className="h-2" />);
-      continue;
-    }
-
-    // Bullet point
-    if (/^[-*]\s/.test(line)) {
-      output.push(
-        <div key={key++} className="flex gap-2 text-sm leading-6 text-slate-700">
-          <span className="mt-0.5 text-slate-400">•</span>
-          <span>{inlineBold(line.replace(/^[-*]\s/, ""))}</span>
-        </div>
-      );
-      continue;
-    }
-
-    // Numbered list
-    const numMatch = line.match(/^(\d+)\.\s(.+)/);
-    if (numMatch) {
-      output.push(
-        <div key={key++} className="flex gap-2 text-sm leading-6 text-slate-700">
-          <span className="w-4 shrink-0 font-semibold text-slate-500">{numMatch[1]}.</span>
-          <span>{inlineBold(numMatch[2])}</span>
-        </div>
-      );
-      continue;
-    }
-
-    // Whole-line bold (section heading like **Reflection:** or **Title**)
-    const headingMatch = line.match(/^\*\*(.+?)\*\*:?\s*$/);
-    if (headingMatch) {
-      output.push(
-        <p key={key++} className="mt-1 text-sm font-semibold text-slate-900">
-          {headingMatch[1]}
-        </p>
-      );
-      continue;
-    }
-
-    // Regular line (may contain inline bold)
-    output.push(
-      <p key={key++} className="text-sm leading-6 text-slate-700">
-        {inlineBold(line)}
-      </p>
-    );
-  }
-
-  return output;
-}
+import AiResultText from "@/components/AiResultText";
+import Rv1909VerseCards, { readVerseCards, type Rv1909Card } from "@/components/Rv1909VerseCards";
+import { useDictionary, useLocale } from "@/context/LocaleContext";
+import { tools } from "@/lib/i18n/dictionaries/tools";
 
 type Tone = "gentle" | "firm" | "short" | "detailed";
 
@@ -85,9 +21,12 @@ type AskResponse = {
   answer?: string;
   error?: string;
   code?: string | null;
+  verses?: unknown;
 };
 
 export default function DevotionalPage() {
+  const locale = useLocale();
+  const { common, devotional: t } = useDictionary(tools);
   const [topic, setTopic] = useState("");
   const [name, setName] = useState("");
   const [situation, setSituation] = useState("");
@@ -95,6 +34,7 @@ export default function DevotionalPage() {
   const [denomination, setDenomination] = useState("non-denominational");
 
   const [result, setResult] = useState("");
+  const [verseCards, setVerseCards] = useState<Rv1909Card[]>([]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -133,6 +73,8 @@ export default function DevotionalPage() {
     setSuccess("");
 
     const denomNote = getDenominationNote(denomination);
+    // English instruction template; on /es the person's own words go in
+    // `userText` so the reply language follows them.
     const prompt =
       topic.trim().length > 0
         ? `Write a Christian devotional about ${topic.trim()}. ${
@@ -156,6 +98,9 @@ export default function DevotionalPage() {
           tone,
           name: name.trim(),
           situation: situation.trim(),
+          ...(locale === "es"
+            ? { locale, userText: [topic.trim(), situation.trim()].filter(Boolean).join(". ") }
+            : {}),
         }),
       });
 
@@ -165,25 +110,26 @@ export default function DevotionalPage() {
       try {
         data = JSON.parse(text);
       } catch {
-        data = { error: text || "Unexpected response." };
+        data = { error: text || common.unexpected };
       }
 
       if (!res.ok) {
         if (res.status === 429) {
-          setError(data.error || "Daily limit reached. Please try again tomorrow.");
+          setError(locale === "es" ? common.limitReached : data.error || common.limitReached);
           return;
         }
 
-        throw new Error(data.error || `Request failed (${res.status})`);
+        throw new Error((locale === "en" && data.error) || common.requestFailed(res.status));
       }
 
       if (!data.answer) {
-        throw new Error("No devotional returned.");
+        throw new Error(t.noResult);
       }
 
       setResult(data.answer);
+      setVerseCards(locale === "es" ? readVerseCards(data.verses) : []);
     } catch (err: any) {
-      setError(err?.message || "Something went wrong.");
+      setError(err?.message || common.somethingWrong);
     } finally {
       setIsLoading(false);
     }
@@ -194,12 +140,12 @@ export default function DevotionalPage() {
     setSuccess("");
 
     if (!result.trim()) {
-      setError("Generate a devotional first.");
+      setError(t.needResult);
       return;
     }
 
     if (!me?.signedIn) {
-      setError("Sign in to save your devotionals and build your personal faith journal.");
+      setError(t.signIn);
       return;
     }
 
@@ -213,7 +159,7 @@ export default function DevotionalPage() {
         },
         body: JSON.stringify({
           type: "answer",
-          title: topic.trim() || "Devotional",
+          title: topic.trim() || t.defaultTitle,
           content: result,
           reference: null,
         }),
@@ -225,16 +171,16 @@ export default function DevotionalPage() {
       try {
         data = JSON.parse(text);
       } catch {
-        data = { error: text || "Failed to save." };
+        data = { error: text || common.failedSave };
       }
 
       if (!res.ok) {
-        throw new Error(data.error || "Failed to save.");
+        throw new Error((locale === "en" && data.error) || common.failedSave);
       }
 
-      setSuccess("Devotional saved to your account.");
+      setSuccess(t.saved);
     } catch (err: any) {
-      setError(err?.message || "Failed to save.");
+      setError(err?.message || common.failedSave);
     } finally {
       setIsSaving(false);
     }
@@ -246,6 +192,7 @@ export default function DevotionalPage() {
     setSituation("");
     setTone("gentle");
     setResult("");
+    setVerseCards([]);
     setError("");
     setSuccess("");
   }
@@ -254,11 +201,11 @@ export default function DevotionalPage() {
     <main className="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-12">
       <header className="mb-8">
         <p className="text-xs font-semibold uppercase tracking-widest text-orange-400">
-          Based on your faith journey, here&apos;s guidance for you today
+          {t.eyebrow}
         </p>
-        <h1 className="mt-2 text-3xl font-bold text-white md:text-4xl">Devotional</h1>
+        <h1 className="mt-2 text-3xl font-bold text-white md:text-4xl">{t.heading}</h1>
         <p className="mt-2 max-w-2xl text-sm leading-7 text-white/70 md:text-base">
-          This is tailored to where you are right now — enter a topic or generate one for your current season.
+          {t.intro}
         </p>
       </header>
 
@@ -266,20 +213,20 @@ export default function DevotionalPage() {
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label htmlFor="topic" className="block text-sm font-medium text-slate-700">
-              Topic
+              {common.topic}
             </label>
             <input
               id="topic"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              placeholder="e.g., peace, endurance, hope, forgiveness"
+              placeholder={t.topicPlaceholder}
               className="mt-2 w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-black/10"
             />
           </div>
 
           <div>
             <label htmlFor="tone" className="block text-sm font-medium text-slate-700">
-              Tone
+              {common.tone}
             </label>
             <select
               id="tone"
@@ -287,41 +234,41 @@ export default function DevotionalPage() {
               onChange={(e) => setTone(e.target.value as Tone)}
               className="mt-2 w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-black/10"
             >
-              <option value="gentle">Gentle</option>
-              <option value="firm">Firm</option>
-              <option value="short">Short</option>
-              <option value="detailed">Detailed</option>
+              <option value="gentle">{common.tones.gentle}</option>
+              <option value="firm">{common.tones.firm}</option>
+              <option value="short">{common.tones.short}</option>
+              <option value="detailed">{common.tones.detailed}</option>
             </select>
           </div>
 
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-slate-700">
-              Your name (optional)
+              {common.name}
             </label>
             <input
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g., Sarah"
+              placeholder={common.namePlaceholder}
               className="mt-2 w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-black/10"
             />
           </div>
 
           <div>
             <label htmlFor="situation" className="block text-sm font-medium text-slate-700">
-              What are you facing? (optional)
+              {common.situation}
             </label>
             <input
               id="situation"
               value={situation}
               onChange={(e) => setSituation(e.target.value)}
-              placeholder="e.g., discouragement, uncertainty, fear, waiting"
+              placeholder={t.situationPlaceholder}
               className="mt-2 w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-black/10"
             />
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-slate-700">Tradition</label>
+            <label className="block text-sm font-medium text-slate-700">{common.tradition}</label>
             <DenominationSelect className="mt-2 w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-black/10" />
           </div>
         </div>
@@ -333,7 +280,7 @@ export default function DevotionalPage() {
             disabled={isLoading}
             className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-black px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
           >
-            {isLoading ? "Generating..." : "Generate devotional"}
+            {isLoading ? common.generating : t.generate}
           </button>
 
           <button
@@ -342,7 +289,7 @@ export default function DevotionalPage() {
             disabled={!result || isSaving}
             className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 disabled:opacity-50"
           >
-            {isSaving ? "Saving..." : "Save"}
+            {isSaving ? common.saving : common.save}
           </button>
 
           <button
@@ -350,7 +297,7 @@ export default function DevotionalPage() {
             onClick={handleReset}
             className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
           >
-            Reset
+            {common.reset}
           </button>
         </div>
 
@@ -368,18 +315,18 @@ export default function DevotionalPage() {
 
         {result ? (
           <div className="mt-8 rounded-2xl bg-slate-50 p-5 text-slate-900">
-            <div className="text-sm font-semibold text-slate-800">Devotional</div>
+            <div className="text-sm font-semibold text-slate-800">{t.resultHeading}</div>
 
-            <div className="mt-3 space-y-1">
-              {renderMarkdown(result)}
-            </div>
+            <AiResultText text={result} className="mt-3" />
+
+            <Rv1909VerseCards heading={common.versesHeading} verses={verseCards} />
 
             <MobileInstallBanner />
           </div>
         ) : (
           <div className="mt-8 rounded-2xl bg-slate-50 p-5">
             <p className="text-sm text-slate-600">
-              Your devotional will appear here with reflection, prayer, Scripture references, and action steps.
+              {t.empty}
             </p>
           </div>
         )}
@@ -387,5 +334,3 @@ export default function DevotionalPage() {
     </main>
   );
 }
-
-
