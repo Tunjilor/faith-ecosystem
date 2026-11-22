@@ -1,4 +1,6 @@
-// Generates the static social-share image at public/brand/og-quiz.png.
+// Generates the static default social-share images:
+//   public/brand/og-quiz.png        English (site default)
+//   public/brand/og-default-es.png  Spanish (default for /es pages)
 //
 // The design deliberately mirrors the dynamic OG route in
 // src/app/api/og/verse/route.tsx — same #170537 base, same purple/orange corner
@@ -19,7 +21,12 @@ mkdirSync('public/brand', { recursive: true });
 // working on machines without Segoe UI.
 const FONT = 'Segoe UI, Helvetica Neue, Arial, sans-serif';
 
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+const VARIANTS = [
+  { out: 'public/brand/og-quiz.png', tagline: 'Personalized scripture, prayer &amp; devotionals' },
+  { out: 'public/brand/og-default-es.png', tagline: 'Escrituras, oraciones y devocionales personalizados' },
+];
+
+const svgFor = (tagline) => `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
     <!-- Purple glow, top-left: matches the 580px circle at (-80,-80) in the OG route -->
     <radialGradient id="purpleGlow" cx="0" cy="0" r="1"
@@ -49,7 +56,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
 
   <!-- Tagline -->
   <text x="600" y="424" text-anchor="middle" font-family="${FONT}" font-size="30"
-        fill="#c4a7f7" fill-opacity="0.82">Personalized scripture, prayer &amp; devotionals</text>
+        fill="#c4a7f7" fill-opacity="0.82">${tagline}</text>
 
   <!-- Bottom rule + domain -->
   <rect x="440" y="540" width="320" height="1" fill="#ffffff" fill-opacity="0.12"/>
@@ -57,8 +64,8 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
         fill="#ffffff" fill-opacity="0.40">faithcompanionai.com</text>
 </svg>`;
 
-const out = 'public/brand/og-quiz.png';
-await sharp(Buffer.from(svg)).png().toFile(out);
-
-const meta = await sharp(out).metadata();
-console.log(`Created: ${out} (${meta.width}x${meta.height})`);
+for (const { out, tagline } of VARIANTS) {
+  await sharp(Buffer.from(svgFor(tagline))).png().toFile(out);
+  const meta = await sharp(out).metadata();
+  console.log(`Created: ${out} (${meta.width}x${meta.height})`);
+}

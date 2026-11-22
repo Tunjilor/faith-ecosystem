@@ -1,37 +1,47 @@
 // src/components/Footer.tsx
 import Link from "next/link";
 import GuestEmailCaptureClient from "@/components/GuestEmailCaptureClient";
+import { getLocale } from "@/lib/i18n/server";
+import { localizedHref } from "@/lib/i18n/links";
+import { footer } from "@/lib/i18n/dictionaries/footer";
 
-const sitemapLinks = [
-  { label: "Home", href: "/" },
-  { label: "Dashboard", href: "/dashboard" },
-  { label: "Tools", href: "/tools/verse" },
-  { label: "Prayer Library", href: "/topics" },
-  { label: "Resources", href: "/resources" },
-  { label: "Quiz", href: "/biblequiz" },
-];
+type FooterText = (typeof footer)["en"];
 
-const toolLinks = [
-  { label: "Verse", href: "/tools/verse" },
-  { label: "Prayer", href: "/tools/prayer" },
-  { label: "Devotional", href: "/tools/devotional" },
-];
-
-const legalLinks = [
-  { label: "About", href: "/about" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Contact", href: "/contact" },
-  { label: "Privacy", href: "/privacy" },
-  { label: "Terms", href: "/terms" },
-];
-
-const ecosystemLinks = [
-  { label: "Tithe Calculator", href: "/tools/tithe" },
-  { label: "Prayer Generator", href: "/tools/prayer" },
-  { label: "Bible Verse Generator", href: "/tools/verse" },
-];
+// hrefs are English paths, localized at render time.
+function buildLinks(l: FooterText["links"]) {
+  return {
+    sitemapLinks: [
+      { label: l.home, href: "/" },
+      { label: l.dashboard, href: "/dashboard" },
+      { label: l.tools, href: "/tools/verse" },
+      { label: l.prayerLibrary, href: "/topics" },
+      { label: l.resources, href: "/resources" },
+      { label: l.quiz, href: "/biblequiz" },
+    ],
+    toolLinks: [
+      { label: l.verse, href: "/tools/verse" },
+      { label: l.prayer, href: "/tools/prayer" },
+      { label: l.devotional, href: "/tools/devotional" },
+    ],
+    legalLinks: [
+      { label: l.about, href: "/about" },
+      { label: l.faq, href: "/faq" },
+      { label: l.contact, href: "/contact" },
+      { label: l.privacy, href: "/privacy" },
+      { label: l.terms, href: "/terms" },
+    ],
+    ecosystemLinks: [
+      { label: l.titheCalculator, href: "/tools/tithe" },
+      { label: l.prayerGenerator, href: "/tools/prayer" },
+      { label: l.verseGenerator, href: "/tools/verse" },
+    ],
+  };
+}
 
 export default function Footer() {
+  const locale = getLocale();
+  const t = footer[locale];
+  const { sitemapLinks, toolLinks, legalLinks, ecosystemLinks } = buildLinks(t.links);
   return (
     <footer className="border-t border-white/10">
       <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-12">
@@ -48,38 +58,38 @@ export default function Footer() {
                 <div>
                   <div className="font-extrabold text-white">Faith Companion AI</div>
                   <div className="text-sm text-white/60">
-                    Daily verses &bull; prayers &bull; devotionals
+                    {t.tagline}
                   </div>
                 </div>
               </div>
 
               <p className="mt-5 max-w-sm text-sm leading-7 text-white/70">
-                A calm, Scripture-grounded companion for daily encouragement, reflection, and spiritual growth.
+                {t.blurb}
               </p>
 
               <div className="mt-5 flex flex-wrap gap-3">
                 <Link
-                  href="/biblequiz"
+                  href={localizedHref("/biblequiz", locale)}
                   className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-gradient-to-r from-purple-600 to-orange-500 px-4 py-2 text-sm font-semibold text-white transition hover:opacity-95"
                 >
-                  Take the Quiz
+                  {t.quizCta}
                 </Link>
               </div>
 
               <p className="mt-4 text-xs leading-6 text-white/45">
-                Tip: Share your quiz score to invite friends to beat it.
+                {t.quizTip}
               </p>
             </div>
 
             <div>
               <h3 className="text-sm font-semibold uppercase tracking-wide text-white/60">
-                Sitemap
+                {t.sitemapHeading}
               </h3>
               <div className="mt-4 space-y-3">
                 {sitemapLinks.map((item) => (
                   <Link
                     key={item.href}
-                    href={item.href}
+                    href={localizedHref(item.href, locale)}
                     className="block text-sm text-white/75 transition hover:text-white"
                   >
                     {item.label}
@@ -90,13 +100,13 @@ export default function Footer() {
 
             <div>
               <h3 className="text-sm font-semibold uppercase tracking-wide text-white/60">
-                Tools
+                {t.toolsHeading}
               </h3>
               <div className="mt-4 space-y-3">
                 {toolLinks.map((item) => (
                   <Link
                     key={item.href}
-                    href={item.href}
+                    href={localizedHref(item.href, locale)}
                     className="block text-sm text-white/75 transition hover:text-white"
                   >
                     {item.label}
@@ -107,13 +117,13 @@ export default function Footer() {
 
             <div>
               <h3 className="text-sm font-semibold uppercase tracking-wide text-white/60">
-                Help &amp; Legal
+                {t.helpHeading}
               </h3>
               <div className="mt-4 space-y-3">
                 {legalLinks.map((item) => (
                   <Link
                     key={item.href}
-                    href={item.href}
+                    href={localizedHref(item.href, locale)}
                     className="block text-sm text-white/75 transition hover:text-white"
                   >
                     {item.label}
@@ -122,7 +132,7 @@ export default function Footer() {
               </div>
 
               <div className="mt-6 text-sm text-white/60">
-                Email
+                {t.email}
               </div>
               <a
                 href="mailto:support@faithcompanionai.com"
@@ -134,13 +144,13 @@ export default function Footer() {
 
             <div>
               <h3 className="text-sm font-semibold uppercase tracking-wide text-white/60">
-                Free Christian AI Tools
+                {t.ecosystemHeading}
               </h3>
               <div className="mt-4 space-y-3">
                 {ecosystemLinks.map((item) => (
                   <Link
                     key={item.href}
-                    href={item.href}
+                    href={localizedHref(item.href, locale)}
                     className="block text-sm text-white/75 transition hover:text-white"
                   >
                     {item.label}
@@ -148,7 +158,7 @@ export default function Footer() {
                 ))}
               </div>
               <p className="mt-5 text-xs leading-5 text-white/45">
-                Part of the Faith Companion AI ecosystem — free tools for prayer, Bible study, and tithing.
+                {t.ecosystemNote}
               </p>
             </div>
           </div>
@@ -165,9 +175,9 @@ export default function Footer() {
           </div>
 
           <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
-            <div>&copy; {new Date().getFullYear()} Faith Companion AI. All rights reserved.</div>
+            <div>&copy; {new Date().getFullYear()} Faith Companion AI. {t.rights}</div>
             <div className="flex flex-wrap items-center gap-4">
-              <div>Scripture-based support for daily encouragement and growth.</div>
+              <div>{t.bottomLine}</div>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@
 // URL, so server and client render the same markup (no window access in render).
 import { useLocale } from "@/context/LocaleContext";
 import { LOCALES, LOCALE_COOKIE, splitLocale, withLocale, type Locale } from "@/lib/i18n/config";
+import { nav } from "@/lib/i18n/dictionaries/nav";
 
 const LABELS: Record<Locale, string> = { en: "EN", es: "ES" };
 const NAMES: Record<Locale, string> = { en: "English", es: "Español" };
@@ -20,7 +21,7 @@ export default function LanguageSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-1.5 text-xs font-semibold" aria-label="Language switcher">
+    <div className="flex items-center gap-1.5 text-xs font-semibold" aria-label={nav[current].languageSwitcher}>
       {LOCALES.map((code, i) => (
         <span key={code} className="flex items-center gap-1.5">
           {i > 0 && <span className="text-white/20">|</span>}

@@ -4,6 +4,7 @@ import {
   LOCALES,
   LOCALE_COOKIE as COOKIE,
   LOCALE_HEADER,
+  ROUTE_PATH_HEADER,
   isTranslatedRoute,
 } from "@/lib/i18n/config";
 const LEGACY_REDIRECTS: Record<string, string> = {
@@ -55,6 +56,7 @@ export function middleware(request: NextRequest) {
     }
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set(LOCALE_HEADER, locale);
+    requestHeaders.set(ROUTE_PATH_HEADER, stripped);
     const response = NextResponse.rewrite(new URL(stripped, request.url), {
       request: { headers: requestHeaders },
     });
@@ -68,6 +70,7 @@ export function middleware(request: NextRequest) {
   }
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set(LOCALE_HEADER, DEFAULT_LOCALE);
+  requestHeaders.set(ROUTE_PATH_HEADER, pathname);
   const response = NextResponse.next({
     request: { headers: requestHeaders },
   });

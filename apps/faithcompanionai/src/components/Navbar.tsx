@@ -6,34 +6,53 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useUser } from "@/context/UserContext";
 import type { UserData } from "@/context/UserContext";
+import { useLocale } from "@/context/LocaleContext";
+import { splitLocale, type Locale } from "@/lib/i18n/config";
+import { localizedHref } from "@/lib/i18n/links";
+import { nav } from "@/lib/i18n/dictionaries/nav";
+
+type NavText = (typeof nav)["en"];
 
 type NavItem =
   | { type: "link"; label: string; href: string }
-  | { type: "menu"; label: string; baseHref?: string; items: Array<{ label: string; href: string }> };
+  | { type: "menu"; id: string; label: string; baseHref?: string; items: Array<{ label: string; href: string }> };
 
-const NAV: NavItem[] = [
-  { type: "link", label: "Home", href: "/" },
-  { type: "link", label: "Dashboard", href: "/dashboard" },
-  { type: "menu", label: "Tools", baseHref: "/tools", items: [
-    { label: "Verse", href: "/tools/verse" },
-    { label: "Prayer", href: "/tools/prayer" },
-    { label: "Devotional", href: "/tools/devotional" },
-    { label: "Bible Search", href: "/tools/bible-search" },
-    { label: "Share Card", href: "/tools/share-card" },
-  ]},
-  { type: "link", label: "Quiz", href: "/biblequiz" },
-  { type: "link", label: "Resources", href: "/resources" },
-  { type: "menu", label: "More", items: [
-    { label: "Saved", href: "/saved" },
-    { label: "Blog", href: "/blog" },
-    { label: "Topics", href: "/topics" },
-    { label: "About", href: "/about" },
-    { label: "FAQ", href: "/faq" },
-    { label: "Contact", href: "/contact" },
-    { label: "Privacy", href: "/privacy" },
-    { label: "Terms", href: "/terms" },
-  ]},
-];
+// hrefs are English paths; they are localized at render time, and active-state
+// checks compare against the current path without its /es prefix.
+function buildNav(t: NavText): NavItem[] {
+  return [
+    { type: "link", label: t.home, href: "/" },
+    { type: "link", label: t.dashboard, href: "/dashboard" },
+    { type: "menu", id: "tools", label: t.tools, baseHref: "/tools", items: [
+      { label: t.verse, href: "/tools/verse" },
+      { label: t.prayer, href: "/tools/prayer" },
+      { label: t.devotional, href: "/tools/devotional" },
+      { label: t.bibleSearch, href: "/tools/bible-search" },
+      { label: t.shareCard, href: "/tools/share-card" },
+    ]},
+    { type: "link", label: t.quiz, href: "/biblequiz" },
+    { type: "link", label: t.resources, href: "/resources" },
+    { type: "menu", id: "more", label: t.more, items: [
+      { label: t.saved, href: "/saved" },
+      { label: t.blog, href: "/blog" },
+      { label: t.topics, href: "/topics" },
+      { label: t.about, href: "/about" },
+      { label: t.faq, href: "/faq" },
+      { label: t.contact, href: "/contact" },
+      { label: t.privacy, href: "/privacy" },
+      { label: t.terms, href: "/terms" },
+    ]},
+  ];
+}
+
+/**
+ * Current path without its locale prefix. Under the /es rewrite the server sees
+ * "/tools/tithe" while the browser sees "/es/tools/tithe"; both map to the same
+ * value here, so active states match on / and /es and hydrate identically.
+ */
+function useRoutePath() {
+  return splitLocale(usePathname() ?? "/").path;
+}
 
 function classNames(...xs: Array<string | false | null | undefined>) {
   return xs.filter(Boolean).join(" ");
@@ -59,8 +78,8 @@ function useOnClickOutside(ref: React.RefObject<HTMLElement | null>, handler: ()
   }, [ref, handler, enabled]);
 }
 
-function Dropdown({ label, items, baseHref }: { label: string; items: Array<{ label: string; href: string }>; baseHref?: string }) {
-  const pathname = usePathname();
+function Dropdown({ label, items, baseHref, locale }: { label: string; items: Array<{ label: string; href: string }>; baseHref?: string; locale: Locale }) {
+  const pathname = useRoutePath();
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const anyActive = useMemo(() => {
@@ -85,7 +104,7 @@ function Dropdown({ label, items, baseHref }: { label: string; items: Array<{ la
       {open && (
         <div role="menu" className="absolute left-0 mt-2 w-60 overflow-hidden rounded-xl border border-white/10 bg-black/80 shadow-lg backdrop-blur">
           {items.map((it) => (
-            <Link key={it.href} href={it.href} onClick={() => setOpen(false)}
+            <Link key={it.href} href={localizedHref(it.href, locale)} onClick={() => setOpen(false)}
               className={classNames("block px-4 py-2 text-sm transition",
                 isActivePath(pathname, it.href) ? "bg-white/10 text-white" : "text-white/80 hover:bg-white/10 hover:text-white")}
               role="menuitem">{it.label}</Link>
@@ -96,8 +115,8 @@ function Dropdown({ label, items, baseHref }: { label: string; items: Array<{ la
   );
 }
 
-function AccountMenu({ me }: { me: UserData }) {
-  const pathname = usePathname();
+function AccountMenu({ me, t, locale }: { me: UserData; t: NavText; locale: Locale }) {
+  const pathname = useRoutePath();
   const [open, setOpen] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
   const wrapRef = useRef<HTMLDivElement | null>(null);
@@ -114,14 +133,14 @@ function AccountMenu({ me }: { me: UserData }) {
       setLoggingOut(true);
       const res = await fetch("/api/auth/logout", { method: "POST" });
       if (!res.ok) throw new Error("Logout failed");
-      window.location.href = "/login";
+      window.location.href = localizedHref("/login", locale);
     } catch { setLoggingOut(false); }
   }
   if (!signedIn) {
     return (
       <div className="hidden items-center gap-2 md:flex">
-        <Link href="/login" className={classNames("rounded-md px-3 py-2 text-sm font-medium transition",
-          isActivePath(pathname, "/login") ? "bg-white/10 text-white" : "text-white/80 hover:bg-white/10 hover:text-white")}>Sign in</Link>
+        <Link href={localizedHref("/login", locale)} className={classNames("rounded-md px-3 py-2 text-sm font-medium transition",
+          isActivePath(pathname, "/login") ? "bg-white/10 text-white" : "text-white/80 hover:bg-white/10 hover:text-white")}>{t.signIn}</Link>
       </div>
     );
   }
@@ -130,21 +149,21 @@ function AccountMenu({ me }: { me: UserData }) {
       <button type="button" onClick={() => setOpen((v) => !v)}
         className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-white hover:bg-white/10"
         aria-haspopup="menu" aria-expanded={open}>
-        <span className="max-w-[160px] truncate">{me.displayName || me.email || "Account"}</span>
+        <span className="max-w-[160px] truncate">{me.displayName || me.email || t.account}</span>
         <span className={classNames("transition", open && "rotate-180")}>▾</span>
       </button>
       {open && (
         <div className="absolute right-0 mt-2 w-64 overflow-hidden rounded-xl border border-white/10 bg-black/80 shadow-lg backdrop-blur">
           <div className="border-b border-white/10 px-4 py-3">
-            <div className="truncate text-sm font-semibold text-white">{me.displayName || me.email || "Account"}</div>
+            <div className="truncate text-sm font-semibold text-white">{me.displayName || me.email || t.account}</div>
             {me.displayName && <div className="truncate text-xs text-white/40">{me.email}</div>}
           </div>
-          <Link href="/dashboard" className="block px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white" onClick={() => setOpen(false)}>Dashboard</Link>
-          <Link href="/saved" className="block px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white" onClick={() => setOpen(false)}>Saved</Link>
-          <Link href="/profile" className="block px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white" onClick={() => setOpen(false)}>Profile &amp; Settings</Link>
+          <Link href={localizedHref("/dashboard", locale)} className="block px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white" onClick={() => setOpen(false)}>{t.dashboard}</Link>
+          <Link href={localizedHref("/saved", locale)} className="block px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white" onClick={() => setOpen(false)}>{t.saved}</Link>
+          <Link href={localizedHref("/profile", locale)} className="block px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white" onClick={() => setOpen(false)}>{t.profileSettings}</Link>
           <button type="button" onClick={handleLogout} disabled={loggingOut}
             className="block w-full px-4 py-2 text-left text-sm text-white/80 transition hover:bg-white/10 hover:text-white disabled:opacity-60">
-            {loggingOut ? "Logging out..." : "Log out"}
+            {loggingOut ? t.loggingOut : t.logOut}
           </button>
         </div>
       )}
@@ -153,22 +172,26 @@ function AccountMenu({ me }: { me: UserData }) {
 }
 
 export function Navbar() {
-  const pathname = usePathname();
+  const rawPathname = usePathname();
+  const pathname = useRoutePath();
+  const locale = useLocale();
+  const t = nav[locale];
+  const navItems = useMemo(() => buildNav(t), [t]);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileSections, setMobileSections] = useState<Record<string, boolean>>({ Tools: false, More: false });
+  const [mobileSections, setMobileSections] = useState<Record<string, boolean>>({ tools: false, more: false });
   const me = useUser();
-  useEffect(() => { setMobileOpen(false); }, [pathname]);
+  useEffect(() => { setMobileOpen(false); }, [rawPathname]);
   const signedIn = !!(me.signedIn || me.authed);
-  function toggleSection(label: string) {
-    setMobileSections((prev) => ({ ...prev, [label]: !prev[label] }));
+  function toggleSection(id: string) {
+    setMobileSections((prev) => ({ ...prev, [id]: !prev[id] }));
   }
   async function handleMobileLogout() {
-    try { await fetch("/api/auth/logout", { method: "POST" }); window.location.href = "/login"; } catch {}
+    try { await fetch("/api/auth/logout", { method: "POST" }); window.location.href = localizedHref("/login", locale); } catch {}
   }
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/30 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 md:px-6">
-        <Link href="/" className="flex items-center gap-3">
+        <Link href={localizedHref("/", locale)} className="flex items-center gap-3">
           <Image
               src="/icons/icon-192.png"
               alt="Faith Companion AI"
@@ -183,11 +206,11 @@ export function Navbar() {
           </div>
         </Link>
         <div className="flex items-center gap-2">
-          <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
-            {NAV.map((item) => {
-              if (item.type === "menu") return <Dropdown key={item.label} label={item.label} items={item.items} baseHref={item.baseHref} />;
+          <nav className="hidden items-center gap-1 md:flex" aria-label={t.primaryLabel}>
+            {navItems.map((item) => {
+              if (item.type === "menu") return <Dropdown key={item.id} label={item.label} items={item.items} baseHref={item.baseHref} locale={locale} />;
               return (
-                <Link key={item.href} href={item.href}
+                <Link key={item.href} href={localizedHref(item.href, locale)}
                   className={classNames("rounded-md px-3 py-2 text-sm font-medium transition",
                     isActivePath(pathname, item.href) ? "bg-white/10 text-white" : "text-white/80 hover:bg-white/10 hover:text-white")}>
                   {item.label}
@@ -195,10 +218,10 @@ export function Navbar() {
               );
             })}
           </nav>
-          <AccountMenu me={me} />
+          <AccountMenu me={me} t={t} locale={locale} />
           <button type="button"
             className="inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white md:hidden"
-            onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen}>
+            onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? t.closeMenu : t.openMenu} aria-expanded={mobileOpen}>
             ☰
           </button>
         </div>
@@ -207,13 +230,13 @@ export function Navbar() {
         <div className="border-t border-white/10 bg-black/40 backdrop-blur-xl md:hidden">
           <div className="mx-auto max-w-6xl px-4 py-3">
             <div className="flex flex-col gap-2">
-              {NAV.map((item) => {
+              {navItems.map((item) => {
                 if (item.type === "menu") {
-                  const open = !!mobileSections[item.label];
+                  const open = !!mobileSections[item.id];
                   const anyActive = (item.baseHref && isActivePath(pathname, item.baseHref)) || item.items.some((it) => isActivePath(pathname, it.href));
                   return (
-                    <div key={item.label} className="rounded-xl border border-white/10 bg-white/5">
-                      <button type="button" onClick={() => toggleSection(item.label)}
+                    <div key={item.id} className="rounded-xl border border-white/10 bg-white/5">
+                      <button type="button" onClick={() => toggleSection(item.id)}
                         className={classNames("flex w-full items-center justify-between px-3 py-3 text-sm font-semibold", anyActive ? "text-white" : "text-white/80")}>
                         <span>{item.label}</span>
                         <span className={classNames("transition", open && "rotate-180")}>▾</span>
@@ -221,7 +244,7 @@ export function Navbar() {
                       {open && (
                         <div className="border-t border-white/10 p-2">
                           {item.items.map((it) => (
-                            <Link key={it.href} href={it.href} onClick={() => setMobileOpen(false)}
+                            <Link key={it.href} href={localizedHref(it.href, locale)} onClick={() => setMobileOpen(false)}
                               className={classNames("block rounded-md px-3 py-2 text-sm transition",
                                 isActivePath(pathname, it.href) ? "bg-white/10 text-white" : "text-white/80 hover:bg-white/10 hover:text-white")}>
                               {it.label}
@@ -233,7 +256,7 @@ export function Navbar() {
                   );
                 }
                 return (
-                  <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}
+                  <Link key={item.href} href={localizedHref(item.href, locale)} onClick={() => setMobileOpen(false)}
                     className={classNames("rounded-md px-3 py-2 text-sm font-medium transition",
                       isActivePath(pathname, item.href) ? "bg-white/10 text-white" : "text-white/80 hover:bg-white/10 hover:text-white")}>
                     {item.label}
@@ -243,21 +266,21 @@ export function Navbar() {
               <div className="mt-2 rounded-xl border border-white/10 bg-white/5 p-3">
                 {signedIn ? (
                   <>
-                    <div className="text-sm font-semibold text-white">{me.displayName || me.email || "Account"}</div>
+                    <div className="text-sm font-semibold text-white">{me.displayName || me.email || t.account}</div>
                     {me.displayName && <div className="truncate text-xs text-white/40">{me.email}</div>}
                     <div className="mt-3 flex flex-col gap-2">
-                      <Link href="/profile" onClick={() => setMobileOpen(false)}
-                        className="rounded-md border border-white/10 px-3 py-2 text-center text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">Profile &amp; Settings</Link>
-                      <Link href="/saved" onClick={() => setMobileOpen(false)}
-                        className="rounded-md border border-white/10 px-3 py-2 text-center text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">Saved</Link>
+                      <Link href={localizedHref("/profile", locale)} onClick={() => setMobileOpen(false)}
+                        className="rounded-md border border-white/10 px-3 py-2 text-center text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">{t.profileSettings}</Link>
+                      <Link href={localizedHref("/saved", locale)} onClick={() => setMobileOpen(false)}
+                        className="rounded-md border border-white/10 px-3 py-2 text-center text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">{t.saved}</Link>
                       <button type="button" onClick={handleMobileLogout}
-                        className="rounded-md border border-white/10 px-3 py-2 text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">Log out</button>
+                        className="rounded-md border border-white/10 px-3 py-2 text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">{t.logOut}</button>
                     </div>
                   </>
                 ) : (
                   <div className="flex flex-col gap-2">
-                    <Link href="/login" onClick={() => setMobileOpen(false)}
-                      className="rounded-md border border-white/10 px-3 py-2 text-center text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">Sign in</Link>
+                    <Link href={localizedHref("/login", locale)} onClick={() => setMobileOpen(false)}
+                      className="rounded-md border border-white/10 px-3 py-2 text-center text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">{t.signIn}</Link>
                   </div>
                 )}
               </div>
@@ -270,4 +293,3 @@ export function Navbar() {
 }
 
 export default Navbar;
-
