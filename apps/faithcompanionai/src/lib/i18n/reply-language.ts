@@ -90,7 +90,7 @@ export function replyLanguage(text: string, pageLocale: Locale): Locale {
  */
 export function languageInstruction(lang: Locale) {
   if (lang === "en") return "Write your entire reply in English.";
-  return `Write your entire reply in Spanish: neutral Latin American Spanish. Address the reader as "tú"; for a group use "ustedes", never "vosotros"; avoid Spain-only vocabulary.
+  return `Write your entire reply in Spanish: neutral Latin American Spanish. Address the reader as "tú"; for a group use "ustedes", never "vosotros"; avoid Spain-only vocabulary. Use Spanish sentence case in titles and headings ("La paciencia en tiempos difíciles", not "La Paciencia en Tiempos Difíciles").
 Cite Bible references with Reina-Valera 1909 book names (for example Juan, Salmos, Filipenses, Cantares, Apocalipsis) followed by "(RV1909)", e.g. "Filipenses 4:6-7 (RV1909)".
 Do not quote the wording of any Bible verse, not even a phrase in quotation marks: give the reference and describe or paraphrase its meaning in your own words. The app shows the verse text itself.`;
 }

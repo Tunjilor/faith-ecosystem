@@ -50,8 +50,16 @@ function parseMatch(m: RegExpExecArray): ParsedRef | null {
   };
 }
 
-function formatRef(ref: ParsedRef) {
-  let out = `${ref.book.es} ${ref.chapter}`;
+// "Salmo 23" (one psalm) is correct Spanish usage next to the RV1909 book name
+// "Salmos"; keep it when the reply already says "Salmo" ("el Salmo 23:1",
+// never "el Salmos 23:1").
+function bookLabel(ref: ParsedRef, written?: string) {
+  if (ref.book.id === "PSA" && written === "Salmo") return "Salmo";
+  return ref.book.es;
+}
+
+function formatRef(ref: ParsedRef, written?: string) {
+  let out = `${bookLabel(ref, written)} ${ref.chapter}`;
   if (ref.verseStart) out += `:${ref.verseStart}`;
   if (ref.verseEnd) out += `-${ref.verseEnd}`;
   return out + ref.extra.replace(/\s+/g, " ").replace(/,(\S)/g, ", $1");
@@ -90,7 +98,7 @@ export function formatSpanishReferences(text: string) {
     const before = text.slice(0, m.index);
     const insideParens = before.lastIndexOf("(") > before.lastIndexOf(")");
 
-    out += text.slice(last, m.index) + formatRef(ref) + (insideParens ? ", RV1909" : " (RV1909)");
+    out += text.slice(last, m.index) + formatRef(ref, m[1]) +(insideParens ? ", RV1909" : " (RV1909)");
     last = resumeAt;
     re.lastIndex = resumeAt;
   }
