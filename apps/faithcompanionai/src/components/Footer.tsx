@@ -165,11 +165,13 @@ export default function Footer() {
 
           {/* Daily-verse email capture — logged-out visitors only. Client-gated because the
               footer also renders on force-static routes. Hidden on pages that carry their own
-              inline capture so a guest is never asked twice. */}
+              inline capture so a guest is never asked twice. Hidden on /es while the daily
+              emails are English-only. */}
           <div className="mt-10 border-t border-white/10 pt-6 empty:hidden">
             <GuestEmailCaptureClient
               source="footer"
               variant="compact"
+              hideOnSpanish
               hideOnPathPrefixes={["/", "/topics/", "/biblequiz/results/", "/tools/prayer", "/daily"]}
             />
           </div>
