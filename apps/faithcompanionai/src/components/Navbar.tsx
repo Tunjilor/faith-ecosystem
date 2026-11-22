@@ -10,6 +10,7 @@ import { useLocale } from "@/context/LocaleContext";
 import { splitLocale, type Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/links";
 import { nav } from "@/lib/i18n/dictionaries/nav";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 type NavText = (typeof nav)["en"];
 
@@ -218,6 +219,8 @@ export function Navbar() {
               );
             })}
           </nav>
+          {/* In the header bar at every width, so it is never hidden behind the sticky header. */}
+          <LanguageSwitcher />
           <AccountMenu me={me} t={t} locale={locale} />
           <button type="button"
             className="inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white md:hidden"

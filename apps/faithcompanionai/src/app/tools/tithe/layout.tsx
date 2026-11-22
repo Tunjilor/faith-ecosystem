@@ -32,9 +32,9 @@ export function generateMetadata(): Metadata {
       ],
     },
     es: {
-      title: "Calculadora de Diezmo – 10% de tus ingresos",
+      title: "Calculadora de diezmo – 10% de tus ingresos",
       description: ES_DESCRIPTION,
-      ogTitle: "Calculadora de Diezmo – 10% de tus ingresos | Faith Companion AI",
+      ogTitle: "Calculadora de diezmo – 10% de tus ingresos | Faith Companion AI",
       image: "/brand/og-tithe-es.png",
       imageAlt: "Calculadora de diezmo de Faith Companion AI",
       keywords: [
