@@ -84,6 +84,28 @@ export function replyLanguage(text: string, pageLocale: Locale): Locale {
 }
 
 /**
+ * Reply language in a chat: the latest message's own language; for an
+ * ambiguous message ("ok", "amén", a bare reference), the language of the
+ * person's most recent earlier message that has one; the page locale only
+ * when nothing earlier is clear (start of a chat).
+ */
+export function replyLanguageInConversation(
+  message: string,
+  history: ReadonlyArray<{ role: string; content: string }>,
+  pageLocale: Locale,
+): Locale {
+  const own = detectMessageLanguage(message);
+  if (own) return own;
+  for (let i = history.length - 1; i >= 0; i--) {
+    const m = history[i];
+    if (m?.role !== "user" || typeof m.content !== "string") continue;
+    const lang = detectMessageLanguage(m.content);
+    if (lang) return lang;
+  }
+  return pageLocale;
+}
+
+/**
  * Instruction appended to every system prompt so the model answers in the
  * chosen language. Spanish replies cite RV1909 book names and must not quote
  * verse wording from memory: the app shows the RV1909 text from bible-api.com.

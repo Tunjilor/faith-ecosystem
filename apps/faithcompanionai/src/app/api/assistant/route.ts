@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import { enforceAskQuotaFromSessionOrThrow } from "@/lib/access";
 import { extractOutputText, getModel, getOpenAI } from "@/lib/openai-ts";
-import { languageInstruction, parseLocaleField, replyLanguage } from "@/lib/i18n/reply-language";
+import { languageInstruction, parseLocaleField, replyLanguageInConversation } from "@/lib/i18n/reply-language";
 import { formatSpanishReferences, rv1909VersesFor } from "@/lib/i18n/scripture-es";
 
 export const runtime = "nodejs";
@@ -32,8 +32,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: localeField.error }, { status: 400 });
     }
 
-    // Reply in the language of the latest message; page locale when unclear.
-    const lang = replyLanguage(message, localeField.locale);
+    // Reply in the language of the latest message; if it has none ("amén"),
+    // the person's previous message decides; the page locale only at the start.
+    const lang = replyLanguageInConversation(message, history.slice(-10), localeField.locale);
 
     const client = getOpenAI();
     const model = getModel();
