@@ -6,7 +6,8 @@ import { dayKeyUTC } from "@/lib/verse/pick-daily";
 import { getUserKeyMaybeEmail } from "@/lib/auth/user-key";
 import type { Locale } from "@/lib/i18n/config";
 import { languageInstruction, parseLocaleField, replyLanguage } from "@/lib/i18n/reply-language";
-import { fetchRv1909, formatSpanishReferences, parseBibleReference } from "@/lib/i18n/scripture-es";
+import { fetchRv1909, formatSpanishReply, parseBibleReference } from "@/lib/i18n/scripture-es";
+import { RELATIONSHIP_SAFETY_PROMPT, withSafetyResources } from "@/lib/ai/relationship-safety";
 
 export const runtime = "nodejs";
 
@@ -25,6 +26,7 @@ function buildPrompt(args: {
   const base = `You are FaithCompanionAI.
 Be biblically respectful and doctrinally neutral.
 Do not claim new revelation. Avoid stating denominations are correct/incorrect.
+${RELATIONSHIP_SAFETY_PROMPT}
 ${languageLine}
 
 Scripture (${args.translation}):
@@ -156,7 +158,8 @@ export async function POST(req: Request) {
     // fallback if SDK shape changes
     (resp as any)?.output?.[0]?.content?.[0]?.text?.trim?.() ||
     "";
-  const output = lang === "es" ? formatSpanishReferences(rawOutput) : rawOutput;
+  const formatted = lang === "es" ? formatSpanishReply(rawOutput) : rawOutput;
+  const output = rawOutput ? withSafetyResources(formatted, question ?? "", lang) : "";
 
   if (!output) {
     return NextResponse.json({ error: "Empty AI output" }, { status: 500 });

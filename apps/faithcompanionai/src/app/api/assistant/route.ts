@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 import { enforceAskQuotaFromSessionOrThrow } from "@/lib/access";
 import { extractOutputText, getModel, getOpenAI } from "@/lib/openai-ts";
 import { languageInstruction, parseLocaleField, replyLanguageInConversation } from "@/lib/i18n/reply-language";
-import { formatSpanishReferences, rv1909VersesFor } from "@/lib/i18n/scripture-es";
+import { formatSpanishReply, rv1909VersesFor } from "@/lib/i18n/scripture-es";
+import { RELATIONSHIP_SAFETY_PROMPT, withSafetyResources } from "@/lib/ai/relationship-safety";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -44,6 +45,7 @@ export async function POST(req: Request) {
     const recentHistory = history.slice(-10);
     const messages: Array<{ role: "system" | "user" | "assistant"; content: string }> = [
       { role: "system", content: `${SYSTEM_PROMPT}
+${RELATIONSHIP_SAFETY_PROMPT}
 ${languageInstruction(lang)}` },
       ...recentHistory.map((m) => ({ role: m.role, content: m.content })),
       { role: "user", content: message.trim() },
@@ -63,12 +65,13 @@ ${languageInstruction(lang)}` },
 
     if (lang === "es") {
       // RV1909 book names + "(RV1909)" tags, and verse text from bible-api.com.
-      const reply = formatSpanishReferences(raw);
+      const reply = withSafetyResources(formatSpanishReply(raw), message, "es");
       const verses = await rv1909VersesFor(reply, 2);
       return NextResponse.json({ reply, lang, verses, quota: quotaInfo });
     }
 
-    return NextResponse.json({ reply: raw, lang, quota: quotaInfo });
+    const reply = withSafetyResources(raw, message, "en");
+    return NextResponse.json({ reply, lang, quota: quotaInfo });
   } catch (err: any) {
     return NextResponse.json(
       { error: err?.message || "Server error", code: err?.code || null },

@@ -53,7 +53,7 @@ const NEUTRAL = new Set(
 );
 
 function fold(word: string) {
-  return word.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  return word.normalize("NFD").replace(/\p{M}/gu, "");
 }
 
 /** Which language a message is written in, or null when it is unclear. */
@@ -113,6 +113,7 @@ export function replyLanguageInConversation(
 export function languageInstruction(lang: Locale) {
   if (lang === "en") return "Write your entire reply in English.";
   return `Write your entire reply in Spanish: neutral Latin American Spanish. Address the reader as "tú"; for a group use "ustedes", never "vosotros"; avoid Spain-only vocabulary. Use Spanish sentence case in titles and headings ("La paciencia en tiempos difíciles", not "La Paciencia en Tiempos Difíciles").
+When the writer's own gender is unknown, use gender-neutral wording instead of masculine or feminine adjectives about them ("te sientas en soledad" instead of "te sientas solo", "Habla con honestidad" instead of "Sé honesto", "Te damos la bienvenida" instead of "Bienvenido"). Mentioning a spouse ("mi esposo", "mi esposa") does not tell you the writer's gender. Match their gender only when they show it themselves (e.g. "estoy cansada").
 Cite Bible references with Reina-Valera 1909 book names (for example Juan, Salmos, Filipenses, Cantares, Apocalipsis) followed by "(RV1909)", e.g. "Filipenses 4:6-7 (RV1909)".
 Do not quote the wording of any Bible verse, not even a phrase in quotation marks: give the reference and describe or paraphrase its meaning in your own words. The app shows the verse text itself.`;
 }

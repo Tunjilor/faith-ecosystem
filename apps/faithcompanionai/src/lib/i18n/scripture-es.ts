@@ -4,6 +4,9 @@
 // - rewrite them with RV1909 book names and a "(RV1909)" tag,
 // - fetch the RV1909 verse text from bible-api.com (never from model memory).
 import { BIBLE_BOOKS, type BibleBook } from "./bible-books";
+import { modernizeRv1909 } from "./rv1909-text";
+
+export { modernizeRv1909 };
 
 const BOOK_BY_NAME = new Map<string, BibleBook>();
 for (const book of BIBLE_BOOKS) {
@@ -128,7 +131,15 @@ export function parseBibleReference(text: string): ParsedRef | null {
   return m ? parseMatch(m) : null;
 }
 
-export type Rv1909Verse = { reference: string; text: string; translation: "RV1909"; sourceUrl: string };
+/**
+ * Final pass over every Spanish AI reply: lowercase "amén" after a comma
+ * ("En el nombre de Jesús, amén.") and RV1909 reference formatting.
+ */
+export function formatSpanishReply(text: string) {
+  return formatSpanishReferences(text.replace(/,(\s*)Amén(?!\p{L})/gu, ",$1amén"));
+}
+
+export type Rv1909Verse ={ reference: string; text: string; translation: "RV1909"; sourceUrl: string };
 
 const MAX_VERSES_PER_PASSAGE = 6;
 const verseCache = new Map<string, Rv1909Verse | null>();
@@ -157,7 +168,8 @@ export async function fetchRv1909(ref: ParsedRef, timeoutMs = 4000): Promise<Rv1
       return null;
     }
     const data: any = await res.json();
-    const text = typeof data?.text === "string" ? data.text.replace(/\s+/g, " ").trim() : "";
+    const raw = typeof data?.text === "string" ? data.text.replace(/\s+/g, " ").trim() : "";
+    const text = modernizeRv1909(raw);
     if (!text || data?.translation_id !== "rv1909") return null;
     const verse: Rv1909Verse = {
       reference: `${ref.book.es} ${ref.chapter}:${verses}`,

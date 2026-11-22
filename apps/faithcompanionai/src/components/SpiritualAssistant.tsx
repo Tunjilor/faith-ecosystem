@@ -6,6 +6,7 @@ import { RotateCcw, X, Send } from "lucide-react";
 import { useDictionary, useLocale } from "@/context/LocaleContext";
 import { assistant } from "@/lib/i18n/dictionaries/assistant";
 import { localizedHref } from "@/lib/i18n/links";
+import { modernizeRv1909 } from "@/lib/i18n/rv1909-text";
 
 type Verse = { reference: string; text: string };
 
@@ -95,7 +96,7 @@ export default function SpiritualAssistant() {
       ...msgs.map((m) => {
         const who = m.role === "user" ? t.you : t.assistant;
         const time = new Date(m.ts).toLocaleString(locale);
-        const verses = (m.verses ?? []).map((v) => `\n${v.reference} (RV1909): ${v.text}`).join("");
+        const verses = (m.verses ?? []).map((v) => `\n${v.reference} (RV1909): ${modernizeRv1909(v.text)}`).join("");
         return `[${time}] ${who}: ${m.content}${verses}`;
       }),
     ].join("\n\n");
@@ -289,7 +290,8 @@ export default function SpiritualAssistant() {
                       className="mt-2 border-l-2 border-white/20 pl-2 text-xs text-white/70"
                     >
                       <span className="block font-semibold text-white/80">{v.reference} (RV1909)</span>
-                      <span className="block">{v.text}</span>
+                      {/* Also covers cards saved before the server modernized the spelling. */}
+                      <span className="block">{modernizeRv1909(v.text)}</span>
                     </blockquote>
                   ))}
                 </div>

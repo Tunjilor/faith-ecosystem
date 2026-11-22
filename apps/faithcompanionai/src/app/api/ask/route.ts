@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 import { enforceAskQuotaFromSessionOrThrow } from "@/lib/access";
 import { extractOutputText, getModel, getOpenAI } from "@/lib/openai-ts";
 import { languageInstruction, parseLocaleField, replyLanguage } from "@/lib/i18n/reply-language";
-import { formatSpanishReferences, rv1909VersesFor } from "@/lib/i18n/scripture-es";
+import { formatSpanishReply, rv1909VersesFor } from "@/lib/i18n/scripture-es";
+import { RELATIONSHIP_SAFETY_PROMPT, withSafetyResources } from "@/lib/ai/relationship-safety";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -92,6 +93,7 @@ export async function POST(req: Request) {
       model,
       input: [
         { role: "system", content: `${systemForMode(mode, tone)}
+${RELATIONSHIP_SAFETY_PROMPT}
 ${languageInstruction(lang)}` },
         { role: "user", content: userMessage },
       ],
@@ -99,15 +101,16 @@ ${languageInstruction(lang)}` },
     });
 
     const raw = extractOutputText(resp);
+    const userWords = `${prompt} ${situation} ${userText}`;
 
     if (lang === "es") {
-      const answer = formatSpanishReferences(raw);
+      const answer = withSafetyResources(formatSpanishReply(raw), userWords, "es");
       const verses = await rv1909VersesFor(answer, 3);
       return NextResponse.json({ answer, lang, verses, quota: quotaInfo });
     }
 
     return NextResponse.json({
-      answer: raw,
+      answer: withSafetyResources(raw, userWords, "en"),
       lang,
       quota: quotaInfo,
     });
