@@ -136,7 +136,11 @@ export function parseBibleReference(text: string): ParsedRef | null {
  * ("En el nombre de Jesús, amén.") and RV1909 reference formatting.
  */
 export function formatSpanishReply(text: string) {
-  return formatSpanishReferences(text.replace(/,(\s*)Amén(?!\p{L})/gu, ",$1amén"));
+  const polished = text
+    .replace(/,(\s*)Amén(?!\p{L})/gu, ",$1amén")
+    // The most common gendered slip aimed at the reader; fixed phrase only.
+    .replace(/(?<!\p{L})([Nn])o estás sol[oa](?!\p{L})/gu, "$1o estás a solas");
+  return formatSpanishReferences(polished);
 }
 
 export type Rv1909Verse ={ reference: string; text: string; translation: "RV1909"; sourceUrl: string };

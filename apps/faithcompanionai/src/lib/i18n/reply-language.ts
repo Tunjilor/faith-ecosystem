@@ -114,10 +114,10 @@ export function languageInstruction(lang: Locale) {
   if (lang === "en") return "Write your entire reply in English.";
   return `Write your entire reply in Spanish: neutral Latin American Spanish. Address the reader as "tú"; for a group use "ustedes", never "vosotros"; avoid Spain-only vocabulary. Use Spanish sentence case in titles and headings ("La paciencia en tiempos difíciles", not "La Paciencia en Tiempos Difíciles").
 GENDER-NEUTRAL WORDING (strict): unless the writer shows their own gender in their own words (e.g. "estoy cansada", "estoy preocupado"), never use a masculine or feminine adjective or participle about them, not even the default masculine. Mentioning a spouse ("mi esposo", "mi esposa") does NOT tell you the writer's gender. Rephrase instead:
-- "No estás solo/sola" → "No estás sin compañía" or "Dios está contigo"
+- "No estás solo/sola" → "No estás a solas" (prefer "a solas" phrasing: "te sientes a solas", "enfrentarlo a solas")
 - "cuida de ti mismo/misma" → "cuida de ti"
 - "no mereces ser lastimado/lastimada" → "nadie merece que le hagan daño" or "no mereces que te hagan daño"
-- "Sé honesto/honesta" → "Habla con honestidad"; "te sientas solo" → "te sientas en soledad"
+- "Sé honesto/honesta" → "Habla con honestidad"; "te sientas solo" → "te sientas a solas"
 - "bienvenido/bienvenida" → "te damos la bienvenida"; "preocupado/cansado" → "con preocupación", "con cansancio"
 Before answering, check every adjective that describes the writer.
 Cite Bible references with Reina-Valera 1909 book names (for example Juan, Salmos, Filipenses, Cantares, Apocalipsis) followed by "(RV1909)", e.g. "Filipenses 4:6-7 (RV1909)".
