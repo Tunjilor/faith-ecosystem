@@ -90,7 +90,10 @@ function extract(html: string) {
 
 async function routesFrom(base: string) {
   const xml = await (await fetch(`${base}/sitemap.xml`)).text();
-  const fromSitemap = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
+  // /es URLs in the sitemap are covered by prefixing each English route below.
+  const fromSitemap = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
+    .map((m) => new URL(m[1]).pathname)
+    .filter((p) => p !== "/es" && !p.startsWith("/es/"));
   return [...new Set([...fromSitemap, ...EXTRA_ROUTES])].sort();
 }
 

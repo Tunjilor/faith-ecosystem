@@ -62,7 +62,8 @@ export function localizedMetadata(
       url: `${SITE_URL}${url}`,
       siteName: SITE_NAME,
       type: "website",
-      locale: locale === "es" ? "es_LA" : "en_US",
+      // English pages never set og:locale, so only Spanish adds it.
+      ...(locale === "es" ? { locale: "es_LA" } : {}),
       images: [{ url: page.image, width: 1200, height: 630, alt: page.imageAlt }],
     },
     twitter: {

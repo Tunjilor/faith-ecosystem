@@ -2,6 +2,7 @@
 import type { MetadataRoute } from "next";
 import { getPublishedPosts } from "./blog/content";
 import { TOPICS, TOPIC_SLUGS } from "./topics/data";
+import { isTranslatedRoute, withLocale } from "@/lib/i18n/config";
 
 // Regenerate daily so scheduled blog posts appear on their publishDate
 // (blog/[slug] 404s until then, so they must not be listed early).
@@ -58,10 +59,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: TOPICS[t].dateModified ?? TOPICS[t].datePublished,
     }));
 
-  return [...static_pages, ...blog_posts, ...topic_pages].map(({ route, priority, freq, lastModified }) => ({
-    url: `${base}${route}`,
-    ...(lastModified ? { lastModified } : {}),
-    changeFrequency: freq,
-    priority,
-  }));
+  const entries = [...static_pages, ...blog_posts, ...topic_pages];
+
+  // Translated routes get hreflang alternates on both language versions, and
+  // their /es URL is listed right after the English one. Untranslated /es
+  // pages are noindexed and never listed.
+  const alternatesFor = (route: string) => ({
+    languages: {
+      en: `${base}${route}`,
+      es: `${base}${withLocale(route || "/", "es")}`,
+      "x-default": `${base}${route}`,
+    },
+  });
+
+  return entries.flatMap(({ route, priority, freq, lastModified }) => {
+    const common = {
+      ...(lastModified ? { lastModified } : {}),
+      changeFrequency: freq,
+      priority,
+    };
+    if (!isTranslatedRoute(route || "/")) {
+      return [{ url: `${base}${route}`, ...common }];
+    }
+    const alternates = alternatesFor(route);
+    return [
+      { url: `${base}${route}`, ...common, alternates },
+      { url: `${base}${withLocale(route || "/", "es")}`, ...common, alternates },
+    ];
+  });
 }

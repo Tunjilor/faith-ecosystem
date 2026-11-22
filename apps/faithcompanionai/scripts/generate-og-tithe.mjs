@@ -1,5 +1,6 @@
-// Generates the static social-share image for the tithe calculator at
-// public/brand/og-tithe.png.
+// Generates the static social-share images for the tithe calculator:
+//   public/brand/og-tithe.png     English (/tools/tithe)
+//   public/brand/og-tithe-es.png  Spanish (/es/tools/tithe)
 //
 // Same visual family as scripts/generate-og.mjs (og-quiz.png): #170537 base,
 // purple/orange corner glows, star mark, bottom rule + domain.
@@ -16,7 +17,20 @@ mkdirSync('public/brand', { recursive: true });
 
 const FONT = 'Segoe UI, Helvetica Neue, Arial, sans-serif';
 
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+const VARIANTS = [
+  {
+    out: 'public/brand/og-tithe.png',
+    title: 'Tithe Calculator',
+    tagline: 'Your tithe per paycheck, month or year',
+  },
+  {
+    out: 'public/brand/og-tithe-es.png',
+    title: 'Calculadora de Diezmo',
+    tagline: 'Tu diezmo por pago, por mes o por año',
+  },
+];
+
+const svgFor = ({ title, tagline }) => `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
     <radialGradient id="purpleGlow" cx="0" cy="0" r="1"
       gradientUnits="userSpaceOnUse" gradientTransform="translate(210 210) scale(290)">
@@ -44,11 +58,11 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
 
   <!-- Page name -->
   <text x="600" y="390" text-anchor="middle" font-family="${FONT}" font-size="76"
-        font-weight="700" fill="#ffffff" fill-opacity="0.95">Tithe Calculator</text>
+        font-weight="700" fill="#ffffff" fill-opacity="0.95">${title}</text>
 
   <!-- Tagline -->
   <text x="600" y="450" text-anchor="middle" font-family="${FONT}" font-size="30"
-        fill="#c4a7f7" fill-opacity="0.82">Your tithe per paycheck, month or year</text>
+        fill="#c4a7f7" fill-opacity="0.82">${tagline}</text>
 
   <!-- Bottom rule + brand/domain -->
   <rect x="440" y="530" width="320" height="1" fill="#ffffff" fill-opacity="0.12"/>
@@ -56,8 +70,8 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
         fill="#ffffff" fill-opacity="0.40">Faith Companion AI · faithcompanionai.com</text>
 </svg>`;
 
-const out = 'public/brand/og-tithe.png';
-await sharp(Buffer.from(svg)).png().toFile(out);
-
-const meta = await sharp(out).metadata();
-console.log(`Created: ${out} (${meta.width}x${meta.height})`);
+for (const variant of VARIANTS) {
+  await sharp(Buffer.from(svgFor(variant))).png().toFile(variant.out);
+  const meta = await sharp(variant.out).metadata();
+  console.log(`Created: ${variant.out} (${meta.width}x${meta.height})`);
+}
