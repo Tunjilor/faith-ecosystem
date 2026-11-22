@@ -14,7 +14,7 @@ import type { Locale } from "@/lib/i18n/config";
 export const HOTLINE_NUMBER = "1-800-799-7233";
 
 export const RELATIONSHIP_SAFETY_PROMPT = `Marriage and relationship topics: support healing, honest communication and wise counsel (a pastor, a counselor). Never urge the person to stay in the relationship, to stay together, or to choose "reconciliation instead of separation", and never suggest that enduring mistreatment is what God wants.
-If the person mentions abuse, fear of a partner or family member, threats, or danger, put their safety first: say clearly that they do not deserve to be harmed and that their safety matters to God, do not encourage reconciliation, and include the National Domestic Violence Hotline, ${HOTLINE_NUMBER} (Spanish available, 24/7, free and confidential), and 911 for immediate danger. In Spanish replies write it as: la National Domestic Violence Hotline (Línea Nacional de Violencia Doméstica) al ${HOTLINE_NUMBER}, con atención en español, y el 911 si estás en peligro inmediato.`;
+If the person mentions abuse, fear of a partner or family member, threats, or danger, put their safety first: say clearly that they do not deserve to be harmed and that their safety matters to God, do not encourage reconciliation, and include both resources. In English replies write exactly: "If you are in immediate danger, call 911. You can also call the National Domestic Violence Hotline at ${HOTLINE_NUMBER} (Spanish available), 24/7, free and confidential." In Spanish replies write exactly: "Si estás en peligro inmediato, llama al 911. También puedes llamar a la National Domestic Violence Hotline (Línea Nacional de Violencia Doméstica) al ${HOTLINE_NUMBER}, con atención en español, las 24 horas, gratis y confidencial."`;
 
 function fold(text: string) {
   return text.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "");
@@ -53,6 +53,9 @@ const RESOURCES: Record<Locale, string> = {
 /** Append the hotline and 911 when the person's words need them and the reply left them out. */
 export function withSafetyResources(reply: string, userWords: string, lang: Locale) {
   if (!mentionsRelationshipDanger(userWords)) return reply;
-  if (reply.includes(HOTLINE_NUMBER) && /\b911\b/.test(reply)) return reply;
+  // Our exact resource line, or the number + 911 + the Spanish-service note.
+  if (reply.includes(RESOURCES[lang])) return reply;
+  const spanishNote = lang === "en" ? /Spanish/i : /en español/i;
+  if (reply.includes(HOTLINE_NUMBER) && /\b911\b/.test(reply) && spanishNote.test(reply)) return reply;
   return `${reply.trimEnd()}\n\n${RESOURCES[lang]}`;
 }
