@@ -2,6 +2,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useContentDictionary } from "@/context/LocaleContext";
+import { tools } from "@/lib/i18n/dictionaries/tools";
 
 export const DENOMINATIONS = [
   { value: "non-denominational", label: "Non-denominational" },
@@ -33,6 +35,7 @@ export default function DenominationSelect({
 }: {
   className?: string;
 }) {
+  const t = useContentDictionary(tools).denominations;
   const [value, setValue] = useState<Denomination>("non-denominational");
 
   useEffect(() => {
@@ -52,12 +55,12 @@ export default function DenominationSelect({
       value={value}
       onChange={handleChange}
       className={className}
-      title="Your Christian tradition"
-      aria-label="Denomination"
+      title={t.title}
+      aria-label={t.aria}
     >
       {DENOMINATIONS.map((d) => (
         <option key={d.value} value={d.value}>
-          {d.label}
+          {t.labels[d.value]}
         </option>
       ))}
     </select>

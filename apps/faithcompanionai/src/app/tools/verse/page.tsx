@@ -7,6 +7,10 @@ import { useEffect, useMemo, useState } from "react";
 import DenominationSelect, { getDenominationNote, readDenomination } from "@/components/DenominationSelect";
 import ShareCardModal from "@/components/ShareCardModal";
 import { ImageIcon } from "lucide-react";
+import Rv1909VerseCards, { readVerseCards, type Rv1909Card } from "@/components/Rv1909VerseCards";
+import { useDictionary, useLocale } from "@/context/LocaleContext";
+import { tools } from "@/lib/i18n/dictionaries/tools";
+import { useHydrated } from "@/hooks/useHydrated";
 
 type Length = "short" | "medium" | "long";
 
@@ -16,6 +20,7 @@ type MeResponse = {
 
 type VerseResponse = {
   verses?: string[];
+  verseCards?: unknown;
   encouragement?: string;
   nextStep?: string;
   error?: string;
@@ -25,20 +30,29 @@ type ResultData = {
   verses: string[];
   encouragement: string;
   nextStep: string;
+  // Spanish only: RV1909 text for each reference, from bible-api.com.
+  cards: Rv1909Card[];
 };
 
-function resultToText(data: ResultData): string {
+type VerseText = { textReferences: string; textEncouragement: string; textNextStep: string };
+
+function resultToText(data: ResultData, t: VerseText): string {
+  const cardText = new Map(data.cards.map((c) => [c.reference, c.text]));
   return [
-    "Bible References:",
-    ...data.verses.map((v) => `- ${v}`),
+    t.textReferences,
+    ...data.verses.map((v) => (cardText.has(v) ? `- ${v} (RV1909): ${cardText.get(v)}` : `- ${v}`)),
     "",
-    `Encouragement: ${data.encouragement}`,
+    `${t.textEncouragement} ${data.encouragement}`,
     "",
-    `Next Step: ${data.nextStep}`,
+    `${t.textNextStep} ${data.nextStep}`,
   ].join("\n");
 }
 
 export default function VersePage() {
+  const locale = useLocale();
+  const { common, verse: t } = useDictionary(tools);
+  // Generate stays disabled until hydrated: before that, clicks are dropped.
+  const hydrated = useHydrated();
   const [topic, setTopic] = useState("");
   const [length, setLength] = useState<Length>("short");
   const [denomination, setDenomination] = useState("non-denominational");
@@ -92,6 +106,7 @@ export default function VersePage() {
         body: JSON.stringify({
           topic: topic + getDenominationNote(denomination),
           length,
+          ...(locale === "es" ? { locale } : {}),
         }),
       });
 
@@ -101,25 +116,26 @@ export default function VersePage() {
       try {
         data = JSON.parse(text);
       } catch {
-        data = { error: text || "Unexpected response." };
+        data = { error: text || common.unexpected };
       }
 
       if (!res.ok) {
-        throw new Error(data.error || `Request failed (${res.status})`);
+        throw new Error((locale === "en" && data.error) || common.requestFailed(res.status));
       }
 
       if (!data.verses || !data.encouragement || !data.nextStep) {
-        throw new Error("Incomplete verse response.");
+        throw new Error(t.incomplete);
       }
 
       const newResult = {
         verses: data.verses,
         encouragement: data.encouragement,
         nextStep: data.nextStep,
+        cards: locale === "es" ? readVerseCards(data.verseCards) : [],
       };
       setResult(newResult);
     } catch (err: any) {
-      setError(err?.message || "Something went wrong.");
+      setError(err?.message || common.somethingWrong);
       setResult(null);
     } finally {
       setIsLoading(false);
@@ -131,12 +147,12 @@ export default function VersePage() {
     setSuccess("");
 
     if (!result) {
-      setError("Generate a verse thought first.");
+      setError(t.needResult);
       return;
     }
 
     if (!me?.signedIn) {
-      setError("Sign in to save your verses and build your personal faith journal.");
+      setError(t.signIn);
       return;
     }
 
@@ -150,8 +166,8 @@ export default function VersePage() {
         },
         body: JSON.stringify({
           type: "verse",
-          title: topic.trim() || `Verse thought (${length})`,
-          content: resultToText(result),
+          title: topic.trim() || t.savedTitle(locale === "es" ? t.lengths[length].toLowerCase() : length),
+          content: resultToText(result, t),
           reference: null,
           meta: {
             topic: topic.trim() || null,
@@ -166,16 +182,16 @@ export default function VersePage() {
       try {
         data = JSON.parse(text);
       } catch {
-        data = { error: text || "Failed to save." };
+        data = { error: text || common.failedSave };
       }
 
       if (!res.ok) {
-        throw new Error(data.error || "Failed to save.");
+        throw new Error((locale === "en" && data.error) || common.failedSave);
       }
 
-      setSuccess("Saved to your account.");
+      setSuccess(t.saved);
     } catch (err: any) {
-      setError(err?.message || "Failed to save.");
+      setError(err?.message || common.failedSave);
     } finally {
       setIsSaving(false);
     }
@@ -189,25 +205,14 @@ export default function VersePage() {
     setSuccess("");
   }
 
-  const lengthHelp = useMemo(() => {
-    switch (length) {
-      case "short":
-        return "Quick encouragement";
-      case "medium":
-        return "Balanced reflection";
-      case "long":
-        return "More detailed encouragement";
-      default:
-        return "";
-    }
-  }, [length]);
+  const lengthHelp = useMemo(() => t.lengthHelp[length] ?? "", [length, t]);
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-12">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-white md:text-4xl">Verse</h1>
+        <h1 className="text-3xl font-bold text-white md:text-4xl">{t.heading}</h1>
         <p className="mt-2 max-w-2xl text-sm leading-7 text-white/70 md:text-base">
-          Generate a short verse thought with Scripture references and a simple next step.
+          {t.intro}
         </p>
       </header>
 
@@ -215,20 +220,20 @@ export default function VersePage() {
         <div className="grid gap-4 md:grid-cols-3">
           <div className="md:col-span-2">
             <label htmlFor="topic" className="block text-sm font-medium text-slate-700">
-              Topic (optional)
+              {t.topic}
             </label>
             <input
               id="topic"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              placeholder="e.g., peace, anxiety, forgiveness, guidance"
+              placeholder={t.topicPlaceholder}
               className="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-100 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-500 outline-none focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-black/10"
             />
           </div>
 
           <div>
             <label htmlFor="length" className="block text-sm font-medium text-slate-700">
-              Length
+              {t.length}
             </label>
             <select
               id="length"
@@ -237,13 +242,13 @@ export default function VersePage() {
               className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-medium text-white outline-none focus:border-slate-500 focus:ring-2 focus:ring-black/10"
             >
               <option value="short" className="bg-white text-slate-900">
-                Short
+                {t.lengths.short}
               </option>
               <option value="medium" className="bg-white text-slate-900">
-                Medium
+                {t.lengths.medium}
               </option>
               <option value="long" className="bg-white text-slate-900">
-                Long
+                {t.lengths.long}
               </option>
             </select>
             <p className="mt-2 text-xs text-slate-500">{lengthHelp}</p>
@@ -251,7 +256,7 @@ export default function VersePage() {
 
           <div className="md:col-span-3">
             <label className="block text-sm font-medium text-slate-700">
-              Tradition
+              {common.tradition}
             </label>
             <DenominationSelect className="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-100 px-4 py-3 text-sm text-slate-900 outline-none focus:border-slate-500" />
           </div>
@@ -261,10 +266,10 @@ export default function VersePage() {
           <button
             type="button"
             onClick={handleGenerate}
-            disabled={isLoading}
+            disabled={!hydrated || isLoading}
             className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-black px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
           >
-            {isLoading ? "Generating..." : "Generate verse thought"}
+            {isLoading ? common.generating : t.generate}
           </button>
 
           <button
@@ -273,7 +278,7 @@ export default function VersePage() {
             disabled={!result || isSaving}
             className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 disabled:opacity-50"
           >
-            {isSaving ? "Saving..." : "Save"}
+            {isSaving ? common.saving : common.save}
           </button>
 
           <button
@@ -281,7 +286,7 @@ export default function VersePage() {
             onClick={handleReset}
             className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
           >
-            Reset
+            {common.reset}
           </button>
 
           {result && (
@@ -291,7 +296,7 @@ export default function VersePage() {
               className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-purple-300 bg-purple-50 px-5 py-3 text-sm font-semibold text-purple-700 transition hover:bg-purple-100"
             >
               <ImageIcon size={15} />
-              Share Card
+              {t.shareCard}
             </button>
           )}
         </div>
@@ -311,15 +316,15 @@ export default function VersePage() {
         {result ? (
           <div className="mt-8 rounded-2xl bg-slate-50 p-5">
             <div className="flex items-center justify-between gap-3">
-              <div className="text-sm font-semibold text-slate-800">Result</div>
+              <div className="text-sm font-semibold text-slate-800">{t.resultHeading}</div>
               <div className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600">
-                Length: {length.charAt(0).toUpperCase() + length.slice(1)}
+                {t.lengthBadge(t.lengths[length])}
               </div>
             </div>
 
             <div className="mt-4 space-y-4 text-sm leading-7 text-slate-700">
               <div>
-                <p className="font-semibold text-slate-900">Bible References</p>
+                <p className="font-semibold text-slate-900">{t.references}</p>
                 <ul className="mt-1 space-y-1 pl-1">
                   {result.verses.map((v) => (
                     <li key={v} className="flex gap-2">
@@ -331,20 +336,22 @@ export default function VersePage() {
               </div>
 
               <div>
-                <p className="font-semibold text-slate-900">Encouragement</p>
+                <p className="font-semibold text-slate-900">{t.encouragement}</p>
                 <p className="mt-1">{result.encouragement}</p>
               </div>
 
               <div>
-                <p className="font-semibold text-slate-900">Next Step</p>
+                <p className="font-semibold text-slate-900">{t.nextStep}</p>
                 <p className="mt-1">{result.nextStep}</p>
               </div>
             </div>
+
+            <Rv1909VerseCards heading={common.versesHeading} verses={result.cards} />
           </div>
         ) : (
           <div className="mt-8 rounded-2xl bg-slate-50 p-5">
             <p className="text-sm text-slate-600">
-              Your verse thought will appear here with Scripture references and a simple next step.
+              {t.empty}
             </p>
           </div>
         )}

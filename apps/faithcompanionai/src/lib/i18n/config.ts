@@ -27,6 +27,9 @@ export const ROUTE_PATH_HEADER = "x-route-path";
  */
 export const TRANSLATED_ROUTES: readonly string[] = [
   "/tools/tithe",
+  "/tools/prayer",
+  "/tools/verse",
+  "/tools/devotional",
 ];
 
 export function isLocale(value: unknown): value is Locale {

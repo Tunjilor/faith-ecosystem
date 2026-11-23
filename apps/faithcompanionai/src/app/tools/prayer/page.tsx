@@ -6,7 +6,12 @@ import { useUser } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 import DenominationSelect, { getDenominationNote, readDenomination } from "@/components/DenominationSelect";
 import GuestEmailCaptureClient from "@/components/GuestEmailCaptureClient";
+import AiResultText from "@/components/AiResultText";
+import Rv1909VerseCards,{ readVerseCards, type Rv1909Card } from "@/components/Rv1909VerseCards";
 import Link from "next/link";
+import { useDictionary, useLocale } from "@/context/LocaleContext";
+import { tools } from "@/lib/i18n/dictionaries/tools";
+import { useHydrated } from "@/hooks/useHydrated";
 
 type Tone = "gentle" | "firm" | "short" | "detailed";
 
@@ -18,9 +23,14 @@ type AskResponse = {
   answer?: string;
   error?: string;
   code?: string | null;
+  verses?: unknown;
 };
 
 export default function PrayerPage() {
+  const locale = useLocale();
+  const { common, prayer: t } = useDictionary(tools);
+  // Generate stays disabled until hydrated: before that, clicks are dropped.
+  const hydrated = useHydrated();
   const [topic, setTopic] = useState("");
   const [name, setName] = useState("");
   const [situation, setSituation] = useState("");
@@ -28,6 +38,7 @@ export default function PrayerPage() {
   const [denomination, setDenomination] = useState("non-denominational");
 
   const [result, setResult] = useState("");
+  const [verseCards, setVerseCards] = useState<Rv1909Card[]>([]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -66,6 +77,9 @@ export default function PrayerPage() {
     setSuccess("");
 
     const denomNote = getDenominationNote(denomination);
+    // The prompt template stays in English (it is an instruction to the model);
+    // on /es the person's own words go in `userText` so the reply language
+    // follows them, with the page locale as the fallback.
     const prompt =
       topic.trim().length > 0
         ? `Write a sincere Christian prayer about ${topic.trim()}. ${situation.trim() ? `The situation is: ${situation.trim()}.` : ""} Include 1-3 Bible references and make it suitable for daily encouragement.${denomNote}`
@@ -85,6 +99,9 @@ export default function PrayerPage() {
           tone,
           name: name.trim(),
           situation: situation.trim(),
+          ...(locale === "es"
+            ? { locale, userText: [topic.trim(), situation.trim()].filter(Boolean).join(". ") }
+            : {}),
         }),
       });
 
@@ -94,25 +111,26 @@ export default function PrayerPage() {
       try {
         data = JSON.parse(text);
       } catch {
-        data = { error: text || "Unexpected response." };
+        data = { error: text || common.unexpected };
       }
 
       if (!res.ok) {
         if (res.status === 429) {
-          setError(data.error || "Daily limit reached. Please try again tomorrow.");
+          setError(locale === "es" ? common.limitReached : data.error || common.limitReached);
           return;
         }
 
-        throw new Error(data.error || `Request failed (${res.status})`);
+        throw new Error((locale === "en" && data.error) || common.requestFailed(res.status));
       }
 
       if (!data.answer) {
-        throw new Error("No prayer returned.");
+        throw new Error(t.noResult);
       }
 
       setResult(data.answer);
+      setVerseCards(locale === "es" ? readVerseCards(data.verses) : []);
     } catch (err: any) {
-      setError(err?.message || "Something went wrong.");
+      setError(err?.message || common.somethingWrong);
     } finally {
       setIsLoading(false);
     }
@@ -123,12 +141,12 @@ export default function PrayerPage() {
     setSuccess("");
 
     if (!result.trim()) {
-      setError("Generate a prayer first.");
+      setError(t.needResult);
       return;
     }
 
     if (!me?.signedIn) {
-      setError("Sign in to save your prayers and build your personal faith journal.");
+      setError(t.signIn);
       return;
     }
 
@@ -142,7 +160,7 @@ export default function PrayerPage() {
         },
         body: JSON.stringify({
           type: "prayer",
-          title: topic.trim() || "Prayer",
+          title: topic.trim() || t.defaultTitle,
           content: result,
           reference: null,
         }),
@@ -154,16 +172,16 @@ export default function PrayerPage() {
       try {
         data = JSON.parse(text);
       } catch {
-        data = { error: text || "Failed to save." };
+        data = { error: text || common.failedSave };
       }
 
       if (!res.ok) {
-        throw new Error(data.error || "Failed to save.");
+        throw new Error((locale === "en" && data.error) || common.failedSave);
       }
 
-      setSuccess("Prayer saved to your account.");
+      setSuccess(t.saved);
     } catch (err: any) {
-      setError(err?.message || "Failed to save.");
+      setError(err?.message || common.failedSave);
     } finally {
       setIsSaving(false);
     }
@@ -175,6 +193,7 @@ export default function PrayerPage() {
     setSituation("");
     setTone("gentle");
     setResult("");
+    setVerseCards([]);
     setError("");
     setSuccess("");
   }
@@ -182,9 +201,9 @@ export default function PrayerPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-12">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-white md:text-4xl">Prayer</h1>
+        <h1 className="text-3xl font-bold text-white md:text-4xl">{t.heading}</h1>
         <p className="mt-2 max-w-2xl text-sm leading-7 text-white/70 md:text-base">
-          Generate a personal prayer for your current need, with Scripture references and a calm, encouraging tone.
+          {t.intro}
         </p>
       </header>
 
@@ -194,20 +213,20 @@ export default function PrayerPage() {
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label htmlFor="topic" className="block text-sm font-medium text-slate-700">
-              Topic
+              {common.topic}
             </label>
             <input
               id="topic"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              placeholder="e.g., peace, healing, strength, guidance"
+              placeholder={t.topicPlaceholder}
               className="mt-2 w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-black/10"
             />
           </div>
 
           <div>
             <label htmlFor="tone" className="block text-sm font-medium text-slate-700">
-              Tone
+              {common.tone}
             </label>
             <select
               id="tone"
@@ -215,41 +234,41 @@ export default function PrayerPage() {
               onChange={(e) => setTone(e.target.value as Tone)}
               className="mt-2 w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-black/10"
             >
-              <option value="gentle">Gentle</option>
-              <option value="firm">Firm</option>
-              <option value="short">Short</option>
-              <option value="detailed">Detailed</option>
+              <option value="gentle">{common.tones.gentle}</option>
+              <option value="firm">{common.tones.firm}</option>
+              <option value="short">{common.tones.short}</option>
+              <option value="detailed">{common.tones.detailed}</option>
             </select>
           </div>
 
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-slate-700">
-              Your name (optional)
+              {common.name}
             </label>
             <input
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g., Sarah"
+              placeholder={common.namePlaceholder}
               className="mt-2 w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-black/10"
             />
           </div>
 
           <div>
             <label htmlFor="situation" className="block text-sm font-medium text-slate-700">
-              What are you facing? (optional)
+              {common.situation}
             </label>
             <input
               id="situation"
               value={situation}
               onChange={(e) => setSituation(e.target.value)}
-              placeholder="e.g., anxiety, family stress, grief, uncertainty"
+              placeholder={t.situationPlaceholder}
               className="mt-2 w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-black/10"
             />
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-slate-700">Tradition</label>
+            <label className="block text-sm font-medium text-slate-700">{common.tradition}</label>
             <DenominationSelect className="mt-2 w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-black/10" />
           </div>
         </div>
@@ -258,10 +277,10 @@ export default function PrayerPage() {
           <button
             type="button"
             onClick={handleGenerate}
-            disabled={isLoading}
+            disabled={!hydrated || isLoading}
             className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-black px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
           >
-            {isLoading ? "Generating..." : "Generate prayer"}
+            {isLoading ? common.generating : t.generate}
           </button>
 
           <button
@@ -270,7 +289,7 @@ export default function PrayerPage() {
             disabled={!result || isSaving}
             className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 disabled:opacity-50"
           >
-            {isSaving ? "Saving..." : "Save"}
+            {isSaving ? common.saving : common.save}
           </button>
 
           <button
@@ -278,7 +297,7 @@ export default function PrayerPage() {
             onClick={handleReset}
             className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
           >
-            Reset
+            {common.reset}
           </button>
         </div>
 
@@ -296,16 +315,16 @@ export default function PrayerPage() {
 
         {result ? (
           <div className="mt-8 rounded-2xl bg-slate-50 p-5">
-            <div className="text-sm font-semibold text-slate-800">Prayer</div>
+            <div className="text-sm font-semibold text-slate-800">{t.resultHeading}</div>
 
-            <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-slate-700">
-              {result}
-            </p>
+            <AiResultText text={result} className="mt-3" />
+
+            <Rv1909VerseCards heading={common.versesHeading} verses={verseCards} />
           </div>
         ) : (
           <div className="mt-8 rounded-2xl bg-slate-50 p-5">
             <p className="text-sm text-slate-600">
-              Your prayer will appear here with Scripture references and a calm, encouraging structure.
+              {t.empty}
             </p>
           </div>
         )}
@@ -313,8 +332,9 @@ export default function PrayerPage() {
 
       {/* Ask right after a prayer is generated, when the visitor has just
           received value. Guests get the email signup (source "prayer-result");
-          signed-in users get a link to switch daily emails on. */}
-      {result && (
+          signed-in users get a link to switch daily emails on. Both are hidden
+          on /es while the daily emails are English-only. */}
+      {result && locale === "en" && (
         <div className="mt-8">
           {me?.signedIn ? (
             <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-5 text-sm text-white/80">
@@ -327,6 +347,7 @@ export default function PrayerPage() {
           ) : (
             <GuestEmailCaptureClient
               source="prayer-result"
+              hideOnSpanish
               heading="Want encouragement like this every morning?"
               subtext="Get a free Bible verse and short devotional in your inbox each day. No spam. Unsubscribe anytime."
             />
@@ -336,5 +357,3 @@ export default function PrayerPage() {
     </main>
   );
 }
-
-

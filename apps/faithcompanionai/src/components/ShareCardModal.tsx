@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { X, Download, Share2, ImageIcon } from "lucide-react";
 import { drawVerseCard, type CardFormat } from "@/lib/drawVerseCard";
+import { useContentDictionary } from "@/context/LocaleContext";
+import { tools } from "@/lib/i18n/dictionaries/tools";
 
 type Props = {
   initialText?: string;
@@ -20,7 +22,8 @@ export default function ShareCardModal({
   const [format, setFormat] = useState<CardFormat>("square");
   const [downloading, setDownloading] = useState(false);
   const [sharing, setSharing] = useState(false);
-  const [shareLabel, setShareLabel] = useState("Share");
+  const t = useContentDictionary(tools).shareCard;
+  const [copied, setCopied] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -83,13 +86,13 @@ export default function ShareCardModal({
       if (typeof navigator.share === "function" && navigator.canShare?.({ files: [file] })) {
         await navigator.share({
           files: [file],
-          title: reference || "Bible Verse",
+          title: reference || t.defaultShareTitle,
           text: `${text}\n\u2014 ${reference}\n\nFaith Companion AI`,
         });
       } else if (navigator.clipboard?.write) {
         await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
-        setShareLabel("Copied!");
-        setTimeout(() => setShareLabel("Share"), 2500);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
       } else {
         downloadBlob(blob);
       }
@@ -121,13 +124,13 @@ export default function ShareCardModal({
         <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
           <div className="flex items-center gap-2">
             <ImageIcon size={17} className="text-purple-400" />
-            <span className="font-semibold text-white">Share Card</span>
+            <span className="font-semibold text-white">{t.title}</span>
           </div>
           <button
             type="button"
             onClick={onClose}
             className="rounded-lg p-1.5 text-white/50 hover:bg-white/10 hover:text-white transition"
-            aria-label="Close"
+            aria-label={t.close}
           >
             <X size={18} />
           </button>
@@ -159,7 +162,7 @@ export default function ShareCardModal({
                     : "border-white/10 bg-white/5 text-white/55 hover:bg-white/10 hover:text-white/80",
                 ].join(" ")}
               >
-                {f === "square" ? "Square 1:1" : "Landscape 16:9"}
+                {f === "square" ? t.square : t.landscape}
               </button>
             ))}
           </div>
@@ -168,25 +171,25 @@ export default function ShareCardModal({
           <div className="space-y-3">
             <div>
               <label className="block text-xs font-semibold text-white/60 mb-1.5">
-                Verse text
+                {t.verseText}
               </label>
               <textarea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 rows={3}
-                placeholder="Type or paste verse text..."
+                placeholder={t.verseTextPlaceholder}
                 className="w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/35 outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 transition"
               />
             </div>
             <div>
               <label className="block text-xs font-semibold text-white/60 mb-1.5">
-                Scripture reference
+                {t.reference}
               </label>
               <input
                 type="text"
                 value={reference}
                 onChange={(e) => setReference(e.target.value)}
-                placeholder="e.g. John 3:16"
+                placeholder={t.referencePlaceholder}
                 className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/35 outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 transition"
               />
             </div>
@@ -201,7 +204,7 @@ export default function ShareCardModal({
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-5 py-2.5 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-60 transition"
             >
               <Download size={15} />
-              {downloading ? "Saving..." : "Download PNG"}
+              {downloading ? t.saving : t.download}
             </button>
             <button
               type="button"
@@ -210,12 +213,12 @@ export default function ShareCardModal({
               className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/15 disabled:opacity-60 transition"
             >
               <Share2 size={15} />
-              {sharing ? "Sharing..." : shareLabel}
+              {sharing ? t.sharing : copied ? t.copied : t.share}
             </button>
           </div>
 
           <p className="text-xs text-white/30">
-            Square format is ideal for Instagram. Landscape works best on Twitter/X and Facebook.
+            {t.hint}
           </p>
         </div>
       </div>

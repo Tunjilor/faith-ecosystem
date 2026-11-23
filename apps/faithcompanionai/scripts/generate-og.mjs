@@ -1,6 +1,10 @@
 // Generates the static default social-share images:
 //   public/brand/og-quiz.png        English (site default)
 //   public/brand/og-default-es.png  Spanish (default for /es pages)
+//   public/brand/og-prayer-es.png   /es/tools/prayer
+//   public/brand/og-verse-es.png    /es/tools/verse
+//   public/brand/og-devotional-es.png /es/tools/devotional
+// (English tool pages keep og-quiz.png.)
 //
 // The design deliberately mirrors the dynamic OG route in
 // src/app/api/og/verse/route.tsx — same #170537 base, same purple/orange corner
@@ -63,6 +67,26 @@ const svgFor = (tagline) => `<svg xmlns="http://www.w3.org/2000/svg" width="${W}
   <text x="600" y="580" text-anchor="middle" font-family="${FONT}" font-size="20"
         fill="#ffffff" fill-opacity="0.40">faithcompanionai.com</text>
 </svg>`;
+
+// Spanish tool pages: page name + tagline, same layout as og-tithe-es.png
+// (scripts/generate-og-tithe.mjs) without the "10%" accent.
+const TOOL_VARIANTS = [
+  { out: 'public/brand/og-prayer-es.png', title: 'Generador de oraciones', tagline: 'Una oración personal con la Biblia' },
+  { out: 'public/brand/og-verse-es.png', title: 'Versículos de la Biblia', tagline: 'Con el texto de la Reina-Valera 1909' },
+  { out: 'public/brand/og-devotional-es.png', title: 'Devocional diario', tagline: 'Reflexión, oración y pasos para hoy' },
+];
+
+const toolSvgFor = ({ title, tagline }) => svgFor(tagline)
+  .replace(/<!-- Site name -->[\s\S]*?<\/text>/, `<!-- Page name -->
+  <text x="600" y="360" text-anchor="middle" font-family="${FONT}" font-size="76"
+        font-weight="700" fill="#ffffff" fill-opacity="0.95">${title}</text>`)
+  .replace('fill-opacity="0.40">faithcompanionai.com<', 'fill-opacity="0.40">Faith Companion AI · faithcompanionai.com<');
+
+for (const variant of TOOL_VARIANTS) {
+  await sharp(Buffer.from(toolSvgFor(variant))).png().toFile(variant.out);
+  const meta = await sharp(variant.out).metadata();
+  console.log(`Created: ${variant.out} (${meta.width}x${meta.height})`);
+}
 
 for (const { out, tagline } of VARIANTS) {
   await sharp(Buffer.from(svgFor(tagline))).png().toFile(out);
