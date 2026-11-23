@@ -10,6 +10,7 @@ import { ImageIcon } from "lucide-react";
 import Rv1909VerseCards, { readVerseCards, type Rv1909Card } from "@/components/Rv1909VerseCards";
 import { useDictionary, useLocale } from "@/context/LocaleContext";
 import { tools } from "@/lib/i18n/dictionaries/tools";
+import { useHydrated } from "@/hooks/useHydrated";
 
 type Length = "short" | "medium" | "long";
 
@@ -50,6 +51,8 @@ function resultToText(data: ResultData, t: VerseText): string {
 export default function VersePage() {
   const locale = useLocale();
   const { common, verse: t } = useDictionary(tools);
+  // Generate stays disabled until hydrated: before that, clicks are dropped.
+  const hydrated = useHydrated();
   const [topic, setTopic] = useState("");
   const [length, setLength] = useState<Length>("short");
   const [denomination, setDenomination] = useState("non-denominational");
@@ -263,7 +266,7 @@ export default function VersePage() {
           <button
             type="button"
             onClick={handleGenerate}
-            disabled={isLoading}
+            disabled={!hydrated || isLoading}
             className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-black px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
           >
             {isLoading ? common.generating : t.generate}
