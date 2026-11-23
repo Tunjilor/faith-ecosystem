@@ -17,6 +17,7 @@ export function renderAiMarkdown(text: string): React.ReactNode[] {
   const lines = text.split("\n");
   const output: React.ReactNode[] = [];
   let key = 0;
+  let seenContent = false;
 
   for (const raw of lines) {
     const line = raw.trimEnd();
@@ -25,14 +26,19 @@ export function renderAiMarkdown(text: string): React.ReactNode[] {
       output.push(<div key={key++} className="h-2" />);
       continue;
     }
+    const isFirstLine = !seenContent;
+    seenContent = true;
 
-    // Markdown heading ("### Title")
+    // Title: a Markdown heading ("### Title"), or a whole-line bold first line
+    // ("**Title**", no trailing colon). Rendered as a real heading element.
     const hashMatch = line.match(/^#{1,6}\s+(.+)$/);
-    if (hashMatch) {
+    const boldTitle = isFirstLine ? line.match(/^\*\*([^*]+?)\*\*\s*$/) : null;
+    if (hashMatch || (boldTitle && !boldTitle[1].trim().endsWith(":"))) {
+      const title = (hashMatch ? hashMatch[1] : boldTitle![1]).replace(/\*\*/g, "").trim();
       output.push(
-        <p key={key++} className="mt-1 text-base font-semibold text-slate-900">
-          {hashMatch[1].replace(/\*\*/g, "")}
-        </p>
+        <h2 key={key++} className="mt-1 text-lg font-bold leading-snug text-slate-900 md:text-xl">
+          {title}
+        </h2>
       );
       continue;
     }
